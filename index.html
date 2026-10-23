@@ -3,152 +3,293 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b12">
+  <meta name="description" content="Discover movies and explore what's worth watching.">
   <title>Xtreme Movie Watch</title>
-
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
-      background: #101010;
-      color: white;
+      background: #090b12;
+      color: #f7f7fb;
       font-family: Arial, sans-serif;
     }
 
     header {
-      background: #e50914;
-      padding: 22px 15px;
-      text-align: center;
+      padding: 22px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #252735;
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 28px;
+    .logo { font-size: 23px; font-weight: 800; }
+    .logo span { color: #ff334f; }
+
+    .hero {
+      padding: 42px 5% 28px;
+      background: linear-gradient(135deg, #191b2a, #090b12);
     }
 
-    header p {
-      margin-bottom: 0;
+    .hero h1 {
+      font-size: clamp(30px, 6vw, 52px);
+      margin: 0 0 12px;
     }
+
+    .hero p { color: #b9bdcc; line-height: 1.6; }
 
     .search {
-      display: block;
-      width: 90%;
-      max-width: 500px;
-      margin: 22px auto;
+      display: flex;
+      gap: 8px;
+      max-width: 600px;
+      margin-top: 24px;
+    }
+
+    input {
+      flex: 1;
+      min-width: 0;
       padding: 14px;
-      border: none;
-      border-radius: 6px;
+      border: 1px solid #36394a;
+      border-radius: 9px;
+      background: #171a26;
+      color: white;
       font-size: 16px;
     }
 
-    h2 {
-      padding-left: 16px;
+    button {
+      padding: 13px 18px;
+      border: 0;
+      border-radius: 9px;
+      background: #ff334f;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
     }
 
-    .movies {
+    main { padding: 24px 5% 50px; }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin: 15px 0 20px;
+    }
+
+    .section-title h2 { font-size: 22px; }
+
+    .grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
-      padding: 14px;
+      grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
+      gap: 18px 12px;
     }
 
     .movie {
-      background: #222;
-      border-radius: 8px;
+      min-width: 0;
       overflow: hidden;
-      text-align: center;
-      padding-bottom: 15px;
+      background: #151824;
+      border: 1px solid #252838;
+      border-radius: 12px;
     }
 
-    .poster {
-      height: 150px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #360000, #e50914);
-      font-size: 40px;
+    .movie img {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      display: block;
+      background: #222638;
     }
+
+    .movie-info { padding: 11px; }
 
     .movie h3 {
-      font-size: 17px;
-      margin: 12px 5px;
-    }
-
-    button {
-      background: #e50914;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 14px;
-      cursor: pointer;
       font-size: 14px;
+      margin: 0 0 8px;
+      line-height: 1.4;
     }
 
-    button:hover {
-      background: #b20710;
+    .movie p {
+      font-size: 12px;
+      color: #b9bdcc;
+      margin: 0 0 10px;
     }
 
-    #details {
-      display: none;
-      margin: 16px;
-      padding: 18px;
-      background: #222;
-      border-radius: 8px;
+    .movie button { width: 100%; padding: 10px 5px; }
+
+    .message {
+      color: #b9bdcc;
+      line-height: 1.6;
+      padding: 20px 0;
     }
+
+    .hidden { display: none; }
 
     footer {
       text-align: center;
-      padding: 25px;
-      color: #aaa;
+      color: #999fb1;
+      padding: 28px 5%;
+      border-top: 1px solid #252735;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    a { color: #ff7185; }
+
+    @media (max-width: 380px) {
+      .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .search button { padding: 12px; }
     }
   </style>
 </head>
-
 <body>
-
   <header>
-    <h1>Xtreme Movie Watch</h1>
-    <p>Your movie world starts here!</p>
+    <div class="logo"><span>X</span>TREME MOVIE WATCH</div>
   </header>
 
-  <input
-    class="search"
-    id="search"
-    type="text"
-    placeholder="Search for a movie..."
-    oninput="searchMovies()"
-  >
+  <section class="hero">
+    <h1>Your next movie starts here.</h1>
+    <p>Discover movies, explore popular titles, and find your next favourite.</p>
 
-  <h2>Featured Movies</h2>
+    <form class="search" id="searchForm">
+      <input id="searchInput" type="search"
+        placeholder="Search for a movie..." aria-label="Movie title">
+      <button type="submit">Search</button>
+    </form>
+  </section>
 
-  <main class="movies" id="movies">
-
-    <div class="movie" data-title="African Adventure">
-      <div class="poster">🎬</div>
-      <h3>African Adventure</h3>
-      <button onclick="showMovie('African Adventure')">
-        View Details
-      </button>
+  <main>
+    <div class="section-title">
+      <h2 id="sectionHeading">Popular Movies</h2>
+      <button id="homeButton" type="button">Home</button>
     </div>
 
-    <div class="movie" data-title="Action Hero">
-      <div class="poster">🎥</div>
-      <h3>Action Hero</h3>
-      <button onclick="showMovie('Action Hero')">
-        View Details
-      </button>
-    </div>
+    <p id="message" class="message" role="status">
+      Loading movies...
+    </p>
 
-    <div class="movie" data-title="Love Forever">
-      <div class="poster">❤️</div>
-      <h3>Love Forever</h3>
-      <button onclick="showMovie('Love Forever')">
-        View Details
-      </button>
-    </div>
+    <div id="movieGrid" class="grid"></div>
+  </main>
 
-    <div class="movie" data-title="The Last Dancer">
-      <div class="poster">💃</div>
-      <h3
+  <footer>
+    <p>Xtreme Movie Watch — Discover your next favourite.</p>
+    <p>Movie information and posters provided by TMDB.</p>
+    <p>This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
+  </footer>
+
+  <script>
+    // Add your TMDB API key here to enable live movie data.
+    const API_KEY = "PASTE_YOUR_TMDB_API_KEY_HERE";
+
+    const grid = document.getElementById("movieGrid");
+    const message = document.getElementById("message");
+    const heading = document.getElementById("sectionHeading");
+    const searchInput = document.getElementById("searchInput");
+
+    async function loadMovies(query = "") {
+      grid.replaceChildren();
+      message.classList.remove("hidden");
+
+      if (!API_KEY || API_KEY === "PASTE_YOUR_TMDB_API_KEY_HERE") {
+        message.textContent =
+          "Your app is ready. Add your TMDB API key in the code to load live movie listings and search results.";
+        return;
+      }
+
+      message.textContent = "Loading movies...";
+
+      try {
+        const endpoint = query
+          ? "https://api.themoviedb.org/3/search/movie"
+          : "https://api.themoviedb.org/3/movie/popular";
+
+        const url = new URL(endpoint);
+        url.searchParams.set("api_key", API_KEY);
+        url.searchParams.set("language", "en-US");
+        url.searchParams.set("page", "1");
+
+        if (query) url.searchParams.set("query", query);
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error("Movie service returned an error.");
+        }
+
+        const data = await response.json();
+        const movies = data.results || [];
+
+        if (!movies.length) {
+          message.textContent = "No movies found. Try another title.";
+          return;
+        }
+
+        message.classList.add("hidden");
+
+        movies.forEach(movie => {
+          const card = document.createElement("article");
+          card.className = "movie";
+
+          const poster = document.createElement("img");
+          poster.alt = movie.title + " poster";
+          poster.loading = "lazy";
+
+          poster.src = movie.poster_path
+            ? "https://image.tmdb.org/t/p/w500" + movie.poster_path
+            : "";
+
+          if (!movie.poster_path) {
+            poster.alt = "Poster unavailable";
+          }
+
+          const info = document.createElement("div");
+          info.className = "movie-info";
+
+          const title = document.createElement("h3");
+          title.textContent = movie.title;
+
+          const year = document.createElement("p");
+          year.textContent =
+            (movie.release_date || "Release date unknown").slice(0, 4) +
+            " · ★ " +
+            (Number(movie.vote_average || 0).toFixed(1));
+
+          const details = document.createElement("button");
+          details.type = "button";
+          details.textContent = "Movie details";
+
+          details.addEventListener("click", () => {
+            alert(
+              movie.title + "\n\n" +
+              (movie.overview || "No description available.")
+            );
+          });
+
+          info.append(title, year, details);
+          card.append(poster, info);
+          grid.append(card);
+        });
+      } catch (error) {
+        message.textContent =
+          "Could not load movies. Check your internet connection and API key, then try again.";
+      }
+    }
+
+    document.getElementById("searchForm").addEventListener("submit", event => {
+      event.preventDefault();
+
+      const query = searchInput.value.trim();
+      heading.textContent = query ? "Search Results" : "Popular Movies";
+      loadMovies(query);
+    });
+
+    document.getElementById("homeButton").addEventListener("click", () => {
+      searchInput.value = "";
+      heading.textContent = "Popular Movies";
+      loadMovies();
+    });
+
+    loadMovies();
+  </script>
+</body>
+</html>
