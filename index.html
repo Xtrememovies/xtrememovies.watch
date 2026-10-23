@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xtreme Movie Watch</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #101010;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    header {
+      background: #e50914;
+      padding: 22px 15px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    header p {
+      margin-bottom: 0;
+    }
+
+    .search {
+      display: block;
+      width: 90%;
+      max-width: 500px;
+      margin: 22px auto;
+      padding: 14px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    h2 {
+      padding-left: 16px;
+    }
+
+    .movies {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      padding: 14px;
+    }
+
+    .movie {
+      background: #222;
+      border-radius: 8px;
+      overflow: hidden;
+      text-align: center;
+      padding-bottom: 15px;
+    }
+
+    .poster {
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #360000, #e50914);
+      font-size: 40px;
+    }
+
+    .movie h3 {
+      font-size: 17px;
+      margin: 12px 5px;
+    }
+
+    button {
+      background: #e50914;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background: #b20710;
+    }
+
+    #details {
+      display: none;
+      margin: 16px;
+      padding: 18px;
+      background: #222;
+      border-radius: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #aaa;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Xtreme Movie Watch</h1>
+    <p>Your movie world starts here!</p>
+  </header>
+
+  <input
+    class="search"
+    id="search"
+    type="text"
+    placeholder="Search for a movie..."
+    oninput="searchMovies()"
+  >
+
+  <h2>Featured Movies</h2>
+
+  <main class="movies" id="movies">
+
+    <div class="movie" data-title="African Adventure">
+      <div class="poster">🎬</div>
+      <h3>African Adventure</h3>
+      <button onclick="showMovie('African Adventure')">
+        View Details
+      </button>
+    </div>
+
+    <div class="movie" data-title="Action Hero">
+      <div class="poster">🎥</div>
+      <h3>Action Hero</h3>
+      <button onclick="showMovie('Action Hero')">
+        View Details
+      </button>
+    </div>
+
+    <div class="movie" data-title="Love Forever">
+      <div class="poster">❤️</div>
+      <h3>Love Forever</h3>
+      <button onclick="showMovie('Love Forever')">
+        View Details
+      </button>
+    </div>
+
+    <div class="movie" data-title="The Last Dancer">
+      <div class="poster">💃</div>
+      <h3
