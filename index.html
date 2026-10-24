@@ -310,8 +310,8 @@
 
       try {
         const endpoint = query
-          ? "https://themoviedb.org"
-          : "https://themoviedb.org";
+  ? "https://api.themoviedb.org/3/search/movie"
+  : "https://api.themoviedb.org/3/movie/popular";
 
         const url = new URL(endpoint);
         url.searchParams.set("api_key", API_KEY);
