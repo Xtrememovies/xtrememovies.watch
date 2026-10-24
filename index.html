@@ -15,19 +15,43 @@
       color: #f7f7fb;
       font-family: Arial, sans-serif;
     }
-nav
-    <nav>
-    <href ="#MovieGrid">
-    <a href ="#MovieGrid">Movies</a>
-    <a href ="#TvShows">Tv/a
-    /nav
-    <section Id="Movie_Grid"</section
-    <div class ="Movie_Grid">
-    <div class ="Movie_Card>
-    /div
-    <div class ="movie_card">
-    <h3 feature/h3
-    <img src="https://kitten.com/600 >
+<header class="navbar">
+  <div class="logo">MyMovieApp</div>
+  <nav class="nav-links">
+    <a href="#home" class="nav-btn active">Home</a>
+    <a href="#tvshows" class="nav-btn">TV Shows</a>
+    <a href="#movies" class="nav-btn">Movies</a>
+    <a href="#watchlist" class="nav-btn">Watchlist</a>
+  </nav>
+  <div class="search-container">
+    <input type="text" placeholder="Search movies or shows...">
+  </div>
+</header>
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #111111;
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-links a {
+  color: #b3b3b3;
+  text-decoration: none;
+  margin: 0 1rem;
+  font-weight: 500;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+  color: #ffffff;
+  border-bottom: 2px solid #e50914; /* Highlight color */
+}
+
     header {
       padding: 22px 5%;
       display: flex;
