@@ -345,8 +345,8 @@
           poster.alt = movie.title + " poster";
           poster.loading = "lazy";
           poster.src = movie.poster_path
-            ? "https://tmdb.org" + movie.poster_path
-            : "";
+  ? "https://image.tmdb.org/t/p/w500" + movie.poster_path
+  : "";
 
           if (!movie.poster_path) {
             poster.alt = "Poster structural placeholder asset unavailable";
