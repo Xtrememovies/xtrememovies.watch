@@ -310,8 +310,8 @@
 
       try {
         const endpoint = query
-  ? "https://api.themoviedb.org/3/search/movie"
-  : "https://api.themoviedb.org/3/movie/popular";
+          ? "https://api.themoviedb.org/3/search/movie"
+          : "https://api.themoviedb.org/3/movie/popular";
 
         const url = new URL(endpoint);
         url.searchParams.set("api_key", API_KEY);
@@ -323,7 +323,7 @@
         const response = await fetch(url);
 
         if (!response.ok) {
-          throw new Error("Movie service network execution error.");
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
 
         const data = await response.json();
@@ -331,6 +331,7 @@
 
         if (!movies.length) {
           message.textContent = "No movies found. Try another title.";
+          message.classList.remove("hidden");
           return;
         }
 
@@ -340,16 +341,13 @@
         movies.forEach(movie => {
           const card = document.createElement("article");
           card.className = "movie";
-const poster = document.createElement("img");
-poster.alt = movie.title + " poster";
-poster.loading = "lazy";
-poster.src = movie.poster_path
-  ? "https://image.tmdb.org/t/p/w500" + movie.poster_path
-  : "";
 
-if (!movie.poster_path) {
-  poster.alt = "Poster structural placeholder asset unavailable";
-}
+          const poster = document.createElement("img");
+          poster.alt = movie.title ? movie.title + " poster" : "Movie poster";
+          poster.loading = "lazy";
+          poster.src = movie.poster_path
+            ? "https://image.tmdb.org/t/p/w500" + movie.poster_path
+            : "";
 
           if (!movie.poster_path) {
             poster.alt = "Poster structural placeholder asset unavailable";
@@ -382,33 +380,12 @@ if (!movie.poster_path) {
           card.append(poster, info);
           grid.append(card);
         });
-     
-     // Inside your loadMovies function:
-     try {
-     const response = await fetch(url);
-    
-    // 1. ADD THIS CHECK: Throw an error if the server response is bad
-    if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-    }
 
-    const data = await response.json();
-    const movies = data.results || [];
-    
-    if (!movies.length) {
-        message.textContent = "No movies found. Try another title.";
-        message.classList.remove("hidden"); // Make sure message is visible!
-        return;
+      } catch (error) {
+        message.textContent = "Could not load movie data stream. Check connectivity options and system configuration.";
+        message.classList.remove("hidden");
+      }
     }
-    
-    message.classList.add("hidden");
-    // ... rest of your movie card generation loop ...
-
-} catch (error) {
-    // 2. This will now properly catch both network drops and bad responses
-    message.textContent = "Could not load movie data stream. Check connectivity options and system configuration.";
-    message.classList.remove("hidden"); // Ensure the error message displays
-}
 
     // Context Reset Operations
     function resetToHome(e) {
@@ -418,10 +395,19 @@ if (!movie.poster_path) {
       loadMovies();
     }
 
-   // Event Bindings Mapping
-searchForm.addEventListener("submit", event => {
-    event.preventDefault();
-    const query = searchInput.value.trim();
-    heading.textContent = query ? `Search Results for "${query}"` : "Popular Movies";
-    loadMovies(query); // <-- This triggers the search and populates the grid
-});
+    // Event Bindings Mapping
+    searchForm.addEventListener("submit", event => {
+      event.preventDefault();
+      const query = searchInput.value.trim();
+      heading.textContent = query ? `Search Results for "${query}"` : "Popular Movies";
+      loadMovies(query);
+    });
+
+    if (navHome) navHome.addEventListener("click", resetToHome);
+    if (brandLogo) brandLogo.addEventListener("click", resetToHome);
+
+    // Initial load on page startup
+    loadMovies();
+  </script>
+</body>
+</html>
