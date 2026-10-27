@@ -4,14 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#090b12">
-  <meta name="description" content="Discover movies and explore what's worth watching.">
+  <meta name="description" content="Discover movies, TV shows, and Lugandan VJ translations.">
   <title>Xtreme Movie Watch</title>
   
   <style>
-    /* Global Resets & Variables */
-    * { 
-      box-sizing: border-box; 
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -20,12 +17,8 @@
       font-family: Arial, sans-serif;
     }
 
-    a { 
-      color: #ff7185; 
-      text-decoration: none;
-    }
+    a { color: #ff7185; text-decoration: none; }
 
-    /* Layout Components: Header & Navigation */
     header.navbar {
       display: flex;
       justify-content: space-between;
@@ -38,20 +31,15 @@
       z-index: 1000;
     }
 
-    .logo { 
-      font-size: 23px; 
-      font-weight: 800; 
-    }
-
-    .logo span { 
-      color: #ff334f; 
-    }
+    .logo { font-size: 23px; font-weight: 800; }
+    .logo span { color: #ff334f; }
 
     .nav-links a {
       color: #b3b3b3;
       margin: 0 1rem;
       font-weight: 500;
       padding-bottom: 4px;
+      cursor: pointer;
     }
 
     .nav-links a.active,
@@ -60,26 +48,24 @@
       border-bottom: 2px solid #ff334f;
     }
 
-    /* Layout Components: Hero Section */
     .hero {
-      padding: 50px 5% 40px;
+      padding: 40px 5% 30px;
       background: linear-gradient(135deg, #191b2a, #090b12);
       text-align: center;
     }
 
     .hero h1 {
-      font-size: clamp(30px, 6vw, 52px);
-      margin: 0 0 12px;
+      font-size: clamp(28px, 5vw, 48px);
+      margin: 0 0 10px;
     }
 
     .hero p { 
       color: #b9bdcc; 
       line-height: 1.6; 
       max-width: 600px;
-      margin: 0 auto 24px;
+      margin: 0 auto 20px;
     }
 
-    /* Layout Components: Search Forms & Inputs */
     .search-container {
       display: flex;
       justify-content: center;
@@ -115,14 +101,9 @@
       transition: background 0.2s ease;
     }
 
-    button:hover {
-      background: #e0243f;
-    }
+    button:hover { background: #e0243f; }
 
-    /* Layout Components: Main Content & Grid */
-    main { 
-      padding: 24px 5% 50px; 
-    }
+    main { padding: 24px 5% 50px; }
 
     .section-header {
       display: flex;
@@ -131,10 +112,7 @@
       margin: 15px 0 20px;
     }
 
-    .section-header h2 { 
-      font-size: 22px; 
-      margin: 0;
-    }
+    .section-header h2 { font-size: 22px; margin: 0; }
 
     .grid {
       display: grid;
@@ -142,7 +120,6 @@
       gap: 24px 16px;
     }
 
-    /* Movie Cards */
     .movie {
       display: flex;
       flex-direction: column;
@@ -192,7 +169,70 @@
       font-size: 13px;
     }
 
-    /* States & System Messages */
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .modal-content {
+      background: #111420;
+      width: 90%;
+      max-width: 800px;
+      border-radius: 12px;
+      border: 1px solid #2f344a;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-header {
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #2f344a;
+    }
+
+    .modal-header h3 { margin: 0; font-size: 18px; }
+
+    .close-btn {
+      background: transparent;
+      color: #fff;
+      font-size: 22px;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+
+    .video-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .modal-body {
+      padding: 15px 20px;
+      color: #b9bdcc;
+      font-size: 14px;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+
     .message {
       color: #b9bdcc;
       line-height: 1.6;
@@ -200,11 +240,8 @@
       text-align: center;
     }
 
-    .hidden { 
-      display: none !important; 
-    }
+    .hidden { display: none !important; }
 
-    /* Layout Components: Footer */
     footer {
       text-align: center;
       color: #999fb1;
@@ -215,199 +252,245 @@
       background-color: #090b12;
     }
 
-    /* Responsive Breakpoints */
     @media (max-width: 600px) {
-      header.navbar {
-        flex-direction: column;
-        gap: 12px;
-        padding: 1rem 5%;
-      }
-      .nav-links {
-        display: flex;
-        justify-content: center;
-        width: 100%;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .grid { 
-        grid-template-columns: repeat(2, minmax(0, 1fr)); 
-      }
+      header.navbar { flex-direction: column; gap: 12px; padding: 1rem 5%; }
+      .nav-links { display: flex; justify-content: center; width: 100%; flex-wrap: wrap; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation Bar Container -->
   <header class="navbar">
     <div class="logo"><a href="#home" id="brandLogo"><span>X</span>TREME MOVIE WATCH</a></div>
     <nav class="nav-links">
       <a href="#home" id="navHome" class="active">Home</a>
       <a href="#movies" id="navMovies">Movies</a>
       <a href="#tvshows" id="navTv">TV Shows</a>
+      <a href="#vj" id="navVJ">Lugandan VJ 🇺🇬</a>
     </nav>
   </header>
 
-  <!-- Hero Display Container -->
   <section class="hero">
     <h1>Your next movie starts here.</h1>
-    <p>Discover movies, explore popular titles, and find your next favourite.</p>
+    <p>Discover movies, TV shows, and Lugandan VJ translations all in one place.</p>
 
     <div class="search-container">
       <form class="search-form" id="searchForm">
-        <input id="searchInput" type="search" placeholder="Search for a movie..." aria-label="Movie title" required>
+        <input id="searchInput" type="search" placeholder="Search movies, TV shows, or VJ action..." aria-label="Media title" required>
         <button type="submit">Search</button>
       </form>
     </div>
   </section>
 
-  <!-- Dynamic Content Layout Grid -->
   <main>
     <div class="section-header">
       <h2 id="sectionHeading">Popular Movies</h2>
     </div>
 
-    <!-- Application Status Messages -->
-    <p id="message" class="message" role="status">
-      Loading movies...
-    </p>
+    <p id="message" class="message" role="status">Loading content...</p>
 
-    <!-- Movie Card Inject Destination -->
     <div id="movieGrid" class="grid"></div>
   </main>
 
-  <!-- Global Footer -->
+  <!-- Video Player Modal -->
+  <div id="playerModal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Now Playing</h3>
+        <button id="closeModal" class="close-btn">&times;</button>
+      </div>
+      <div class="video-container">
+        <iframe id="videoPlayerFrame" src="" allowfullscreen></iframe>
+      </div>
+      <div class="modal-body">
+        <p id="modalOverview"></p>
+      </div>
+    </div>
+  </div>
+
   <footer>
     <p>&copy; 2026 Xtreme Movie Watch — Discover your next favourite.</p>
     <p>Movie information and posters provided by TMDB.</p>
-    <p>This product uses the TMDB API but is not endorsed or certified by TMDB.</p>
   </footer>
 
-  <!-- Application Interaction logic -->
   <script>
     const API_KEY = "925111c270baf9b011e32b3c70c84546";
 
-    // DOM Elements Cache
     const grid = document.getElementById("movieGrid");
     const message = document.getElementById("message");
     const heading = document.getElementById("sectionHeading");
     const searchInput = document.getElementById("searchInput");
     const searchForm = document.getElementById("searchForm");
     const navHome = document.getElementById("navHome");
+    const navMovies = document.getElementById("navMovies");
+    const navTv = document.getElementById("navTv");
+    const navVJ = document.getElementById("navVJ");
     const brandLogo = document.getElementById("brandLogo");
 
-    // Fetch and Process Movies Data Routine
-    async function loadMovies(query = "") {
+    const playerModal = document.getElementById("playerModal");
+    const videoPlayerFrame = document.getElementById("videoPlayerFrame");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalOverview = document.getElementById("modalOverview");
+    const closeModal = document.getElementById("closeModal");
+
+    let currentMode = "movie";
+
+    async function loadMedia(query = "", mode = "movie") {
+      currentMode = mode;
       grid.replaceChildren();
       message.classList.remove("hidden");
-
-      if (!API_KEY || API_KEY === "PASTE_YOUR_TMDB_API_KEY_HERE") {
-        message.textContent = "Your app is ready. Add your TMDB API key in the code to load live movie listings.";
-        return;
-      }
-
-      message.textContent = "Loading movies...";
+      message.textContent = "Loading content...";
 
       try {
-        const endpoint = query
-          ? "https://api.themoviedb.org/3/search/movie"
-          : "https://api.themoviedb.org/3/movie/popular";
+        let endpoint;
+        let searchQuery = query;
+
+        if (mode === "vj") {
+          endpoint = "https://api.themoviedb.org/3/search/movie";
+          searchQuery = query || "Action"; 
+        } else if (query) {
+          endpoint = `https://api.themoviedb.org/3/search/${mode === "tv" ? "tv" : "movie"}`;
+        } else {
+          endpoint = mode === "tv" 
+            ? "https://api.themoviedb.org/3/tv/popular" 
+            : "https://api.themoviedb.org/3/movie/popular";
+        }
 
         const url = new URL(endpoint);
         url.searchParams.set("api_key", API_KEY);
         url.searchParams.set("language", "en-US");
         url.searchParams.set("page", "1");
 
-        if (query) url.searchParams.set("query", query);
+        if (searchQuery) url.searchParams.set("query", searchQuery);
 
         const response = await fetch(url);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
         const data = await response.json();
-        const movies = data.results || [];
+        const results = data.results || [];
 
-        if (!movies.length) {
-          message.textContent = "No movies found. Try another title.";
+        if (!results.length) {
+          message.textContent = "No content found. Try another search term.";
           message.classList.remove("hidden");
           return;
         }
 
         message.classList.add("hidden");
 
-        // Build UI Elements Matrix Loop
-        movies.forEach(movie => {
+        results.forEach(item => {
           const card = document.createElement("article");
           card.className = "movie";
 
           const poster = document.createElement("img");
-          poster.alt = movie.title ? movie.title + " poster" : "Movie poster";
-          poster.loading = "lazy";
-          poster.src = movie.poster_path
-            ? "https://image.tmdb.org/t/p/w500" + movie.poster_path
-            : "";
+          const titleText = item.title || item.name;
+          const dateText = item.release_date || item.first_air_date || "Unknown";
 
-          if (!movie.poster_path) {
-            poster.alt = "Poster structural placeholder asset unavailable";
-          }
+          poster.alt = titleText ? titleText + " poster" : "Poster";
+          poster.loading = "lazy";
+          poster.src = item.poster_path
+            ? "https://image.tmdb.org/t/p/w500" + item.poster_path
+            : "";
 
           const info = document.createElement("div");
           info.className = "movie-info";
 
           const title = document.createElement("h3");
-          title.textContent = movie.title;
+          title.textContent = mode === "vj" ? `[VJ Translated] ${titleText}` : titleText;
 
           const year = document.createElement("p");
-          year.textContent =
-            (movie.release_date || "Unknown Release").slice(0, 4) +
-            " · ★ " +
-            (Number(movie.vote_average || 0).toFixed(1));
+          year.textContent = dateText.slice(0, 4) + " · ★ " + Number(item.vote_average || 0).toFixed(1);
 
-          const details = document.createElement("button");
-          details.type = "button";
-          details.textContent = "Movie details";
+          const playBtn = document.createElement("button");
+          playBtn.type = "button";
+          playBtn.textContent = "▶ Watch Now";
 
-          details.addEventListener("click", () => {
-            alert(
-              movie.title + "\n\n" +
-              (movie.overview || "No description available.")
-            );
+          playBtn.addEventListener("click", () => {
+            openPlayer(titleText, item.overview);
           });
 
-          info.append(title, year, details);
+          info.append(title, year, playBtn);
           card.append(poster, info);
           grid.append(card);
         });
 
       } catch (error) {
-        message.textContent = "Could not load movie data stream. Check connectivity options and system configuration.";
+        console.error(error);
+        message.textContent = "Could not load data stream. Check connectivity options.";
         message.classList.remove("hidden");
       }
     }
 
-    // Context Reset Operations
-    function resetToHome(e) {
-      e.preventDefault();
-      searchInput.value = "";
-      heading.textContent = "Popular Movies";
-      loadMovies();
+    function openPlayer(title, overview) {
+      modalTitle.textContent = title;
+      modalOverview.textContent = overview || "No description available.";
+      videoPlayerFrame.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"; 
+      playerModal.classList.remove("hidden");
     }
 
-    // Event Bindings Mapping
+    function closePlayerModal() {
+      videoPlayerFrame.src = ""; 
+      playerModal.classList.add("hidden");
+    }
+
+    closeModal.addEventListener("click", closePlayerModal);
+    playerModal.addEventListener("click", (e) => {
+      if (e.target === playerModal) closePlayerModal();
+    });
+
+    function setActiveNav(activeElement) {
+      [navHome, navMovies, navTv, navVJ].forEach(nav => nav.classList.remove("active"));
+      if (activeElement) activeElement.classList.add("active");
+    }
+
     searchForm.addEventListener("submit", event => {
       event.preventDefault();
       const query = searchInput.value.trim();
-      heading.textContent = query ? `Search Results for "${query}"` : "Popular Movies";
-      loadMovies(query);
+      const modeText = currentMode === "vj" ? "Lugandan VJ Results" : (currentMode === "tv" ? "TV Shows" : "Movies");
+      heading.textContent = query ? `Search Results for "${query}"` : `Popular ${modeText}`;
+      loadMedia(query, currentMode);
     });
 
-    if (navHome) navHome.addEventListener("click", resetToHome);
-    if (brandLogo) brandLogo.addEventListener("click", resetToHome);
+    navHome.addEventListener("click", (e) => {
+      e.preventDefault();
+      searchInput.value = "";
+      heading.textContent = "Popular Movies";
+      setActiveNav(navHome);
+      loadMedia("", "movie");
+    });
 
-    // Initial load on page startup
-    loadMovies();
+    brandLogo.addEventListener("click", (e) => {
+      e.preventDefault();
+      searchInput.value = "";
+      heading.textContent = "Popular Movies";
+      setActiveNav(navHome);
+      loadMedia("", "movie");
+    });
+
+    navMovies.addEventListener("click", (e) => {
+      e.preventDefault();
+      searchInput.value = "";
+      heading.textContent = "Popular Movies";
+      setActiveNav(navMovies);
+      loadMedia("", "movie");
+    });
+
+    navTv.addEventListener("click", (e) => {
+      e.preventDefault();
+      searchInput.value = "";
+      heading.textContent = "Popular TV Shows";
+      setActiveNav(navTv);
+      loadMedia("", "tv");
+    });
+
+    navVJ.addEventListener("click", (e) => {
+      e.preventDefault();
+      searchInput.value = "";
+      heading.textContent = "Lugandan VJ Translated Movies";
+      setActiveNav(navVJ);
+      loadMedia("Action", "vj");
+    });
+
+    loadMedia("", "movie");
   </script>
 </body>
 </html>
