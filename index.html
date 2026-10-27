@@ -40,13 +40,43 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-badge {
+      background: var(--netflix-red);
+      color: #fff;
+      font-weight: 900;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 16px;
+      letter-spacing: 0.5px;
+    }
+
+    .logo-text-group {
+      display: flex;
+      flex-direction: column;
+    }
+
     .logo { 
-      font-size: 24px; 
+      font-size: 20px; 
       font-weight: 900; 
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
+      line-height: 1.1;
     }
 
     .logo span { color: var(--netflix-red); }
+
+    .logo-subtitle {
+      font-size: 10px;
+      color: var(--netflix-gray);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
 
     .nav-links {
       display: flex;
@@ -423,7 +453,13 @@
 <body>
 
   <header class="navbar">
-    <div class="logo"><a href="#home" id="brandLogo"><span>X</span>TREME WATCH</a></div>
+    <div class="logo-container">
+      <div class="logo-badge">XT</div>
+      <div class="logo-text-group">
+        <div class="logo"><a href="#home" id="brandLogo"><span>X</span>TREME WATCH</a></div>
+        <span class="logo-subtitle">UGANDAN VJ TRANSLATIONS</span>
+      </div>
+    </div>
     <nav class="nav-links">
       <a href="#home" id="navHome" class="active">Home</a>
       <a href="#movies" id="navMovies">Movies</a>
@@ -451,8 +487,8 @@
         <div class="chip" data-vj="VJ Jingo">VJ Jingo</div>
         <div class="chip" data-vj="VJ Mark">VJ Mark</div>
         <div class="chip" data-vj="VJ Aaron">VJ Aaron</div>
-        <div class="chip" data-vj="VJ Jingo">VJ Jingo</div>
-        <div class="chip" data-vj="VJ Emmy">VJ Emmy</div>
+        <div class="chip" data-vj="VJ Isma Pro">VJ Isma Pro</div>
+        <div class="chip" data-vj="VJ Eddy">VJ Eddy</div>
       </div>
     </div>
 
@@ -609,7 +645,7 @@
     // Nav Filter Button toggle
     navFilterTab.addEventListener("click", (e) => {
       e.preventDefault();
-      filterPanel.style.display = filterPanel.style.display === "none" ? "block" : "block";
+      filterPanel.style.display = "block";
       filterPanel.scrollIntoView({ behavior: "smooth" });
     });
 
@@ -617,6 +653,7 @@
     vjChipGrid.addEventListener("click", (e) => {
       if (e.target.classList.contains("chip")) {
         document.querySelectorAll("#vjChipGrid .chip").forEach(c => c.classList.remove("active"));
+        document.querySelectorAll("#genreChipGrid .chip").forEach(c => c.classList.remove("active"));
         e.target.classList.add("active");
         activeVJ = e.target.getAttribute("data-vj");
         selectedGenre = "";
@@ -629,6 +666,7 @@
     genreChipGrid.addEventListener("click", (e) => {
       if (e.target.classList.contains("chip")) {
         document.querySelectorAll("#genreChipGrid .chip").forEach(c => c.classList.remove("active"));
+        document.querySelectorAll("#vjChipGrid .chip").forEach(c => c.classList.remove("active"));
         e.target.classList.add("active");
         selectedGenre = e.target.getAttribute("data-genre");
         activeVJ = "";
@@ -724,4 +762,164 @@
       posterContainer.className = "poster-container";
 
       const titleText = item.title || item.name;
-      const dateText = item.release_date || item.first_air_date ||
+      const dateText = item.release_date || item.first_air_date || "Unknown";
+
+      if (item.poster_path) {
+        const poster = document.createElement("img");
+        poster.alt = titleText + " poster";
+        poster.loading = "lazy";
+        poster.src = "https://image.tmdb.org/t/p/w500" + item.poster_path;
+        posterContainer.appendChild(poster);
+      } else {
+        const fallback = document.createElement("div");
+        fallback.className = "poster-fallback";
+        fallback.innerHTML = `<span>${titleText}</span><br><small>(${dateText.slice(0, 4)})</small>`;
+        posterContainer.appendChild(fallback);
+      }
+
+      const info = document.createElement("div");
+      info.className = "movie-info";
+
+      const title = document.createElement("h3");
+      title.textContent = activeVJ ? `[${activeVJ}] ${titleText}` : titleText;
+
+      const year = document.createElement("p");
+      year.textContent = (dateText ? dateText.slice(0, 4) : "") + " · ★ " + Number(item.vote_average || 0).toFixed(1);
+
+      const actions = document.createElement("div");
+      actions.className = "card-actions";
+
+      const playBtn = document.createElement("button");
+      playBtn.type = "button";
+      playBtn.className = "play-btn";
+      playBtn.textContent = "▶ Play";
+      playBtn.addEventListener("click", () => openInAppPlayer(titleText, item.overview));
+
+      const isInWatchlist = watchlist.some(w => w.id === item.id);
+      const listBtn = document.createElement("button");
+      listBtn.type = "button";
+      listBtn.style.background = isInWatchlist ? "var(--netflix-red)" : "rgba(255,255,255,0.05)";
+      listBtn.textContent = isInWatchlist ? "✓ In List" : "+ List";
+      
+      listBtn.addEventListener("click", () => {
+        const index = watchlist.findIndex(w => w.id === item.id);
+        if (index > -1) {
+          watchlist.splice(index, 1);
+          listBtn.textContent = "+ List";
+          listBtn.style.background = "rgba(255,255,255,0.05)";
+        } else {
+          watchlist.push(item);
+          listBtn.textContent = "✓ In List";
+          listBtn.style.background = "var(--netflix-red)";
+        }
+        localStorage.setItem("xtreme_watchlist", JSON.stringify(watchlist));
+        updateWatchlistBadge();
+      });
+
+      actions.append(playBtn, listBtn);
+      info.append(title, year, actions);
+      card.append(posterContainer, info);
+      grid.append(card);
+    }
+
+    navWatchlist.addEventListener("click", (e) => {
+      e.preventDefault();
+      setActiveNav(null);
+      heading.textContent = "My Watchlist";
+      grid.replaceChildren();
+      if (!watchlist.length) {
+        message.textContent = "Your watchlist is empty.";
+        message.classList.remove("hidden");
+        return;
+      }
+      message.classList.add("hidden");
+      watchlist.forEach(item => renderCard(item));
+    });
+
+    function openInAppPlayer(title, overview) {
+      modalTitle.textContent = title;
+      modalOverview.textContent = overview || "No description available.";
+      nativePlayer.src = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+      nativePlayer.load();
+      playerModal.classList.remove("hidden");
+      nativePlayer.play().catch(err => console.log("Autoplay blocked:", err));
+    }
+
+    function closePlayerModal() {
+      nativePlayer.pause();
+      nativePlayer.src = "";
+      playerModal.classList.add("hidden");
+    }
+
+    closeModal.addEventListener("click", closePlayerModal);
+    playerModal.addEventListener("click", (e) => {
+      if (e.target === playerModal) closePlayerModal();
+    });
+
+    navSignIn.addEventListener("click", (e) => {
+      e.preventDefault();
+      authEmail.value = "";
+      document.getElementById("authPassword").value = "";
+      authStatus.textContent = "";
+      authModal.classList.remove("hidden");
+    });
+    closeAuthModal.addEventListener("click", () => authModal.classList.add("hidden"));
+    authModal.addEventListener("click", (e) => {
+      if (e.target === authModal) authModal.classList.add("hidden");
+    });
+
+    authForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      authStatus.style.color = "#46d369";
+      authStatus.textContent = "Successfully signed in!";
+      setTimeout(() => authModal.classList.add("hidden"), 1200);
+    });
+
+    function setActiveNav(activeElement) {
+      [navHome, navMovies, navSeries].forEach(nav => nav.classList.remove("active"));
+      if (activeElement) activeElement.classList.add("active");
+    }
+
+    searchForm.addEventListener("submit", event => {
+      event.preventDefault();
+      const query = searchInput.value.trim();
+      heading.textContent = query ? `Search Results for "${query}"` : "Popular Movies";
+      loadMedia(query, currentMode, activeVJ, selectedGenre);
+    });
+
+    navHome.addEventListener("click", (e) => {
+      e.preventDefault();
+      activeVJ = ""; selectedGenre = ""; searchInput.value = "";
+      heading.textContent = "Popular Movies";
+      setActiveNav(navHome);
+      loadMedia("", "movie", "", "");
+    });
+
+    brandLogo.addEventListener("click", (e) => {
+      e.preventDefault();
+      activeVJ = ""; selectedGenre = ""; searchInput.value = "";
+      heading.textContent = "Popular Movies";
+      setActiveNav(navHome);
+      loadMedia("", "movie", "", "");
+    });
+
+    navMovies.addEventListener("click", (e) => {
+      e.preventDefault();
+      activeVJ = ""; selectedGenre = ""; searchInput.value = "";
+      heading.textContent = "Popular Movies";
+      setActiveNav(navMovies);
+      loadMedia("", "movie", "", "");
+    });
+
+    navSeries.addEventListener("click", (e) => {
+      e.preventDefault();
+      activeVJ = ""; selectedGenre = ""; searchInput.value = "";
+      heading.textContent = "Popular TV Series";
+      setActiveNav(navSeries);
+      loadMedia("", "tv", "", "");
+    });
+
+    loadMedia("", "movie", "", "");
+  </script>
+</body>
+</html>
