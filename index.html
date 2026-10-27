@@ -6,7 +6,35 @@
   <meta name="theme-color" content="#141414">
   <meta name="description" content="Discover movies, TV shows, and Lugandan VJ translations.">
   <title>Xtreme Movie Watch</title>
-  
+
+  <!-- Supabase Library CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  // 1. Initialize Supabase with your project details
+  const SUPABASE_URL = 'https://xugiuneiznyepwpsvhfl.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_oT9O906iGy9CKc-Mn6MMMw_dPSwqN5O';
+  const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // 2. Function to load your uploaded movies from the database
+  async function loadMoviesFromSupabase() {
+      const { data: movies, error } = await _supabase.from('movies').select('*');
+      
+      if (error) {
+          console.error('Error fetching movies:', error);
+          return;
+      }
+
+      // 3. This passes your database movies into your app's display function
+      // (Make sure this matches the function name you use to build your movie grid)
+      if (typeof renderMovieGrid === 'function') {
+          renderMovieGrid(movies);
+      }
+  }
+
+  // Run the function when the page finishes loading
+  window.addEventListener('DOMContentLoaded', loadMoviesFromSupabase);
+</script>
   <style>
     :root {
       --netflix-red: #e50914;
