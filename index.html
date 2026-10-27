@@ -8,7 +8,6 @@
   <title>Xtreme Movie Watch</title>
   
   <style>
-    /* Netflix-Inspired Theme Variables & Resets */
     :root {
       --netflix-red: #e50914;
       --netflix-red-hover: #f40612;
@@ -29,7 +28,6 @@
 
     a { color: #ffffff; text-decoration: none; }
 
-    /* Netflix Navbar Style */
     header.navbar {
       display: flex;
       justify-content: space-between;
@@ -48,13 +46,12 @@
       letter-spacing: 1px;
     }
 
-    .logo span { 
-      color: var(--netflix-red); 
-    }
+    .logo span { color: var(--netflix-red); }
 
     .nav-links {
       display: flex;
       gap: 20px;
+      align-items: center;
     }
 
     .nav-links a {
@@ -70,11 +67,23 @@
       color: #ffffff;
     }
 
-    .nav-links a.active {
-      font-weight: 700;
+    /* VJ Dropdown Selector styling */
+    .vj-select {
+      background: #222;
+      color: #fff;
+      border: 1px solid #444;
+      padding: 6px 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
     }
 
-    /* Netflix Hero Banner */
+    .vj-select:hover {
+      border-color: var(--netflix-red);
+    }
+
     .hero {
       padding: 70px 4% 50px;
       background: linear-gradient(180deg, rgba(20,20,20,0.4) 0%, var(--netflix-bg) 100%), 
@@ -123,9 +132,7 @@
       transition: border-color 0.2s;
     }
 
-    input[type="search"]:focus {
-      border-color: #ffffff;
-    }
+    input[type="search"]:focus { border-color: #ffffff; }
 
     button {
       padding: 12px 24px;
@@ -141,7 +148,6 @@
 
     button:hover { background: var(--netflix-red-hover); }
 
-    /* Main Section Content */
     main { padding: 30px 4% 60px; }
 
     .section-header {
@@ -155,17 +161,15 @@
       font-size: 22px; 
       font-weight: 700;
       margin: 0; 
-      letter-spacing: 0.3px;
     }
 
-    /* Grid layout */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
       gap: 20px 14px;
     }
 
-    /* Netflix Style Cards with Hover Zoom */
+    /* Card Layout with Fallback Handling */
     .movie {
       display: flex;
       flex-direction: column;
@@ -183,12 +187,37 @@
       z-index: 10;
     }
 
-    .movie img {
+    .poster-container {
       width: 100%;
       aspect-ratio: 2 / 3;
+      background: #222;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .movie img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       display: block;
-      background: #222;
+    }
+
+    /* Fallback Poster Box when image is missing (common in pre-2020 entries) */
+    .poster-fallback {
+      text-align: center;
+      padding: 15px;
+      color: #777;
+      font-weight: bold;
+      font-size: 14px;
+      background: #181818;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .movie-info { 
@@ -212,7 +241,7 @@
 
     .movie p {
       font-size: 12px;
-      color: #46d369; /* Netflix high-match green indicator color for ratings */
+      color: #46d369;
       font-weight: 600;
       margin: 0 0 10px;
     }
@@ -232,7 +261,7 @@
       border-color: var(--netflix-red);
     }
 
-    /* Video Player Modal Overlay */
+    /* Modal Overlay */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -309,7 +338,6 @@
 
     .hidden { display: none !important; }
 
-    /* Netflix Footer */
     footer {
       text-align: left;
       color: #757575;
@@ -331,31 +359,38 @@
 </head>
 <body>
 
-  <!-- Netflix Navbar -->
   <header class="navbar">
     <div class="logo"><a href="#home" id="brandLogo"><span>X</span>TREME WATCH</a></div>
     <nav class="nav-links">
       <a href="#home" id="navHome" class="active">Home</a>
       <a href="#movies" id="navMovies">Movies</a>
       <a href="#tvshows" id="navTv">TV Shows</a>
-      <a href="#vj" id="navVJ">Lugandan VJ 🇺🇬</a>
+      <!-- Interactive VJ Selector Dropdown -->
+      <div>
+        <select id="vjSelector" class="vj-select" aria-label="Select VJ Translator">
+          <option value="" disabled selected>🇺🇬 Select VJ Translator</option>
+          <option value="VJ Junior">VJ Junior</option>
+          <option value="VJ Ice P">VJ Ice P</option>
+          <option value="VJ Emmie">VJ Emmie</option>
+          <option value="VJ Jingo">VJ Jingo</option>
+          <option value="VJ Mark">VJ Mark</option>
+        </select>
+      </div>
     </nav>
   </header>
 
-  <!-- Hero Section -->
   <section class="hero">
-    <h1>Unlimited movies, TV shows, and more.</h1>
-    <p>Watch anywhere. Explore blockbusters, series, and exclusive Lugandan VJ translations.</p>
+    <h1>Unlimited movies, TV shows, and VJ translations.</h1>
+    <p>Watch blockbusters and classic releases from 2020 and prior with local VJ flair.</p>
 
     <div class="search-container">
       <form class="search-form" id="searchForm">
-        <input id="searchInput" type="search" placeholder="Search title, genre, or actor..." aria-label="Media title" required>
+        <input id="searchInput" type="search" placeholder="Search title, year (e.g. 2018), or genre..." aria-label="Media title" required>
         <button type="submit">Search</button>
       </form>
     </div>
   </section>
 
-  <!-- Main Content Grid -->
   <main>
     <div class="section-header">
       <h2 id="sectionHeading">Popular Movies</h2>
@@ -382,13 +417,11 @@
     </div>
   </div>
 
-  <!-- Footer -->
   <footer>
     <p>Questions? Contact support.</p>
     <p>&copy; 2026 Xtreme Movie Watch. Movie information provided by TMDB.</p>
   </footer>
 
-  <!-- Application Logic -->
   <script>
     const API_KEY = "925111c270baf9b011e32b3c70c84546";
 
@@ -400,7 +433,7 @@
     const navHome = document.getElementById("navHome");
     const navMovies = document.getElementById("navMovies");
     const navTv = document.getElementById("navTv");
-    const navVJ = document.getElementById("navVJ");
+    const vjSelector = document.getElementById("vjSelector");
     const brandLogo = document.getElementById("brandLogo");
 
     const playerModal = document.getElementById("playerModal");
@@ -410,9 +443,11 @@
     const closeModal = document.getElementById("closeModal");
 
     let currentMode = "movie";
+    let activeVJ = "";
 
-    async function loadMedia(query = "", mode = "movie") {
+    async function loadMedia(query = "", mode = "movie", vjName = "") {
       currentMode = mode;
+      activeVJ = vjName;
       grid.replaceChildren();
       message.classList.remove("hidden");
       message.textContent = "Loading content...";
@@ -423,6 +458,7 @@
 
         if (mode === "vj") {
           endpoint = "https://api.themoviedb.org/3/search/movie";
+          // If a user selects an older keyword or general action, pull broad results to handle legacy 2020/pre-2020 films
           searchQuery = query || "Action"; 
         } else if (query) {
           endpoint = `https://api.themoviedb.org/3/search/${mode === "tv" ? "tv" : "movie"}`;
@@ -436,14 +472,30 @@
         url.searchParams.set("api_key", API_KEY);
         url.searchParams.set("language", "en-US");
         url.searchParams.set("page", "1");
-
+        // Include adult=true or let search query catch wide parameters if needed
         if (searchQuery) url.searchParams.set("query", searchQuery);
 
         const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
         const data = await response.json();
-        const results = data.results || [];
+        let results = data.results || [];
+
+        // If VJ mode, let's also fetch a secondary classic page or mix in older queries if requested
+        if (mode === "vj" && !query) {
+          const classicUrl = new URL("https://api.themoviedb.org/3/discover/movie");
+          classicUrl.searchParams.set("api_key", API_KEY);
+          classicUrl.searchParams.set("language", "en-US");
+          classicUrl.searchParams.set("sort_by", "popularity.desc");
+          classicUrl.searchParams.set("primary_release_date.lte", "2020-12-31"); // Pulls titles from 2020 and prior
+          classicUrl.searchParams.set("page", "1");
+          
+          const classicRes = await fetch(classicUrl);
+          if (classicRes.ok) {
+            const classicData = await classicRes.json();
+            results = [...results, ...(classicData.results || [])];
+          }
+        }
 
         if (!results.length) {
           message.textContent = "No content found. Try another search term.";
@@ -457,21 +509,31 @@
           const card = document.createElement("article");
           card.className = "movie";
 
-          const poster = document.createElement("img");
+          const posterContainer = document.createElement("div");
+          posterContainer.className = "poster-container";
+
           const titleText = item.title || item.name;
           const dateText = item.release_date || item.first_air_date || "Unknown";
 
-          poster.alt = titleText ? titleText + " poster" : "Poster";
-          poster.loading = "lazy";
-          poster.src = item.poster_path
-            ? "https://image.tmdb.org/t/p/w500" + item.poster_path
-            : "";
+          if (item.poster_path) {
+            const poster = document.createElement("img");
+            poster.alt = titleText + " poster";
+            poster.loading = "lazy";
+            poster.src = "https://image.tmdb.org/t/p/w500" + item.poster_path;
+            posterContainer.appendChild(poster);
+          } else {
+            // Robust Fallback for items missing posters (especially older 2020/retro releases)
+            const fallback = document.createElement("div");
+            fallback.className = "poster-fallback";
+            fallback.innerHTML = `<span>${titleText}</span><br><small>(${dateText.slice(0, 4)})</small>`;
+            posterContainer.appendChild(fallback);
+          }
 
           const info = document.createElement("div");
           info.className = "movie-info";
 
           const title = document.createElement("h3");
-          title.textContent = mode === "vj" ? `[VJ Translated] ${titleText}` : titleText;
+          title.textContent = activeVJ ? `[${activeVJ}] ${titleText}` : titleText;
 
           const year = document.createElement("p");
           year.textContent = dateText.slice(0, 4) + " · ★ " + Number(item.vote_average || 0).toFixed(1);
@@ -485,7 +547,7 @@
           });
 
           info.append(title, year, playBtn);
-          card.append(poster, info);
+          card.append(posterContainer, info);
           grid.append(card);
         });
 
@@ -514,59 +576,8 @@
     });
 
     function setActiveNav(activeElement) {
-      [navHome, navMovies, navTv, navVJ].forEach(nav => nav.classList.remove("active"));
+      [navHome, navMovies, navTv].forEach(nav => nav.classList.remove("active"));
       if (activeElement) activeElement.classList.add("active");
     }
 
     searchForm.addEventListener("submit", event => {
-      event.preventDefault();
-      const query = searchInput.value.trim();
-      const modeText = currentMode === "vj" ? "Lugandan VJ Results" : (currentMode === "tv" ? "TV Shows" : "Movies");
-      heading.textContent = query ? `Search Results for "${query}"` : `Popular ${modeText}`;
-      loadMedia(query, currentMode);
-    });
-
-    navHome.addEventListener("click", (e) => {
-      e.preventDefault();
-      searchInput.value = "";
-      heading.textContent = "Popular Movies";
-      setActiveNav(navHome);
-      loadMedia("", "movie");
-    });
-
-    brandLogo.addEventListener("click", (e) => {
-      e.preventDefault();
-      searchInput.value = "";
-      heading.textContent = "Popular Movies";
-      setActiveNav(navHome);
-      loadMedia("", "movie");
-    });
-
-    navMovies.addEventListener("click", (e) => {
-      e.preventDefault();
-      searchInput.value = "";
-      heading.textContent = "Popular Movies";
-      setActiveNav(navMovies);
-      loadMedia("", "movie");
-    });
-
-    navTv.addEventListener("click", (e) => {
-      e.preventDefault();
-      searchInput.value = "";
-      heading.textContent = "Popular TV Shows";
-      setActiveNav(navTv);
-      loadMedia("", "tv");
-    });
-
-    navVJ.addEventListener("click", (e) => {
-      e.preventDefault();
-      searchInput.value = "";
-      heading.textContent = "Lugandan VJ Translated Movies";
-      setActiveNav(navVJ);
-      loadMedia("Action", "vj");
-    });
-
-    loadMedia("", "movie");
-  </script>
-</body>
-</html>
