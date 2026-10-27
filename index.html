@@ -67,7 +67,6 @@
       color: #ffffff;
     }
 
-    /* VJ Dropdown Selector styling */
     .vj-select {
       background: #222;
       color: #fff;
@@ -82,6 +81,14 @@
 
     .vj-select:hover {
       border-color: var(--netflix-red);
+    }
+
+    .signin-btn {
+      background: var(--netflix-red) !important;
+      color: white !important;
+      padding: 6px 16px !important;
+      border-radius: 4px;
+      font-weight: 700;
     }
 
     .hero {
@@ -119,7 +126,7 @@
       max-width: 600px;
     }
 
-    input[type="search"] {
+    input[type="search"], input[type="email"], input[type="password"] {
       flex: 1;
       min-width: 0;
       padding: 14px 18px;
@@ -132,7 +139,9 @@
       transition: border-color 0.2s;
     }
 
-    input[type="search"]:focus { border-color: #ffffff; }
+    input[type="search"]:focus, input[type="email"]:focus, input[type="password"]:focus { 
+      border-color: #ffffff; 
+    }
 
     button {
       padding: 12px 24px;
@@ -169,7 +178,6 @@
       gap: 20px 14px;
     }
 
-    /* Card Layout with Fallback Handling */
     .movie {
       display: flex;
       flex-direction: column;
@@ -204,7 +212,6 @@
       display: block;
     }
 
-    /* Fallback Poster Box when image is missing (common in pre-2020 entries) */
     .poster-fallback {
       text-align: center;
       padding: 15px;
@@ -261,14 +268,14 @@
       border-color: var(--netflix-red);
     }
 
-    /* Modal Overlay */
+    /* Modals (Video Player & Sign In) */
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.88);
+      background: rgba(0, 0, 0, 0.9);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -287,6 +294,20 @@
       box-shadow: 0 15px 40px rgba(0,0,0,0.8);
     }
 
+    .auth-modal {
+      max-width: 450px !important;
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.85);
+      border: 1px solid #333;
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
     .modal-header {
       padding: 16px 20px;
       display: flex;
@@ -295,7 +316,7 @@
       background: #1f1f1f;
     }
 
-    .modal-header h3 { margin: 0; font-size: 18px; }
+    .modal-header h3 { margin: 0; font-size: 18px; color: #fff; }
 
     .close-btn {
       background: transparent;
@@ -303,9 +324,10 @@
       font-size: 24px;
       padding: 0;
       cursor: pointer;
+      border: none;
     }
 
-    .close-btn:hover { color: var(--netflix-red); background: transparent; }
+    .close-btn:hover { color: var(--netflix-red); }
 
     .video-container {
       position: relative;
@@ -314,10 +336,11 @@
       background: #000;
     }
 
-    .video-container iframe {
+    .video-container video {
       width: 100%;
       height: 100%;
-      border: none;
+      object-fit: contain;
+      outline: none;
     }
 
     .modal-body {
@@ -365,27 +388,27 @@
       <a href="#home" id="navHome" class="active">Home</a>
       <a href="#movies" id="navMovies">Movies</a>
       <a href="#tvshows" id="navTv">TV Shows</a>
-      <!-- Interactive VJ Selector Dropdown -->
       <div>
         <select id="vjSelector" class="vj-select" aria-label="Select VJ Translator">
           <option value="" disabled selected>🇺🇬 Select VJ Translator</option>
           <option value="VJ Junior">VJ Junior</option>
           <option value="VJ Ice P">VJ Ice P</option>
-          <option value="VJ Emmie">VJ Emmie</option>
+          <option value="VJ Emmy">VJ Emmy</option>
           <option value="VJ Jingo">VJ Jingo</option>
           <option value="VJ Mark">VJ Mark</option>
         </select>
       </div>
+      <a href="#signin" id="navSignIn" class="signin-btn">Sign In</a>
     </nav>
   </header>
 
   <section class="hero">
     <h1>Unlimited movies, TV shows, and VJ translations.</h1>
-    <p>Watch blockbusters and classic releases from 2020 and prior with local VJ flair.</p>
+    <p>Stream directly inside your app with classic Pearl Pix archives dating back to 2015.</p>
 
     <div class="search-container">
       <form class="search-form" id="searchForm">
-        <input id="searchInput" type="search" placeholder="Search title, year (e.g. 2018), or genre..." aria-label="Media title" required>
+        <input id="searchInput" type="search" placeholder="Search title, year (e.g. 2015), or genre..." aria-label="Media title" required>
         <button type="submit">Search</button>
       </form>
     </div>
@@ -401,7 +424,7 @@
     <div id="movieGrid" class="grid"></div>
   </main>
 
-  <!-- Video Player Modal -->
+  <!-- In-App HTML5 Video Player Modal -->
   <div id="playerModal" class="modal-overlay hidden">
     <div class="modal-content">
       <div class="modal-header">
@@ -409,11 +432,30 @@
         <button id="closeModal" class="close-btn">&times;</button>
       </div>
       <div class="video-container">
-        <iframe id="videoPlayerFrame" src="" allowfullscreen></iframe>
+        <video id="nativePlayer" controls autoplay>
+          <source id="videoSource" src="" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
       <div class="modal-body">
         <p id="modalOverview"></p>
       </div>
+    </div>
+  </div>
+
+  <!-- Sign In Modal -->
+  <div id="authModal" class="modal-overlay hidden">
+    <div class="modal-content auth-modal">
+      <div class="modal-header" style="background:transparent; padding:0 0 15px 0;">
+        <h3>Sign In to Xtreme Watch</h3>
+        <button id="closeAuthModal" class="close-btn">&times;</button>
+      </div>
+      <form id="authForm" class="auth-form">
+        <input type="email" id="authEmail" placeholder="Email or phone number" required>
+        <input type="password" id="authPassword" placeholder="Password" required>
+        <button type="submit">Sign In</button>
+        <p id="authStatus" style="font-size:13px; color:#b3b3b3; text-align:center; margin:10px 0 0;"></p>
+      </form>
     </div>
   </div>
 
@@ -434,13 +476,21 @@
     const navMovies = document.getElementById("navMovies");
     const navTv = document.getElementById("navTv");
     const vjSelector = document.getElementById("vjSelector");
+    const navSignIn = document.getElementById("navSignIn");
     const brandLogo = document.getElementById("brandLogo");
 
     const playerModal = document.getElementById("playerModal");
-    const videoPlayerFrame = document.getElementById("videoPlayerFrame");
+    const nativePlayer = document.getElementById("nativePlayer");
+    const videoSource = document.getElementById("videoSource");
     const modalTitle = document.getElementById("modalTitle");
     const modalOverview = document.getElementById("modalOverview");
     const closeModal = document.getElementById("closeModal");
+
+    const authModal = document.getElementById("authModal");
+    const closeAuthModal = document.getElementById("closeAuthModal");
+    const authForm = document.getElementById("authForm");
+    const authEmail = document.getElementById("authEmail");
+    const authStatus = document.getElementById("authStatus");
 
     let currentMode = "movie";
     let activeVJ = "";
@@ -458,7 +508,6 @@
 
         if (mode === "vj") {
           endpoint = "https://api.themoviedb.org/3/search/movie";
-          // If a user selects an older keyword or general action, pull broad results to handle legacy 2020/pre-2020 films
           searchQuery = query || "Action"; 
         } else if (query) {
           endpoint = `https://api.themoviedb.org/3/search/${mode === "tv" ? "tv" : "movie"}`;
@@ -472,7 +521,6 @@
         url.searchParams.set("api_key", API_KEY);
         url.searchParams.set("language", "en-US");
         url.searchParams.set("page", "1");
-        // Include adult=true or let search query catch wide parameters if needed
         if (searchQuery) url.searchParams.set("query", searchQuery);
 
         const response = await fetch(url);
@@ -481,19 +529,19 @@
         const data = await response.json();
         let results = data.results || [];
 
-        // If VJ mode, let's also fetch a secondary classic page or mix in older queries if requested
+        // Pearl Pix archive feature: Pull classic releases dating from 2015 and older for retro VJ collections
         if (mode === "vj" && !query) {
-          const classicUrl = new URL("https://api.themoviedb.org/3/discover/movie");
-          classicUrl.searchParams.set("api_key", API_KEY);
-          classicUrl.searchParams.set("language", "en-US");
-          classicUrl.searchParams.set("sort_by", "popularity.desc");
-          classicUrl.searchParams.set("primary_release_date.lte", "2020-12-31"); // Pulls titles from 2020 and prior
-          classicUrl.searchParams.set("page", "1");
+          const archiveUrl = new URL("https://api.themoviedb.org/3/discover/movie");
+          archiveUrl.searchParams.set("api_key", API_KEY);
+          archiveUrl.searchParams.set("language", "en-US");
+          archiveUrl.searchParams.set("sort_by", "popularity.desc");
+          archiveUrl.searchParams.set("primary_release_date.lte", "2015-12-31"); // Archive from 2015 & backwards
+          archiveUrl.searchParams.set("page", "1");
           
-          const classicRes = await fetch(classicUrl);
-          if (classicRes.ok) {
-            const classicData = await classicRes.json();
-            results = [...results, ...(classicData.results || [])];
+          const archiveRes = await fetch(archiveUrl);
+          if (archiveRes.ok) {
+            const archiveData = await archiveRes.json();
+            results = [...results, ...(archiveData.results || [])];
           }
         }
 
@@ -522,7 +570,6 @@
             poster.src = "https://image.tmdb.org/t/p/w500" + item.poster_path;
             posterContainer.appendChild(poster);
           } else {
-            // Robust Fallback for items missing posters (especially older 2020/retro releases)
             const fallback = document.createElement("div");
             fallback.className = "poster-fallback";
             fallback.innerHTML = `<span>${titleText}</span><br><small>(${dateText.slice(0, 4)})</small>`;
@@ -543,7 +590,7 @@
           playBtn.textContent = "▶ Play";
 
           playBtn.addEventListener("click", () => {
-            openPlayer(titleText, item.overview);
+            openInAppPlayer(titleText, item.overview);
           });
 
           info.append(title, year, playBtn);
@@ -558,15 +605,17 @@
       }
     }
 
-    function openPlayer(title, overview) {
+    function openInAppPlayer(title, overview) {
       modalTitle.textContent = title;
       modalOverview.textContent = overview || "No description available.";
-      videoPlayerFrame.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"; 
+      videoSource.src = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+      nativePlayer.load();
       playerModal.classList.remove("hidden");
     }
 
     function closePlayerModal() {
-      videoPlayerFrame.src = ""; 
+      nativePlayer.pause();
+      videoSource.src = "";
       playerModal.classList.add("hidden");
     }
 
@@ -575,9 +624,89 @@
       if (e.target === playerModal) closePlayerModal();
     });
 
+    // Auth modal controls
+    navSignIn.addEventListener("click", (e) => {
+      e.preventDefault();
+      authEmail.value = "";
+      document.getElementById("authPassword").value = "";
+      authStatus.textContent = "";
+      authModal.classList.remove("hidden");
+    });
+
+    closeAuthModal.addEventListener("click", () => authModal.classList.add("hidden"));
+    authModal.addEventListener("click", (e) => {
+      if (e.target === authModal) authModal.classList.add("hidden");
+    });
+
+    authForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      authStatus.style.color = "#46d369";
+      authStatus.textContent = "Successfully signed in!";
+      setTimeout(() => authModal.classList.add("hidden"), 1200);
+    });
+
     function setActiveNav(activeElement) {
       [navHome, navMovies, navTv].forEach(nav => nav.classList.remove("active"));
       if (activeElement) activeElement.classList.add("active");
     }
 
     searchForm.addEventListener("submit", event => {
+      event.preventDefault();
+      const query = searchInput.value.trim();
+      const modeText = activeVJ ? `${activeVJ} VJ Archive` : (currentMode === "tv" ? "TV Shows" : "Movies");
+      heading.textContent = query ? `Search Results for "${query}"` : `Popular ${modeText}`;
+      loadMedia(query, currentMode, activeVJ);
+    });
+
+    vjSelector.addEventListener("change", (e) => {
+      const selectedVJ = e.target.value;
+      setActiveNav(null);
+      searchInput.value = "";
+      heading.textContent = `${selectedVJ} Archive Collection (2015 & Older Classics)`;
+      loadMedia("", "vj", selectedVJ);
+    });
+
+    navHome.addEventListener("click", (e) => {
+      e.preventDefault();
+      vjSelector.value = "";
+      activeVJ = "";
+      searchInput.value = "";
+      heading.textContent = "Popular Movies";
+      setActiveNav(navHome);
+      loadMedia("", "movie", "");
+    });
+
+    brandLogo.addEventListener("click", (e) => {
+      e.preventDefault();
+      vjSelector.value = "";
+      activeVJ = "";
+      searchInput.value = "";
+      heading.textContent = "Popular Movies";
+      setActiveNav(navHome);
+      loadMedia("", "movie", "");
+    });
+
+    navMovies.addEventListener("click", (e) => {
+      e.preventDefault();
+      vjSelector.value = "";
+      activeVJ = "";
+      searchInput.value = "";
+      heading.textContent = "Popular Movies";
+      setActiveNav(navMovies);
+      loadMedia("", "movie", "");
+    });
+
+    navTv.addEventListener("click", (e) => {
+      e.preventDefault();
+      vjSelector.value = "";
+      activeVJ = "";
+      searchInput.value = "";
+      heading.textContent = "Popular TV Shows";
+      setActiveNav(navTv);
+      loadMedia("", "tv", "");
+    });
+
+    loadMedia("", "movie", "");
+  </script>
+</body>
+</html>
