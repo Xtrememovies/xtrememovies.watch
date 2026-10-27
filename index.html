@@ -28,52 +28,29 @@
 
     a { color: #ffffff; text-decoration: none; }
 
-    /* Pearl Pix Style Header */
     header.navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 4%;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(20,20,20,0.9) 100%);
+      padding: 1.2rem 4%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(20,20,20,0.8) 100%);
       position: sticky;
       top: 0;
       z-index: 1000;
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo-badge {
-      background: var(--netflix-red);
-      color: #fff;
-      font-weight: 900;
-      font-size: 14px;
-      padding: 4px 8px;
-      border-radius: 4px;
-    }
-
-    .logo-text { 
-      font-size: 20px; 
+    .logo { 
+      font-size: 24px; 
       font-weight: 900; 
-      letter-spacing: 0.5px;
-      line-height: 1.1;
+      letter-spacing: 1px;
     }
 
-    .logo-text span { 
-      display: block;
-      font-size: 9px;
-      color: var(--netflix-gray);
-      font-weight: 500;
-      letter-spacing: 1.5px;
-    }
+    .logo span { color: var(--netflix-red); }
 
     .nav-links {
       display: flex;
-      gap: 22px;
+      gap: 20px;
       align-items: center;
     }
 
@@ -90,118 +67,56 @@
       color: #ffffff;
     }
 
-    .mylist-badge-nav {
-      background: rgba(255, 255, 255, 0.1);
+    .vj-select {
+      background: #222;
+      color: #fff;
+      border: 1px solid #444;
       padding: 6px 12px;
       border-radius: 4px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .vj-select:hover {
+      border-color: var(--netflix-red);
     }
 
     .signin-btn {
       background: var(--netflix-red) !important;
       color: white !important;
-      padding: 8px 18px !important;
+      padding: 6px 16px !important;
       border-radius: 4px;
       font-weight: 700;
     }
 
-    /* VJ Category Grid Hub */
-    .vj-hub-container {
-      background: #111;
-      padding: 25px 4%;
-      border-bottom: 1px solid #222;
-      margin-bottom: 20px;
-    }
-
-    .vj-tabs-header {
-      display: flex;
-      border-bottom: 2px solid #222;
-      margin-bottom: 20px;
-    }
-
-    .vj-tab-btn {
-      flex: 1;
-      background: transparent;
-      border: none;
-      color: var(--netflix-gray);
-      font-size: 15px;
-      font-weight: 700;
-      padding: 12px;
-      cursor: pointer;
-      text-align: center;
-      letter-spacing: 1px;
-    }
-
-    .vj-tab-btn.active {
-      color: #fff;
-      border-bottom: 3px solid var(--netflix-red);
-    }
-
-    .vj-search-input {
-      width: 100%;
-      max-width: 500px;
-      padding: 12px 16px;
-      background: #1c1c1c;
-      border: 1px solid #333;
-      border-radius: 6px;
-      color: #fff;
-      font-size: 14px;
-      margin-bottom: 20px;
-      outline: none;
-    }
-
-    .vj-pill-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 12px;
-      max-height: 240px;
-      overflow-y: auto;
-      padding-right: 5px;
-    }
-
-    .vj-pill {
-      background: #1c1c1c;
-      border: 1px solid #333;
-      color: #fff;
-      padding: 14px 10px;
-      border-radius: 6px;
-      font-weight: 700;
-      font-size: 13px;
-      cursor: pointer;
-      text-align: center;
-      transition: all 0.2s ease;
-    }
-
-    .vj-pill:hover, .vj-pill.active {
-      background: var(--netflix-red);
-      border-color: var(--netflix-red);
-    }
-
     .hero {
-      padding: 50px 4% 30px;
+      padding: 70px 4% 50px;
       background: linear-gradient(180deg, rgba(20,20,20,0.4) 0%, var(--netflix-bg) 100%), 
                   radial-gradient(circle at center, #2c2c2c 0%, #111111 100%);
       text-align: center;
     }
 
     .hero h1 {
-      font-size: clamp(28px, 5vw, 48px);
+      font-size: clamp(32px, 6vw, 56px);
       font-weight: 800;
-      margin: 0 0 10px;
+      margin: 0 0 12px;
       letter-spacing: -0.5px;
     }
 
     .hero p { 
       color: var(--netflix-gray); 
-      font-size: 15px;
+      font-size: 16px;
       line-height: 1.5; 
       max-width: 600px;
-      margin: 0 auto 20px;
+      margin: 0 auto 28px;
     }
 
     .search-container {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       width: 100%;
     }
 
@@ -222,6 +137,11 @@
       color: white;
       font-size: 16px;
       outline: none;
+      transition: border-color 0.2s;
+    }
+
+    input[type="search"]:focus, input[type="email"]:focus, input[type="password"]:focus { 
+      border-color: #ffffff; 
     }
 
     button {
@@ -238,7 +158,32 @@
 
     button:hover { background: var(--netflix-red-hover); }
 
-    main { padding: 20px 4% 60px; }
+    .filter-bar {
+      display: flex;
+      gap: 8px;
+      margin-top: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .filter-pill {
+      padding: 6px 14px;
+      font-size: 13px;
+      border-radius: 20px;
+      background: #222;
+      border: 1px solid var(--netflix-border);
+      color: var(--netflix-gray);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-pill.active, .filter-pill:hover {
+      background: var(--netflix-red);
+      color: white;
+      border-color: var(--netflix-red);
+    }
+
+    main { padding: 30px 4% 60px; }
 
     .section-header {
       display: flex;
@@ -251,30 +196,6 @@
       font-size: 22px; 
       font-weight: 700;
       margin: 0; 
-    }
-
-    /* Sub-filters for My List view */
-    .mylist-subnav {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .subnav-btn {
-      background: #222;
-      color: var(--netflix-gray);
-      border: 1px solid #333;
-      padding: 6px 16px;
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .subnav-btn.active {
-      background: var(--netflix-red);
-      color: #fff;
-      border-color: var(--netflix-red);
     }
 
     .grid {
@@ -290,7 +211,6 @@
       border-radius: 6px;
       overflow: hidden;
       height: 100%;
-      position: relative;
       transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
@@ -299,32 +219,6 @@
       transform: scale(1.04);
       box-shadow: 0 10px 25px rgba(0,0,0,0.6);
       z-index: 10;
-    }
-
-    /* Bookmark Button on Card */
-    .bookmark-btn {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background: rgba(0, 0, 0, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #fff;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 16px;
-      z-index: 5;
-      padding: 0;
-      transition: background 0.2s;
-    }
-
-    .bookmark-btn:hover, .bookmark-btn.saved {
-      background: var(--netflix-red);
-      border-color: var(--netflix-red);
     }
 
     .poster-container {
@@ -385,7 +279,7 @@
       margin: 0 0 10px;
     }
 
-    .movie button.play-action-btn { 
+    .movie button { 
       width: 100%; 
       padding: 8px 5px; 
       margin-top: auto;
@@ -395,12 +289,12 @@
       border: 1px solid rgba(255,255,255,0.2);
     }
 
-    .movie button.play-action-btn:hover {
+    .movie button:hover {
       background: var(--netflix-red);
       border-color: var(--netflix-red);
     }
 
-    /* Modals */
+    /* Modals (Video Player, Auth, Contact) */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -415,7 +309,7 @@
     }
 
     .modal-content {
-      background: #181818;
+      background: #141414;
       width: 90%;
       max-width: 850px;
       border-radius: 8px;
@@ -423,7 +317,7 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.9);
     }
 
     .auth-modal {
@@ -471,7 +365,7 @@
     .video-container video {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       outline: none;
     }
 
@@ -507,91 +401,58 @@
 
     @media (max-width: 768px) {
       header.navbar { flex-direction: column; gap: 10px; padding: 1rem 4%; }
-      .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 12px; }
+      .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 15px; }
       .grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Pearl Pix Style Navbar -->
   <header class="navbar">
-    <div class="logo-container">
-      <div class="logo-badge">PP</div>
-      <div class="logo-text">PEARL PIX<span>UGANDAN VJ TRANSLATIONS</span></div>
-    </div>
+    <div class="logo"><a href="#home" id="brandLogo"><span>X</span>TREME WATCH</a></div>
     <nav class="nav-links">
       <a href="#home" id="navHome" class="active">Home</a>
       <a href="#movies" id="navMovies">Movies</a>
-      <a href="#series" id="navSeries">Series</a>
-      <a href="#filter" id="navFilter">Filter</a>
-      <a href="#mylist" id="navMyList" class="mylist-badge-nav">My List (<span id="myListCount">0</span>)</a>
-      <a href="#support" id="navSupport">Contact & Support</a>
-      <a href="#signin" id="navSignIn" class="signin-btn">SIGN IN</a>
+      <a href="#tvshows" id="navTv">TV Shows</a>
+      <a href="#watchlist" id="navWatchlist">Watchlist <span id="watchlistCount" style="background:var(--netflix-red); padding:1px 6px; border-radius:10px; font-size:11px; color:#fff;">0</span></a>
+      <div>
+        <select id="vjSelector" class="vj-select" aria-label="Select VJ Translator">
+          <option value="" disabled selected>🇺🇬 Select VJ Translator</option>
+          <option value="VJ Junior">VJ Junior</option>
+          <option value="VJ Ice P">VJ Ice P</option>
+          <option value="VJ Emmy">VJ Emmy</option>
+          <option value="VJ Jingo">VJ Jingo</option>
+          <option value="VJ Mark">VJ Mark</option>
+        </select>
+      </div>
+      <a href="#signin" id="navSignIn" class="signin-btn">Sign In</a>
     </nav>
   </header>
 
-  <!-- Pearl Pix Style VJ Category Hub -->
-  <div class="vj-hub-container" id="vjHubContainer">
-    <div class="vj-tabs-header">
-      <button class="vj-tab-btn active" id="tabVJCategory">VJ CATEGORY</button>
-      <button class="vj-tab-btn" id="tabGenre">GENRE</button>
-    </div>
-    
-    <div id="vjSectionContent">
-      <input type="text" id="vjFilterInput" class="vj-search-input" placeholder="Search VJ (e.g. Junior, Jingo, Emmy, Ice P...)">
-      <div class="vj-pill-grid" id="vjPillGrid">
-        <div class="vj-pill" data-vj="VJ 03">VJ 03</div>
-        <div class="vj-pill" data-vj="VJ AARON">VJ AARON</div>
-        <div class="vj-pill" data-vj="VJ AKAANA">VJ AKAANA</div>
-        <div class="vj-pill" data-vj="VJ ARAFA">VJ ARAFA</div>
-        <div class="vj-pill" data-vj="VJ ARTIK">VJ ARTIK</div>
-        <div class="vj-pill" data-vj="VJ ASHIM">VJ ASHIM</div>
-        <div class="vj-pill" data-vj="VJ BANKS">VJ BANKS</div>
-        <div class="vj-pill" data-vj="VJ BAROS">VJ BAROS</div>
-        <div class="vj-pill" data-vj="VJ BONNY">VJ BONNY</div>
-        <div class="vj-pill" data-vj="VJ CABS">VJ CABS</div>
-        <div class="vj-pill" data-vj="VJ CB">VJ CB</div>
-        <div class="vj-pill" data-vj="VJ DAN DE">VJ DAN DE</div>
-        <div class="vj-pill" data-vj="VJ EDDY">VJ EDDY</div>
-        <div class="vj-pill" data-vj="VJ EMMY">VJ EMMY</div>
-        <div class="vj-pill" data-vj="VJ FREDY">VJ FREDY</div>
-        <div class="vj-pill" data-vj="VJ HAM">VJ HAM</div>
-        <div class="vj-pill" data-vj="VJ HD">VJ HD</div>
-        <div class="vj-pill" data-vj="VJ HEAVY K">VJ HEAVY K</div>
-        <div class="vj-pill" data-vj="VJ HENRICO">VJ HENRICO</div>
-        <div class="vj-pill" data-vj="VJ ICE P">VJ ICE P</div>
-        <div class="vj-pill" data-vj="VJ ISMA K">VJ ISMA K</div>
-        <div class="vj-pill" data-vj="VJ ISMA PRO">VJ ISMA PRO</div>
-        <div class="vj-pill" data-vj="VJ IVO">VJ IVO</div>
-        <div class="vj-pill" data-vj="VJ JIMMY">VJ JIMMY</div>
-        <div class="vj-pill" data-vj="VJ JUNIOR">VJ JUNIOR</div>
-      </div>
-    </div>
-  </div>
-
-  <section class="hero" id="heroSection">
-    <h1>Your next translated movie starts here.</h1>
-    <p>Discover movies, series, and classic Pearl Pix archives dating back to 2015.</p>
+  <section class="hero">
+    <h1>Unlimited movies, TV shows, and VJ translations.</h1>
+    <p>Stream directly inside your app with top-tier entertainment and classic collections.</p>
 
     <div class="search-container">
       <form class="search-form" id="searchForm">
-        <input id="searchInput" type="search" placeholder="Search title or year (e.g. 2015)..." aria-label="Media title" required>
+        <input id="searchInput" type="search" placeholder="Search title, year, or genre..." aria-label="Media title" required>
         <button type="submit">Search</button>
       </form>
+      
+      <!-- Quick Filter Pills Bar -->
+      <div class="filter-bar" id="filterBar">
+        <button type="button" class="filter-pill active" data-genre="">All Genres</button>
+        <button type="button" class="filter-pill" data-genre="28">Action</button>
+        <button type="button" class="filter-pill" data-genre="35">Comedy</button>
+        <button type="button" class="filter-pill" data-genre="18">Drama</button>
+        <button type="button" class="filter-pill" data-genre="878">Sci-Fi</button>
+      </div>
     </div>
   </section>
 
   <main>
     <div class="section-header">
       <h2 id="sectionHeading">Popular Movies</h2>
-    </div>
-
-    <!-- Subnav filters for My List view -->
-    <div id="myListSubnav" class="mylist-subnav hidden">
-      <button class="subnav-btn active" data-filter="all">All</button>
-      <button class="subnav-btn" data-filter="movies">Movies</button>
-      <button class="subnav-btn" data-filter="series">TV Series</button>
     </div>
 
     <p id="message" class="message" role="status">Loading content...</p>
@@ -607,8 +468,7 @@
         <button id="closeModal" class="close-btn">&times;</button>
       </div>
       <div class="video-container">
-        <video id="nativePlayer" controls autoplay>
-          <source id="videoSource" src="" type="video/mp4">
+        <video id="nativePlayer" controls autoplay playsinline>
           Your browser does not support the video tag.
         </video>
       </div>
@@ -629,13 +489,28 @@
         <input type="email" id="authEmail" placeholder="Email or phone number" required>
         <input type="password" id="authPassword" placeholder="Password" required>
         <button type="submit">Sign In</button>
-        <p id="authStatus" style="font-size:13px; color:#b3b3b3; text-align:center; margin:10px 0 0;"></p>
+        <p id="authStatus" style="font-size:13px; color:#46d369; text-align:center; margin:10px 0 0;"></p>
       </form>
     </div>
   </div>
 
+  <!-- Contact Support Modal -->
+  <div id="contactModal" class="modal-overlay hidden">
+    <div class="modal-content auth-modal">
+      <div class="modal-header" style="background:transparent; padding:0 0 15px 0;">
+        <h3>Contact Support</h3>
+        <button id="closeContactModal" class="close-btn">&times;</button>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:12px; color:#b3b3b3; font-size:14px;">
+        <p>Need help with streaming or VJ translations? Reach out to our support team:</p>
+        <p><strong>Email:</strong> support@xtrememovies.watch</p>
+        <p><strong>WhatsApp / Helpline:</strong> +256 700 000000</p>
+      </div>
+    </div>
+  </div>
+
   <footer>
-    <p>Questions? Contact support.</p>
+    <p>Questions? <a href="#contact" id="contactLink" style="color:var(--netflix-gray); text-decoration:underline;">Contact support</a>.</p>
     <p>&copy; 2026 Xtreme Movie Watch. Movie information provided by TMDB.</p>
   </footer>
 
@@ -647,24 +522,18 @@
     const heading = document.getElementById("sectionHeading");
     const searchInput = document.getElementById("searchInput");
     const searchForm = document.getElementById("searchForm");
-    
-    // Navbar Links
     const navHome = document.getElementById("navHome");
     const navMovies = document.getElementById("navMovies");
-    const navSeries = document.getElementById("navSeries");
-    const navFilter = document.getElementById("navFilter");
-    const navMyList = document.getElementById("navMyList");
-    const navSupport = document.getElementById("navSupport");
+    const navTv = document.getElementById("navTv");
+    const vjSelector = document.getElementById("vjSelector");
     const navSignIn = document.getElementById("navSignIn");
     const brandLogo = document.getElementById("brandLogo");
-    const vjHubContainer = document.getElementById("vjHubContainer");
-    const heroSection = document.getElementById("heroSection");
-    const myListSubnav = document.getElementById("myListSubnav");
-    const myListCount = document.getElementById("myListCount");
+    const navWatchlist = document.getElementById("navWatchlist");
+    const watchlistCount = document.getElementById("watchlistCount");
+    const filterBar = document.getElementById("filterBar");
 
     const playerModal = document.getElementById("playerModal");
     const nativePlayer = document.getElementById("nativePlayer");
-    const videoSource = document.getElementById("videoSource");
     const modalTitle = document.getElementById("modalTitle");
     const modalOverview = document.getElementById("modalOverview");
     const closeModal = document.getElementById("closeModal");
@@ -675,21 +544,43 @@
     const authEmail = document.getElementById("authEmail");
     const authStatus = document.getElementById("authStatus");
 
-    const vjFilterInput = document.getElementById("vjFilterInput");
-    const vjPills = document.querySelectorAll(".vj-pill");
+    const contactLink = document.getElementById("contactLink");
+    const contactModal = document.getElementById("contactModal");
+    const closeContactModal = document.getElementById("closeContactModal");
 
     let currentMode = "movie";
     let activeVJ = "";
-    let myList = JSON.parse(localStorage.getItem("xtreme_mylist")) || [];
+    let selectedGenre = "";
+    let watchlist = JSON.parse(localStorage.getItem("xtreme_watchlist")) || [];
 
-    function updateMyListBadge() {
-      myListCount.textContent = myList.length;
+    function updateWatchlistBadge() {
+      watchlistCount.textContent = watchlist.length;
     }
+    updateWatchlistBadge();
 
-    async function loadMedia(query = "", mode = "movie", vjName = "") {
+    // Contact modal handlers
+    contactLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      contactModal.classList.remove("hidden");
+    });
+    closeContactModal.addEventListener("click", () => contactModal.classList.add("hidden"));
+    contactModal.addEventListener("click", (e) => {
+      if (e.target === contactModal) contactModal.classList.add("hidden");
+    });
+
+    // Filter pills event listener
+    filterBar.addEventListener("click", (e) => {
+      if (e.target.tagName === "BUTTON") {
+        document.querySelectorAll(".filter-pill").forEach(p => p.classList.remove("active"));
+        e.target.classList.add("active");
+        selectedGenre = e.target.getAttribute("data-genre");
+        loadMedia(searchInput.value.trim(), currentMode, activeVJ, selectedGenre);
+      }
+    });
+
+    async function loadMedia(query = "", mode = "movie", vjName = "", genreId = "") {
       currentMode = mode;
       activeVJ = vjName;
-      myListSubnav.classList.add("hidden");
       grid.replaceChildren();
       message.classList.remove("hidden");
       message.textContent = "Loading content...";
@@ -703,6 +594,8 @@
           searchQuery = query || "Action"; 
         } else if (query) {
           endpoint = `https://api.themoviedb.org/3/search/${mode === "tv" ? "tv" : "movie"}`;
+        } else if (genreId) {
+          endpoint = `https://api.themoviedb.org/3/discover/${mode === "tv" ? "tv" : "movie"}`;
         } else {
           endpoint = mode === "tv" 
             ? "https://api.themoviedb.org/3/tv/popular" 
@@ -714,6 +607,7 @@
         url.searchParams.set("language", "en-US");
         url.searchParams.set("page", "1");
         if (searchQuery) url.searchParams.set("query", searchQuery);
+        if (genreId && !query) url.searchParams.set("with_genres", genreId);
 
         const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -721,23 +615,12 @@
         const data = await response.json();
         let results = data.results || [];
 
-        if (mode === "vj" && !query) {
-          const archiveUrl = new URL("https://api.themoviedb.org/3/discover/movie");
-          archiveUrl.searchParams.set("api_key", API_KEY);
-          archiveUrl.searchParams.set("language", "en-US");
-          archiveUrl.searchParams.set("sort_by", "popularity.desc");
-          archiveUrl.searchParams.set("primary_release_date.lte", "2015-12-31");
-          archiveUrl.searchParams.set("page", "1");
-          
-          const archiveRes = await fetch(archiveUrl);
-          if (archiveRes.ok) {
-            const archiveData = await archiveRes.json();
-            results = [...results, ...(archiveData.results || [])];
-          }
+        if (genreId && genreId !== "") {
+          results = results.filter(item => item.genre_ids && item.genre_ids.includes(Number(genreId)));
         }
 
         if (!results.length) {
-          message.textContent = "No content found. Try another search term.";
+          message.textContent = "No content found. Try another filter or search term.";
           message.classList.remove("hidden");
           return;
         }
@@ -751,7 +634,7 @@
       } catch (error) {
         console.error(error);
         message.textContent = "Could not load data stream. Check connectivity options.";
-        message.classList.add("hidden");
+        message.classList.remove("hidden");
       }
     }
 
@@ -764,18 +647,6 @@
 
       const titleText = item.title || item.name;
       const dateText = item.release_date || item.first_air_date || "Unknown";
-      const isSaved = myList.some(m => m.id === item.id);
-
-      // Bookmark button
-      const bookmarkBtn = document.createElement("button");
-      bookmarkBtn.className = `bookmark-btn ${isSaved ? 'saved' : ''}`;
-      bookmarkBtn.innerHTML = isSaved ? "✓" : "+";
-      bookmarkBtn.title = "Add to My List";
-      bookmarkBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        toggleMyList(item, bookmarkBtn);
-      });
-      posterContainer.appendChild(bookmarkBtn);
 
       if (item.poster_path) {
         const poster = document.createElement("img");
@@ -797,83 +668,74 @@
       title.textContent = activeVJ ? `[${activeVJ}] ${titleText}` : titleText;
 
       const year = document.createElement("p");
-      year.textContent = dateText.slice(0, 4) + " · ★ " + Number(item.vote_average || 0).toFixed(1);
+      year.textContent = (dateText ? dateText.slice(0, 4) : "") + " · ★ " + Number(item.vote_average || 0).toFixed(1);
 
       const playBtn = document.createElement("button");
       playBtn.type = "button";
-      playBtn.className = "play-action-btn";
       playBtn.textContent = "▶ Play";
+      playBtn.addEventListener("click", () => openInAppPlayer(titleText, item.overview));
 
-      playBtn.addEventListener("click", () => {
-        openInAppPlayer(titleText, item.overview);
+      const isInWatchlist = watchlist.some(w => w.id === item.id);
+      const listBtn = document.createElement("button");
+      listBtn.type = "button";
+      listBtn.style.marginTop = "6px";
+      listBtn.style.background = isInWatchlist ? "var(--netflix-red)" : "rgba(255,255,255,0.05)";
+      listBtn.textContent = isInWatchlist ? "✓ In Watchlist" : "+ Watchlist";
+      
+      listBtn.addEventListener("click", () => {
+        const index = watchlist.findIndex(w => w.id === item.id);
+        if (index > -1) {
+          watchlist.splice(index, 1);
+          listBtn.textContent = "+ Watchlist";
+          listBtn.style.background = "rgba(255,255,255,0.05)";
+        } else {
+          watchlist.push(item);
+          listBtn.textContent = "✓ In Watchlist";
+          listBtn.style.background = "var(--netflix-red)";
+        }
+        localStorage.setItem("xtreme_watchlist", JSON.stringify(watchlist));
+        updateWatchlistBadge();
       });
 
-      info.append(title, year, playBtn);
+      info.append(title, year, playBtn, listBtn);
       card.append(posterContainer, info);
       grid.append(card);
     }
 
-    function toggleMyList(item, btn) {
-      const index = myList.findIndex(m => m.id === item.id);
-      if (index > -1) {
-        myList.splice(index, 1);
-        btn.classList.remove("saved");
-        btn.innerHTML = "+";
-      } else {
-        myList.push(item);
-        btn.classList.add("saved");
-        btn.innerHTML = "✓";
-      }
-      localStorage.setItem("xtreme_mylist", JSON.stringify(myList));
-      updateMyListBadge();
-      
-      // If currently viewing My List, refresh view
-      if (heading.textContent.includes("My List")) {
-        renderMyListView();
-      }
-    }
-
-    function renderMyListView(filterType = "all") {
+    function displayWatchlist() {
       grid.replaceChildren();
-      myListSubnav.classList.remove("hidden");
-      vjHubContainer.classList.add("hidden");
-      heroSection.classList.add("hidden");
-      heading.textContent = `My List (${myList.length} Titles)`;
+      if (!watchlist.length) {
+        message.textContent = "Your watchlist is empty. Add movies using the '+ Watchlist' button!";
+        message.classList.remove("hidden");
+        return;
+      }
       message.classList.add("hidden");
-
-      if (!myList.length) {
-        message.textContent = "Your List is Empty. Tap the '+' icon on any movie or series to save it for quick access here.";
-        message.classList.remove("hidden");
-        return;
-      }
-
-      const filtered = myList.filter(item => {
-        const isTv = item.name || item.first_air_date;
-        if (filterType === "movies") return !isTv;
-        if (filterType === "series") return isTv;
-        return true;
-      });
-
-      if (!filtered.length) {
-        message.textContent = `No saved ${filterType} found in your list.`;
-        message.classList.remove("hidden");
-        return;
-      }
-
-      filtered.forEach(item => renderCard(item));
+      watchlist.forEach(item => renderCard(item));
     }
+
+    navWatchlist.addEventListener("click", (e) => {
+      e.preventDefault();
+      setActiveNav(null);
+      heading.textContent = "My Watchlist";
+      displayWatchlist();
+    });
 
     function openInAppPlayer(title, overview) {
       modalTitle.textContent = title;
       modalOverview.textContent = overview || "No description available.";
-      videoSource.src = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+      
+      nativePlayer.src = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
       nativePlayer.load();
       playerModal.classList.remove("hidden");
+      
+      nativePlayer.play().catch(error => {
+        console.log("Autoplay was prevented by browser rules:", error);
+      });
     }
 
     function closePlayerModal() {
       nativePlayer.pause();
-      videoSource.src = "";
+      nativePlayer.src = "";
       playerModal.classList.add("hidden");
     }
 
@@ -882,112 +744,6 @@
       if (e.target === playerModal) closePlayerModal();
     });
 
-    // Navigation and Tab mapping
-    function setActiveNav(activeElement) {
-      [navHome, navMovies, navSeries, navFilter, navMyList, navSupport].forEach(nav => nav.classList.remove("active"));
-      if (activeElement) activeElement.classList.add("active");
-    }
-
-    navHome.addEventListener("click", (e) => {
-      e.preventDefault();
-      activeVJ = "";
-      vjHubContainer.classList.remove("hidden");
-      heroSection.classList.remove("hidden");
-      myListSubnav.classList.add("hidden");
-      vjPills.forEach(p => p.classList.remove("active"));
-      searchInput.value = "";
-      heading.textContent = "Popular Movies";
-      setActiveNav(navHome);
-      loadMedia("", "movie", "");
-    });
-
-    brandLogo.addEventListener("click", (e) => {
-      e.preventDefault();
-      navHome.click();
-    });
-
-    navMovies.addEventListener("click", (e) => {
-      e.preventDefault();
-      activeVJ = "";
-      vjHubContainer.classList.add("hidden");
-      heroSection.classList.remove("hidden");
-      myListSubnav.classList.add("hidden");
-      searchInput.value = "";
-      heading.textContent = "Popular Movies";
-      setActiveNav(navMovies);
-      loadMedia("", "movie", "");
-    });
-
-    navSeries.addEventListener("click", (e) => {
-      e.preventDefault();
-      activeVJ = "";
-      vjHubContainer.classList.add("hidden");
-      heroSection.classList.remove("hidden");
-      myListSubnav.classList.add("hidden");
-      searchInput.value = "";
-      heading.textContent = "Popular TV Series";
-      setActiveNav(navSeries);
-      loadMedia("", "tv", "");
-    });
-
-    navFilter.addEventListener("click", (e) => {
-      e.preventDefault();
-      vjHubContainer.classList.remove("hidden");
-      heroSection.classList.remove("hidden");
-      myListSubnav.classList.add("hidden");
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      setActiveNav(navFilter);
-    });
-
-    navMyList.addEventListener("click", (e) => {
-      e.preventDefault();
-      setActiveNav(navMyList);
-      renderMyListView("all");
-    });
-
-    navSupport.addEventListener("click", (e) => {
-      e.preventDefault();
-      setActiveNav(navSupport);
-      vjHubContainer.classList.add("hidden");
-      heroSection.classList.add("hidden");
-      myListSubnav.classList.add("hidden");
-      grid.replaceChildren();
-      heading.textContent = "Contact & Support";
-      message.textContent = "For support or streaming inquiries regarding Pearl Pix VJ translations, contact us at support@xtrememovies.watch or via our official Telegram channel.";
-      message.classList.remove("hidden");
-    });
-
-    // Sub-filters inside My List view
-    document.querySelectorAll(".subnav-btn").forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        document.querySelectorAll(".subnav-btn").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        renderMyListView(btn.getAttribute("data-filter"));
-      });
-    });
-
-    // VJ Pill click event listeners
-    vjPills.forEach(pill => {
-      pill.addEventListener("click", () => {
-        vjPills.forEach(p => p.classList.remove("active"));
-        pill.classList.add("active");
-        const selectedVJ = pill.getAttribute("data-vj");
-        setActiveNav(null);
-        searchInput.value = "";
-        heading.textContent = `${selectedVJ} Archive Collection (2015 & Older Classics)`;
-        loadMedia("", "vj", selectedVJ);
-      });
-    });
-
-    vjFilterInput.addEventListener("input", (e) => {
-      const term = e.target.value.toLowerCase();
-      vjPills.forEach(pill => {
-        const text = pill.textContent.toLowerCase();
-        pill.style.display = text.includes(term) ? "block" : "none";
-      });
-    });
-
-    // Auth modal controls
     navSignIn.addEventListener("click", (e) => {
       e.preventDefault();
       authEmail.value = "";
@@ -1008,17 +764,12 @@
       setTimeout(() => authModal.classList.add("hidden"), 1200);
     });
 
+    function setActiveNav(activeElement) {
+      [navHome, navMovies, navTv].forEach(nav => nav.classList.remove("active"));
+      if (activeElement) activeElement.classList.add("active");
+    }
+
     searchForm.addEventListener("submit", event => {
       event.preventDefault();
       const query = searchInput.value.trim();
-      const modeText = activeVJ ? `${activeVJ} VJ Archive` : (currentMode === "tv" ? "TV Series" : "Movies");
-      heading.textContent = query ? `Search Results for "${query}"` : `Popular ${modeText}`;
-      loadMedia(query, currentMode, activeVJ);
-    });
-
-    // Initial load
-    updateMyListBadge();
-    loadMedia("", "movie", "");
-  </script>
-</body>
-</html>
+      const modeText = activeVJ
