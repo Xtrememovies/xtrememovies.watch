@@ -836,14 +836,17 @@
       watchlist.forEach(item => renderCard(item));
     });
 
-    function openInAppPlayer(title, overview) {
-      modalTitle.textContent = title;
-      modalOverview.textContent = overview || "No description available.";
-      nativePlayer.src = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
-      nativePlayer.load();
-      playerModal.classList.remove("hidden");
-      nativePlayer.play().catch(err => console.log("Autoplay blocked:", err));
-    }
+    function openInAppPlayer(title, overview, videoUrl) {
+    modalTitle.textContent = title;
+    modalOverview.textContent = overview || "No description available.";
+    
+    // Use the actual video URL passed from your movie data
+    nativePlayer.src = videoUrl; 
+    
+    nativePlayer.load();
+    playerModal.classList.remove("hidden");
+    nativePlayer.play().catch(err => console.log("Autoplay blocked:", err));
+}
 
     function closePlayerModal() {
       nativePlayer.pause();
