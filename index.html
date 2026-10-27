@@ -529,7 +529,7 @@
         const data = await response.json();
         let results = data.results || [];
 
-        // Pearl Pix archive feature: Pull classic releases dating from 2015 and older for retro VJ collections
+        // archive feature: Pull classic releases dating from 2015 and older for retro VJ collections
         if (mode === "vj" && !query) {
           const archiveUrl = new URL("https://api.themoviedb.org/3/discover/movie");
           archiveUrl.searchParams.set("api_key", API_KEY);
@@ -606,18 +606,26 @@
     }
 
     function openInAppPlayer(title, overview) {
-      modalTitle.textContent = title;
-      modalOverview.textContent = overview || "No description available.";
-      videoSource.src = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
-      nativePlayer.load();
-      playerModal.classList.remove("hidden");
-    }
+  modalTitle.textContent = title;
+  modalOverview.textContent = overview || "No description available.";
+  
+  // Set the source directly on the video element for reliable playback
+  nativePlayer.src = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+  nativePlayer.load();
+  
+  playerModal.classList.remove("hidden");
+  
+  // Gracefully handle browser autoplay policies
+  nativePlayer.play().catch(error => {
+    console.log("Autoplay blocked or required user interaction:", error);
+  });
+}
 
-    function closePlayerModal() {
-      nativePlayer.pause();
-      videoSource.src = "";
-      playerModal.classList.add("hidden");
-    }
+function closePlayerModal() {
+  nativePlayer.pause();
+  nativePlayer.src = ""; // Clear source to stop background downloading
+  playerModal.classList.add("hidden");
+}
 
     closeModal.addEventListener("click", closePlayerModal);
     playerModal.addEventListener("click", (e) => {
