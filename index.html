@@ -1,364 +1,496 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xtreme Movie Watch</title>
-    <style>
-        :root {
-            --bg-color: #0b0f19;
-            --card-bg: #161b22;
-            --accent-color: #e50914;
-            --text-color: #ffffff;
-            --text-secondary: #9ca3af;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090b12">
+  <meta name="description" content="Discover movies, TV shows, and Lugandan VJ translations.">
+  <title>Xtreme Movie Watch</title>
+  
+  <style>
+    * { box-sizing: border-box; }
 
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-        }
+    body {
+      margin: 0;
+      background: #090b12;
+      color: #f7f7fb;
+      font-family: Arial, sans-serif;
+    }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            background-color: rgba(11, 15, 25, 0.95);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 1px solid #1f2937;
-        }
+    a { color: #ff7185; text-decoration: none; }
 
-        .logo {
-            color: var(--accent-color);
-            font-weight: 900;
-            font-size: 1.5rem;
-            text-decoration: none;
-            letter-spacing: 1px;
-        }
+    header.navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      background-color: #111111;
+      border-bottom: 1px solid #252735;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
 
-        nav a {
-            color: var(--text-color);
-            text-decoration: none;
-            margin-left: 20px;
-            font-size: 0.95rem;
-            transition: color 0.2s;
-        }
+    .logo { font-size: 23px; font-weight: 800; }
+    .logo span { color: #ff334f; }
 
-        nav a:hover, nav a.active {
-            color: var(--accent-color);
-        }
+    .nav-links a {
+      color: #b3b3b3;
+      margin: 0 1rem;
+      font-weight: 500;
+      padding-bottom: 4px;
+      cursor: pointer;
+    }
 
-        .hero {
-            text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(to bottom, rgba(229, 9, 20, 0.1), transparent);
-        }
+    .nav-links a.active,
+    .nav-links a:hover {
+      color: #ffffff;
+      border-bottom: 2px solid #ff334f;
+    }
 
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
+    .hero {
+      padding: 40px 5% 30px;
+      background: linear-gradient(135deg, #191b2a, #090b12);
+      text-align: center;
+    }
 
-        .hero p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-        }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      margin: 0 0 10px;
+    }
 
-        .search-container {
-            display: flex;
-            justify-content: center;
-            max-width: 600px;
-            margin: 0 auto;
-            gap: 10px;
-        }
+    .hero p { 
+      color: #b9bdcc; 
+      line-height: 1.6; 
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
 
-        .search-container input {
-            flex: 1;
-            padding: 12px 20px;
-            border-radius: 6px;
-            border: 1px solid #374151;
-            background-color: #1f2937;
-            color: white;
-            font-size: 1rem;
-            outline: none;
-        }
+    .search-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
 
-        .search-container button {
-            padding: 12px 25px;
-            border-radius: 6px;
-            border: none;
-            background-color: var(--accent-color);
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
+    .search-form {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+      max-width: 600px;
+    }
 
-        .search-container button:hover {
-            background-color: #b80710;
-        }
+    input[type="search"] {
+      flex: 1;
+      min-width: 0;
+      padding: 14px;
+      border: 1px solid #36394a;
+      border-radius: 9px;
+      background: #171a26;
+      color: white;
+      font-size: 16px;
+    }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
+    button {
+      padding: 13px 22px;
+      border: 0;
+      border-radius: 9px;
+      background: #ff334f;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
 
-        .section-title {
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            border-left: 4px solid var(--accent-color);
-            padding-left: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+    button:hover { background: #e0243f; }
 
-        .movie-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
-        }
+    main { padding: 24px 5% 50px; }
 
-        .movie-card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 15px 0 20px;
+    }
 
-        .movie-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-        }
+    .section-header h2 { font-size: 22px; margin: 0; }
 
-        .movie-poster {
-            height: 280px;
-            background-color: #374151;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 24px 16px;
+    }
 
-        .vj-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: var(--accent-color);
-            color: white;
-            font-size: 0.75rem;
-            font-weight: bold;
-            padding: 4px 8px;
-            border-radius: 4px;
-            text-transform: uppercase;
-        }
+    .movie {
+      display: flex;
+      flex-direction: column;
+      background: #151824;
+      border: 1px solid #252838;
+      border-radius: 12px;
+      overflow: hidden;
+      height: 100%;
+    }
 
-        .movie-info {
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: space-between;
-        }
+    .movie img {
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      display: block;
+      background: #222638;
+    }
 
-        .movie-title {
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
+    .movie-info { 
+      padding: 12px; 
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
 
-        .movie-meta {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-        }
+    .movie h3 {
+      font-size: 14px;
+      margin: 0 0 8px;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      height: 40px;
+    }
 
-        .play-btn {
-            background-color: transparent;
-            border: 1px solid var(--accent-color);
-            color: var(--accent-color);
-            padding: 8px;
-            border-radius: 4px;
-            font-weight: bold;
-            text-align: center;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s;
-        }
+    .movie p {
+      font-size: 12px;
+      color: #b9bdcc;
+      margin: 0 0 12px;
+    }
 
-        .play-btn:hover {
-            background-color: var(--accent-color);
-            color: white;
-        }
+    .movie button { 
+      width: 100%; 
+      padding: 10px 5px; 
+      margin-top: auto;
+      font-size: 13px;
+    }
 
-        .no-results {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 40px;
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
 
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-secondary);
-            border-top: 1px solid #1f2937;
-            margin-top: 60px;
-            font-size: 0.85rem;
-        }
-    </style>
+    .modal-content {
+      background: #111420;
+      width: 90%;
+      max-width: 800px;
+      border-radius: 12px;
+      border: 1px solid #2f344a;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-header {
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #2f344a;
+    }
+
+    .modal-header h3 { margin: 0; font-size: 18px; }
+
+    .close-btn {
+      background: transparent;
+      color: #fff;
+      font-size: 22px;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+
+    .video-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .modal-body {
+      padding: 15px 20px;
+      color: #b9bdcc;
+      font-size: 14px;
+      max-height: 120px;
+      overflow-y: auto;
+    }
+
+    .message {
+      color: #b9bdcc;
+      line-height: 1.6;
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    .hidden { display: none !important; }
+
+    footer {
+      text-align: center;
+      color: #999fb1;
+      padding: 32px 5%;
+      border-top: 1px solid #252735;
+      font-size: 12px;
+      line-height: 1.8;
+      background-color: #090b12;
+    }
+
+    @media (max-width: 600px) {
+      header.navbar { flex-direction: column; gap: 12px; padding: 1rem 5%; }
+      .nav-links { display: flex; justify-content: center; width: 100%; flex-wrap: wrap; }
+    }
+  </style>
 </head>
 <body>
 
-    <header>
-        <a href="#" class="logo">XTREME MOVIE WATCH</a>
-        <nav>
-            <a href="#" class="active">Home</a>
-            <a href="#">Movies</a>
-            <a href="#">TV Shows</a>
-            <a href="#">Lugandan VJ 🇺🇬</a>
-        </nav>
-    </header>
+  <header class="navbar">
+    <div class="logo"><a href="#home" id="brandLogo"><span>X</span>TREME MOVIE WATCH</a></div>
+    <nav class="nav-links">
+      <a href="#home" id="navHome" class="active">Home</a>
+      <a href="#movies" id="navMovies">Movies</a>
+      <a href="#tvshows" id="navTv">TV Shows</a>
+      <a href="#vj" id="navVJ">Lugandan VJ 🇺🇬</a>
+    </nav>
+  </header>
 
-    <div class="hero">
-        <h1>Your next movie starts here.</h1>
-        <p>Discover movies, TV shows, and Lugandan VJ translations all in one place.</p>
-        
-        <div class="search-container">
-            <input type="text" placeholder="Search movies or VJ (e.g. VJ Emmy, VJ Junior)..." id="searchInput" onkeyup="handleSearch(event)">
-            <button onclick="searchMovies()">Search</button>
-        </div>
+  <section class="hero">
+    <h1>Your next movie starts here.</h1>
+    <p>Discover movies, TV shows, and Lugandan VJ translations all in one place.</p>
+
+    <div class="search-container">
+      <form class="search-form" id="searchForm">
+        <input id="searchInput" type="search" placeholder="Search movies, TV shows, or VJ action..." aria-label="Media title" required>
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </section>
+
+  <main>
+    <div class="section-header">
+      <h2 id="sectionHeading">Popular Movies</h2>
     </div>
 
-    <div class="container">
-        <div class="section-title" id="sectionTitle">Latest Releases & VJ Translations</div>
-        
-        <div class="movie-grid" id="movieGrid">
-            <!-- Movie 1 -->
-            <div class="movie-card" data-title="Mobland Season 2" data-vj="VJ Junior" data-genre="TV Series">
-                <div class="movie-poster" style="background-image: url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=500&q=80');">
-                    <span class="vj-badge">VJ Junior</span>
-                </div>
-                <div class="movie-info">
-                    <div>
-                        <div class="movie-title">Mobland Season 2</div>
-                        <div class="movie-meta">TV Series • Luganda Translation</div>
-                    </div>
-                    <a href="#" class="play-btn">Play Now</a>
-                </div>
-            </div>
+    <p id="message" class="message" role="status">Loading content...</p>
 
-            <!-- Movie 2 -->
-            <div class="movie-card" data-title="Rise of the Footsoldier" data-vj="VJ Emmy" data-genre="Action">
-                <div class="movie-poster" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=500&q=80');">
-                    <span class="vj-badge">VJ Emmy</span>
-                </div>
-                <div class="movie-info">
-                    <div>
-                        <div class="movie-title">Rise of the Footsoldier</div>
-                        <div class="movie-meta">Action • Luganda Translation</div>
-                    </div>
-                    <a href="#" class="play-btn">Play Now</a>
-                </div>
-            </div>
+    <div id="movieGrid" class="grid"></div>
+  </main>
 
-            <!-- Movie 3 -->
-            <div class="movie-card" data-title="Hobbs and Shaw" data-vj="VJ Jingo" data-genre="Blockbuster">
-                <div class="movie-poster" style="background-image: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=500&q=80');">
-                    <span class="vj-badge">VJ Jingo</span>
-                </div>
-                <div class="movie-info">
-                    <div>
-                        <div class="movie-title">Hobbs & Shaw</div>
-                        <div class="movie-meta">Blockbuster • Luganda Translation</div>
-                    </div>
-                    <a href="#" class="play-btn">Play Now</a>
-                </div>
-            </div>
-
-            <!-- Movie 4 -->
-            <div class="movie-card" data-title="Extraction" data-vj="VJ Emmy" data-genre="Action">
-                <div class="movie-poster" style="background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=500&q=80');">
-                    <span class="vj-badge">VJ Emmy</span>
-                </div>
-                <div class="movie-info">
-                    <div>
-                        <div class="movie-title">Extraction</div>
-                        <div class="movie-meta">Action • Luganda Translation</div>
-                    </div>
-                    <a href="#" class="play-btn">Play Now</a>
-                </div>
-            </div>
-        </div>
+  <!-- Video Player Modal -->
+  <div id="playerModal" class="modal-overlay hidden">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Now Playing</h3>
+        <button id="closeModal" class="close-btn">&times;</button>
+      </div>
+      <div class="video-container">
+        <iframe id="videoPlayerFrame" src="" allowfullscreen></iframe>
+      </div>
+      <div class="modal-body">
+        <p id="modalOverview"></p>
+      </div>
     </div>
+  </div>
 
-    <footer>
-        <p>&copy; 2026 Xtreme Movie Watch — Discover your next favourite.</p>
-        <p style="margin-top: 5px;">Movie information and posters provided by TMDB.</p>
-    </footer>
+  <footer>
+    <p>&copy; 2026 Xtreme Movie Watch — Discover your next favourite.</p>
+    <p>Movie information and posters provided by TMDB.</p>
+  </footer>
 
-    <script>
-        function searchMovies() {
-            const query = document.getElementById('searchInput').value.toLowerCase().trim();
-            const grid = document.getElementById('movieGrid');
-            const cards = grid.getElementsByClassName('movie-card');
-            const sectionTitle = document.getElementById('sectionTitle');
-            
-            let foundCount = 0;
+  <script>
+    const API_KEY = "925111c270baf9b011e32b3c70c84546";
 
-            // Loop through cards and filter based on title or VJ name
-            for (let i = 0; i < cards.length; i++) {
-                const card = cards[i];
-                const title = card.getAttribute('data-title').toLowerCase();
-                const vj = card.getAttribute('data-vj').toLowerCase();
+    const grid = document.getElementById("movieGrid");
+    const message = document.getElementById("message");
+    const heading = document.getElementById("sectionHeading");
+    const searchInput = document.getElementById("searchInput");
+    const searchForm = document.getElementById("searchForm");
+    const navHome = document.getElementById("navHome");
+    const navMovies = document.getElementById("navMovies");
+    const navTv = document.getElementById("navTv");
+    const navVJ = document.getElementById("navVJ");
+    const brandLogo = document.getElementById("brandLogo");
 
-                if (title.includes(query) || vj.includes(query) || query === "") {
-                    card.style.display = "flex";
-                    foundCount++;
-                } else {
-                    card.style.display = "none";
-                }
-            }
+    const playerModal = document.getElementById("playerModal");
+    const videoPlayerFrame = document.getElementById("videoPlayerFrame");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalOverview = document.getElementById("modalOverview");
+    const closeModal = document.getElementById("closeModal");
 
-            // Manage Search Results Header Text
-            let noResultsMsg = document.getElementById('noResultsMessage');
-            if (query !== "") {
-                sectionTitle.innerText = `Search Results for "${document.getElementById('searchInput').value}"`;
-                
-                if (foundCount === 0) {
-                    if (!noResultsMsg) {
-                        noResultsMsg = document.createElement('div');
-                        noResultsMsg.id = 'noResultsMessage';
-                        noResultsMsg.className = 'no-results';
-                        noResultsMsg.innerText = "No content found. Try another search term.";
-                        grid.appendChild(noResultsMsg);
-                    }
-                } else if (noResultsMsg) {
-                    noResultsMsg.remove();
-                }
-            } else {
-                sectionTitle.innerText = "Latest Releases & VJ Translations";
-                if (noResultsMsg) noResultsMsg.remove();
-            }
+    let currentMode = "movie";
+
+    async function loadMedia(query = "", mode = "movie") {
+      currentMode = mode;
+      grid.replaceChildren();
+      message.classList.remove("hidden");
+      message.textContent = "Loading content...";
+
+      try {
+        let endpoint;
+        let searchQuery = query;
+
+        if (mode === "vj") {
+          endpoint = "https://api.themoviedb.org/3/search/movie";
+          searchQuery = query || "Action"; 
+        } else if (query) {
+          endpoint = `https://api.themoviedb.org/3/search/${mode === "tv" ? "tv" : "movie"}`;
+        } else {
+          endpoint = mode === "tv" 
+            ? "https://api.themoviedb.org/3/tv/popular" 
+            : "https://api.themoviedb.org/3/movie/popular";
         }
 
-        function handleSearch(event) {
-            // Trigger search immediately when pressing Enter
-            if (event.key === 'Enter') {
-                searchMovies();
-            }
+        const url = new URL(endpoint);
+        url.searchParams.set("api_key", API_KEY);
+        url.searchParams.set("language", "en-US");
+        url.searchParams.set("page", "1");
+
+        if (searchQuery) url.searchParams.set("query", searchQuery);
+
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+        const data = await response.json();
+        const results = data.results || [];
+
+        if (!results.length) {
+          message.textContent = "No content found. Try another search term.";
+          message.classList.remove("hidden");
+          return;
         }
-    </script>
+
+        message.classList.add("hidden");
+
+        results.forEach(item => {
+          const card = document.createElement("article");
+          card.className = "movie";
+
+          const poster = document.createElement("img");
+          const titleText = item.title || item.name;
+          const dateText = item.release_date || item.first_air_date || "Unknown";
+
+          poster.alt = titleText ? titleText + " poster" : "Poster";
+          poster.loading = "lazy";
+          poster.src = item.poster_path
+            ? "https://image.tmdb.org/t/p/w500" + item.poster_path
+            : "";
+
+          const info = document.createElement("div");
+          info.className = "movie-info";
+
+          const title = document.createElement("h3");
+          title.textContent = mode === "vj" ? `[VJ Translated] ${titleText}` : titleText;
+
+          const year = document.createElement("p");
+          year.textContent = dateText.slice(0, 4) + " · ★ " + Number(item.vote_average || 0).toFixed(1);
+
+          const playBtn = document.createElement("button");
+          playBtn.type = "button";
+          playBtn.textContent = "▶ Watch Now";
+
+          playBtn.addEventListener("click", () => {
+            openPlayer(titleText, item.overview);
+          });
+
+          info.append(title, year, playBtn);
+          card.append(poster, info);
+          grid.append(card);
+        });
+
+      } catch (error) {
+        console.error(error);
+        message.textContent = "Could not load data stream. Check connectivity options.";
+        message.classList.remove("hidden");
+      }
+    }
+
+    function openPlayer(title, overview) {
+      modalTitle.textContent = title;
+      modalOverview.textContent = overview || "No description available.";
+      videoPlayerFrame.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"; 
+      playerModal.classList.remove("hidden");
+    }
+
+    function closePlayerModal() {
+      videoPlayerFrame.src = ""; 
+      playerModal.classList.add("hidden");
+    }
+
+    closeModal.addEventListener("click", closePlayerModal);
+    playerModal.addEventListener("click", (e) => {
+      if (e.target === playerModal) closePlayerModal();
+    });
+
+    function setActiveNav(activeElement) {
+      [navHome, navMovies, navTv, navVJ].forEach(nav => nav.classList.remove("active"));
+      if (activeElement) activeElement.classList.add("active");
+    }
+
+    searchForm.addEventListener("submit", event => {
+      event.preventDefault();
+      const query = searchInput.value.trim();
+      const modeText = currentMode === "vj" ? "Lugandan VJ Results" : (currentMode === "tv" ? "TV Shows" : "Movies");
+      heading.textContent = query ? `Search Results for "${query}"` : `Popular ${modeText}`;
+      loadMedia(query, currentMode);
+    });
+
+    navHome.addEventListener("click", (e) => {
+      e.preventDefault();
+      searchInput.value = "";
+      heading.textContent = "Popular Movies";
+      setActiveNav(navHome);
+      loadMedia("", "movie");
+    });
+
+    brandLogo.addEventListener("click", (e) => {
+      e.preventDefault();
+      searchInput.value = "";
+      heading.textContent = "Popular Movies";
+      setActiveNav(navHome);
+      loadMedia("", "movie");
+    });
+
+    navMovies.addEventListener("click", (e) => {
+      e.preventDefault();
+      searchInput.value = "";
+      heading.textContent = "Popular Movies";
+      setActiveNav(navMovies);
+      loadMedia("", "movie");
+    });
+
+    navTv.addEventListener("click", (e) => {
+      e.preventDefault();
+      searchInput.value = "";
+      heading.textContent = "Popular TV Shows";
+      setActiveNav(navTv);
+      loadMedia("", "tv");
+    });
+
+    navVJ.addEventListener("click", (e) => {
+      e.preventDefault();
+      searchInput.value = "";
+      heading.textContent = "Lugandan VJ Translated Movies";
+      setActiveNav(navVJ);
+      loadMedia("Action", "vj");
+    });
+
+    loadMedia("", "movie");
+  </script>
 </body>
 </html>
