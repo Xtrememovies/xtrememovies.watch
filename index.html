@@ -283,7 +283,7 @@
     }
 
     .modal-content {
-      background: #181818;
+      background: #141414;
       width: 90%;
       max-width: 850px;
       border-radius: 8px;
@@ -291,7 +291,7 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.8);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.9);
     }
 
     .auth-modal {
@@ -339,7 +339,7 @@
     .video-container video {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       outline: none;
     }
 
@@ -404,11 +404,11 @@
 
   <section class="hero">
     <h1>Unlimited movies, TV shows, and VJ translations.</h1>
-    <p>Stream directly inside your app with classic Pearl Pix archives dating back to 2015.</p>
+    <p>Stream directly inside your app with top-tier entertainment and classic collections.</p>
 
     <div class="search-container">
       <form class="search-form" id="searchForm">
-        <input id="searchInput" type="search" placeholder="Search title, year (e.g. 2015), or genre..." aria-label="Media title" required>
+        <input id="searchInput" type="search" placeholder="Search title, year, or genre..." aria-label="Media title" required>
         <button type="submit">Search</button>
       </form>
     </div>
@@ -481,7 +481,6 @@
 
     const playerModal = document.getElementById("playerModal");
     const nativePlayer = document.getElementById("nativePlayer");
-    const videoSource = document.getElementById("videoSource");
     const modalTitle = document.getElementById("modalTitle");
     const modalOverview = document.getElementById("modalOverview");
     const closeModal = document.getElementById("closeModal");
@@ -529,13 +528,12 @@
         const data = await response.json();
         let results = data.results || [];
 
-        // archive feature: Pull classic releases dating from 2015 and older for retro VJ collections
         if (mode === "vj" && !query) {
           const archiveUrl = new URL("https://api.themoviedb.org/3/discover/movie");
           archiveUrl.searchParams.set("api_key", API_KEY);
           archiveUrl.searchParams.set("language", "en-US");
           archiveUrl.searchParams.set("sort_by", "popularity.desc");
-          archiveUrl.searchParams.set("primary_release_date.lte", "2015-12-31"); // Archive from 2015 & backwards
+          archiveUrl.searchParams.set("primary_release_date.lte", "2015-12-31");
           archiveUrl.searchParams.set("page", "1");
           
           const archiveRes = await fetch(archiveUrl);
@@ -606,33 +604,31 @@
     }
 
     function openInAppPlayer(title, overview) {
-  modalTitle.textContent = title;
-  modalOverview.textContent = overview || "No description available.";
-  
-  // Set the source directly on the video element for reliable playback
-  nativePlayer.src = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
-  nativePlayer.load();
-  
-  playerModal.classList.remove("hidden");
-  
-  // Gracefully handle browser autoplay policies
-  nativePlayer.play().catch(error => {
-    console.log("Autoplay blocked or required user interaction:", error);
-  });
-}
+      modalTitle.textContent = title;
+      modalOverview.textContent = overview || "No description available.";
+      
+      // Directly assign the video source to fix the blank screen issue
+      nativePlayer.src = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
+      nativePlayer.load();
+      
+      playerModal.classList.remove("hidden");
+      
+      nativePlayer.play().catch(error => {
+        console.log("Autoplay prevented:", error);
+      });
+    }
 
-function closePlayerModal() {
-  nativePlayer.pause();
-  nativePlayer.src = ""; // Clear source to stop background downloading
-  playerModal.classList.add("hidden");
-}
+    function closePlayerModal() {
+      nativePlayer.pause();
+      nativePlayer.src = ""; // Cleanly clear out the video stream
+      playerModal.classList.add("hidden");
+    }
 
     closeModal.addEventListener("click", closePlayerModal);
     playerModal.addEventListener("click", (e) => {
       if (e.target === playerModal) closePlayerModal();
     });
 
-    // Auth modal controls
     navSignIn.addEventListener("click", (e) => {
       e.preventDefault();
       authEmail.value = "";
@@ -670,7 +666,7 @@ function closePlayerModal() {
       const selectedVJ = e.target.value;
       setActiveNav(null);
       searchInput.value = "";
-      heading.textContent = `${selectedVJ} Archive Collection (2015 & Older Classics)`;
+      heading.textContent = `${selectedVJ} Archive Collection`;
       loadMedia("", "vj", selectedVJ);
     });
 
