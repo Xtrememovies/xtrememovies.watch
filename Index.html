@@ -6,10 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Extreme Movie Watch</title>
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -19,132 +15,82 @@
 
     header {
       background: #e50914;
-      padding: 22px 15px;
       text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 27px;
-    }
-
-    header p {
-      margin-bottom: 0;
-    }
-
-    main {
-      max-width: 900px;
-      margin: auto;
       padding: 20px;
     }
 
-    input {
+    main {
+      max-width: 800px;
+      margin: auto;
+      padding: 16px;
+    }
+
+    .player {
       width: 100%;
-      padding: 13px;
-      border-radius: 6px;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      border-radius: 10px;
+    }
+
+    button {
+      background: #e50914;
+      color: white;
       border: none;
-      font-size: 16px;
-      margin: 12px 0 20px;
+      padding: 12px;
+      margin: 5px;
+      border-radius: 6px;
+      font-size: 15px;
     }
 
-    .movies {
-      display: grid;
-      grid-template-columns: repeat(
-        auto-fit, minmax(140px, 1fr)
-      );
-      gap: 15px;
-    }
-
-    .movie {
-      background: #242432;
-      border-radius: 8px;
-      padding: 18px 12px;
-      text-align: center;
-    }
-
-    .poster {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-
-    .movie h3 {
-      margin: 8px 0;
-    }
-
-    .movie p {
+    .note {
       color: #ccc;
-      font-size: 14px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px;
-      color: #aaa;
+      line-height: 1.5;
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Extreme Movie Watch</h1>
-    <p>Your entertainment starts here</p>
+    <p>Extreme Watch</p>
   </header>
 
   <main>
-    <h2>Discover Movies</h2>
-    <p>Search your favorite movie titles below.</p>
+    <h2>Watch Movie Trailers</h2>
+    <p>Choose a video to play it inside your website.</p>
 
-    <input
-      type="search"
-      id="search"
-      placeholder="Search movies..."
-      aria-label="Search movies"
-    >
+    <iframe
+      id="player"
+      class="player"
+      src="https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ"
+      title="Video player"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen>
+    </iframe>
 
-    <div class="movies" id="movies">
-      <article class="movie">
-        <div class="poster">🎬</div>
-        <h3>Action Movies</h3>
-        <p>Explore action and adventure.</p>
-      </article>
+    <h3 id="videoTitle">Test Video</h3>
 
-      <article class="movie">
-        <div class="poster">🚀</div>
-        <h3>Sci-Fi Movies</h3>
-        <p>Explore science fiction.</p>
-      </article>
+    <button onclick="playVideo('aqz-KE-bpKQ','Test Video')">
+      Play Test Video
+    </button>
 
-      <article class="movie">
-        <div class="poster">😂</div>
-        <h3>Comedy Movies</h3>
-        <p>Find something funny to watch.</p>
-      </article>
+    <button onclick="playVideo('M7lc1UVf-VE','YouTube Demo')">
+      Play Second Demo
+    </button>
 
-      <article class="movie">
-        <div class="poster">👻</div>
-        <h3>Horror Movies</h3>
-        <p>Discover scary stories.</p>
-      </article>
-    </div>
+    <p class="note">
+      These are demonstration videos, not movie trailers.
+      We can add real trailers next.
+    </p>
   </main>
 
-  <footer>
-    <p>Extreme Watch &copy; 2026</p>
-  </footer>
-
   <script>
-    const search = document.getElementById("search");
-    const movies = document.querySelectorAll(".movie");
+    function playVideo(id, title) {
+      document.getElementById("player").src =
+        "https://www.youtube-nocookie.com/embed/" +
+        encodeURIComponent(id);
 
-    search.addEventListener("input", function () {
-      const query = search.value.toLowerCase();
-
-      movies.forEach(function (movie) {
-        movie.style.display =
-          movie.textContent.toLowerCase().includes(query)
-            ? ""
-            : "none";
-      });
-    });
+      document.getElementById("videoTitle").textContent = title;
+    }
   </script>
 </body>
 </html>
