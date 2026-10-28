@@ -976,6 +976,85 @@ main {
     transform: scale(.94);
   }
 }
+ 
+/* ===== XTREME WATCH NEON LOGO BOX ===== */
+.navbar .logo-container {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  margin: 8px 0;
+  border: 2px solid #00eaff;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #070713, #17102d, #080817);
+  box-shadow:
+    0 0 6px #00eaff,
+    0 0 14px rgba(0, 234, 255, 0.8),
+    0 0 28px rgba(153, 0, 255, 0.65),
+    inset 0 0 14px rgba(0, 234, 255, 0.12);
+  animation: xtremeNeonGlow 2.5s ease-in-out infinite alternate;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.navbar .logo-container .logo-badge {
+  flex-shrink: 0;
+  box-shadow:
+    0 0 8px #ff00d4,
+    0 0 16px rgba(255, 0, 212, 0.65);
+}
+
+.navbar .logo-container .logo a {
+  text-shadow:
+    0 0 5px rgba(0, 234, 255, 0.8),
+    0 0 12px rgba(153, 0, 255, 0.5);
+}
+
+.navbar .logo-container .logo-subtitle {
+  text-shadow: 0 0 7px rgba(0, 234, 255, 0.6);
+}
+
+.navbar .logo-container:hover {
+  border-color: #ff00d4;
+  box-shadow:
+    0 0 10px #ff00d4,
+    0 0 24px rgba(255, 0, 212, 0.75),
+    0 0 36px rgba(0, 234, 255, 0.6);
+}
+
+@keyframes xtremeNeonGlow {
+  from {
+    border-color: #00eaff;
+    box-shadow:
+      0 0 5px #00eaff,
+      0 0 13px rgba(0, 234, 255, 0.65),
+      0 0 22px rgba(153, 0, 255, 0.45);
+  }
+  to {
+    border-color: #ff00d4;
+    box-shadow:
+      0 0 8px #ff00d4,
+      0 0 18px rgba(255, 0, 212, 0.65),
+      0 0 30px rgba(0, 234, 255, 0.55);
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar .logo-container {
+    gap: 8px;
+    padding: 9px 11px;
+    border-radius: 13px;
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar .logo-container {
+    animation: none;
+  }
+}
+
   </style>
 </head>
 <body>
