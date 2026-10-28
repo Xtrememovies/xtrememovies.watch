@@ -1,22 +1,150 @@
 
-{
-  "name": "Xtreme Movie Watch",
-  "short_name": "Xtreme Watch",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#141414",
-  "theme_color": "#e50914",
-  "icons": [
-    {
-      "src": "./icons/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "./icons/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Extreme Movie Watch</title>
+  <style>
+    * {
+      box-sizing: border-box;
     }
-  ]
-}
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #101018;
+      color: white;
+    }
+
+    header {
+      background: #e50914;
+      padding: 22px 15px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 27px;
+    }
+
+    header p {
+      margin-bottom: 0;
+    }
+
+    main {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+      margin: 12px 0 20px;
+    }
+
+    .movies {
+      display: grid;
+      grid-template-columns: repeat(
+        auto-fit, minmax(140px, 1fr)
+      );
+      gap: 15px;
+    }
+
+    .movie {
+      background: #242432;
+      border-radius: 8px;
+      padding: 18px 12px;
+      text-align: center;
+    }
+
+    .poster {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+
+    .movie h3 {
+      margin: 8px 0;
+    }
+
+    .movie p {
+      color: #ccc;
+      font-size: 14px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Extreme Movie Watch</h1>
+    <p>Your entertainment starts here</p>
+  </header>
+
+  <main>
+    <h2>Discover Movies</h2>
+    <p>Search your favorite movie titles below.</p>
+
+    <input
+      type="search"
+      id="search"
+      placeholder="Search movies..."
+      aria-label="Search movies"
+    >
+
+    <div class="movies" id="movies">
+      <article class="movie">
+        <div class="poster">🎬</div>
+        <h3>Action Movies</h3>
+        <p>Explore action and adventure.</p>
+      </article>
+
+      <article class="movie">
+        <div class="poster">🚀</div>
+        <h3>Sci-Fi Movies</h3>
+        <p>Explore science fiction.</p>
+      </article>
+
+      <article class="movie">
+        <div class="poster">😂</div>
+        <h3>Comedy Movies</h3>
+        <p>Find something funny to watch.</p>
+      </article>
+
+      <article class="movie">
+        <div class="poster">👻</div>
+        <h3>Horror Movies</h3>
+        <p>Discover scary stories.</p>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <p>Extreme Watch &copy; 2026</p>
+  </footer>
+
+  <script>
+    const search = document.getElementById("search");
+    const movies = document.querySelectorAll(".movie");
+
+    search.addEventListener("input", function () {
+      const query = search.value.toLowerCase();
+
+      movies.forEach(function (movie) {
+        movie.style.display =
+          movie.textContent.toLowerCase().includes(query)
+            ? ""
+            : "none";
+      });
+    });
+  </script>
+</body>
+</html>
