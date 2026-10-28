@@ -1478,6 +1478,61 @@ main {
     });
 
     loadMedia("", "movie", "", "");
+  
+/* Fix Xtreme Movie Watch bottom navigation */
+document.querySelectorAll(".bottom-nav button[data-nav]").forEach(button => {
+  button.addEventListener("click", function () {
+    const destination = this.dataset.nav;
+
+    document.querySelectorAll(".bottom-nav button").forEach(item => {
+      item.classList.remove("active");
+    });
+    this.classList.add("active");
+
+    if (destination === "home") {
+      activeVJ = "";
+      selectedGenre = "";
+      searchInput.value = "";
+      heading.textContent = "Popular Movies";
+      setActiveNav(navHome);
+      loadMedia("", "movie", "", "");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    if (destination === "movies") {
+      activeVJ = "";
+      selectedGenre = "";
+      searchInput.value = "";
+      heading.textContent = "Popular Movies";
+      setActiveNav(navMovies);
+      loadMedia("", "movie", "", "");
+      document.querySelector("main").scrollIntoView({ behavior: "smooth" });
+    }
+
+    if (destination === "series") {
+      activeVJ = "";
+      selectedGenre = "";
+      searchInput.value = "";
+      heading.textContent = "Popular TV Series";
+      setActiveNav(navSeries);
+      loadMedia("", "tv", "", "");
+      document.querySelector("main").scrollIntoView({ behavior: "smooth" });
+    }
+
+    if (destination === "filter") {
+      filterPanel.style.display = "block";
+      filterPanel.scrollIntoView({ behavior: "smooth" });
+    }
+
+    if (destination === "signin") {
+      authEmail.value = "";
+      document.getElementById("authPassword").value = "";
+      authStatus.textContent = "";
+      authModal.classList.remove("hidden");
+    }
+  });
+});
+
   </script>
 </body>
 </html>
