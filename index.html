@@ -55,6 +55,16 @@
   letter-spacing: -.7px;
   white-space: nowrap;
   color: #ffffff;
+  position: relative;
+  display: inline-block;
+  padding: 8px 12px;
+  border: 2px solid #00eaff;
+  border-radius: 10px;
+  animation: rgbNeonBox 4s linear infinite;
+  box-shadow:
+    0 0 5px #00eaff,
+    0 0 12px #00eaff,
+    inset 0 0 8px #00eaff;
   text-shadow:
     0 0 5px #ffffff,
     0 0 10px #00eaff,
@@ -68,6 +78,39 @@
     0 0 10px #ff3155,
     0 0 20px #ff1744,
     0 0 35px #ff1744;
+}
+
+@keyframes rgbNeonBox {
+  0% {
+    border-color: #00eaff;
+    box-shadow: 0 0 5px #00eaff,
+                0 0 15px #00eaff,
+                inset 0 0 8px #00eaff;
+  }
+  25% {
+    border-color: #a100ff;
+    box-shadow: 0 0 5px #a100ff,
+                0 0 15px #a100ff,
+                inset 0 0 8px #a100ff;
+  }
+  50% {
+    border-color: #ff1744;
+    box-shadow: 0 0 5px #ff1744,
+                0 0 15px #ff1744,
+                inset 0 0 8px #ff1744;
+  }
+  75% {
+    border-color: #00ff88;
+    box-shadow: 0 0 5px #00ff88,
+                0 0 15px #00ff88,
+                inset 0 0 8px #00ff88;
+  }
+  100% {
+    border-color: #00eaff;
+    box-shadow: 0 0 5px #00eaff,
+                0 0 15px #00eaff,
+                inset 0 0 8px #00eaff;
+  }
 }
 
     .sign-button, .primary-button {
