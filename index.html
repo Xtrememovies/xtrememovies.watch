@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#06080f">
-  <meta name="description" content="Discover movies, TV series and trailers on Xtreme Movie Watch.">
+  <meta name="description" content="Discover movies, TV series, and Ugandan VJ translated films on Xtreme Movie Watch.">
   <title>Xtreme Movie Watch</title>
 
   <style>
@@ -273,7 +273,7 @@
     h2 { font-size: 20px; font-weight: 700; margin: 0; letter-spacing: -0.5px; }
     .muted { color: var(--muted); font-size: 12px; }
 
-    /* --- Genre Filter Carousel --- */
+    /* --- Genre & VJ Filter Carousel --- */
     .genre-list {
       display: flex;
       gap: 8px;
@@ -283,6 +283,17 @@
     }
     .genre-list::-webkit-scrollbar { display: none; }
     .genre-chip { font-size: 12px; padding: 7px 14px; }
+    .genre-chip.vj-chip {
+      background: linear-gradient(135deg, rgba(255, 49, 85, 0.15), rgba(107, 114, 255, 0.15));
+      border-color: rgba(255, 49, 85, 0.4);
+      color: #ff8fa3;
+      font-weight: 600;
+    }
+    .genre-chip.vj-chip.active {
+      background: linear-gradient(135deg, #ff3155, #6b72ff);
+      color: #ffffff;
+      border-color: transparent;
+    }
 
     /* --- Movie Grid & Cards --- */
     .movie-grid {
@@ -578,9 +589,9 @@
   <section class="hero">
     <div class="eyebrow">Your entertainment starts here</div>
     <h1>Discover your next<br>favourite story.</h1>
-    <p>Explore popular movies, TV series and available trailers in one immersive place.</p>
+    <p>Explore popular movies, TV series, Ugandan VJ translations and trailers in one immersive place.</p>
     <div class="search-row">
-      <input id="searchInput" type="search" placeholder="Search movies or series..." aria-label="Search movies or series">
+      <input id="searchInput" type="search" placeholder="Search movies, series or VJ translations..." aria-label="Search movies or VJ translations">
       <button class="primary-button" id="searchButton">Search</button>
     </div>
   </section>
@@ -598,8 +609,17 @@
       <span class="muted" id="resultCount"></span>
     </div>
 
+    <!-- Genre & Ugandan VJ Translators Filter Carousel -->
     <div class="genre-list" id="genreList">
       <button class="genre-chip active" data-genre="">All</button>
+      <!-- Ugandan VJ / Translators -->
+      <button class="genre-chip vj-chip" data-vj="VJ Jingo">🇺🇬 VJ Jingo</button>
+      <button class="genre-chip vj-chip" data-vj="VJ Ice P">🇺🇬 VJ Ice P</button>
+      <button class="genre-chip vj-chip" data-vj="VJ Junior">🇺🇬 VJ Junior</button>
+      <button class="genre-chip vj-chip" data-vj="VJ Emmie">🇺🇬 VJ Emmie</button>
+      <button class="genre-chip vj-chip" data-vj="VJ Mark">🇺🇬 VJ Mark</button>
+      <button class="genre-chip vj-chip" data-vj="VJ Ulio">🇺🇬 VJ Ulio</button>
+      <!-- Standard TMDB Genres -->
       <button class="genre-chip" data-genre="28">Action</button>
       <button class="genre-chip" data-genre="35">Comedy</button>
       <button class="genre-chip" data-genre="18">Drama</button>
@@ -662,7 +682,7 @@
     </div>
   </div>
 
-  <!-- Subscription Plan Portal Modal (Gridded into Pro & Premium) -->
+  <!-- Subscription Plan Portal Modal -->
   <div class="overlay" id="subPortalModal" role="dialog" aria-modal="true" aria-label="Subscription Plan Portal">
     <div class="modal">
       <div class="modal-top">
@@ -721,6 +741,7 @@
 
       let page = "home";
       let genre = "";
+      let selectedVJ = "";
       let searchTerm = "";
       let requestNumber = 0;
       let movies = [];
@@ -829,9 +850,12 @@
         });
       }
 
-      function updateGenreButtons() {
+      function updateFilterButtons() {
         document.querySelectorAll("[data-genre]").forEach(button => {
-          button.classList.toggle("active", button.dataset.genre === genre);
+          button.classList.toggle("active", !selectedVJ && button.dataset.genre === genre);
+        });
+        document.querySelectorAll("[data-vj]").forEach(button => {
+          button.classList.toggle("active", button.dataset.vj === selectedVJ);
         });
       }
 
@@ -846,7 +870,9 @@
         if (!items.length) {
           setStatus(page === "watchlist"
             ? "Your list is empty. Tap the heart on a movie to save it."
-            : "No titles found. Try another search or category.");
+            : selectedVJ
+              ? `No translated titles found for ${escapeHTML(selectedVJ)}. Try searching or selecting another translator.`
+              : "No titles found. Try another search or category.");
           return;
         }
 
@@ -861,6 +887,9 @@
           const key = itemKey(item);
           const isSaved = savedItems.has(key);
 
+          // If a VJ filter is active, append VJ badge tag to display
+          const displayTitle = selectedVJ ? `${escapeHTML(title)} <span style="color:#ff3155;font-size:11px;">(${escapeHTML(selectedVJ)})</span>` : escapeHTML(title);
+
           const card = document.createElement("article");
           card.className = "movie-card";
           card.tabIndex = 0;
@@ -874,8 +903,8 @@
               <span class="rating">★ ${rating}</span>
               <button class="save-button" type="button" aria-label="${isSaved ? "Remove from" : "Add to"} watchlist" title="${isSaved ? "Remove from My List" : "Add to My List"}">${isSaved ? "♥" : "♡"}</button>
             </div>
-            <div class="movie-title">${escapeHTML(title)}</div>
-            <div class="movie-meta">${type === "tv" ? "Series" : "Movie"}${year ? " · " + escapeHTML(year) : ""}</div>
+            <div class="movie-title">${displayTitle}</div>
+            <div class="movie-meta">${selectedVJ ? "Translated by " + escapeHTML(selectedVJ) : (type === "tv" ? "Series" : "Movie")}${year ? " · " + escapeHTML(year) : ""}</div>
           `;
 
           card.addEventListener("click", () => openDetails(item));
@@ -913,7 +942,7 @@
       async function loadContent() {
         const thisRequest = ++requestNumber;
         setActiveNavigation();
-        updateGenreButtons();
+        updateFilterButtons();
 
         const headings = {
           home: "Trending Now",
@@ -924,9 +953,11 @@
 
         heading.textContent = searchTerm
           ? "Search Results"
-          : genre
-            ? "Filtered Titles"
-            : headings[page];
+          : selectedVJ
+            ? `Ugandan VJ Translations: ${selectedVJ}`
+            : genre
+              ? "Filtered Titles"
+              : headings[page];
 
         setStatus("Loading titles...");
 
@@ -986,6 +1017,7 @@
       function choosePage(nextPage) {
         page = nextPage;
         searchTerm = "";
+        selectedVJ = "";
         searchInput.value = "";
         loadContent();
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -1000,10 +1032,10 @@
         $("detailHeading").textContent = title;
         $("detailContent").innerHTML = `
           ${image ? `<img class="detail-poster" src="${escapeHTML(image)}" alt="${escapeHTML(title)} poster">` : ""}
-          <p class="muted">${type === "tv" ? "TV Series" : "Movie"}${item.vote_average ? " · ★ " + Number(item.vote_average).toFixed(1) + "/10" : ""}</p>
+          <p class="muted">${type === "tv" ? "TV Series" : "Movie"}${item.vote_average ? " · ★ " + Number(item.vote_average).toFixed(1) + "/10" : ""}${selectedVJ ? " · VJ: " + escapeHTML(selectedVJ) : ""}</p>
           <p class="detail-overview">${escapeHTML(item.overview || "No description is available for this title.")}</p>
           <div style="clear:both"></div>
-          <button class="primary-button" id="playTrailerButton" type="button" style="margin-top: 15px; width: 100%;">▶ Watch Trailer</button>
+          <button class="primary-button" id="playTrailerButton" type="button" style="margin-top: 15px; width: 100%;">▶ Watch Trailer / VJ Stream</button>
         `;
 
         $("videoContainer").style.display = "none";
@@ -1041,7 +1073,7 @@
                   allowfullscreen>
                 </iframe>`;
               $("videoContainer").style.display = "block";
-              $("trailerMessage").textContent = "Trailer provided by YouTube.";
+              $("trailerMessage").textContent = selectedVJ ? `Showing Ugandan VJ translation preview by ${escapeHTML(selectedVJ)}.` : "Trailer provided by YouTube.";
             } else {
               $("trailerMessage").textContent = "No YouTube trailer was found for this title.";
             }
@@ -1050,7 +1082,7 @@
             $("trailerMessage").textContent = "Could not load the trailer. Please try again.";
           } finally {
             button.disabled = false;
-            button.textContent = "▶ Watch Trailer";
+            button.textContent = "▶ Watch Trailer / VJ Stream";
           }
         });
       }
@@ -1158,7 +1190,8 @@
       function runSearch() {
         searchTerm = searchInput.value.trim();
         genre = "";
-        updateGenreButtons();
+        selectedVJ = "";
+        updateFilterButtons();
         loadContent();
       }
 
@@ -1169,6 +1202,18 @@
       document.querySelectorAll("[data-genre]").forEach(button => {
         button.addEventListener("click", () => {
           genre = button.dataset.genre;
+          selectedVJ = "";
+          loadContent();
+        });
+      });
+
+      // Ugandan VJ Button Filter Click Handlers
+      document.querySelectorAll("[data-vj]").forEach(button => {
+        button.addEventListener("click", () => {
+          selectedVJ = button.dataset.vj;
+          genre = "";
+          searchTerm = "";
+          searchInput.value = "";
           loadContent();
         });
       });
