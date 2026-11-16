@@ -24,8 +24,8 @@
       --radius-sm: 8px;
     }
 
-    /* Bright Theme Variables */
-    body.bright-theme {
+    /* 1. Bright Theme */
+    body.theme-bright {
       --bg: #f4f6fa;
       --panel: rgba(255, 255, 255, 0.85);
       --panel-solid: #ffffff;
@@ -33,6 +33,43 @@
       --text: #1a1f2c;
       --muted: #64748b;
       --border: rgba(203, 213, 225, 0.8);
+    }
+
+    /* 2. Dark Theme (Default) */
+    body.theme-dark {
+      --bg: #06080f;
+      --panel: rgba(20, 24, 38, 0.75);
+      --panel-solid: #141826;
+      --panel2: #1b2030;
+      --text: #ffffff;
+      --muted: #9ba3b7;
+      --border: rgba(41, 46, 64, 0.6);
+    }
+
+    /* 3. Desert Theme */
+    body.theme-desert {
+      --bg: #1c1410;
+      --panel: rgba(45, 33, 26, 0.85);
+      --panel-solid: #2d211a;
+      --panel2: #3d2d24;
+      --text: #fdf6f0;
+      --muted: #d4b5a0;
+      --accent: #e07a5f;
+      --accent-glow: rgba(224, 122, 95, 0.4);
+      --border: rgba(82, 60, 48, 0.8);
+    }
+
+    /* 4. Seawater Blue Theme */
+    body.theme-seawater {
+      --bg: #021226;
+      --panel: rgba(8, 30, 56, 0.85);
+      --panel-solid: #081e38;
+      --panel2: #112c4d;
+      --text: #e0f2fe;
+      --muted: #7dd3fc;
+      --accent: #0ea5e9;
+      --accent-glow: rgba(14, 165, 233, 0.4);
+      --border: rgba(22, 78, 129, 0.8);
     }
 
     * { box-sizing: border-box; }
@@ -86,8 +123,8 @@
     }
 
     .logo span {
-      color: #ff3155;
-      text-shadow: 0 0 8px rgba(255, 49, 85, 0.6);
+      color: var(--accent);
+      text-shadow: 0 0 8px var(--accent-glow);
     }
 
     @keyframes rgbNeonBox {
@@ -103,7 +140,7 @@
       align-items: center;
     }
 
-    .sign-button, .primary-button, .sub-portal-btn, .theme-toggle-btn {
+    .sign-button, .primary-button, .sub-portal-btn, .theme-select {
       background: linear-gradient(135deg, var(--accent), #e01b3f);
       border: 0;
       color: white;
@@ -114,7 +151,7 @@
       transition: transform 0.2s ease, opacity 0.2s ease;
       font-size: 13px;
     }
-    .sign-button:hover, .primary-button:hover, .sub-portal-btn:hover, .theme-toggle-btn:hover {
+    .sign-button:hover, .primary-button:hover, .sub-portal-btn:hover {
       opacity: 0.92;
       transform: translateY(-1px);
     }
@@ -126,11 +163,12 @@
       font-weight: 700;
     }
 
-    .theme-toggle-btn {
+    .theme-select {
       background: var(--panel2);
       color: var(--text);
       border: 1px solid var(--border);
       box-shadow: none;
+      padding: 8px 10px;
     }
 
     /* --- Cinematic Hero --- */
@@ -143,7 +181,7 @@
     }
 
     .eyebrow {
-      color: #ff647d;
+      color: var(--accent);
       font-size: 11px;
       font-weight: 700;
       letter-spacing: 2.5px;
@@ -526,7 +564,12 @@
   <header class="topbar">
     <div class="logo">XTREME <span>MOVIE .WATCH</span></div>
     <div class="header-actions">
-      <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Theme">☀️ Bright</button>
+      <select class="theme-select" id="themeSelector" aria-label="Select App Theme">
+        <option value="dark">🌙 Dark</option>
+        <option value="bright">☀️ Bright</option>
+        <option value="desert">🏜️ Desert</option>
+        <option value="seawater">🌊 Seawater</option>
+      </select>
       <button class="sub-portal-btn" id="subPortalNavButton">Subscription Plans</button>
       <button class="sign-button" id="signInButton">Sign In</button>
     </div>
@@ -572,7 +615,7 @@
     </div>
 
     <div class="footer">
-      Xtreme Movie Watch · Movie information and trailers powered by TMDB.
+      [Xtreme Movie Watch](https://github.com/Xtrememovies/xtrememovies.watch) · Movie information and trailers powered by TMDB.
       <br>This site is not endorsed or certified by TMDB.
     </div>
   </main>
@@ -619,14 +662,14 @@
     </div>
   </div>
 
-  <!-- Subscription Plan & Mobile Money Portal Modal -->
+  <!-- Subscription Plan Portal Modal (Gridded into Pro & Premium) -->
   <div class="overlay" id="subPortalModal" role="dialog" aria-modal="true" aria-label="Subscription Plan Portal">
     <div class="modal">
       <div class="modal-top">
         <strong>SUBSCRIPTION PLAN PORTAL</strong>
         <button class="close-button" data-close="subPortalModal">✕ Close</button>
       </div>
-      <p class="message">Select your payment network, subscription tier, and enter your phone number to authorize instant mobile money payment.</p>
+      <p class="message">Choose your payment network, select a Pro or Premium tier, and enter your phone number to complete checkout.</p>
       
       <div class="form-stack">
         <label>Choose Payment Network</label>
@@ -635,17 +678,21 @@
           <button type="button" class="provider-btn" id="mtnTab" onclick="setPaymentProvider('mtn')">MTN MoMo</button>
         </div>
 
-        <label>Select Subscription Plan
+        <label>Select Subscription Tier & Plan
           <select class="plan-select" id="subscriptionPlan">
-            <option value="20000">1 Month — UGX 20,000</option>
-            <option value="5000">1 Week — UGX 5,000</option>
-            <option value="3000">3 Days — UGX 3,000</option>
-            <option value="1000">1 Day — UGX 1,000</option>
+            <optgroup label="⭐ PRO PLANS">
+              <option value="20000">Pro - 1 Month — UGX 20,000</option>
+              <option value="5000">Pro - 1 Week — UGX 5,000</option>
+            </optgroup>
+            <optgroup label="🔥 PREMIUM PLANS">
+              <option value="3000">Premium - 3 Days — UGX 3,000</option>
+              <option value="1000">Premium - 1 Day — UGX 1,000</option>
+            </optgroup>
           </select>
         </label>
 
         <label><span id="networkLabel">Airtel</span> Phone Number
-          <input class="form-input" id="phoneInput" type="tel" placeholder="070xxxxxxxx or 077xxxxxxxx">
+          <input class="form-input" id="phoneInput" type="tel" placeholder="070xxxxxxxx or 075xxxxxxxx">
         </label>
 
         <button class="primary-button" id="submitPayment" type="button" style="margin-top: 10px; width: 100%; padding: 12px; font-size: 15px;">Pay Now</button>
@@ -698,22 +745,17 @@
         } catch {}
       }
 
-      // --- Theme Toggle Logic ---
+      // --- Multi-Theme Selection Logic ---
       function initTheme() {
         const savedTheme = localStorage.getItem("xtremeTheme") || "dark";
-        if (savedTheme === "bright") {
-          document.body.classList.add("bright-theme");
-          $("themeToggleBtn").textContent = "🌙 Dark";
-        } else {
-          document.body.classList.remove("bright-theme");
-          $("themeToggleBtn").textContent = "☀️ Bright";
-        }
+        document.body.className = "theme-" + savedTheme;
+        $("themeSelector").value = savedTheme;
       }
 
-      function toggleTheme() {
-        const isBright = document.body.classList.toggle("bright-theme");
-        localStorage.setItem("xtremeTheme", isBright ? "bright" : "dark");
-        $("themeToggleBtn").textContent = isBright ? "🌙 Dark" : "☀️ Bright";
+      function changeTheme(e) {
+        const newTheme = e.target.value;
+        document.body.className = "theme-" + newTheme;
+        localStorage.setItem("xtremeTheme", newTheme);
       }
 
       // --- Payment Provider Toggle ---
@@ -1035,7 +1077,7 @@
       function openSubPortal() {
         $("subPortalModal").classList.add("open");
         document.body.style.overflow = "hidden";
-        $("paymentStatus").textContent = "Select your network, subscription plan, and enter your phone number.";
+        $("paymentStatus").textContent = "Select your network, Pro/Premium tier, and enter your phone number.";
       }
 
       function updateAuthUI() {
@@ -1144,7 +1186,7 @@
       $("accountButton").addEventListener("click", openAuth);
       $("subPortalNavButton").addEventListener("click", openSubPortal);
       $("submitPayment").addEventListener("click", processPayment);
-      $("themeToggleBtn").addEventListener("click", toggleTheme);
+      $("themeSelector").addEventListener("change", changeTheme);
 
       document.querySelectorAll("[data-close]").forEach(button => {
         button.addEventListener("click", () => closeModal(button.dataset.close));
