@@ -18,8 +18,11 @@
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow-x: hidden;
       font-family: 'Segoe UI', Arial, sans-serif;
       background: var(--bg-color);
       color: var(--text-main);
@@ -28,8 +31,10 @@
     header {
       background: var(--surface-color);
       border-bottom: 1px solid #2a2a3d;
-      text-align: center;
-      padding: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
       position: sticky;
       top: 0;
       z-index: 100;
@@ -38,71 +43,95 @@
     header h1 {
       margin: 0;
       color: var(--primary-red);
-      font-size: 24px;
+      font-size: 20px;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
     header p {
-      margin: 4px 0 0;
+      margin: 0;
       color: var(--text-muted);
       font-size: 13px;
     }
 
     main {
-      max-width: 1000px;
-      margin: 24px auto;
-      padding: 0 16px;
+      width: 100%;
+      max-width: 1400px;
+      margin: 16px auto;
+      padding: 0 20px;
     }
 
-    /* Video Player Section */
+    /* Video Player Section fitted to viewport height */
     .player-container {
       background: var(--surface-color);
-      border-radius: 12px;
+      border-radius: 10px;
       overflow: hidden;
       border: 1px solid #2a2a3d;
       box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-      margin-bottom: 24px;
+      margin-bottom: 16px;
+      display: flex;
+      flex-direction: column;
     }
 
     .player {
       width: 100%;
-      aspect-ratio: 16 / 9;
+      height: 52vh;
+      min-height: 250px;
+      max-height: 550px;
       border: 0;
+      display: block;
     }
 
     .player-info {
-      padding: 16px 20px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .player-info h3 {
-      margin: 0 0 6px;
-      font-size: 20px;
+      margin: 0;
+      font-size: 18px;
     }
 
     .player-info p {
       margin: 0;
       color: var(--text-muted);
-      font-size: 14px;
+      font-size: 13px;
     }
 
-    /* Category Filter Buttons */
+    /* Controls Bar (Filters & Title) */
+    .controls-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 17px;
+      margin: 0;
+      font-weight: 600;
+    }
+
     .filters {
       display: flex;
       gap: 8px;
-      margin-bottom: 20px;
       overflow-x: auto;
-      padding-bottom: 4px;
     }
 
     .filter-btn {
       background: var(--surface-color);
       color: var(--text-muted);
       border: 1px solid #2a2a3d;
-      padding: 8px 16px;
+      padding: 6px 14px;
       border-radius: 20px;
       cursor: pointer;
-      font-size: 14px;
+      font-size: 13px;
       white-space: nowrap;
       transition: all 0.2s;
     }
@@ -113,60 +142,53 @@
       border-color: var(--primary-red);
     }
 
-    .section-title {
-      font-size: 18px;
-      margin-bottom: 14px;
-      font-weight: 600;
-    }
-
     /* Movie Grid */
     .movie-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      margin-bottom: 20px;
     }
 
     .movie-card {
       background: var(--surface-color);
       border: 1px solid #2a2a3d;
-      border-radius: 10px;
-      padding: 16px;
+      border-radius: 8px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
-      justify-space-between;
+      justify-content: space-between;
       transition: transform 0.2s, border-color 0.2s;
     }
 
     .movie-card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-2px);
       border-color: var(--primary-red);
     }
 
     .movie-card.active-card {
       border-color: var(--primary-red);
-      box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.2);
+      box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.25);
     }
 
     .movie-card h4 {
       margin: 0 0 4px;
-      font-size: 16px;
+      font-size: 15px;
     }
 
     .movie-card .meta {
       font-size: 12px;
       color: var(--text-muted);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .movie-card button {
       background: var(--primary-red);
       color: white;
       border: none;
-      padding: 10px;
-      margin: 0;
+      padding: 8px;
       border-radius: 6px;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 600;
       cursor: pointer;
       width: 100%;
@@ -179,10 +201,20 @@
 
     .note {
       color: var(--text-muted);
-      line-height: 1.5;
-      font-size: 13px;
+      font-size: 12px;
       text-align: center;
-      margin-top: 30px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        gap: 4px;
+        padding: 10px;
+      }
+      .player {
+        height: 35vh;
+      }
     }
   </style>
 </head>
@@ -210,19 +242,19 @@
       </div>
     </div>
 
-    <!-- Category Filters -->
-    <div class="filters">
-      <button class="filter-btn active" onclick="filterCategory('all', this)">All</button>
-      <button class="filter-btn" onclick="filterCategory('vj', this)">Luganda VJ</button>
-      <button class="filter-btn" onclick="filterCategory('action', this)">Action</button>
-      <button class="filter-btn" onclick="filterCategory('demo', this)">Demos</button>
+    <!-- Controls Bar & Filters -->
+    <div class="controls-bar">
+      <h2 class="section-title">Available Watch List</h2>
+      <div class="filters">
+        <button class="filter-btn active" onclick="filterCategory('all', this)">All</button>
+        <button class="filter-btn" onclick="filterCategory('vj', this)">Luganda VJ</button>
+        <button class="filter-btn" onclick="filterCategory('action', this)">Action</button>
+        <button class="filter-btn" onclick="filterCategory('demo', this)">Demos</button>
+      </div>
     </div>
-
-    <h2 class="section-title">Available Watch List</h2>
 
     <!-- Movie Selection Grid -->
     <div class="movie-grid" id="movieGrid">
-      
       <div class="movie-card" data-category="demo">
         <div>
           <h4>Test Video</h4>
@@ -238,7 +270,6 @@
         </div>
         <button onclick="playVideo('M7lc1UVf-VE', 'YouTube Demo', 'Secondary system test playback stream.', this)">Play Video</button>
       </div>
-
     </div>
 
     <p class="note">
@@ -249,13 +280,12 @@
   <script>
     function playVideo(id, title, desc, btnElement) {
       document.getElementById("player").src =
-        "https://www.youtube.com/embed/" +
+        "https://www.youtube-nocookie.com/embed/" +
         encodeURIComponent(id) + "?autoplay=1";
 
       document.getElementById("videoTitle").textContent = title;
       document.getElementById("videoDesc").textContent = desc;
 
-      // Highlight active card
       document.querySelectorAll('.movie-card').forEach(card => card.classList.remove('active-card'));
       if (btnElement) {
         btnElement.closest('.movie-card').classList.add('active-card');
