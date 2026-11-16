@@ -103,7 +103,7 @@
       align-items: center;
     }
 
-    .sign-button, .primary-button, .airtel-pay-btn, .theme-toggle-btn {
+    .sign-button, .primary-button, .sub-portal-btn, .theme-toggle-btn {
       background: linear-gradient(135deg, var(--accent), #e01b3f);
       border: 0;
       color: white;
@@ -114,14 +114,16 @@
       transition: transform 0.2s ease, opacity 0.2s ease;
       font-size: 13px;
     }
-    .sign-button:hover, .primary-button:hover, .airtel-pay-btn:hover, .theme-toggle-btn:hover {
+    .sign-button:hover, .primary-button:hover, .sub-portal-btn:hover, .theme-toggle-btn:hover {
       opacity: 0.92;
       transform: translateY(-1px);
     }
 
-    .airtel-pay-btn {
-      background: linear-gradient(135deg, #ff4d00, #cc3d00);
-      box-shadow: 0 4px 15px rgba(255, 77, 0, 0.4);
+    .sub-portal-btn {
+      background: linear-gradient(135deg, #00eaff, #0077ff);
+      box-shadow: 0 4px 15px rgba(0, 234, 255, 0.3);
+      color: #06080f;
+      font-weight: 700;
     }
 
     .theme-toggle-btn {
@@ -339,6 +341,39 @@
       font-size: 14px;
     }
 
+    /* --- Payment Provider Radio Tabs --- */
+    .provider-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .provider-btn {
+      background: var(--panel2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+
+    .provider-btn.active-airtel {
+      background: rgba(255, 77, 0, 0.2);
+      border-color: #ff4d00;
+      color: #ff4d00;
+    }
+
+    .provider-btn.active-mtn {
+      background: rgba(255, 204, 0, 0.2);
+      border-color: #ffcc00;
+      color: #ffcc00;
+    }
+
     /* --- Bottom Mobile Navigation Bar --- */
     .bottom-nav {
       position: fixed;
@@ -492,7 +527,7 @@
     <div class="logo">XTREME <span>MOVIE .WATCH</span></div>
     <div class="header-actions">
       <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Theme">☀️ Bright</button>
-      <button class="airtel-pay-btn" id="airtelPayNavButton">Airtel Pay</button>
+      <button class="sub-portal-btn" id="subPortalNavButton">Subscription Plans</button>
       <button class="sign-button" id="signInButton">Sign In</button>
     </div>
   </header>
@@ -537,7 +572,7 @@
     </div>
 
     <div class="footer">
-      [Xtreme Movie Watch](https://github.com/Xtrememovies/xtrememovies.watch) · Movie information and trailers powered by TMDB.
+      Xtreme Movie Watch · Movie information and trailers powered by TMDB.
       <br>This site is not endorsed or certified by TMDB.
     </div>
   </main>
@@ -584,16 +619,22 @@
     </div>
   </div>
 
-  <!-- Airtel Mobile Money Subscription & Payment Modal -->
-  <div class="overlay" id="airtelModal" role="dialog" aria-modal="true" aria-label="Airtel Mobile Money Checkout">
+  <!-- Subscription Plan & Mobile Money Portal Modal -->
+  <div class="overlay" id="subPortalModal" role="dialog" aria-modal="true" aria-label="Subscription Plan Portal">
     <div class="modal">
       <div class="modal-top">
-        <strong>AIRTEL MOBILE MONEY CHECKOUT</strong>
-        <button class="close-button" data-close="airtelModal">✕ Close</button>
+        <strong>SUBSCRIPTION PLAN PORTAL</strong>
+        <button class="close-button" data-close="subPortalModal">✕ Close</button>
       </div>
-      <p class="message">Choose your subscription plan and enter your Airtel phone number to instantly authorize payment.</p>
+      <p class="message">Select your payment network, subscription tier, and enter your phone number to authorize instant mobile money payment.</p>
       
       <div class="form-stack">
+        <label>Choose Payment Network</label>
+        <div class="provider-tabs">
+          <button type="button" class="provider-btn active-airtel" id="airtelTab" onclick="setPaymentProvider('airtel')">Airtel Money</button>
+          <button type="button" class="provider-btn" id="mtnTab" onclick="setPaymentProvider('mtn')">MTN MoMo</button>
+        </div>
+
         <label>Select Subscription Plan
           <select class="plan-select" id="subscriptionPlan">
             <option value="20000">1 Month — UGX 20,000</option>
@@ -603,12 +644,12 @@
           </select>
         </label>
 
-        <label>Airtel Phone Number
-          <input class="form-input" id="airtelPhoneInput" type="tel" placeholder="070xxxxxxxx or 075xxxxxxxx">
+        <label><span id="networkLabel">Airtel</span> Phone Number
+          <input class="form-input" id="phoneInput" type="tel" placeholder="070xxxxxxxx or 077xxxxxxxx">
         </label>
 
-        <button class="airtel-pay-btn" id="submitAirtelPayment" type="button" style="margin-top: 10px; width: 100%; padding: 12px; font-size: 15px;">Pay Now</button>
-        <div class="message" id="airtelPaymentStatus" aria-live="polite"></div>
+        <button class="primary-button" id="submitPayment" type="button" style="margin-top: 10px; width: 100%; padding: 12px; font-size: 15px;">Pay Now</button>
+        <div class="message" id="paymentStatus" aria-live="polite"></div>
       </div>
     </div>
   </div>
@@ -638,6 +679,7 @@
       let movies = [];
       let supabase = null;
       let currentUser = null;
+      let selectedProvider = "airtel";
 
       const savedItems = new Set(readSaved());
 
@@ -673,6 +715,26 @@
         localStorage.setItem("xtremeTheme", isBright ? "bright" : "dark");
         $("themeToggleBtn").textContent = isBright ? "🌙 Dark" : "☀️ Bright";
       }
+
+      // --- Payment Provider Toggle ---
+      window.setPaymentProvider = function(provider) {
+        selectedProvider = provider;
+        const airtelBtn = $("airtelTab");
+        const mtnBtn = $("mtnTab");
+        const networkLabel = $("networkLabel");
+
+        if (provider === "airtel") {
+          airtelBtn.className = "provider-btn active-airtel";
+          mtnBtn.className = "provider-btn";
+          networkLabel.textContent = "Airtel";
+          $("phoneInput").placeholder = "070xxxxxxxx or 075xxxxxxxx";
+        } else {
+          mtnBtn.className = "provider-btn active-mtn";
+          airtelBtn.className = "provider-btn";
+          networkLabel.textContent = "MTN";
+          $("phoneInput").placeholder = "077xxxxxxxx or 078xxxxxxxx";
+        }
+      };
 
       function escapeHTML(value) {
         return String(value ?? "").replace(/[&<>"']/g, character => ({
@@ -970,10 +1032,10 @@
         updateAuthUI();
       }
 
-      function openAirtelPay() {
-        $("airtelModal").classList.add("open");
+      function openSubPortal() {
+        $("subPortalModal").classList.add("open");
         document.body.style.overflow = "hidden";
-        $("airtelPaymentStatus").textContent = "Select a subscription plan and enter your Airtel phone number.";
+        $("paymentStatus").textContent = "Select your network, subscription plan, and enter your phone number.";
       }
 
       function updateAuthUI() {
@@ -1034,19 +1096,20 @@
         updateAuthUI();
       }
 
-      function processAirtelPayment() {
-        const phone = $("airtelPhoneInput").value.trim();
+      function processPayment() {
+        const phone = $("phoneInput").value.trim();
         const amount = $("subscriptionPlan").value;
         const planText = $("subscriptionPlan").options[$("subscriptionPlan").selectedIndex].text;
+        const providerName = selectedProvider === "airtel" ? "Airtel Money" : "MTN MoMo";
 
         if (!phone || phone.length < 10) {
-          $("airtelPaymentStatus").textContent = "Please enter a valid Airtel phone number (e.g., 070xxxxxxx or 075xxxxxxx).";
+          $("paymentStatus").textContent = "Please enter a valid phone number (e.g., 070xxxxxxx or 077xxxxxxx).";
           return;
         }
 
-        $("airtelPaymentStatus").textContent = `Requesting UGX ${amount} for [${planText}] from ${phone}... Check your phone for the USSD prompt.`;
+        $("paymentStatus").textContent = `Requesting UGX ${amount} for [${planText}] via ${providerName} (${phone})... Check your phone for the USSD prompt.`;
         setTimeout(() => {
-          $("airtelPaymentStatus").textContent = "USSD push sent successfully! Enter your Airtel Money PIN to confirm.";
+          $("paymentStatus").textContent = "USSD push sent successfully! Enter your Mobile Money PIN to confirm.";
         }, 1500);
       }
 
@@ -1079,8 +1142,8 @@
 
       $("signInButton").addEventListener("click", openAuth);
       $("accountButton").addEventListener("click", openAuth);
-      $("airtelPayNavButton").addEventListener("click", openAirtelPay);
-      $("submitAirtelPayment").addEventListener("click", processAirtelPayment);
+      $("subPortalNavButton").addEventListener("click", openSubPortal);
+      $("submitPayment").addEventListener("click", processPayment);
       $("themeToggleBtn").addEventListener("click", toggleTheme);
 
       document.querySelectorAll("[data-close]").forEach(button => {
