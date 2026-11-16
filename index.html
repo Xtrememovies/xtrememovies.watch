@@ -24,6 +24,17 @@
       --radius-sm: 8px;
     }
 
+    /* Bright Theme Variables */
+    body.bright-theme {
+      --bg: #f4f6fa;
+      --panel: rgba(255, 255, 255, 0.85);
+      --panel-solid: #ffffff;
+      --panel2: #eaeef5;
+      --text: #1a1f2c;
+      --muted: #64748b;
+      --border: rgba(203, 213, 225, 0.8);
+    }
+
     * { box-sizing: border-box; }
 
     body {
@@ -33,6 +44,7 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       padding-bottom: 95px;
       overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     button, input, select { font: inherit; }
@@ -47,7 +59,7 @@
       position: sticky;
       top: 0;
       z-index: 30;
-      background: rgba(6, 8, 15, 0.85);
+      background: var(--panel);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
@@ -63,7 +75,7 @@
       font-weight: 900;
       letter-spacing: -.5px;
       white-space: nowrap;
-      color: #ffffff;
+      color: var(--text);
       position: relative;
       display: inline-block;
       padding: 7px 12px;
@@ -91,17 +103,18 @@
       align-items: center;
     }
 
-    .sign-button, .primary-button, .airtel-pay-btn {
+    .sign-button, .primary-button, .airtel-pay-btn, .theme-toggle-btn {
       background: linear-gradient(135deg, var(--accent), #e01b3f);
       border: 0;
       color: white;
       font-weight: 600;
       border-radius: var(--radius-sm);
-      padding: 9px 16px;
+      padding: 9px 14px;
       box-shadow: 0 4px 15px var(--accent-glow);
       transition: transform 0.2s ease, opacity 0.2s ease;
+      font-size: 13px;
     }
-    .sign-button:hover, .primary-button:hover, .airtel-pay-btn:hover {
+    .sign-button:hover, .primary-button:hover, .airtel-pay-btn:hover, .theme-toggle-btn:hover {
       opacity: 0.92;
       transform: translateY(-1px);
     }
@@ -111,12 +124,19 @@
       box-shadow: 0 4px 15px rgba(255, 77, 0, 0.4);
     }
 
+    .theme-toggle-btn {
+      background: var(--panel2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
+
     /* --- Cinematic Hero --- */
     .hero {
       position: relative;
       padding: 40px 20px 30px;
       background: radial-gradient(circle at top right, rgba(107,114,255,0.15), transparent 60%),
-                  linear-gradient(180deg, #0e1222, var(--bg));
+                  linear-gradient(180deg, var(--panel-solid), var(--bg));
       border-bottom: 1px solid var(--border);
     }
 
@@ -150,18 +170,18 @@
       max-width: 600px;
     }
 
-    .search-row input, .form-input {
+    .search-row input, .form-input, .plan-select {
       min-width: 0;
       width: 100%;
       padding: 12px 16px;
       border: 1px solid var(--border);
       background: var(--panel);
       backdrop-filter: blur(10px);
-      color: white;
+      color: var(--text);
       border-radius: var(--radius-md);
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
-    .search-row input:focus, .form-input:focus {
+    .search-row input:focus, .form-input:focus, .plan-select:focus {
       border-color: var(--blue);
       box-shadow: 0 0 0 3px rgba(107, 114, 255, 0.2);
     }
@@ -180,7 +200,7 @@
       background: var(--panel);
       backdrop-filter: blur(8px);
       border: 1px solid var(--border);
-      color: #cbd0df;
+      color: var(--muted);
       padding: 8px 16px;
       border-radius: 30px;
       white-space: nowrap;
@@ -190,7 +210,7 @@
     }
     .tabs button:hover, .genre-chip:hover {
       border-color: rgba(255,255,255,0.2);
-      color: white;
+      color: var(--text);
     }
 
     .tabs button.active, .genre-chip.active {
@@ -249,7 +269,7 @@
       border-radius: var(--radius-md);
       overflow: hidden;
       border: 1px solid var(--border);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
 
     .poster {
@@ -329,7 +349,7 @@
       display: flex;
       justify-content: space-around;
       padding: 10px 6px calc(10px + env(safe-area-inset-bottom));
-      background: rgba(10, 13, 22, 0.92);
+      background: var(--panel);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-top: 1px solid var(--border);
@@ -380,11 +400,11 @@
       max-width: 580px;
       max-height: 90vh;
       overflow-y: auto;
-      background: #0f1320;
+      background: var(--panel-solid);
       border: 1px solid var(--border);
       border-radius: var(--radius-lg);
       padding: 24px;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
     }
 
     .modal-top {
@@ -399,25 +419,25 @@
     .close-button {
       border: 1px solid var(--border);
       background: var(--panel2);
-      color: white;
+      color: var(--text);
       border-radius: var(--radius-sm);
       padding: 7px 12px;
       font-size: 12px;
       font-weight: 500;
       transition: background 0.2s ease;
     }
-    .close-button:hover { background: #262e45; }
+    .close-button:hover { opacity: 0.8; }
 
     .detail-poster {
       width: 110px;
       border-radius: var(--radius-sm);
       float: left;
       margin: 0 16px 12px 0;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.3);
     }
 
     .detail-overview {
-      color: #d1d5db;
+      color: var(--text);
       font-size: 13px;
       line-height: 1.6;
     }
@@ -439,16 +459,16 @@
     }
 
     .form-stack { display: grid; gap: 14px; margin-top: 12px; }
-    .form-stack label { font-size: 13px; color: #cbd0df; font-weight: 500; }
-    .form-stack input { margin-top: 6px; }
+    .form-stack label { font-size: 13px; color: var(--text); font-weight: 500; }
+    .form-stack input, .form-stack select { margin-top: 6px; }
     .message { font-size: 13px; color: var(--muted); line-height: 1.5; margin-top: 10px; }
 
     .footer {
-      color: #6b7285;
+      color: var(--muted);
       text-align: center;
       font-size: 11px;
       padding: 30px 10px 10px;
-      border-top: 1px solid rgba(41, 46, 64, 0.3);
+      border-top: 1px solid var(--border);
       margin-top: 30px;
     }
 
@@ -462,7 +482,7 @@
     @media (min-width: 900px) {
       .movie-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
       body { padding-bottom: 20px; }
-      .bottom-nav { position: static; max-width: 480px; margin: 20px auto 10px; border: 1px solid var(--border); border-radius: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+      .bottom-nav { position: static; max-width: 480px; margin: 20px auto 10px; border: 1px solid var(--border); border-radius: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
     }
   </style>
 </head>
@@ -471,6 +491,7 @@
   <header class="topbar">
     <div class="logo">XTREME <span>MOVIE .WATCH</span></div>
     <div class="header-actions">
+      <button class="theme-toggle-btn" id="themeToggleBtn" title="Toggle Theme">☀️ Bright</button>
       <button class="airtel-pay-btn" id="airtelPayNavButton">Airtel Pay</button>
       <button class="sign-button" id="signInButton">Sign In</button>
     </div>
@@ -516,7 +537,7 @@
     </div>
 
     <div class="footer">
-      Xtreme Movie Watch · Movie information and trailers powered by TMDB.
+      [Xtreme Movie Watch](https://github.com/Xtrememovies/xtrememovies.watch) · Movie information and trailers powered by TMDB.
       <br>This site is not endorsed or certified by TMDB.
     </div>
   </main>
@@ -563,20 +584,30 @@
     </div>
   </div>
 
-  <!-- Airtel Mobile Money Payment Modal -->
+  <!-- Airtel Mobile Money Subscription & Payment Modal -->
   <div class="overlay" id="airtelModal" role="dialog" aria-modal="true" aria-label="Airtel Mobile Money Checkout">
     <div class="modal">
       <div class="modal-top">
-        <strong>AIRTEL MOBILE MONEY</strong>
+        <strong>AIRTEL MOBILE MONEY CHECKOUT</strong>
         <button class="close-button" data-close="airtelModal">✕ Close</button>
       </div>
-      <p class="message">Enter your Airtel phone number to instantly authorize your subscription or premium film access.</p>
+      <p class="message">Choose your subscription plan and enter your Airtel phone number to instantly authorize payment.</p>
       
       <div class="form-stack">
+        <label>Select Subscription Plan
+          <select class="plan-select" id="subscriptionPlan">
+            <option value="20000">1 Month — UGX 20,000</option>
+            <option value="5000">1 Week — UGX 5,000</option>
+            <option value="3000">3 Days — UGX 3,000</option>
+            <option value="1000">1 Day — UGX 1,000</option>
+          </select>
+        </label>
+
         <label>Airtel Phone Number
           <input class="form-input" id="airtelPhoneInput" type="tel" placeholder="070xxxxxxxx or 075xxxxxxxx">
         </label>
-        <button class="airtel-pay-btn" id="submitAirtelPayment" type="button" style="margin-top: 10px; width: 100%; padding: 12px; font-size: 15px;">Pay UGX 2,000</button>
+
+        <button class="airtel-pay-btn" id="submitAirtelPayment" type="button" style="margin-top: 10px; width: 100%; padding: 12px; font-size: 15px;">Pay Now</button>
         <div class="message" id="airtelPaymentStatus" aria-live="polite"></div>
       </div>
     </div>
@@ -623,6 +654,24 @@
         try {
           localStorage.setItem("xtremeWatchlist", JSON.stringify([...savedItems]));
         } catch {}
+      }
+
+      // --- Theme Toggle Logic ---
+      function initTheme() {
+        const savedTheme = localStorage.getItem("xtremeTheme") || "dark";
+        if (savedTheme === "bright") {
+          document.body.classList.add("bright-theme");
+          $("themeToggleBtn").textContent = "🌙 Dark";
+        } else {
+          document.body.classList.remove("bright-theme");
+          $("themeToggleBtn").textContent = "☀️ Bright";
+        }
+      }
+
+      function toggleTheme() {
+        const isBright = document.body.classList.toggle("bright-theme");
+        localStorage.setItem("xtremeTheme", isBright ? "bright" : "dark");
+        $("themeToggleBtn").textContent = isBright ? "🌙 Dark" : "☀️ Bright";
       }
 
       function escapeHTML(value) {
@@ -924,7 +973,7 @@
       function openAirtelPay() {
         $("airtelModal").classList.add("open");
         document.body.style.overflow = "hidden";
-        $("airtelPaymentStatus").textContent = "Enter your active Airtel phone number to receive a payment prompt.";
+        $("airtelPaymentStatus").textContent = "Select a subscription plan and enter your Airtel phone number.";
       }
 
       function updateAuthUI() {
@@ -987,13 +1036,17 @@
 
       function processAirtelPayment() {
         const phone = $("airtelPhoneInput").value.trim();
+        const amount = $("subscriptionPlan").value;
+        const planText = $("subscriptionPlan").options[$("subscriptionPlan").selectedIndex].text;
+
         if (!phone || phone.length < 10) {
           $("airtelPaymentStatus").textContent = "Please enter a valid Airtel phone number (e.g., 070xxxxxxx or 075xxxxxxx).";
           return;
         }
-        $("airtelPaymentStatus").textContent = "Sending USSD push prompt to " + phone + "... Please check your phone and enter your Airtel Money PIN.";
+
+        $("airtelPaymentStatus").textContent = `Requesting UGX ${amount} for [${planText}] from ${phone}... Check your phone for the USSD prompt.`;
         setTimeout(() => {
-          $("airtelPaymentStatus").textContent = "Payment prompt initiated successfully. Confirm on your phone.";
+          $("airtelPaymentStatus").textContent = "USSD push sent successfully! Enter your Airtel Money PIN to confirm.";
         }, 1500);
       }
 
@@ -1028,6 +1081,7 @@
       $("accountButton").addEventListener("click", openAuth);
       $("airtelPayNavButton").addEventListener("click", openAirtelPay);
       $("submitAirtelPayment").addEventListener("click", processAirtelPayment);
+      $("themeToggleBtn").addEventListener("click", toggleTheme);
 
       document.querySelectorAll("[data-close]").forEach(button => {
         button.addEventListener("click", () => closeModal(button.dataset.close));
@@ -1082,6 +1136,7 @@
         updateAuthUI();
       }
 
+      initTheme();
       initialiseAuth();
       loadContent();
     })();
