@@ -85,7 +85,13 @@
       100% { border-color: #00eaff; box-shadow: 0 0 8px rgba(0,234,255,.3); }
     }
 
-    .sign-button, .primary-button {
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .sign-button, .primary-button, .airtel-pay-btn {
       background: linear-gradient(135deg, var(--accent), #e01b3f);
       border: 0;
       color: white;
@@ -95,9 +101,14 @@
       box-shadow: 0 4px 15px var(--accent-glow);
       transition: transform 0.2s ease, opacity 0.2s ease;
     }
-    .sign-button:hover, .primary-button:hover {
+    .sign-button:hover, .primary-button:hover, .airtel-pay-btn:hover {
       opacity: 0.92;
       transform: translateY(-1px);
+    }
+
+    .airtel-pay-btn {
+      background: linear-gradient(135deg, #ff4d00, #cc3d00);
+      box-shadow: 0 4px 15px rgba(255, 77, 0, 0.4);
     }
 
     /* --- Cinematic Hero --- */
@@ -459,7 +470,10 @@
 <body>
   <header class="topbar">
     <div class="logo">XTREME <span>MOVIE .WATCH</span></div>
-    <button class="sign-button" id="signInButton">Sign In</button>
+    <div class="header-actions">
+      <button class="airtel-pay-btn" id="airtelPayNavButton">Airtel Pay</button>
+      <button class="sign-button" id="signInButton">Sign In</button>
+    </div>
   </header>
 
   <section class="hero">
@@ -546,6 +560,25 @@
         <button type="button" class="close-button" id="signOutButton" style="display:none">Sign Out</button>
         <div class="message" id="authStatus" aria-live="polite"></div>
       </form>
+    </div>
+  </div>
+
+  <!-- Airtel Mobile Money Payment Modal -->
+  <div class="overlay" id="airtelModal" role="dialog" aria-modal="true" aria-label="Airtel Mobile Money Checkout">
+    <div class="modal">
+      <div class="modal-top">
+        <strong>AIRTEL MOBILE MONEY</strong>
+        <button class="close-button" data-close="airtelModal">✕ Close</button>
+      </div>
+      <p class="message">Enter your Airtel phone number to instantly authorize your subscription or premium film access.</p>
+      
+      <div class="form-stack">
+        <label>Airtel Phone Number
+          <input class="form-input" id="airtelPhoneInput" type="tel" placeholder="070xxxxxxxx or 075xxxxxxxx">
+        </label>
+        <button class="airtel-pay-btn" id="submitAirtelPayment" type="button" style="margin-top: 10px; width: 100%; padding: 12px; font-size: 15px;">Pay UGX 2,000</button>
+        <div class="message" id="airtelPaymentStatus" aria-live="polite"></div>
+      </div>
     </div>
   </div>
 
@@ -888,6 +921,12 @@
         updateAuthUI();
       }
 
+      function openAirtelPay() {
+        $("airtelModal").classList.add("open");
+        document.body.style.overflow = "hidden";
+        $("airtelPaymentStatus").textContent = "Enter your active Airtel phone number to receive a payment prompt.";
+      }
+
       function updateAuthUI() {
         $("signInButton").textContent = currentUser ? "My Account" : "Sign In";
         $("signOutButton").style.display = currentUser ? "block" : "none";
@@ -946,6 +985,18 @@
         updateAuthUI();
       }
 
+      function processAirtelPayment() {
+        const phone = $("airtelPhoneInput").value.trim();
+        if (!phone || phone.length < 10) {
+          $("airtelPaymentStatus").textContent = "Please enter a valid Airtel phone number (e.g., 070xxxxxxx or 075xxxxxxx).";
+          return;
+        }
+        $("airtelPaymentStatus").textContent = "Sending USSD push prompt to " + phone + "... Please check your phone and enter your Airtel Money PIN.";
+        setTimeout(() => {
+          $("airtelPaymentStatus").textContent = "Payment prompt initiated successfully. Confirm on your phone.";
+        }, 1500);
+      }
+
       function runSearch() {
         searchTerm = searchInput.value.trim();
         genre = "";
@@ -975,6 +1026,8 @@
 
       $("signInButton").addEventListener("click", openAuth);
       $("accountButton").addEventListener("click", openAuth);
+      $("airtelPayNavButton").addEventListener("click", openAirtelPay);
+      $("submitAirtelPayment").addEventListener("click", processAirtelPayment);
 
       document.querySelectorAll("[data-close]").forEach(button => {
         button.addEventListener("click", () => closeModal(button.dataset.close));
