@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,90 +5,275 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Extreme Movie Watch</title>
   <style>
+    :root {
+      --bg-color: #101018;
+      --surface-color: #1a1a26;
+      --primary-red: #e50914;
+      --primary-hover: #f40612;
+      --text-main: #ffffff;
+      --text-muted: #a7a7b3;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #101018;
-      color: white;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg-color);
+      color: var(--text-main);
     }
 
     header {
-      background: #e50914;
+      background: var(--surface-color);
+      border-bottom: 1px solid #2a2a3d;
       text-align: center;
-      padding: 20px;
+      padding: 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header h1 {
+      margin: 0;
+      color: var(--primary-red);
+      font-size: 24px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      margin: 4px 0 0;
+      color: var(--text-muted);
+      font-size: 13px;
     }
 
     main {
-      max-width: 800px;
-      margin: auto;
-      padding: 16px;
+      max-width: 1000px;
+      margin: 24px auto;
+      padding: 0 16px;
+    }
+
+    /* Video Player Section */
+    .player-container {
+      background: var(--surface-color);
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #2a2a3d;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      margin-bottom: 24px;
     }
 
     .player {
       width: 100%;
       aspect-ratio: 16 / 9;
       border: 0;
-      border-radius: 10px;
     }
 
-    button {
-      background: #e50914;
+    .player-info {
+      padding: 16px 20px;
+    }
+
+    .player-info h3 {
+      margin: 0 0 6px;
+      font-size: 20px;
+    }
+
+    .player-info p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* Category Filter Buttons */
+    .filters {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .filter-btn {
+      background: var(--surface-color);
+      color: var(--text-muted);
+      border: 1px solid #2a2a3d;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--primary-red);
+      color: white;
+      border-color: var(--primary-red);
+    }
+
+    .section-title {
+      font-size: 18px;
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+
+    /* Movie Grid */
+    .movie-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .movie-card {
+      background: var(--surface-color);
+      border: 1px solid #2a2a3d;
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-space-between;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .movie-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--primary-red);
+    }
+
+    .movie-card.active-card {
+      border-color: var(--primary-red);
+      box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.2);
+    }
+
+    .movie-card h4 {
+      margin: 0 0 4px;
+      font-size: 16px;
+    }
+
+    .movie-card .meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .movie-card button {
+      background: var(--primary-red);
       color: white;
       border: none;
-      padding: 12px;
-      margin: 5px;
+      padding: 10px;
+      margin: 0;
       border-radius: 6px;
-      font-size: 15px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s;
+    }
+
+    .movie-card button:hover {
+      background: var(--primary-hover);
     }
 
     .note {
-      color: #ccc;
+      color: var(--text-muted);
       line-height: 1.5;
+      font-size: 13px;
+      text-align: center;
+      margin-top: 30px;
     }
   </style>
 </head>
 <body>
+
   <header>
     <h1>Extreme Movie Watch</h1>
     <p>Extreme Watch</p>
   </header>
 
   <main>
-    <h2>Watch Movie Trailers</h2>
-    <p>Choose a video to play it inside your website.</p>
+    <!-- Video Player Box -->
+    <div class="player-container">
+      <iframe
+        id="player"
+        class="player"
+        src="https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ"
+        title="Video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+      <div class="player-info">
+        <h3 id="videoTitle">Test Video</h3>
+        <p id="videoDesc">Select a video title below to play it inside your website.</p>
+      </div>
+    </div>
 
-    <iframe
-      id="player"
-      class="player"
-      src="https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ"
-      title="Video player"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen>
-    </iframe>
+    <!-- Category Filters -->
+    <div class="filters">
+      <button class="filter-btn active" onclick="filterCategory('all', this)">All</button>
+      <button class="filter-btn" onclick="filterCategory('vj', this)">Luganda VJ</button>
+      <button class="filter-btn" onclick="filterCategory('action', this)">Action</button>
+      <button class="filter-btn" onclick="filterCategory('demo', this)">Demos</button>
+    </div>
 
-    <h3 id="videoTitle">Test Video</h3>
+    <h2 class="section-title">Available Watch List</h2>
 
-    <button onclick="playVideo('aqz-KE-bpKQ','Test Video')">
-      Play Test Video
-    </button>
+    <!-- Movie Selection Grid -->
+    <div class="movie-grid" id="movieGrid">
+      
+      <div class="movie-card" data-category="demo">
+        <div>
+          <h4>Test Video</h4>
+          <div class="meta">Demo · 2026</div>
+        </div>
+        <button onclick="playVideo('aqz-KE-bpKQ', 'Test Video', 'Standard platform test video feed.', this)">Play Video</button>
+      </div>
 
-    <button onclick="playVideo('M7lc1UVf-VE','YouTube Demo')">
-      Play Second Demo
-    </button>
+      <div class="movie-card" data-category="demo">
+        <div>
+          <h4>YouTube Demo</h4>
+          <div class="meta">Demo · 2026</div>
+        </div>
+        <button onclick="playVideo('M7lc1UVf-VE', 'YouTube Demo', 'Secondary system test playback stream.', this)">Play Video</button>
+      </div>
+
+    </div>
 
     <p class="note">
-      These are demonstration videos, not movie trailers.
-      We can add real trailers next.
+      Easily add more movies to your grid by duplicating the card blocks above and updating the video IDs and categories.
     </p>
   </main>
 
   <script>
-    function playVideo(id, title) {
+    function playVideo(id, title, desc, btnElement) {
       document.getElementById("player").src =
         "https://www.youtube.com/embed/" +
-        encodeURIComponent(id);
+        encodeURIComponent(id) + "?autoplay=1";
 
       document.getElementById("videoTitle").textContent = title;
+      document.getElementById("videoDesc").textContent = desc;
+
+      // Highlight active card
+      document.querySelectorAll('.movie-card').forEach(card => card.classList.remove('active-card'));
+      if (btnElement) {
+        btnElement.closest('.movie-card').classList.add('active-card');
+      }
+    }
+
+    function filterCategory(category, btnElement) {
+      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+      btnElement.classList.add('active');
+
+      const cards = document.querySelectorAll('.movie-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
     }
   </script>
 </body>
