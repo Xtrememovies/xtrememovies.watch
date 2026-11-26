@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#070709">
 <title>Xtreme Movie Watch - Unlimited VJ Movies & Series</title>
 <style>
 :root{
@@ -62,83 +62,82 @@
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:84px}
-body{margin:0;background:#000;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background-color .35s ease,color .35s ease}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background-color .35s ease,color .35s ease}
 button,input,select{font:inherit}
 button{cursor:pointer}
 a{color:inherit;text-decoration:none}
 
 /* =========================================================
-   NETFLIX-STYLE LANDING & SIGN-IN GATEWAY (BEFORE APP)
+   1. DARK MODERN SIGN-IN & WELCOME GATEWAY (NO WHITE)
    ========================================================= */
-.auth-landing{min-height:100vh;background:#000000;color:#ffffff;position:relative;overflow-x:hidden;padding-bottom:96px}
-.auth-hero{position:relative;min-height:600px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;background:#000}
-.auth-collage{position:absolute;inset:-45px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;transform:rotate(-8deg) scale(1.14);opacity:0.44;pointer-events:none;z-index:0}
+.auth-landing{min-height:100vh;background:#06070a;color:#f5f7fa;position:relative;overflow-x:hidden;padding-bottom:108px}
+.auth-hero{position:relative;min-height:590px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;background:#06070a}
+.auth-collage{position:absolute;inset:-45px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;transform:rotate(-7deg) scale(1.14);opacity:0.34;pointer-events:none;z-index:0}
 @media(min-width:769px){.auth-collage{grid-template-columns:repeat(6,1fr);gap:16px}}
-.auth-collage img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px;background:#141418;box-shadow:0 8px 24px rgba(0,0,0,0.85)}
-.auth-hero-vignette{position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,rgba(0,0,0,0.35) 0%,rgba(0,0,0,0.88) 76%,#000000 100%),linear-gradient(180deg,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.35) 45%,#000000 100%);z-index:1}
+.auth-collage img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:12px;background:#11141c;box-shadow:0 8px 24px rgba(0,0,0,0.9)}
+.auth-hero-vignette{position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,rgba(12,15,24,0.42) 0%,rgba(6,7,10,0.9) 76%,#06070a 100%),linear-gradient(180deg,rgba(6,7,10,0.88) 0%,rgba(6,7,10,0.42) 48%,#06070a 100%);z-index:1}
 
-.auth-topbar{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:20px 24px;max-width:1280px;width:100%;margin:0 auto}
-.nf-wordmark{color:#e50914;font-weight:950;font-size:clamp(22px,4vw,32px);letter-spacing:1.2px;text-transform:uppercase;text-shadow:0 2px 16px rgba(229,9,20,0.45)}
-.nf-signin-btn{background:#e50914;color:#ffffff;border:none;border-radius:6px;padding:8px 16px;font-size:14px;font-weight:700;transition:background .2s}
-.nf-signin-btn:hover{background:#f40612}
+.auth-topbar{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:18px 22px;max-width:1280px;width:100%;margin:0 auto}
+.auth-brand{display:flex;align-items:center;gap:10px}
+.auth-brand-badge{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;font-weight:950;font-size:14px;color:#ffffff;background:linear-gradient(135deg,#ff9900,#ff2a55);box-shadow:0 6px 20px rgba(255,65,40,0.35)}
+.auth-wordmark{color:#ffffff;font-weight:900;font-size:clamp(17px,3.2vw,23px);letter-spacing:0.6px;text-transform:uppercase}
+.auth-signin-btn{background:#151923;color:#ffffff;border:1px solid rgba(255,255,255,0.16);border-radius:12px;padding:9px 16px;font-size:13px;font-weight:800;transition:all .2s}
+.auth-signin-btn:hover{background:linear-gradient(135deg,#ff9900,#ff2a55);border-color:transparent}
 
-.auth-hero-center{position:relative;z-index:3;max-width:680px;margin:auto;padding:34px 22px 54px;text-align:center}
-.auth-hero-center h1{font-size:clamp(30px,5.6vw,54px);font-weight:900;line-height:1.12;margin:0 0 16px;letter-spacing:-0.5px;text-shadow:0 4px 24px rgba(0,0,0,0.9)}
-.auth-price-line{font-size:clamp(16px,2.4vw,20px);font-weight:600;color:#ffffff;margin:0 0 18px}
-.auth-sub-line{font-size:15px;color:#e5e5e5;line-height:1.5;margin:0 0 22px}
+.auth-hero-center{position:relative;z-index:3;max-width:680px;margin:auto;padding:28px 20px 46px;text-align:center}
+.auth-pill-tag{display:inline-block;padding:6px 14px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:#ffb703;background:rgba(255,183,3,0.12);border:1px solid rgba(255,183,3,0.28);margin-bottom:14px}
+.auth-hero-center h1{font-size:clamp(28px,5.2vw,50px);font-weight:900;line-height:1.12;margin:0 0 14px;letter-spacing:-0.4px;color:#ffffff}
+.auth-price-line{font-size:clamp(15px,2.2vw,19px);font-weight:700;color:#d6dce8;margin:0 0 14px}
+.auth-sub-line{font-size:14px;color:#9aa3b5;line-height:1.55;margin:0 0 22px}
 
-.nf-start-form{display:flex;flex-direction:column;gap:14px;max-width:520px;margin:0 auto}
+.nf-start-form{display:flex;flex-direction:column;gap:12px;max-width:520px;margin:0 auto}
 @media(min-width:640px){.nf-start-form{flex-direction:row;align-items:stretch}}
-.nf-email-input{flex:1;height:54px;background:rgba(18,18,22,0.82);border:1px solid rgba(255,255,255,0.38);border-radius:6px;padding:0 16px;color:#ffffff;font-size:16px;outline:none;backdrop-filter:blur(8px)}
-.nf-email-input::placeholder{color:#b3b3b3}
-.nf-email-input:focus{border-color:#ffffff;box-shadow:0 0 0 2px rgba(255,255,255,0.25)}
-.nf-cta-btn{height:54px;background:#e50914;color:#ffffff;border:none;border-radius:6px;padding:0 26px;font-size:18px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:10px;white-space:nowrap;box-shadow:0 8px 26px rgba(229,9,20,0.45);transition:background .2s,transform .15s}
-.nf-cta-btn:hover{background:#f40612;transform:translateY(-1px)}
+.nf-email-input{flex:1;height:52px;background:#11151f;border:1px solid rgba(255,255,255,0.16);border-radius:14px;padding:0 16px;color:#ffffff;font-size:15px;outline:none}
+.nf-email-input::placeholder{color:#7c8599}
+.nf-email-input:focus{border-color:#ff7b00;box-shadow:0 0 0 3px rgba(255,123,0,0.18)}
+.nf-cta-btn{height:52px;background:linear-gradient(135deg,#ff9900,#ff2a55);color:#ffffff;border:none;border-radius:14px;padding:0 24px;font-size:16px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;box-shadow:0 8px 24px rgba(255,65,40,0.35);transition:transform .18s,filter .18s}
+.nf-cta-btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
 
-/* Signature Netflix Curved Red Arch Divider */
-.nf-arch-divider{position:relative;height:44px;margin-top:-22px;z-index:4;overflow:hidden}
-.nf-arch-curve{position:absolute;left:-12%;right:-12%;top:4px;height:140px;border-top:4px solid #e50914;border-radius:50% 50% 0 0 / 38px 38px 0 0;background:radial-gradient(55% 42px at 50% 0%,rgba(229,9,20,0.36),rgba(14,22,52,0.45) 55%,#000000 100%)}
+/* Dark Curved Arch Divider */
+.nf-arch-divider{position:relative;height:38px;margin-top:-18px;z-index:4;overflow:hidden}
+.nf-arch-curve{position:absolute;left:-10%;right:-10%;top:4px;height:120px;border-top:2px solid rgba(255,130,30,0.45);border-radius:50% 50% 0 0 / 32px 32px 0 0;background:radial-gradient(55% 36px at 50% 0%,rgba(255,120,20,0.18),rgba(14,18,28,0.6) 60%,#06070a 100%)}
 
-.auth-body{max-width:1200px;margin:0 auto;padding:6px 20px 24px}
-.auth-sec-title{font-size:22px;font-weight:800;margin:18px 0 16px;color:#ffffff}
+.auth-body{max-width:1200px;margin:0 auto;padding:8px 18px 24px}
+.auth-sec-title{font-size:20px;font-weight:800;margin:18px 0 14px;color:#f5f7fa;display:flex;align-items:center;gap:10px}
+.auth-sec-title::before{content:"";width:5px;height:20px;border-radius:3px;background:linear-gradient(135deg,#ff9900,#ff2a55)}
 
-/* Trending Now Top 10 Row with Big Rank Numbers */
-.nf-trending-row{display:flex;gap:18px;overflow-x:auto;padding:10px 8px 20px 22px;scrollbar-width:none;scroll-snap-type:x mandatory}
+/* Trending Now Top 10 Row */
+.nf-trending-row{display:flex;gap:18px;overflow-x:auto;padding:10px 8px 18px 20px;scrollbar-width:none;scroll-snap-type:x mandatory}
 .nf-trending-row::-webkit-scrollbar{display:none}
-.nf-trend-card{position:relative;min-width:148px;width:148px;flex-shrink:0;scroll-snap-align:start;cursor:pointer;transition:transform .25s ease}
-@media(min-width:769px){.nf-trend-card{min-width:185px;width:185px}}
-.nf-trend-card:hover{transform:scale(1.04)}
-.nf-trend-poster{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px;display:block;background:#16161c;box-shadow:0 10px 26px rgba(0,0,0,0.85)}
-.nf-rank-num{position:absolute;left:-18px;bottom:-6px;font-size:74px;font-weight:950;line-height:0.85;color:#000000;-webkit-text-stroke:2.2px #ffffff;text-shadow:0 4px 18px rgba(0,0,0,0.95);pointer-events:none;user-select:none;font-family:Impact,"Arial Black",sans-serif}
-@media(min-width:769px){.nf-rank-num{font-size:94px;left:-22px}}
+.nf-trend-card{position:relative;min-width:146px;width:146px;flex-shrink:0;scroll-snap-align:start;cursor:pointer;transition:transform .25s ease}
+@media(min-width:769px){.nf-trend-card{min-width:182px;width:182px}}
+.nf-trend-card:hover{transform:translateY(-5px)}
+.nf-trend-poster{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:14px;display:block;background:#121620;border:1px solid rgba(255,255,255,0.08);box-shadow:0 10px 24px rgba(0,0,0,0.75)}
+.nf-rank-num{position:absolute;left:-16px;bottom:-4px;font-size:68px;font-weight:950;line-height:0.85;color:#06070a;-webkit-text-stroke:2px #e6ecf8;text-shadow:0 4px 16px rgba(0,0,0,0.95);pointer-events:none;user-select:none;font-family:Impact,"Arial Black",sans-serif}
+@media(min-width:769px){.nf-rank-num{font-size:88px;left:-20px}}
 
-/* More Reasons to Join Cards */
+/* Dark Modern Feature Cards */
 .nf-reasons-grid{display:grid;grid-template-columns:1fr;gap:14px}
 @media(min-width:769px){.nf-reasons-grid{grid-template-columns:repeat(4,1fr);gap:16px}}
-.nf-reason-card{background:linear-gradient(155deg,#192145 0%,#1b132b 55%,#210e19 100%);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:22px 20px 64px;position:relative;overflow:hidden}
-.nf-reason-card h3{margin:0 0 10px;font-size:19px;font-weight:800;color:#ffffff}
-.nf-reason-card p{margin:0;font-size:14px;line-height:1.5;color:#c7c9d9}
-.nf-reason-icon{position:absolute;right:18px;bottom:16px;font-size:34px;filter:drop-shadow(0 4px 12px rgba(229,9,20,0.45))}
+.nf-reason-card{background:#0f131c;border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:20px 18px 58px;position:relative;overflow:hidden}
+.nf-reason-card h3{margin:0 0 8px;font-size:17px;font-weight:800;color:#ffffff}
+.nf-reason-card p{margin:0;font-size:13px;line-height:1.5;color:#9aa3b5}
+.nf-reason-icon{position:absolute;right:16px;bottom:14px;font-size:30px;opacity:0.92}
 
-/* Sticky Bottom Get Started Bar on Mobile */
-.nf-sticky-footer{position:fixed;bottom:0;left:0;right:0;z-index:35;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(0deg,#000000 72%,transparent);display:flex;justify-content:center}
-.nf-sticky-footer button{width:100%;max-width:520px;height:48px;background:#e50914;color:#ffffff;border:none;border-radius:6px;font-size:16px;font-weight:800;box-shadow:0 6px 24px rgba(229,9,20,0.55)}
-@media(min-width:769px){.nf-sticky-footer{display:none}}
-
-/* Sign-In Modal Box */
-.nf-auth-dialog{width:100%;max-width:430px;background:rgba(12,12,16,0.96);border:1px solid rgba(255,255,255,0.14);border-radius:18px;padding:32px 28px;color:#ffffff;position:relative;box-shadow:0 24px 60px rgba(0,0,0,0.9)}
-.nf-auth-dialog h2{margin:0 0 8px;font-size:28px;font-weight:900}
-.nf-auth-field{width:100%;height:50px;background:#181820;border:1px solid #333342;border-radius:8px;padding:0 14px;color:#ffffff;font-size:15px;margin-top:12px;outline:none}
-.nf-auth-field:focus{border-color:#e50914}
-.nf-auth-submit{width:100%;height:50px;background:#e50914;color:#ffffff;border:none;border-radius:8px;font-size:16px;font-weight:800;margin-top:18px}
-.nf-auth-submit:hover{background:#f40612}
+/* Dark Sign-In Modal Box */
+.nf-auth-dialog{width:100%;max-width:430px;background:#0e1118;border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:30px 26px;color:#ffffff;position:relative;box-shadow:0 24px 60px rgba(0,0,0,0.85)}
+.nf-auth-dialog h2{margin:0 0 8px;font-size:26px;font-weight:900}
+.nf-auth-field{width:100%;height:48px;background:#161a24;border:1px solid #282f40;border-radius:12px;padding:0 14px;color:#ffffff;font-size:15px;margin-top:12px;outline:none}
+.nf-auth-field:focus{border-color:#ff7b00}
+.nf-auth-submit{width:100%;height:48px;background:linear-gradient(135deg,#ff9900,#ff2a55);color:#ffffff;border:none;border-radius:12px;font-size:15px;font-weight:800;margin-top:18px}
+.nf-auth-submit:hover{filter:brightness(1.06)}
 
 #appShell{display:none;background:var(--bg)}
 #appShell.unlocked{display:block}
 #authLanding.hidden{display:none}
 
 /* =========================================================
-   MAIN STREAMING APP STYLES
+   2. MAIN STREAMING APP STYLES & MODERN LOWER NAV
    ========================================================= */
 .sidebar{position:fixed;inset:0 auto 0 0;width:280px;background:var(--panel);border-right:1px solid var(--line);z-index:45;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(0.16,1,0.3,1),background-color .35s ease}
 .sidebar-header{padding:22px 20px;border-bottom:1px solid var(--line)}
@@ -186,7 +185,7 @@ a{color:inherit;text-decoration:none}
 .user-badge.vip{border:2px solid #ffd000;box-shadow:0 0 18px rgba(255,208,0,0.85)}
 
 /* Content & Hero */
-.content{max-width:1560px;margin:auto;padding:0 28px 80px}
+.content{max-width:1560px;margin:auto;padding:0 28px 96px}
 .hero-wrapper{position:relative;margin:20px 0 32px;border-radius:24px;overflow:hidden;background:var(--hero-grad);border:1px solid var(--line);box-shadow:0 18px 40px rgba(0,0,0,0.25)}
 .hero-slider{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth}
 .hero-slider::-webkit-scrollbar{display:none}
@@ -319,11 +318,13 @@ a{color:inherit;text-decoration:none}
 .pay-status.show{display:block}
 
 .footer{text-align:center;border-top:1px solid var(--line);padding:34px 20px;color:var(--muted);font-size:12px;line-height:1.8;background:var(--panel)}
-.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;background:color-mix(in srgb,var(--panel) 94%,transparent);border-top:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-bottom));backdrop-filter:blur(16px);justify-content:space-around}
-.mobile-nav a{color:var(--muted);text-align:center;font-size:10px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px}
-.mobile-nav b{font-size:19px}
-.mobile-nav a.active{color:var(--red)}
-.mobile-nav a.nav-glow{color:#ffffff;background:var(--accent-grad);border-radius:12px;padding:6px 10px;box-shadow:var(--glow)}
+
+/* Modern Lower Navigation Dock */
+.mobile-nav{display:none;position:fixed;bottom:10px;left:12px;right:12px;z-index:100;background:color-mix(in srgb,var(--panel) 92%,#08090d 8%);border:1px solid var(--line);border-radius:20px;padding:8px 8px calc(8px + env(safe-area-inset-bottom));backdrop-filter:blur(20px);justify-content:space-around;align-items:center;box-shadow:0 12px 32px rgba(0,0,0,0.55)}
+.mobile-nav a{color:var(--muted);text-align:center;font-size:10px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 10px;border-radius:14px;transition:all .2s ease;min-width:54px}
+.mobile-nav b{font-size:18px;line-height:1.1}
+.mobile-nav a.active{color:#ffffff;background:var(--accent-grad);box-shadow:var(--glow)}
+.mobile-nav a.nav-glow{color:#ffffff;background:var(--accent-grad);border-radius:14px;padding:6px 10px;box-shadow:var(--glow)}
 
 @media(min-width:769px){
   .modal{align-items:center;padding:24px}
@@ -336,7 +337,7 @@ a{color:inherit;text-decoration:none}
   .sidebar.open{transform:translateX(0)}
   .main{margin-left:0}
   .menu-btn{display:grid}
-  .content{padding:0 16px 96px}
+  .content{padding:0 16px 102px}
   .mobile-nav{display:flex}
   .detail-layout{grid-template-columns:130px 1fr;gap:16px}
   .dialog{padding:20px 18px 28px;border-radius:24px 24px 0 0}
@@ -348,7 +349,7 @@ a{color:inherit;text-decoration:none}
 <body data-theme="emerald">
 
 <!-- =========================================================
-     1. NETFLIX-STYLE WELCOME & SIGN-IN SCREEN (SHOWN FIRST)
+     1. DARK MODERN SIGN-IN & WELCOME SCREEN (SHOWN FIRST)
      ========================================================= -->
 <div class="auth-landing" id="authLanding">
   <section class="auth-hero">
@@ -356,14 +357,18 @@ a{color:inherit;text-decoration:none}
     <div class="auth-hero-vignette"></div>
 
     <div class="auth-topbar">
-      <div class="nf-wordmark">XTREME WATCH</div>
-      <button type="button" class="nf-signin-btn" onclick="openSignInModal()">Sign In</button>
+      <div class="auth-brand">
+        <span class="auth-brand-badge">XT</span>
+        <span class="auth-wordmark">XTREME WATCH</span>
+      </div>
+      <button type="button" class="auth-signin-btn" onclick="openSignInModal()">Sign In</button>
     </div>
 
     <div class="auth-hero-center">
+      <span class="auth-pill-tag">Ugandan VJ Translations • HD</span>
       <h1>Unlimited movies, TV shows, and more</h1>
       <p class="auth-price-line">Starts at 1,000 UGX. Cancel anytime.</p>
-      <p class="auth-sub-line">Ready to watch? Enter your email or phone number to sign in or start your 1-hour free sample.</p>
+      <p class="auth-sub-line">Ready to watch? Enter your email or mobile number to sign in or start your 1-hour free sample.</p>
       <form class="nf-start-form" id="landingStartForm">
         <input class="nf-email-input" id="landingEmailInput" type="text" placeholder="Email address or phone number" required>
         <button type="submit" class="nf-cta-btn">Get Started &rsaquo;</button>
@@ -371,14 +376,14 @@ a{color:inherit;text-decoration:none}
     </div>
   </section>
 
-  <!-- Curved Red Arch Separator -->
+  <!-- Dark Curved Arch Separator -->
   <div class="nf-arch-divider"><div class="nf-arch-curve"></div></div>
 
   <div class="auth-body">
     <h2 class="auth-sec-title">Trending Now</h2>
     <div class="nf-trending-row" id="landingTrendingRow"></div>
 
-    <h2 class="auth-sec-title" style="margin-top:28px;">More Reasons to Join</h2>
+    <h2 class="auth-sec-title" style="margin-top:26px;">More Reasons to Join</h2>
     <div class="nf-reasons-grid">
       <div class="nf-reason-card">
         <h3>Enjoy on your TV & Phone</h3>
@@ -392,7 +397,7 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="nf-reason-card">
         <h3>Easy Mobile Money</h3>
-        <p>Instant activation using MTN MoMo or Airtel Money starting from just 1,000 UGX.</p>
+        <p>Instant activation using MTN MoMo or Airtel Money starting from 1,000 UGX.</p>
         <div class="nf-reason-icon">📱</div>
       </div>
       <div class="nf-reason-card">
@@ -403,25 +408,30 @@ a{color:inherit;text-decoration:none}
     </div>
   </div>
 
-  <div class="nf-sticky-footer">
-    <button type="button" onclick="openSignInModal()">Get Started</button>
-  </div>
+  <!-- Dark Lower Navigation Dock on Landing Screen -->
+  <nav class="mobile-nav" style="display:flex;" aria-label="Welcome navigation">
+    <a href="#authLanding" class="active" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;"><b>🏠</b>Home</a>
+    <a href="#landingTrendingRow" onclick="document.getElementById('landingTrendingRow').scrollIntoView({behavior:'smooth'});return false;"><b>🔥</b>Trending</a>
+    <a href="#" onclick="openSignInModal();return false;"><b>🔐</b>Sign In</a>
+    <a href="#" onclick="openSignInModal();return false;"><b>💎</b>1,000</a>
+    <a href="#" onclick="quickGuestEnter();return false;"><b>▶️</b>Enter</a>
+  </nav>
 </div>
 
 <!-- Sign-In Modal -->
 <div class="modal" id="signInModal">
   <div class="nf-auth-dialog">
-    <button class="close" data-close="signInModal" style="background:#1c1c26;color:#fff;border-color:#333">✕</button>
+    <button class="close" data-close="signInModal" style="background:#161a24;color:#fff;border-color:#282f40">✕</button>
     <h2>Sign In</h2>
-    <p style="color:#a3a3b5;font-size:13px;margin:0 0 10px;">Sign in to unlock the full HD Xtreme Movie Watch library.</p>
+    <p style="color:#9aa3b5;font-size:13px;margin:0 0 10px;">Sign in to unlock the full HD Xtreme Movie Watch library.</p>
     <form id="signInForm">
       <input class="nf-auth-field" id="authUserField" type="text" placeholder="Email or mobile number (e.g. 0740981386)" required>
       <input class="nf-auth-field" id="authPassField" type="password" placeholder="Password (min 4 characters)" minlength="4" required>
       <button type="submit" class="nf-auth-submit">Sign In & Watch</button>
     </form>
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:12px;color:#999;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:12px;color:#9aa3b5;">
       <label style="display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" checked> Remember me</label>
-      <a href="#" onclick="quickGuestEnter();return false;" style="color:#fff;text-decoration:underline;">Quick Enter</a>
+      <a href="#" onclick="quickGuestEnter();return false;" style="color:#ffb703;font-weight:700;">Quick Enter</a>
     </div>
   </div>
 </div>
@@ -668,11 +678,11 @@ a{color:inherit;text-decoration:none}
     <footer class="footer">XTREME MOVIE WATCH<br>Ugandan VJ Translations • This product uses the TMDB API but is not endorsed or certified by TMDB.<br>© <span id="yearNow"></span> Xtreme.</footer>
   </div>
 
-  <nav class="mobile-nav" id="mobileNav">
+  <nav class="mobile-nav" id="mobileNav" aria-label="Main navigation">
     <a href="#" data-nav="home" class="active" onclick="showHomeView();return false;"><b>🏠</b>Home</a>
     <a href="#catalog" onclick="showHomeView();go('catalog');return false;"><b>🎞️</b>Movies</a>
     <a href="#series" onclick="showHomeView();go('series');return false;"><b>📺</b>Series</a>
-    <a href="#" id="mobileSubKey" onclick="showSubscriptionView();return false;"><b>💎</b><span id="mobileSubLabel">Plans</span></a>
+    <a href="#" id="mobileSubKey" onclick="showSubscriptionView();return false;"><b>💎</b><span id="mobileSubLabel">1,000</span></a>
     <a href="#" id="mobileSettingsKey" onclick="showSettingsView();return false;"><b>⚙️</b>Settings</a>
   </nav>
 </div>
@@ -788,11 +798,9 @@ $("signInForm").addEventListener("submit",e=>{
 function renderLandingShowcase(){
   const items=allMovies.filter(m=>m.poster);
   if(!items.length)return;
-  // Populate tilted background collage with HD w780 posters
   const collageItems=[...items,...items].slice(0,24);
   $("authCollage").innerHTML=collageItems.map(m=>`<img src="${esc(m.poster)}" alt="" loading="lazy">`).join("");
 
-  // Populate Trending Now Top 10 with large outlined rank numbers
   $("landingTrendingRow").innerHTML=items.slice(0,10).map((m,idx)=>`
     <div class="nf-trend-card" onclick="openSignInModal()" title="${esc(m.title)}">
       <img class="nf-trend-poster" src="${esc(m.poster)}" alt="${esc(m.title)}" loading="lazy">
@@ -833,12 +841,17 @@ function getActivePlan(){
   try{const p=JSON.parse(localStorage.getItem("xtreme_active_plan")||"null");if(p&&p.expiresAt&&Date.now()>p.expiresAt){localStorage.removeItem("xtreme_active_plan");return null;}return p;}catch{return null}
 }
 
+function setMobileActive(key){
+  document.querySelectorAll("#mobileNav a").forEach(a=>a.classList.toggle("active",a.dataset.mnav===key));
+}
+
 function showHomeView(){
   $("mainAppView").classList.remove("hidden");
   $("subViewContainer").classList.remove("active");
   $("subscriptionViewSection").classList.remove("active");
   $("settingsViewSection").classList.remove("active");
   updateActiveNav("homeSidebarLink");
+  setMobileActive("home");
 }
 
 function showSubscriptionView(){
@@ -848,6 +861,7 @@ function showSubscriptionView(){
   $("settingsViewSection").classList.remove("active");
   window.scrollTo({top:0,behavior:"smooth"});
   updateActiveNav("subSidebarLink");
+  setMobileActive("plans");
 }
 
 function showSettingsView(){
@@ -857,6 +871,7 @@ function showSettingsView(){
   $("subscriptionViewSection").classList.remove("active");
   window.scrollTo({top:0,behavior:"smooth"});
   updateActiveNav("settingsSidebarLink");
+  setMobileActive("settings");
 }
 
 function updateActiveNav(activeId){
@@ -1167,7 +1182,6 @@ async function loadTMDB(){
   if(!TMDB_API_KEY||TMDB_API_KEY.includes("YOUR_"))return;
   const base="https://api.themoviedb.org/3";
   const key=encodeURIComponent(TMDB_API_KEY);
-  // HD Poster (w780) & Original Backdrop for sharp HD clarity
   const imgBase="https://image.tmdb.org/t/p/w780";
   const heroBase="https://image.tmdb.org/t/p/original";
 
@@ -1241,7 +1255,7 @@ async function loadTMDB(){
   }catch(e){}
 }
 
-function go(id){const el=$(id);if(el){el.scrollIntoView({behavior:"smooth",block:"start"});closeSidebar()}}
+function go(id){const el=$(id);if(el){el.scrollIntoView({behavior:"smooth",block:"start"});closeSidebar();setMobileActive(id==="series"?"series":"movies")}}
 function closeSidebar(){$("sidebar").classList.remove("open");$("sidebarOverlay").classList.remove("show")}
 
 let lastTapTime=0,lastTapCard=null;
@@ -1325,7 +1339,6 @@ try{const savedTheme=localStorage.getItem("xtreme_theme");if(savedTheme)applyThe
 const existingPlan=getActivePlan();
 if(existingPlan?.planName && existingPlan?.amount)applyPlanUI(existingPlan.planName,existingPlan.amount,false);
 
-// Check if user is already signed in
 const existingUser=getSignedUser();
 if(existingUser) unlockApp(existingUser);
 
