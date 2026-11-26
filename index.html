@@ -1,1703 +1,747 @@
-```html
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#070709">
-  <title>Xtreme Movie Watch — Ugandan VJ Cinema</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-          },
-          colors: {
-            obsidian: '#070709',
-            surface: '#0e0e13',
-            card: '#14141b',
-            crimson: {
-              DEFAULT: '#e50914',
-              glow: 'rgba(229, 9, 20, 0.38)',
-              soft: 'rgba(229, 9, 20, 0.14)'
-            }
-          }
-        }
-      }
-    };
-  </script>
-  <style>
-    :root {
-      --bg: #070709;
-      --surface: #0e0e13;
-      --card: #14141b;
-      --red: #e50914;
-      --red-glow: rgba(229, 9, 20, 0.42);
-      --border: rgba(255, 255, 255, 0.08);
-    }
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#070709">
+<title>Xtreme Movie Watch - Premium</title>
+<style>
+:root{
+  --bg:#070709;--panel:#111116;--card:#181820;--red:#e50914;--text:#ffffff;--muted:#8c8c9a;--line:#272733;
+  --glow:0 0 22px rgba(229,9,20,0.45);
+  --accent-grad:linear-gradient(135deg,#ff0055,#ff4b2b,#7a00ff);
+  --hero-grad:radial-gradient(ellipse at 85% 35%,rgba(229,9,20,0.28),transparent 50%),linear-gradient(115deg,#180c10,#0e0e14 60%,#160914);
+  --sub-grad:linear-gradient(135deg,#160812,#1c102b,#0b1322);
+  --sub-title-grad:linear-gradient(90deg,#ff5f6d,#ffc371,#c471ed)
+}
 
-    * {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
+/* Theme 1: Crimson Cinema (Default) */
+[data-theme="crimson"]{
+  --bg:#070709;--panel:#111116;--card:#181820;--red:#e50914;--text:#ffffff;--muted:#9090a2;--line:#272733;
+  --glow:0 0 22px rgba(229,9,20,0.45);
+  --accent-grad:linear-gradient(135deg,#ff0055,#ff4b2b,#7a00ff);
+  --hero-grad:radial-gradient(ellipse at 85% 35%,rgba(229,9,20,0.28),transparent 50%),linear-gradient(115deg,#180c10,#0e0e14 60%,#160914);
+  --sub-grad:linear-gradient(135deg,#180812,#1d102c,#0c1424);
+  --sub-title-grad:linear-gradient(90deg,#ff4b55,#ff9966,#d53369)
+}
 
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 84px;
-      background: var(--bg);
-      color: #f4f4f6;
-      font-family: 'Inter', system-ui, sans-serif;
-    }
+/* Theme 2: Electric Neon */
+[data-theme="neon"]{
+  --bg:#050811;--panel:#0c1222;--card:#121b33;--red:#00e5ff;--text:#f4f8ff;--muted:#8fa4c8;--line:#213154;
+  --glow:0 0 24px rgba(0,229,255,0.45);
+  --accent-grad:linear-gradient(135deg,#00f5a0,#00d9f5,#7b2cbf);
+  --hero-grad:radial-gradient(ellipse at 85% 35%,rgba(0,229,255,0.25),transparent 50%),linear-gradient(115deg,#09192e,#070c1a 60%,#150b2e);
+  --sub-grad:linear-gradient(135deg,#071b2e,#120d2e,#062429);
+  --sub-title-grad:linear-gradient(90deg,#00f5a0,#00d9f5,#b5179e)
+}
 
-    body {
-      margin: 0;
-      background: var(--bg);
-      overflow-x: hidden;
-      overscroll-behavior-y: contain;
-    }
+/* Theme 3: Royal Gold */
+[data-theme="gold"]{
+  --bg:#090806;--panel:#14110b;--card:#1d1911;--red:#f5b700;--text:#fffdf7;--muted:#b5aa8e;--line:#332b1c;
+  --glow:0 0 24px rgba(245,183,0,0.42);
+  --accent-grad:linear-gradient(135deg,#ffd000,#ff7b00,#d90429);
+  --hero-grad:radial-gradient(ellipse at 85% 35%,rgba(245,183,0,0.24),transparent 50%),linear-gradient(115deg,#1f1708,#0e0c08 60%,#211108);
+  --sub-grad:linear-gradient(135deg,#1f1506,#241016,#121008);
+  --sub-title-grad:linear-gradient(90deg,#ffe169,#ff9f1c,#ff5400)
+}
 
-    /* Custom Scrollbars */
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #070709;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #272732;
-      border-radius: 999px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #e50914;
-    }
+/* Theme 4: Emerald Pulse */
+[data-theme="emerald"]{
+  --bg:#050a08;--panel:#0b1511;--card:#102019;--red:#00e676;--text:#f2fff8;--muted:#88b09b;--line:#1d382c;
+  --glow:0 0 24px rgba(0,230,118,0.42);
+  --accent-grad:linear-gradient(135deg,#00e676,#1de9b6,#00b0ff);
+  --hero-grad:radial-gradient(ellipse at 85% 35%,rgba(0,230,118,0.24),transparent 50%),linear-gradient(115deg,#072116,#060d0a 60%,#071b26);
+  --sub-grad:linear-gradient(135deg,#062117,#071c29,#112614);
+  --sub-title-grad:linear-gradient(90deg,#69f0ae,#18ffff,#64ffda)
+}
 
-    /* Hide scrollbar for swipeable strips */
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
+/* Theme 5: Sunset Velvet */
+[data-theme="sunset"]{
+  --bg:#0b060d;--panel:#160c1a;--card:#211226;--red:#ff2a85;--text:#fff5fb;--muted:#b996ad;--line:#381e40;
+  --glow:0 0 24px rgba(255,42,133,0.45);
+  --accent-grad:linear-gradient(135deg,#ff2a85,#ff8e53,#8e2de2);
+  --hero-grad:radial-gradient(ellipse at 85% 35%,rgba(255,42,133,0.26),transparent 50%),linear-gradient(115deg,#240b1d,#0e0812 60%,#1c0b2e);
+  --sub-grad:linear-gradient(135deg,#240a1d,#1e0b30,#261214);
+  --sub-title-grad:linear-gradient(90deg,#ff5e9e,#ffb36b,#c77dff)
+}
 
-    /* Glassmorphism Utilities */
-    .glass {
-      background: rgba(11, 11, 16, 0.78);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      border-color: rgba(255, 255, 255, 0.08);
-    }
+/* Theme 6: Crisp Light Mode */
+[data-theme="light"]{
+  --bg:#f4f5f9;--panel:#ffffff;--card:#ffffff;--red:#d90429;--text:#12131a;--muted:#5c6070;--line:#dfe2ec;
+  --glow:0 8px 24px rgba(217,4,41,0.18);
+  --accent-grad:linear-gradient(135deg,#ff0055,#ff6a00,#7a00ff);
+  --hero-grad:radial-gradient(ellipse at 85% 35%,rgba(255,0,85,0.14),transparent 55%),linear-gradient(115deg,#ffffff,#f2f4fa 62%,#ffeaf0);
+  --sub-grad:linear-gradient(135deg,#fff0f5,#f3efff,#eef6ff);
+  --sub-title-grad:linear-gradient(90deg,#d90429,#ff4d00,#6a00f4)
+}
 
-    .glass-strong {
-      background: rgba(14, 14, 20, 0.92);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-    }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s ease,color .35s ease}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
 
-    /* Crimson Ambient Glow */
-    .crimson-glow {
-      box-shadow: 0 0 24px rgba(229, 9, 20, 0.35);
-    }
+/* Sidebar */
+.sidebar{position:fixed;inset:0 auto 0 0;width:260px;background:var(--panel);border-right:1px solid var(--line);padding:24px 16px;z-index:45;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(0.16,1,0.3,1),background-color .35s ease,border-color .35s ease}
+.brand{display:flex;align-items:center;gap:12px;padding:0 8px 26px}
+.brand-mark{width:46px;height:46px;border:2px solid var(--red);border-radius:12px;display:grid;place-items:center;font-weight:900;font-size:18px;color:#fff;box-shadow:var(--glow);background:var(--accent-grad)}
+.brand-name{font-size:16px;font-weight:900;letter-spacing:0.5px}
+.brand-name small{display:block;color:var(--red);font-size:10px;letter-spacing:2.4px;margin-top:4px}
+.side-label{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:2px;padding:16px 12px 8px;text-transform:uppercase;opacity:0.8}
+.side-link{display:flex;align-items:center;gap:14px;padding:13px 14px;border:1px solid transparent;border-radius:12px;color:var(--muted);font-size:14px;font-weight:600;margin:3px 0;transition:all .2s ease}
+.side-link .ico{width:24px;text-align:center;font-size:18px;transition:transform .2s}
+.side-link:hover{background:rgba(128,128,150,0.08);color:var(--text)}
+.side-link.active{background:var(--accent-grad);color:#ffffff;box-shadow:var(--glow);font-weight:700}
+.side-link.active .ico{transform:scale(1.1)}
+.side-bottom{margin-top:auto;border-top:1px solid var(--line);padding-top:16px}
+.side-note{font-size:11px;color:var(--muted);line-height:1.6;padding:12px;background:rgba(128,128,150,0.06);border-radius:10px;text-align:center}
 
-    /* Horizontal Carousel Drag & Snap */
-    .carousel-track {
-      display: flex;
-      gap: 14px;
-      overflow-x: auto;
-      scroll-snap-type: x proximity;
-      scroll-behavior: smooth;
-      cursor: grab;
-      user-select: none;
-      padding: 6px 4px 14px;
-    }
-    .carousel-track.dragging {
-      scroll-snap-type: none;
-      scroll-behavior: auto;
-      cursor: grabbing;
-    }
-    .carousel-track > .movie-card {
-      flex: 0 0 156px;
-      scroll-snap-align: start;
-    }
-    @media (min-width: 640px) {
-      .carousel-track > .movie-card {
-        flex: 0 0 182px;
-      }
-    }
-    @media (min-width: 1024px) {
-      .carousel-track > .movie-card {
-        flex: 0 0 202px;
-      }
-    }
+/* Overlay & Main Layout */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px);z-index:40}
+.overlay.show{display:block}
+.main{margin-left:260px;min-height:100vh;transition:margin-left .3s cubic-bezier(0.16,1,0.3,1)}
 
-    /* Edge Fade Masks on Desktop Carousels */
-    .carousel-wrapper {
-      position: relative;
-    }
-    @media (min-width: 768px) {
-      .carousel-wrapper::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 14px;
-        width: 48px;
-        background: linear-gradient(to left, #070709, transparent);
-        pointer-events: none;
-        z-index: 5;
-      }
-    }
+/* Topbar */
+.topbar{height:72px;position:sticky;top:0;z-index:25;background:color-mix(in srgb,var(--panel) 86%,transparent);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 28px;transition:background-color .35s ease,border-color .35s ease}
+.menu-btn{display:none;background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:10px;width:44px;height:44px;font-size:22px;place-items:center}
+.search-wrap{position:relative;flex:1;max-width:620px}
+.search-wrap::before{content:"🔍";position:absolute;left:15px;top:12px;font-size:16px;opacity:0.65}
+.search-wrap input{width:100%;height:44px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:0 16px 0 46px;color:var(--text);outline:none;font-size:14px;transition:all .25s}
+.search-wrap input:focus{border-color:var(--red);box-shadow:var(--glow)}
+.top-right{margin-left:auto;display:flex;gap:10px;align-items:center}
+.top-btn{background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:10px 15px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px;transition:all .3s ease;position:relative;overflow:hidden;white-space:nowrap}
+.top-btn:hover{border-color:var(--red);transform:translateY(-1px)}
+.top-btn.sub-activated{background:var(--accent-grad);color:#ffffff;border-color:transparent;box-shadow:0 0 28px rgba(255,0,85,0.65),0 0 12px var(--red);transform:scale(1.04);animation:navCelebration .7s cubic-bezier(0.22,1,0.36,1)}
+@keyframes navCelebration{
+  0%{transform:scale(0.92);filter:brightness(1.5)}
+  50%{transform:scale(1.09)}
+  100%{transform:scale(1.04);filter:brightness(1)}
+}
+.user-badge{width:40px;height:40px;border-radius:50%;background:var(--accent-grad);color:#ffffff;border:2px solid rgba(255,255,255,0.35);display:grid;place-items:center;font-weight:900;font-size:13px;box-shadow:var(--glow);transition:all .3s ease}
+.user-badge.vip{transform:scale(1.1);box-shadow:0 0 24px rgba(255,195,113,0.85)}
 
-    /* Double Tap Heart Burst Animation */
-    @keyframes heartBurst {
-      0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.2) rotate(-12deg);
-      }
-      35% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.25) rotate(6deg);
-      }
-      70% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(0.95) rotate(0deg);
-      }
-      100% {
-        opacity: 0;
-        transform: translate(-50%, -65%) scale(1.35);
-      }
-    }
-    .heart-burst-icon {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      pointer-events: none;
-      z-index: 20;
-      filter: drop-shadow(0 0 18px rgba(229, 9, 20, 0.85));
-      animation: heartBurst 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
+/* Theme Switcher Bar */
+.theme-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px 20px;margin:20px 0 12px;transition:background-color .35s ease,border-color .35s ease}
+.theme-bar-title{font-size:13px;font-weight:800;letter-spacing:0.5px;display:flex;align-items:center;gap:8px}
+.theme-bar-title small{color:var(--muted);font-weight:500}
+.theme-swatches{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.theme-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:12px;font-weight:700;transition:all .22s ease}
+.theme-pill:hover{transform:translateY(-2px);border-color:var(--red)}
+.theme-pill.active{background:var(--accent-grad);color:#ffffff;border-color:transparent;box-shadow:var(--glow)}
+.swatch-dot{width:13px;height:13px;border-radius:50%;border:1px solid rgba(255,255,255,0.5);flex-shrink:0}
 
-    /* Gesture Seek Ripple Animation */
-    @keyframes seekRipple {
-      0% {
-        opacity: 0;
-        transform: scale(0.7);
-      }
-      30% {
-        opacity: 1;
-        transform: scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: scale(1.15);
-      }
-    }
-    .seek-indicator {
-      animation: seekRipple 0.65s ease-out forwards;
-    }
+/* Content & Hero */
+.content{max-width:1560px;margin:auto;padding:0 28px 80px}
+.hero-wrapper{position:relative;margin:16px 0 32px;border-radius:24px;overflow:hidden;background:var(--hero-grad);border:1px solid var(--line);box-shadow:0 16px 40px rgba(0,0,0,0.22)}
+.hero-slider{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth}
+.hero-slider::-webkit-scrollbar{display:none}
+.hero-slide{min-width:100%;scroll-snap-align:center;position:relative;min-height:390px;display:flex;align-items:flex-end;padding:44px;background-size:cover;background-position:center}
+.hero-slide::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,color-mix(in srgb,var(--bg) 92%,transparent) 8%,color-mix(in srgb,var(--bg) 62%,transparent) 52%,transparent 100%),linear-gradient(0deg,color-mix(in srgb,var(--bg) 95%,transparent) 0%,transparent 65%)}
+.hero-content{position:relative;z-index:2;max-width:650px}
+.eyebrow{color:#ffffff;background:var(--accent-grad);font-size:10px;font-weight:900;letter-spacing:2.6px;text-transform:uppercase;padding:6px 14px;border-radius:999px;display:inline-block;margin-bottom:14px;box-shadow:var(--glow)}
+.hero-slide h1,.hero-slide h2{font-size:clamp(30px,4.6vw,52px);margin:0 0 14px;font-weight:900;line-height:1.1}
+.hero-slide p{color:var(--muted);line-height:1.6;font-size:15px;margin:0 0 24px}
+[data-theme]:not([data-theme="light"]) .hero-slide p{color:#e2e2ee}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{background:var(--accent-grad);color:#ffffff;border:none;border-radius:12px;padding:12px 22px;font-size:13px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all .22s ease;box-shadow:var(--glow)}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn.secondary{background:var(--panel);color:var(--text);border:1px solid var(--line);box-shadow:none}
+.btn.secondary:hover{border-color:var(--red)}
+.slider-indicators{position:absolute;bottom:22px;right:24px;z-index:3;display:flex;gap:8px;background:color-mix(in srgb,var(--panel) 80%,transparent);padding:8px 12px;border-radius:20px;border:1px solid var(--line);backdrop-filter:blur(10px)}
+.indicator{width:11px;height:11px;border-radius:50%;background:var(--muted);opacity:0.45;border:none;padding:0;transition:all .25s}
+.indicator.active{background:var(--red);opacity:1;transform:scale(1.25)}
 
-    /* Modal Sheet Transitions */
-    .modal-backdrop {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.28s ease;
-    }
-    .modal-backdrop.open {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .modal-sheet {
-      transform: translateY(28px) scale(0.98);
-      opacity: 0;
-      transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
-    }
-    .modal-backdrop.open .modal-sheet {
-      transform: translateY(0) scale(1);
-      opacity: 1;
-    }
-    .modal-sheet.dragging-sheet {
-      transition: none !important;
-    }
+/* Brilliant Gradient Subscription Section */
+.subscription-section{margin:36px 0;padding:38px 32px;background:var(--sub-grad);border-radius:28px;border:1px solid color-mix(in srgb,var(--red) 45%,var(--line));position:relative;overflow:hidden;box-shadow:0 18px 45px rgba(0,0,0,0.25)}
+.subscription-section::after{content:"";position:absolute;inset:-60px -60px auto auto;width:240px;height:240px;border-radius:50%;background:var(--accent-grad);filter:blur(75px);opacity:0.28;pointer-events:none}
+.sub-header{text-align:center;max-width:740px;margin:0 auto 32px;position:relative;z-index:1}
+.sub-header h2{font-size:clamp(28px,3.8vw,42px);margin:0 0 10px;font-weight:900;background:var(--sub-title-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.sub-header p{color:var(--muted);font-size:15px;line-height:1.55;margin:0}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:20px;position:relative;z-index:1}
+.price-card{background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:22px;padding:26px 22px;text-align:center;transition:all .3s cubic-bezier(0.16,1,0.3,1);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.price-card:hover{transform:translateY(-8px);border-color:var(--red);box-shadow:var(--glow)}
+.price-card.selected-plan{border-color:var(--red);box-shadow:0 0 0 2px var(--red),var(--glow)}
+.price-card.featured{border-color:color-mix(in srgb,var(--red) 70%,transparent)}
+.badge-popular{position:absolute;top:15px;right:-32px;background:var(--accent-grad);color:#ffffff;font-size:10px;font-weight:900;padding:4px 36px;transform:rotate(42deg);text-transform:uppercase;letter-spacing:0.8px}
+.plan-duration{font-size:12px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:10px;background:var(--sub-title-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.plan-price{font-size:34px;font-weight:900;margin-bottom:6px;color:var(--text)}
+.plan-price small{font-size:13px;color:var(--muted);display:block;font-weight:600;margin-top:2px}
+.plan-features{list-style:none;padding:0;margin:18px 0 24px;text-align:left;flex-grow:1}
+.plan-features li{font-size:13px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.plan-features li::before{content:"✦";color:var(--red);font-weight:900}
+.plan-btn{width:100%;padding:13px 16px;border-radius:12px;border:none;background:var(--accent-grad);color:#ffffff;font-weight:800;font-size:13px;letter-spacing:0.4px;box-shadow:var(--glow);transition:transform .2s ease,filter .2s ease}
+.plan-btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
 
-    /* Sidebar Drawer Transitions */
-    .sidebar-drawer {
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-    }
+/* Quick Chips & Filters */
+.quick{display:flex;gap:10px;overflow-x:auto;padding-bottom:10px;margin:24px 0;scrollbar-width:none}
+.quick::-webkit-scrollbar{display:none}
+.chip{background:var(--card);border:1px solid var(--line);color:var(--muted);border-radius:24px;padding:9px 18px;font-size:13px;font-weight:700;white-space:nowrap;transition:all .2s}
+.chip:hover,.chip.active{border-color:transparent;background:var(--accent-grad);color:#ffffff;box-shadow:var(--glow)}
+.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:16px 20px;background:var(--panel);border:1px solid var(--line);border-radius:20px;margin:24px 0}
+.toolbar select{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:11px 15px;font-size:13px;font-weight:600;min-width:140px;outline:none}
+.vj-chips{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}
 
-    /* Poster Zoom Micro-interaction */
-    .movie-card:hover .poster-img {
-      transform: scale(1.06);
-    }
-    .poster-img {
-      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-    }
+/* Sections & Carousels */
+.section{margin:38px 0}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.section-head h2{font-size:21px;margin:0;font-weight:900;display:flex;align-items:center;gap:12px}
+.section-head h2::before{content:"";display:inline-block;width:6px;height:24px;background:var(--accent-grad);border-radius:3px;box-shadow:var(--glow)}
+.section-head span{font-size:12px;color:var(--muted);font-weight:600}
+.grid-car{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:8px 2px 14px;cursor:grab}
+.grid-car:active{cursor:grabbing}
+.grid-car::-webkit-scrollbar{display:none}
+.movie{min-width:185px;width:185px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;position:relative;transition:all .28s cubic-bezier(0.16,1,0.3,1);scroll-snap-align:start;display:flex;flex-direction:column;box-shadow:0 6px 18px rgba(0,0,0,0.12)}
+.movie:hover{transform:translateY(-6px);border-color:var(--red);box-shadow:var(--glow)}
+.poster-wrap{position:relative;background:var(--panel);aspect-ratio:2/3;overflow:hidden}
+.poster{display:block;width:100%;height:100%;object-fit:cover;transition:transform .45s ease;user-select:none;-webkit-user-drag:none}
+.movie:hover .poster{transform:scale(1.06)}
+.poster-placeholder{width:100%;height:100%;aspect-ratio:2/3;display:grid;place-items:center;text-align:center;padding:14px;background:var(--hero-grad);color:var(--text);font-size:12px;font-weight:900;letter-spacing:1.5px}
+.poster-tag{position:absolute;left:10px;top:10px;background:var(--accent-grad);color:#ffffff;padding:4px 8px;border-radius:6px;font-size:10px;font-weight:900;letter-spacing:0.6px}
+.heart{position:absolute;right:10px;top:10px;border:none;border-radius:50%;width:36px;height:36px;background:rgba(10,10,14,0.72);backdrop-filter:blur(6px);color:#ffffff;font-size:18px;display:grid;place-items:center;transition:transform .2s ease}
+.heart:hover{transform:scale(1.12)}
+.heart.saved{color:#ff4b55;text-shadow:0 0 12px rgba(255,75,85,0.9)}
+.heart-burst{position:absolute;inset:0;display:grid;place-items:center;font-size:52px;color:#ff2a55;text-shadow:0 0 24px rgba(255,42,85,0.9);pointer-events:none;animation:heartPop .65s ease forwards}
+@keyframes heartPop{
+  0%{opacity:0;transform:scale(0.3)}
+  35%{opacity:1;transform:scale(1.25)}
+  100%{opacity:0;transform:scale(1.6) translateY(-10px)}
+}
+.movie-info{padding:13px;display:flex;flex-direction:column;flex-grow:1}
+.movie-title{font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:6px}
+.meta{font-size:11px;color:var(--muted);display:flex;justify-content:space-between;gap:6px;margin-bottom:12px;font-weight:600}
+.movie-actions{display:flex;gap:8px;margin-top:auto}
+.movie-actions button{flex:1;padding:9px 6px;font-size:11px;border-radius:9px;font-weight:800}
+.notice{font-size:12px;color:var(--muted);margin:10px 0 0}
 
-    /* Toast Animation */
-    @keyframes toastIn {
-      from {
-        opacity: 0;
-        transform: translate(-50%, 18px) scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: translate(-50%, 0) scale(1);
-      }
-    }
-    .toast-item {
-      animation: toastIn 0.28s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-  </style>
+/* Modals / Bottom Sheets */
+.modal{display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.78);backdrop-filter:blur(10px);align-items:flex-end;justify-content:center;opacity:0;transition:opacity .3s ease}
+.modal.show{display:flex;opacity:1}
+.dialog{width:100%;max-width:860px;max-height:90vh;background:var(--panel);color:var(--text);border-top-left-radius:30px;border-top-right-radius:30px;border:1px solid var(--line);border-bottom:none;overflow-y:auto;position:relative;padding:28px 30px 34px;box-shadow:0 -12px 45px rgba(0,0,0,0.5);transform:translateY(100%);transition:transform .35s cubic-bezier(0.16,1,0.3,1)}
+.modal.show .dialog{transform:translateY(0)}
+.drag-handle{width:50px;height:6px;background:var(--line);border-radius:999px;margin:0 auto 20px;cursor:grab;touch-action:none}
+.close{position:absolute;right:22px;top:22px;background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:50%;width:38px;height:38px;font-size:18px;display:grid;place-items:center}
+.detail-layout{display:grid;grid-template-columns:210px 1fr;gap:24px}
+.detail-layout img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:16px}
+.detail-layout h2{margin:0 36px 10px 0;font-size:26px}
+.detail-layout p{color:var(--muted);line-height:1.6;font-size:14px}
+.modal-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.player-frame{width:100%;aspect-ratio:16/9;border:none;border-radius:16px;background:#000}
+.player-message{font-size:12px;color:var(--muted);text-align:center;margin-top:14px}
+
+/* Mobile Nav & Footer */
+.footer{text-align:center;border-top:1px solid var(--line);padding:34px 20px;color:var(--muted);font-size:12px;line-height:1.8;background:var(--panel)}
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:35;background:color-mix(in srgb,var(--panel) 94%,transparent);border-top:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-bottom));backdrop-filter:blur(16px);justify-content:space-around}
+.mobile-nav a{color:var(--muted);text-align:center;font-size:10px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px}
+.mobile-nav b{font-size:19px}
+.mobile-nav a.active{color:var(--red)}
+
+@media(max-width:768px){
+  .sidebar{transform:translateX(-105%)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0}
+  .menu-btn{display:grid}
+  .top-right .top-btn{display:none}
+  .content{padding:0 16px 96px}
+  .mobile-nav{display:flex}
+  .detail-layout{grid-template-columns:130px 1fr;gap:16px}
+  .dialog{padding:20px 18px 28px;border-radius:24px 24px 0 0}
+  .hero-slide{padding:26px;min-height:340px}
+  .subscription-section{padding:26px 18px}
+}
+</style>
 </head>
-<body class="bg-obsidian text-zinc-100 antialiased selection:bg-crimson selection:text-white">
+<body data-theme="crimson">
 
-  <!-- Left Edge Swipe Trigger Zone for Mobile Sidebar -->
-  <div id="edgeSwipeZone" class="fixed inset-y-0 left-0 w-5 z-40 md:hidden" aria-hidden="true"></div>
+<aside class="sidebar" id="sidebar">
+  <a class="brand" href="#home" data-nav="home"><span class="brand-mark">XT</span><span class="brand-name">XTREME WATCH<small>UGANDAN VJ TRANSLATIONS</small></span></a>
+  <div class="side-label">Discover</div>
+  <a class="side-link active" href="#home" data-nav="home"><span class="ico">🏠</span>Home</a>
+  <a class="side-link" href="#subscription" data-nav="subscription"><span class="ico">💎</span>Subscription Plans</a>
+  <a class="side-link" href="#catalog" data-nav="catalog"><span class="ico">🎞️</span>Latest Movies</a>
+  <a class="side-link" href="#series" data-nav="series"><span class="ico">📺</span>Series</a>
+  <a class="side-link" href="#categories" data-nav="categories"><span class="ico">🔍</span>Browse & Filter</a>
+  <div class="side-label">Library</div>
+  <a class="side-link" href="#mylist" data-nav="mylist"><span class="ico">❤️</span>My List <span id="sideWatchCount" style="margin-left:auto;padding:2px 8px;border-radius:10px;font-size:12px">0</span></a>
+  <a class="side-link" href="#vjcollections" data-nav="vjcollections"><span class="ico">🎙️</span>VJ Collections</a>
+  <div class="side-label">Collections</div>
+  <a class="side-link" href="#kids" data-nav="kids"><span class="ico">🧸</span>Kids Zone</a>
+  <a class="side-link" href="#indian" data-nav="indian"><span class="ico">✨</span>Indian Movies</a>
+  <a class="side-link" href="#asian" data-nav="asian"><span class="ico">⛩️</span>Asian Series</a>
+  <div class="side-bottom">
+    <a class="side-link" href="#support" data-nav="support"><span class="ico">🎧</span>Support</a>
+    <div class="side-note">Your entertainment • Your VJ • Your choice<br>© <span id="sideYear"></span> Xtreme</div>
+  </div>
+</aside>
 
-  <!-- Sidebar Overlay -->
-  <div id="sidebarOverlay" class="fixed inset-0 bg-black/75 backdrop-blur-xs z-40 hidden opacity-0 transition-opacity duration-300"></div>
+<div class="overlay" id="sidebarOverlay"></div>
 
-  <!-- Navigation Sidebar Drawer -->
-  <aside id="sidebar" class="sidebar-drawer fixed inset-y-0 left-0 w-64 bg-[#0a0a0f] border-r border-white/[0.07] z-50 flex flex-col -translate-x-full md:translate-x-0">
-    <!-- Brand Logo -->
-    <a href="#home" data-nav="home" class="flex items-center gap-3 px-5 pt-6 pb-5 border-b border-white/[0.06] group">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-crimson to-red-900 flex items-center justify-center font-black text-white text-base tracking-tighter shadow-lg shadow-crimson/30 group-hover:scale-105 transition-transform">
-        XT
-      </div>
-      <div>
-        <div class="font-extrabold text-sm tracking-wider text-white">XTREME WATCH</div>
-        <div class="text-[10px] font-semibold tracking-[0.18em] text-crimson uppercase mt-0.5">Ugandan VJ Cinema</div>
-      </div>
-    </a>
+<div class="main">
+  <header class="topbar">
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+    <div class="search-wrap"><input id="searchInput" type="search" placeholder="Search movies, year, genre or VJ..."></div>
+    <div class="top-right">
+      <button class="top-btn" id="myListTop">❤️ My List <span id="watchCount">0</span></button>
+      <div class="user-badge" title="Xtreme Member" id="userBadge">XT</div>
+    </div>
+  </header>
 
-    <!-- Navigation Links -->
-    <div class="flex-1 overflow-y-auto px-3 py-4 space-y-6 no-scrollbar">
-      <div>
-        <div class="px-3 mb-2 text-[10px] font-bold tracking-[0.2em] text-zinc-500 uppercase">Discover</div>
-        <nav class="space-y-1">
-          <a href="#home" data-nav="home" class="side-link active flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-zinc-300 hover:text-white hover:bg-white/[0.05] transition-all">
-            <svg class="w-4 h-4 text-crimson" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-            <span>Home Spotlight</span>
-          </a>
-          <a href="#catalog" data-nav="catalog" class="side-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-zinc-400 hover:text-white hover:bg-white/[0.05] transition-all">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"/></svg>
-            <span>Latest Catalog</span>
-          </a>
-          <a href="#series" data-nav="series" class="side-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-zinc-400 hover:text-white hover:bg-white/[0.05] transition-all">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
-            <span>Series Collection</span>
-          </a>
-          <a href="#categories" data-nav="categories" class="side-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-zinc-400 hover:text-white hover:bg-white/[0.05] transition-all">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
-            <span>Filters & Genres</span>
-          </a>
-        </nav>
-      </div>
-
-      <div>
-        <div class="px-3 mb-2 text-[10px] font-bold tracking-[0.2em] text-zinc-500 uppercase">Your Library</div>
-        <nav class="space-y-1">
-          <a href="#mylist" data-nav="mylist" class="side-link flex items-center justify-between px-3 py-2.5 rounded-xl text-xs font-medium text-zinc-400 hover:text-white hover:bg-white/[0.05] transition-all">
-            <span class="flex items-center gap-3">
-              <svg class="w-4 h-4 text-crimson" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"/></svg>
-              <span>My List</span>
-            </span>
-            <span id="sideWatchCount" class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-crimson/20 text-crimson border border-crimson/30">0</span>
-          </a>
-          <a href="#vjcollections" data-nav="vjcollections" class="side-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-zinc-400 hover:text-white hover:bg-white/[0.05] transition-all">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
-            <span>VJ Translators</span>
-          </a>
-        </nav>
-      </div>
-
-      <div>
-        <div class="px-3 mb-2 text-[10px] font-bold tracking-[0.2em] text-zinc-500 uppercase">Curated Zones</div>
-        <nav class="space-y-1">
-          <a href="#kids" data-nav="kids" class="side-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-zinc-400 hover:text-white hover:bg-white/[0.05] transition-all">
-            <span class="w-4 text-center text-sm">✨</span>
-            <span>Kids Zone</span>
-          </a>
-          <a href="#indian" data-nav="indian" class="side-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-zinc-400 hover:text-white hover:bg-white/[0.05] transition-all">
-            <span class="w-4 text-center text-sm">🎬</span>
-            <span>Indian Movies</span>
-          </a>
-          <a href="#asian" data-nav="asian" class="side-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-medium text-zinc-400 hover:text-white hover:bg-white/[0.05] transition-all">
-            <span class="w-4 text-center text-sm">🐉</span>
-            <span>Asian Series</span>
-          </a>
-        </nav>
+  <div class="content">
+    <!-- 6-Theme Switcher (Including Light Mode) -->
+    <div class="theme-bar" id="themeBar">
+      <div class="theme-bar-title">🎨 Theme Colors <small>• 6 looks including Light Mode</small></div>
+      <div class="theme-swatches" id="themeSwatches">
+        <button class="theme-pill active" data-theme-choice="crimson"><span class="swatch-dot" style="background:#e50914"></span>Crimson Dark</button>
+        <button class="theme-pill" data-theme-choice="neon"><span class="swatch-dot" style="background:#00e5ff"></span>Neon Cyber</button>
+        <button class="theme-pill" data-theme-choice="gold"><span class="swatch-dot" style="background:#f5b700"></span>Royal Gold</button>
+        <button class="theme-pill" data-theme-choice="emerald"><span class="swatch-dot" style="background:#00e676"></span>Emerald Pulse</button>
+        <button class="theme-pill" data-theme-choice="sunset"><span class="swatch-dot" style="background:#ff2a85"></span>Sunset Velvet</button>
+        <button class="theme-pill" data-theme-choice="light"><span class="swatch-dot" style="background:#ffffff;border-color:#888"></span>Light Mode</button>
       </div>
     </div>
 
-    <!-- Sidebar Footer -->
-    <div class="p-4 border-t border-white/[0.06] bg-black/20">
-      <a href="#support" data-nav="support" class="flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs text-zinc-400 hover:text-white hover:bg-white/[0.05] transition-colors mb-2">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        <span>Contact & Support</span>
-      </a>
-      <p class="px-3 text-[10px] text-zinc-500 leading-relaxed">
-        Tip: Double-tap any poster to save to My List.
-        <span class="block mt-1 text-zinc-600">© <span id="sideYear"></span> Xtreme Watch</span>
-      </p>
+    <!-- Hero Spotlight Slider -->
+    <section class="hero-wrapper" id="home">
+      <div class="hero-slider" id="heroSlider">
+        <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200')">
+          <div class="hero-content">
+            <span class="eyebrow">Featured Spotlight • VJ Junior</span>
+            <h1>Action Blockbuster Returns</h1>
+            <p>Experience top action hits with energetic Ugandan VJ translations, crisp audio, and instant access.</p>
+            <div class="hero-actions">
+              <button class="btn" id="exploreBtn">Explore Movies</button>
+              <button class="btn secondary" id="browseSeriesBtn">Browse Series</button>
+              <button class="btn secondary" onclick="go('subscription')">View Plans</button>
+            </div>
+          </div>
+        </div>
+        <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1200')">
+          <div class="hero-content">
+            <span class="eyebrow">Trending Series • Ice P</span>
+            <h2>Series & Drama Marathon</h2>
+            <p>Binge full seasons, Asian dramas, and translated favorites with smooth playback across devices.</p>
+            <div class="hero-actions">
+              <button class="btn" onclick="go('series')">Watch Series</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slider-indicators" id="sliderIndicators"></div>
+    </section>
+
+    <!-- Brilliant Gradient Subscription Section -->
+    <section class="subscription-section" id="subscription">
+      <div class="sub-header">
+        <h2>Subscription Plans</h2>
+        <p>Tap any plan amount below to activate and light up your navigation key with a smooth gradient glow.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="price-card" data-plan-card="1000">
+          <span class="plan-duration">1 Day Pass</span>
+          <div class="plan-price">1,000 UGX<small>24 Hours Access</small></div>
+          <ul class="plan-features">
+            <li>1-day full catalog streaming</li>
+            <li>All translated VJ movies</li>
+            <li>Instant pass activation</li>
+          </ul>
+          <button class="plan-btn" data-select-plan="1 Day Pass" data-amount="1000">Pay 1,000 UGX</button>
+        </div>
+
+        <div class="price-card" data-plan-card="1500">
+          <span class="plan-duration">2 Days Pass</span>
+          <div class="plan-price">1,500 UGX<small>48 Hours Access</small></div>
+          <ul class="plan-features">
+            <li>2-day full catalog streaming</li>
+            <li>Movies & series access</li>
+            <li>Great weekend value</li>
+          </ul>
+          <button class="plan-btn" data-select-plan="2 Days Pass" data-amount="1500">Pay 1,500 UGX</button>
+        </div>
+
+        <div class="price-card featured" data-plan-card="4000">
+          <span class="badge-popular">Popular</span>
+          <span class="plan-duration">1 Week Pass</span>
+          <div class="plan-price">4,000 UGX<small>7 Days Access</small></div>
+          <ul class="plan-features">
+            <li>7 days unlimited browsing</li>
+            <li>All VJs & collections</li>
+            <li>Best weekly rate at 4,000 UGX</li>
+          </ul>
+          <button class="plan-btn" data-select-plan="1 Week Pass" data-amount="4000">Pay 4,000 UGX</button>
+        </div>
+
+        <div class="price-card" data-plan-card="20000">
+          <span class="plan-duration">1 Month Pass</span>
+          <div class="plan-price">20,000 UGX<small>30 Days Access</small></div>
+          <ul class="plan-features">
+            <li>Full 30-day monthly pass</li>
+            <li>Priority access to new drops</li>
+            <li>VIP member badge highlight</li>
+          </ul>
+          <button class="plan-btn" data-select-plan="1 Month Pass" data-amount="20000">Pay 20,000 UGX</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="quick" id="quickGenres">
+      <button class="chip active" data-filter="all">All</button>
+      <button class="chip" data-filter="Action">Action</button>
+      <button class="chip" data-filter="Comedy">Comedy</button>
+      <button class="chip" data-filter="Drama">Drama</button>
+      <button class="chip" data-filter="Romance">Romance</button>
+      <button class="chip" data-filter="Horror">Horror</button>
+      <button class="chip" data-filter="Thriller">Thriller</button>
+      <button class="chip" data-filter="Sci-Fi">Sci-Fi</button>
     </div>
-  </aside>
 
-  <!-- Main Content Shell -->
-  <div class="md:pl-64 min-h-screen flex flex-col">
+    <div class="toolbar" id="categories">
+      <select id="typeFilter"><option value="all">All content</option><option value="movie">Movies</option><option value="series">Series</option></select>
+      <select id="genreFilter"><option value="all">All genres</option><option>Action</option><option>Comedy</option><option>Drama</option><option>Romance</option><option>Horror</option><option>Thriller</option><option>Sci-Fi</option><option>Animation</option></select>
+      <select id="vjFilter"><option value="all">All VJs</option></select>
+      <select id="sortFilter"><option value="newest">Newest first</option><option value="az">Title A–Z</option><option value="year">Year: newest</option></select>
+      <button class="btn secondary" id="clearFilters">Clear filters</button>
+    </div>
 
-    <!-- Sticky Glassmorphic Header -->
-    <header class="sticky top-0 z-30 glass border-b border-white/[0.07] px-3 sm:px-6 h-16 flex items-center gap-3">
-      <button id="menuBtn" aria-label="Open menu" class="md:hidden w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.08] flex items-center justify-center text-zinc-200 hover:bg-white/[0.1] active:scale-95 transition">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h10"/></svg>
-      </button>
+    <section class="section" id="catalog">
+      <div class="section-head"><h2 id="catalogTitle">Latest Movies</h2><span id="resultCount">Loading library...</span></div>
+      <div class="grid-car" id="movieGrid"><div class="empty" style="padding:36px;color:var(--muted);width:100%;text-align:center">Loading your movie library...</div></div>
+      <p class="notice" id="loadNotice">Connect your database or add movie records to populate this library.</p>
+      <div style="text-align:center;margin-top:16px"><button class="btn secondary" id="loadMore" hidden>Load more</button></div>
+    </section>
 
-      <!-- Search Bar -->
-      <div class="relative flex-1 max-w-xl">
-        <svg class="w-4 h-4 text-zinc-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-        <input id="searchInput" type="search" placeholder="Search titles, VJ Junior, Ice P, year, genre..." class="w-full h-10 pl-10 pr-9 rounded-xl bg-white/[0.05] border border-white/[0.09] text-xs sm:text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-crimson focus:bg-white/[0.08] focus:ring-2 focus:ring-crimson/25 transition-all">
-        <button id="clearSearchBtn" aria-label="Clear search" class="hidden absolute right-2.5 top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-zinc-700/80 text-zinc-200 text-xs items-center justify-center hover:bg-zinc-600">×</button>
-      </div>
-
-      <!-- Right Header Actions -->
-      <div class="flex items-center gap-2.5 ml-auto">
-        <button id="myListTop" class="hidden sm:flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-xs font-semibold text-zinc-200 transition active:scale-95">
-          <span class="text-crimson">♥</span>
-          <span>My List</span>
-          <span id="watchCount" class="px-1.5 py-0.5 text-[10px] rounded-md bg-crimson text-white font-bold">0</span>
-        </button>
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-crimson/30 to-zinc-900 border border-crimson/50 flex items-center justify-center text-xs font-black text-white shadow-inner">
-          XT
-        </div>
-      </div>
-    </header>
-
-    <!-- Main Container -->
-    <main class="flex-1 max-w-[1540px] w-full mx-auto px-3 sm:px-6 pb-28 md:pb-14">
-
-      <!-- Swipeable Featured Hero Spotlight -->
-      <section id="home" class="pt-4 sm:pt-6">
-        <div id="heroSpotlight" class="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/[0.1] bg-surface min-h-[290px] sm:min-h-[360px] flex items-end select-none touch-pan-y group cursor-grab active:cursor-grabbing">
-          <!-- Dynamic Backdrop Layer -->
-          <div id="heroBackdrop" class="absolute inset-0 bg-cover bg-center transition-all duration-700 scale-105 opacity-45"></div>
-          <div class="absolute inset-0 bg-gradient-to-t from-[#070709] via-[#070709]/75 to-transparent"></div>
-          <div class="absolute inset-0 bg-gradient-to-r from-[#070709] via-[#070709]/80 to-transparent"></div>
-          <div class="absolute -right-12 -top-12 w-72 h-72 rounded-full bg-crimson/20 blur-3xl pointer-events-none"></div>
-
-          <!-- Hero Content -->
-          <div class="relative z-10 w-full p-5 sm:p-9 lg:p-11 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
-            <div class="max-w-2xl">
-              <div class="flex flex-wrap items-center gap-2 mb-3">
-                <span class="px-2.5 py-1 rounded-md bg-crimson text-white text-[10px] font-extrabold tracking-widest uppercase shadow-md shadow-crimson/40">Featured Spotlight</span>
-                <span id="heroVjBadge" class="px-2.5 py-1 rounded-md bg-white/10 backdrop-blur-md border border-white/15 text-zinc-200 text-[11px] font-semibold">VJ Junior</span>
-                <span id="heroMetaBadge" class="text-xs text-zinc-400 font-medium">2025 • Action</span>
-              </div>
-              <h1 id="heroTitle" class="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-[1.12] mb-2.5">
-                Your next translated blockbuster starts here.
-              </h1>
-              <p id="heroDesc" class="text-xs sm:text-sm text-zinc-300/90 line-clamp-2 sm:line-clamp-3 max-w-xl leading-relaxed mb-5">
-                Stream Ugandan VJ-translated action movies, drama series, and classic archives. Swipe this banner or browse curated rows below.
-              </p>
-              <div class="flex flex-wrap items-center gap-3">
-                <button id="heroPlayBtn" class="px-5 py-2.5 rounded-xl bg-crimson hover:bg-red-600 text-white text-xs sm:text-sm font-bold flex items-center gap-2 shadow-lg shadow-crimson/35 active:scale-95 transition">
-                  <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M6.3 2.841A1.5 1.5 0 004 4.11V15.89a1.5 1.5 0 002.3 1.269l9.344-5.89a1.5 1.5 0 000-2.538L6.3 2.84z"/></svg>
-                  <span>Watch Now</span>
-                </button>
-                <button id="heroSaveBtn" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 backdrop-blur-md border border-white/15 text-white text-xs sm:text-sm font-semibold flex items-center gap-2 active:scale-95 transition">
-                  <span id="heroSaveIcon">＋</span>
-                  <span id="heroSaveLabel">My List</span>
-                </button>
-                <button id="heroDetailsBtn" class="px-4 py-2.5 rounded-xl bg-black/40 hover:bg-black/60 border border-white/10 text-zinc-300 text-xs sm:text-sm font-medium active:scale-95 transition">
-                  Details
-                </button>
-              </div>
-            </div>
-
-            <!-- Spotlight Slide Indicators & Desktop Arrows -->
-            <div class="flex items-center justify-between sm:flex-col sm:items-end gap-3">
-              <div class="hidden sm:flex items-center gap-2">
-                <button id="heroPrev" aria-label="Previous spotlight" class="w-9 h-9 rounded-full bg-white/10 hover:bg-crimson border border-white/15 flex items-center justify-center text-white transition active:scale-90">‹</button>
-                <button id="heroNext" aria-label="Next spotlight" class="w-9 h-9 rounded-full bg-white/10 hover:bg-crimson border border-white/15 flex items-center justify-center text-white transition active:scale-90">›</button>
-              </div>
-              <div id="heroDots" class="flex items-center gap-1.5"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Horizontal Swipeable Genre Pills -->
-      <div class="mt-5">
-        <div id="quickGenres" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
-          <button class="chip active shrink-0 px-4 py-2 rounded-full text-xs font-semibold bg-crimson text-white shadow-md shadow-crimson/30 transition" data-filter="all">All Genres</button>
-          <button class="chip shrink-0 px-4 py-2 rounded-full text-xs font-semibold bg-surface border border-white/[0.08] text-zinc-300 hover:border-crimson/50 hover:text-white transition" data-filter="Action">Action</button>
-          <button class="chip shrink-0 px-4 py-2 rounded-full text-xs font-semibold bg-surface border border-white/[0.08] text-zinc-300 hover:border-crimson/50 hover:text-white transition" data-filter="Comedy">Comedy</button>
-          <button class="chip shrink-0 px-4 py-2 rounded-full text-xs font-semibold bg-surface border border-white/[0.08] text-zinc-300 hover:border-crimson/50 hover:text-white transition" data-filter="Drama">Drama</button>
-          <button class="chip shrink-0 px-4 py-2 rounded-full text-xs font-semibold bg-surface border border-white/[0.08] text-zinc-300 hover:border-crimson/50 hover:text-white transition" data-filter="Romance">Romance</button>
-          <button class="chip shrink-0 px-4 py-2 rounded-full text-xs font-semibold bg-surface border border-white/[0.08] text-zinc-300 hover:border-crimson/50 hover:text-white transition" data-filter="Horror">Horror</button>
-          <button class="chip shrink-0 px-4 py-2 rounded-full text-xs font-semibold bg-surface border border-white/[0.08] text-zinc-300 hover:border-crimson/50 hover:text-white transition" data-filter="Thriller">Thriller</button>
-          <button class="chip shrink-0 px-4 py-2 rounded-full text-xs font-semibold bg-surface border border-white/[0.08] text-zinc-300 hover:border-crimson/50 hover:text-white transition" data-filter="Sci-Fi">Sci-Fi</button>
-          <button class="chip shrink-0 px-4 py-2 rounded-full text-xs font-semibold bg-surface border border-white/[0.08] text-zinc-300 hover:border-crimson/50 hover:text-white transition" data-filter="Animation">Animation</button>
-        </div>
-      </div>
-
-      <!-- Compact Glass Filter Bar -->
-      <div id="categories" class="mt-3 p-3 rounded-2xl bg-surface/90 border border-white/[0.07] flex flex-wrap items-center gap-2.5">
-        <select id="typeFilter" aria-label="Filter by content type" class="flex-1 sm:flex-none min-w-[125px] h-9 px-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-xs text-zinc-200 focus:outline-none focus:border-crimson">
-          <option value="all" class="bg-zinc-900">All Content</option>
-          <option value="movie" class="bg-zinc-900">Movies Only</option>
-          <option value="series" class="bg-zinc-900">Series Only</option>
-        </select>
-
-        <select id="genreFilter" aria-label="Filter by genre" class="flex-1 sm:flex-none min-w-[130px] h-9 px-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-xs text-zinc-200 focus:outline-none focus:border-crimson">
-          <option value="all" class="bg-zinc-900">All Genres</option>
-          <option class="bg-zinc-900">Action</option>
-          <option class="bg-zinc-900">Comedy</option>
-          <option class="bg-zinc-900">Drama</option>
-          <option class="bg-zinc-900">Romance</option>
-          <option class="bg-zinc-900">Horror</option>
-          <option class="bg-zinc-900">Thriller</option>
-          <option class="bg-zinc-900">Sci-Fi</option>
-          <option class="bg-zinc-900">Animation</option>
-        </select>
-
-        <select id="vjFilter" aria-label="Filter by VJ translator" class="flex-1 sm:flex-none min-w-[130px] h-9 px-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-xs text-zinc-200 focus:outline-none focus:border-crimson">
-          <option value="all" class="bg-zinc-900">All VJs</option>
-        </select>
-
-        <select id="sortFilter" aria-label="Sort catalog" class="flex-1 sm:flex-none min-w-[140px] h-9 px-3 rounded-xl bg-white/[0.04] border border-white/[0.08] text-xs text-zinc-200 focus:outline-none focus:border-crimson">
-          <option value="newest" class="bg-zinc-900">Newest Added</option>
-          <option value="year" class="bg-zinc-900">Release Year (New)</option>
-          <option value="az" class="bg-zinc-900">Title A–Z</option>
-        </select>
-
-        <button id="clearFilters" class="h-9 px-3.5 rounded-xl bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.08] text-xs font-medium text-zinc-300 transition active:scale-95 ml-auto">
-          Reset
-        </button>
-      </div>
-
-      <!-- Main Filtered Catalog Grid -->
-      <section id="catalog" class="mt-7">
-        <div class="flex items-center justify-between gap-3 mb-4">
-          <div class="flex items-center gap-2.5">
-            <span class="w-1 h-5 rounded-full bg-crimson shadow-sm shadow-crimson"></span>
-            <h2 id="catalogTitle" class="text-base sm:text-lg font-extrabold tracking-tight text-white">Latest Movies & Releases</h2>
-          </div>
-          <span id="resultCount" class="text-xs font-medium text-zinc-400">Loading library...</span>
-        </div>
-
-        <div id="movieGrid" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-2.5 sm:gap-4">
-          <div class="col-span-full py-12 text-center text-xs text-zinc-500 border border-dashed border-white/10 rounded-2xl">Loading your movie library...</div>
-        </div>
-
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-3 mt-4">
-          <p id="loadNotice" class="text-[11px] text-zinc-500">Connect Supabase or add movie records to populate this catalog.</p>
-          <button id="loadMore" hidden class="px-5 py-2.5 rounded-xl bg-surface hover:bg-white/[0.08] border border-white/[0.1] text-xs font-semibold text-white transition active:scale-95">
-            Load More Titles
-          </button>
-        </div>
-      </section>
-
-      <!-- Curated Gesture-Draggable Horizontal Carousels -->
-      <section id="series" class="mt-10">
-        <div class="flex items-center justify-between mb-3">
-          <div class="flex items-center gap-2.5">
-            <span class="w-1 h-5 rounded-full bg-crimson"></span>
-            <h2 class="text-base sm:text-lg font-extrabold text-white">Series Collection</h2>
-          </div>
-          <div class="flex items-center gap-1.5">
-            <span class="text-[11px] text-zinc-500 hidden sm:inline mr-2">Drag or swipe</span>
-            <button data-scroll-left="seriesGrid" class="w-7 h-7 rounded-lg bg-surface border border-white/10 text-zinc-300 hover:text-white hover:border-crimson/50 flex items-center justify-center text-sm">‹</button>
-            <button data-scroll-right="seriesGrid" class="w-7 h-7 rounded-lg bg-surface border border-white/10 text-zinc-300 hover:text-white hover:border-crimson/50 flex items-center justify-center text-sm">›</button>
-          </div>
-        </div>
-        <div class="carousel-wrapper">
-          <div id="seriesGrid" class="carousel-track no-scrollbar"></div>
-        </div>
-      </section>
-
-      <section id="kids" class="mt-8">
-        <div class="flex items-center justify-between mb-3">
-          <div class="flex items-center gap-2.5">
-            <span class="w-1 h-5 rounded-full bg-amber-500"></span>
-            <h2 class="text-base sm:text-lg font-extrabold text-white">Kids & Family Zone</h2>
-          </div>
-          <div class="flex items-center gap-1.5">
-            <button data-scroll-left="kidsGrid" class="w-7 h-7 rounded-lg bg-surface border border-white/10 text-zinc-300 hover:text-white flex items-center justify-center text-sm">‹</button>
-            <button data-scroll-right="kidsGrid" class="w-7 h-7 rounded-lg bg-surface border border-white/10 text-zinc-300 hover:text-white flex items-center justify-center text-sm">›</button>
-          </div>
-        </div>
-        <div class="carousel-wrapper">
-          <div id="kidsGrid" class="carousel-track no-scrollbar"></div>
-        </div>
-      </section>
-
-      <section id="indian" class="mt-8">
-        <div class="flex items-center justify-between mb-3">
-          <div class="flex items-center gap-2.5">
-            <span class="w-1 h-5 rounded-full bg-orange-500"></span>
-            <h2 class="text-base sm:text-lg font-extrabold text-white">Indian Movies</h2>
-          </div>
-          <div class="flex items-center gap-1.5">
-            <button data-scroll-left="indianGrid" class="w-7 h-7 rounded-lg bg-surface border border-white/10 text-zinc-300 hover:text-white flex items-center justify-center text-sm">‹</button>
-            <button data-scroll-right="indianGrid" class="w-7 h-7 rounded-lg bg-surface border border-white/10 text-zinc-300 hover:text-white flex items-center justify-center text-sm">›</button>
-          </div>
-        </div>
-        <div class="carousel-wrapper">
-          <div id="indianGrid" class="carousel-track no-scrollbar"></div>
-        </div>
-      </section>
-
-      <section id="asian" class="mt-8">
-        <div class="flex items-center justify-between mb-3">
-          <div class="flex items-center gap-2.5">
-            <span class="w-1 h-5 rounded-full bg-rose-500"></span>
-            <h2 class="text-base sm:text-lg font-extrabold text-white">Asian & K-Drama Series</h2>
-          </div>
-          <div class="flex items-center gap-1.5">
-            <button data-scroll-left="asianGrid" class="w-7 h-7 rounded-lg bg-surface border border-white/10 text-zinc-300 hover:text-white flex items-center justify-center text-sm">‹</button>
-            <button data-scroll-right="asianGrid" class="w-7 h-7 rounded-lg bg-surface border border-white/10 text-zinc-300 hover:text-white flex items-center justify-center text-sm">›</button>
-          </div>
-        </div>
-        <div class="carousel-wrapper">
-          <div id="asianGrid" class="carousel-track no-scrollbar"></div>
-        </div>
-      </section>
-
-      <!-- My List Carousel -->
-      <section id="mylist" class="mt-8">
-        <div class="flex items-center justify-between mb-3">
-          <div class="flex items-center gap-2.5">
-            <span class="w-1 h-5 rounded-full bg-crimson"></span>
-            <h2 class="text-base sm:text-lg font-extrabold text-white">My Saved List</h2>
-          </div>
-          <span class="text-xs text-zinc-400">Double-tap any poster to toggle</span>
-        </div>
-        <div class="carousel-wrapper">
-          <div id="watchlistGrid" class="carousel-track no-scrollbar"></div>
-        </div>
-      </section>
-
-      <!-- VJ Translator Collections -->
-      <section id="vjcollections" class="mt-9">
-        <div class="flex items-center justify-between mb-3.5">
-          <div class="flex items-center gap-2.5">
-            <span class="w-1 h-5 rounded-full bg-crimson"></span>
-            <h2 class="text-base sm:text-lg font-extrabold text-white">Browse by VJ Translator</h2>
-          </div>
-          <span class="text-xs text-zinc-500">Tap a VJ to filter</span>
-        </div>
-        <div id="vjChips" class="flex flex-wrap gap-2"></div>
-      </section>
-
-      <!-- Support Card -->
-      <section id="support" class="mt-10">
-        <div class="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-surface to-[#131018] border border-white/[0.08] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <div>
-            <div class="text-xs font-extrabold tracking-wider text-crimson uppercase mb-1">Xtreme Movie Watch</div>
-            <h3 class="text-base font-bold text-white">Need help or want to request a VJ translation?</h3>
-            <p class="text-xs text-zinc-400 mt-1">Reach out to our team for support, feedback, or catalog requests.</p>
-          </div>
-          <a href="mailto:support@xtrememovies.watch" class="px-4 py-2.5 rounded-xl bg-crimson hover:bg-red-600 text-white text-xs font-bold shadow-md shadow-crimson/25 transition active:scale-95 shrink-0">
-            Email Support
-          </a>
-        </div>
-      </section>
-
-      <!-- Footer -->
-      <footer class="mt-10 pt-6 border-t border-white/[0.06] text-center text-[11px] text-zinc-500 leading-relaxed">
-        <div class="font-bold text-zinc-400">XTREME MOVIE WATCH</div>
-        <div>Ugandan VJ Translations • Metadata powered by TMDB where configured.</div>
-        <div>Only stream or share media you own or are authorized to distribute. © <span id="yearNow"></span> Xtreme.</div>
-      </footer>
-    </main>
+    <section class="section" id="series"><div class="section-head"><h2>Series Collection</h2><span>Series and seasons</span></div><div class="grid-car" id="seriesGrid"></div></section>
+    <section class="section" id="kids"><div class="section-head"><h2>Kids Zone</h2><span>Family-friendly collection</span></div><div class="grid-car" id="kidsGrid"></div></section>
+    <section class="section" id="indian"><div class="section-head"><h2>Indian Movies</h2><span>Browse Indian cinema</span></div><div class="grid-car" id="indianGrid"></div></section>
+    <section class="section" id="asian"><div class="section-head"><h2>Asian Series</h2><span>Korean and other Asian series</span></div><div class="grid-car" id="asianGrid"></div></section>
+    <section class="section" id="mylist"><div class="section-head"><h2>My List</h2><span>Your saved titles</span></div><div class="grid-car" id="watchlistGrid"></div></section>
+    <section class="section" id="vjcollections"><div class="section-head"><h2>VJ Collections</h2><span>Choose your favourite translator</span></div><div class="vj-chips" id="vjChips"></div></section>
+    <section class="section" id="support"><div class="section-head"><h2>Contact & Support</h2><span>Need help?</span></div><div class="toolbar"><div style="flex:1;min-width:190px"><b>XTREME MOVIE WATCH</b><p class="notice">For support, questions or feedback, contact the app team.</p></div><a class="btn" href="mailto:support@xtrememovies.watch">Email Support</a></div></section>
   </div>
 
-  <!-- Mobile Bottom Glass Navigation Bar -->
-  <nav class="md:hidden fixed bottom-0 inset-x-0 z-30 glass-strong border-t border-white/[0.08] flex items-center justify-around px-2 pt-2 pb-[calc(0.5rem+env(safe-area-inset-bottom))]">
-    <a href="#home" data-nav="home" class="mobile-link active flex flex-col items-center gap-0.5 text-[10px] font-semibold text-crimson min-w-[52px]">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-      <span>Home</span>
-    </a>
-    <a href="#catalog" data-nav="catalog" class="mobile-link flex flex-col items-center gap-0.5 text-[10px] font-medium text-zinc-400 min-w-[52px]">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z"/></svg>
-      <span>Movies</span>
-    </a>
-    <a href="#series" data-nav="series" class="mobile-link flex flex-col items-center gap-0.5 text-[10px] font-medium text-zinc-400 min-w-[52px]">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
-      <span>Series</span>
-    </a>
-    <a href="#mylist" data-nav="mylist" class="mobile-link relative flex flex-col items-center gap-0.5 text-[10px] font-medium text-zinc-400 min-w-[52px]">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
-      <span>My List</span>
-    </a>
-    <a href="#categories" data-nav="categories" class="mobile-link flex flex-col items-center gap-0.5 text-[10px] font-medium text-zinc-400 min-w-[52px]">
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/></svg>
-      <span>Filter</span>
-    </a>
-  </nav>
+  <footer class="footer">XTREME MOVIE WATCH<br>Ugandan VJ Translations • Movie information provided by TMDB where configured.<br>© <span id="yearNow"></span> Xtreme.</footer>
+</div>
 
-  <!-- Swipe-Down Dismissible Details Bottom Sheet / Modal -->
-  <div id="detailModal" class="modal-backdrop fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div id="detailSheet" class="modal-sheet w-full sm:max-w-2xl max-h-[90vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl bg-[#111118] border border-white/[0.12] shadow-2xl relative">
-      <!-- Drag Handle Pill for Swipe-Down Gesture -->
-      <div data-sheet-handle="detailModal" class="sticky top-0 z-20 pt-3 pb-2 bg-[#111118]/90 backdrop-blur-md flex justify-center cursor-grab active:cursor-grabbing">
-        <div class="w-11 h-1.5 rounded-full bg-zinc-600/80"></div>
-      </div>
-      <button data-close="detailModal" aria-label="Close details" class="absolute right-4 top-3.5 z-30 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-zinc-200 flex items-center justify-center text-lg transition">×</button>
-      <div id="detailContent" class="px-5 pb-7 pt-1"></div>
+<nav class="mobile-nav" id="mobileNav">
+  <a href="#home" data-nav="home" class="active"><b>🏠</b>Home</a>
+  <a href="#catalog" data-nav="catalog"><b>🎞️</b>Movies</a>
+  <a href="#series" data-nav="series"><b>📺</b>Series</a>
+  <a href="#mylist" data-nav="mylist"><b>❤️</b>My List</a>
+  <a href="#subscription" data-nav="subscription" id="mobileSubKey"><b>💎</b><span id="mobileSubLabel">Plans</span></a>
+</nav>
+
+<div class="modal" id="detailModal"><div class="dialog" id="detailDialog"><div class="drag-handle" id="detailDrag"></div><button class="close" data-close="detailModal">✕</button><div id="detailContent"></div></div></div>
+<div class="modal" id="playerModal"><div class="dialog" id="playerDialog" style="max-width:1000px"><div class="drag-handle" id="playerDrag"></div><button class="close" data-close="playerModal">✕</button><h3 id="playerTitle" style="margin-top:0">Now Playing</h3><div id="playerStage"></div><p class="player-message" id="playerMessage"></p></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL="YOUR_SUPABASE_URL",SUPABASE_ANON_KEY="YOUR_SUPABASE_ANON_KEY",TABLE_NAME="movies";
+const TMDB_API_KEY="YOUR_TMDB_API_KEY";
+const VJS=["VJ Junior","Ice P","Emmy","Jingo","Mark","Aaron","Isma Pro","Eddy","VJ ashim","Ulio","Muba","Ivo","Soul"];
+const demoMovies=[
+  {id:"demo1",title:"Sample Action Movie",year:2025,genre:"Action",vj:"VJ Junior",type:"movie",description:"Sample title. Replace it with a real record from Supabase."},
+  {id:"demo2",title:"Sample Comedy Movie",year:2024,genre:"Comedy",vj:"VJ Emmy",type:"movie",description:"A sample entry showing your movie cards."},
+  {id:"demo3",title:"Sample Drama Series",year:2025,genre:"Drama",vj:"Ice P",type:"series",description:"A sample series entry."}
+];
+
+let allMovies=[],visibleLimit=24,activeGenre="all",supabaseClient=null;
+const $=id=>document.getElementById(id),clean=v=>String(v??"").trim();
+function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function normalize(m){
+  const t=String(m.type||m.content_type||"movie").toLowerCase();
+  return{
+    id:String(m.id??m.movie_id??(m.title||m.name||"title")+"-"+(m.year||"")),
+    title:clean(m.title||m.name||"Untitled"),
+    year:Number(m.year||m.release_year||(m.release_date||"").slice(0,4))||"",
+    genre:clean(Array.isArray(m.genres)?m.genres.join(", "):(m.genre||m.genres||"")),
+    vj:clean(m.vj||m.video_jockey||m.translator||""),
+    type:t.includes("series")||t==="tv"?"series":"movie",
+    category:clean(m.category||m.collection||""),
+    poster:clean(m.poster||m.poster_url||m.image_url||m.thumbnail||""),
+    description:clean(m.description||m.overview||""),
+    video_url:clean(m.video_url||m.stream_url||m.youtube_url||m.url||""),
+    language:clean(m.language||"")
+  };
+}
+
+function savedIds(){try{return JSON.parse(localStorage.getItem("xtreme_watchlist")||"[]").map(String)}catch{return[]}}
+function saveIds(ids){
+  try{localStorage.setItem("xtreme_watchlist",JSON.stringify(ids))}catch(e){}
+  $("watchCount").textContent=ids.length;
+  $("sideWatchCount").textContent=ids.length;
+}
+function isSaved(id){return savedIds().includes(String(id))}
+
+// Theme Switcher (6 Themes including Light Mode)
+function applyTheme(themeName){
+  const valid=["crimson","neon","gold","emerald","sunset","light"];
+  const chosen=valid.includes(themeName)?themeName:"crimson";
+  document.body.setAttribute("data-theme",chosen);
+  try{localStorage.setItem("xtreme_theme",chosen)}catch(e){}
+  document.querySelectorAll("[data-theme-choice]").forEach(btn=>{
+    btn.classList.toggle("active",btn.dataset.themeChoice===chosen);
+  });
+}
+
+// Subscription Plan Selection & Navigation Key Animation
+function selectPlan(planName,amount){
+  const formatted=Number(amount).toLocaleString()+" UGX";
+  try{localStorage.setItem("xtreme_active_plan",JSON.stringify({planName,amount}))}catch(e){}
+
+  document.querySelectorAll("[data-plan-card]").forEach(card=>{
+    card.classList.toggle("selected-plan",String(card.dataset.planCard)===String(amount));
+  });
+
+  const topBtn=$("myListTop");
+  if(topBtn){
+    topBtn.classList.remove("sub-activated");
+    void topBtn.offsetWidth;
+    topBtn.classList.add("sub-activated");
+    topBtn.innerHTML=`⚡ ${esc(planName)} • ${formatted}`;
+  }
+
+  const mobileSubKey=$("mobileSubKey");
+  const mobileSubLabel=$("mobileSubLabel");
+  if(mobileSubKey && mobileSubLabel){
+    mobileSubKey.classList.remove("sub-activated");
+    void mobileSubKey.offsetWidth;
+    mobileSubKey.classList.add("sub-activated");
+    mobileSubLabel.textContent=Number(amount).toLocaleString();
+  }
+
+  const badge=$("userBadge");
+  if(badge){
+    badge.classList.add("vip");
+    badge.textContent="VIP";
+  }
+}
+
+// Hero Slider Indicators
+function initHeroSlider(){
+  const slider=$("heroSlider"),indicators=$("sliderIndicators");
+  if(!slider||!indicators)return;
+  const slides=slider.querySelectorAll(".hero-slide");
+  indicators.innerHTML=Array.from(slides).map((_,i)=>`<button class="indicator ${i===0?"active":""}" aria-label="Slide ${i+1}" data-slide="${i}"></button>`).join("");
+  indicators.addEventListener("click",e=>{
+    const b=e.target.closest("[data-slide]");
+    if(!b)return;
+    const idx=Number(b.dataset.slide);
+    slider.scrollTo({left:idx*slider.clientWidth,behavior:"smooth"});
+  });
+  slider.addEventListener("scroll",()=>{
+    const idx=Math.round(slider.scrollLeft/Math.max(1,slider.clientWidth));
+    indicators.querySelectorAll(".indicator").forEach((dot,i)=>dot.classList.toggle("active",i===idx));
+  },{passive:true});
+}
+
+function poster(m){
+  return m.poster
+    ?`<img class="poster" src="${esc(m.poster)}" alt="${esc(m.title)} poster" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.hidden=false"><div class="poster-placeholder" hidden>XTREME<br>MOVIE WATCH</div>`
+    :`<div class="poster-placeholder">XTREME<br>MOVIE WATCH</div>`;
+}
+
+function card(m){
+  const saved=isSaved(m.id);
+  return `<article class="movie" data-card-id="${esc(m.id)}">
+    <div class="poster-wrap">
+      ${poster(m)}
+      <span class="poster-tag">${m.type==="series"?"SERIES":"MOVIE"}</span>
+      <button class="heart ${saved?"saved":""}" title="Favorite" data-save="${esc(m.id)}">${saved?"❤️":"🤍"}</button>
     </div>
-  </div>
-
-  <!-- Swipe-Down Dismissible Gesture Video Player Modal -->
-  <div id="playerModal" class="modal-backdrop fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div id="playerSheet" class="modal-sheet w-full sm:max-w-4xl max-h-[94vh] overflow-y-auto rounded-t-3xl sm:rounded-3xl bg-[#0c0c12] border border-white/[0.12] shadow-2xl relative">
-      <!-- Drag Handle Pill -->
-      <div data-sheet-handle="playerModal" class="pt-3 pb-1 flex justify-center cursor-grab active:cursor-grabbing">
-        <div class="w-11 h-1.5 rounded-full bg-zinc-600/80"></div>
-      </div>
-      <div class="px-4 sm:px-6 pb-6 pt-2">
-        <div class="flex items-center justify-between gap-3 mb-3">
-          <div class="min-w-0">
-            <span class="text-[10px] font-bold tracking-widest text-crimson uppercase">Now Streaming</span>
-            <h3 id="playerTitle" class="text-base sm:text-lg font-extrabold text-white truncate">Now Playing</h3>
-          </div>
-          <button data-close="playerModal" aria-label="Close player" class="w-9 h-9 rounded-full bg-white/10 hover:bg-crimson text-white flex items-center justify-center text-lg shrink-0 transition">×</button>
-        </div>
-
-        <!-- Video Stage with Double-Tap Seek & Swipe Brightness/Volume Overlay -->
-        <div id="playerStage" class="relative rounded-2xl overflow-hidden bg-black border border-white/10 aspect-video select-none"></div>
-
-        <div class="mt-3 flex flex-wrap items-center justify-between gap-2 text-[11px] text-zinc-400">
-          <p id="playerMessage" class="leading-relaxed"></p>
-          <span class="text-zinc-500 hidden sm:inline">Gestures: Double-tap left/right ±10s • Drag down pill to close</span>
-        </div>
+    <div class="movie-info">
+      <div class="movie-title" title="${esc(m.title)}">${esc(m.title)}</div>
+      <div class="meta"><span>${esc(m.year||"Year N/A")}</span><span>${esc(m.vj||"VJ N/A")}</span></div>
+      <div class="movie-actions">
+        <button class="btn" data-details="${esc(m.id)}">Details</button>
+        <button class="btn secondary" data-play="${esc(m.id)}">Play</button>
       </div>
     </div>
-  </div>
+  </article>`;
+}
 
-  <!-- Floating Toast Container -->
-  <div id="toastContainer" class="fixed bottom-20 md:bottom-6 left-1/2 -translate-x-1/2 z-[70] pointer-events-none flex flex-col items-center gap-2"></div>
+function triggerHeartBurst(cardEl){
+  if(!cardEl)return;
+  const wrap=cardEl.querySelector(".poster-wrap");
+  if(!wrap)return;
+  const burst=document.createElement("div");
+  burst.className="heart-burst";
+  burst.textContent="❤️";
+  wrap.appendChild(burst);
+  setTimeout(()=>burst.remove(),700);
+}
 
-  <!-- Supabase Client -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script>
-    /* ==========================================================================
-       CONFIGURATION & DATA CONSTANTS (Preserved from Original)
-       ========================================================================== */
-    const SUPABASE_URL = "YOUR_SUPABASE_URL";
-    const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
-    const TABLE_NAME = "movies";
-    const TMDB_API_KEY = "YOUR_TMDB_API_KEY";
+function grid(id,items,limit=items.length){
+  $(id).innerHTML=items.length
+    ?items.slice(0,limit).map(card).join("")
+    :'<div class="empty" style="padding:36px;color:var(--muted);width:100%;text-align:center">No titles found in this collection yet.</div>';
+}
 
-    const VJS = [
-      "VJ Junior", "Ice P", "Emmy", "Jingo", "Mark",
-      "Aaron", "Isma Pro", "Eddy", "VJ ashim", "Ulio",
-      "Muba", "Ivo", "Soul"
-    ];
+function matches(m){
+  const q=clean($("searchInput").value).toLowerCase(),type=$("typeFilter").value,g=$("genreFilter").value,v=$("vjFilter").value;
+  const hay=[m.title,m.year,m.genre,m.vj,m.description,m.category,m.language].join(" ").toLowerCase();
+  return(!q||hay.includes(q))&&(type==="all"||m.type===type)&&(g==="all"||m.genre.toLowerCase().includes(g.toLowerCase()))&&(v==="all"||m.vj===v)&&(activeGenre==="all"||m.genre.toLowerCase().includes(activeGenre.toLowerCase()));
+}
 
-    /* Helper to generate crisp inline SVG cinema poster art for demo items */
-    function makePosterArt(title, vj, c1, c2) {
-      const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600" viewBox="0 0 400 600">
-        <defs>
-          <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="${c1}"/>
-            <stop offset="100%" stop-color="${c2}"/>
-          </linearGradient>
-          <radialGradient id="glow" cx="50%" cy="30%" r="60%">
-            <stop offset="0%" stop-color="#e50914" stop-opacity="0.35"/>
-            <stop offset="100%" stop-color="#070709" stop-opacity="0"/>
-          </radialGradient>
-        </defs>
-        <rect width="400" height="600" fill="url(#g)"/>
-        <rect width="400" height="600" fill="url(#glow)"/>
-        <circle cx="200" cy="210" r="95" fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2"/>
-        <polygon points="182,175 182,245 242,210" fill="#e50914" fill-opacity="0.85"/>
-        <text x="200" y="385" fill="#ffffff" font-family="Arial,sans-serif" font-size="24" font-weight="900" text-anchor="middle" letter-spacing="1">${title.slice(0, 22).toUpperCase()}</text>
-        <text x="200" y="420" fill="#e50914" font-family="Arial,sans-serif" font-size="14" font-weight="700" text-anchor="middle" letter-spacing="3">${vj.toUpperCase()}</text>
-        <text x="200" y="555" fill="#ffffff" fill-opacity="0.45" font-family="Arial,sans-serif" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="4">XTREME MOVIE WATCH</text>
-      </svg>`;
-      return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+function render(){
+  const list=allMovies.filter(matches).sort((a,b)=>$("sortFilter").value==="az"?a.title.localeCompare(b.title):(Number(b.year)||0)-(Number(a.year)||0));
+  $("catalogTitle").textContent=$("typeFilter").value==="series"?"Series Results":"Latest Movies";
+  $("resultCount").textContent=list.length+" titles";
+  grid("movieGrid",list,visibleLimit);
+  $("loadMore").hidden=list.length<=visibleLimit;
+  grid("seriesGrid",allMovies.filter(m=>m.type==="series").slice(0,12));
+  grid("kidsGrid",allMovies.filter(m=>/kids|children|animation|family/i.test(m.category+" "+m.genre)).slice(0,12));
+  grid("indianGrid",allMovies.filter(m=>/india|indian|hindi|bollywood/i.test(m.category+" "+m.language)).slice(0,12));
+  grid("asianGrid",allMovies.filter(m=>/korean|asian|japanese|chinese|thai/i.test(m.category+" "+m.language)).slice(0,12));
+  grid("watchlistGrid",allMovies.filter(m=>isSaved(m.id)));
+  $("loadNotice").textContent=allMovies.length?"Showing titles from your movie library.":"No database titles loaded. Demo titles are shown until your database is connected.";
+}
+
+function populateVjs(){
+  const names=[...new Set([...VJS,...allMovies.map(m=>m.vj).filter(Boolean)])];
+  $("vjFilter").innerHTML='<option value="all">All VJs</option>'+names.map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join("");
+  $("vjChips").innerHTML=names.map(v=>`<button class="chip" data-vjchip="${esc(v)}">${esc(v)}</button>`).join("");
+}
+
+// Bottom Sheets
+let startY=0,currentY=0,activeModal=null;
+function showModal(id){
+  const m=$(id);if(!m)return;
+  m.classList.add("show");
+  document.body.style.overflow="hidden";
+}
+function closeModal(id){
+  const m=$(id);if(!m)return;
+  m.classList.remove("show");
+  if(!document.querySelector(".modal.show"))document.body.style.overflow="";
+  if(id==="playerModal")$("playerStage").innerHTML="";
+}
+
+function findMovie(id){return allMovies.find(m=>String(m.id)===String(id))}
+function details(id){
+  const m=findMovie(id);if(!m)return;
+  $("detailContent").innerHTML=`<div class="detail-layout">${poster(m)}<div><h2>${esc(m.title)}</h2><div class="meta"><span>${esc(m.year||"Year N/A")}</span><span>${esc(m.type)}</span></div><p><b>VJ:</b> ${esc(m.vj||"Not specified")}<br><b>Genre:</b> ${esc(m.genre||"Not specified")}<br><b>Collection:</b> ${esc(m.category||"General")}</p><p>${esc(m.description||"No description has been added yet.")}</p><div class="modal-actions"><button class="btn" data-play="${esc(m.id)}">Play now</button><button class="btn secondary" data-save="${esc(m.id)}">${isSaved(m.id)?"Remove from":"Add to"} My List</button></div></div></div>`;
+  showModal("detailModal");
+}
+function youtubeEmbed(url){try{const u=new URL(url);let id="";if(u.hostname.includes("youtu.be"))id=u.pathname.slice(1);else if(u.hostname.includes("youtube.com"))id=u.searchParams.get("v")||((u.pathname.match(/\/(embed|shorts)\/([^/?]+)/)||[])[2]||"");return id?"https://www.youtube-nocookie.com/embed/"+encodeURIComponent(id)+"?autoplay=1&rel=0":""}catch{return""}}
+function play(id){
+  const m=findMovie(id);if(!m)return;
+  $("playerTitle").textContent=m.title;$("playerStage").innerHTML="";$("playerMessage").textContent="";
+  if(!m.video_url){$("playerMessage").textContent="No video URL is connected. Add an authorized MP4/HLS stream or an embeddable YouTube link to this title in Supabase.";showModal("playerModal");return}
+  const embed=youtubeEmbed(m.video_url);
+  if(embed)$("playerStage").innerHTML=`<iframe class="player-frame" src="${embed}" title="${esc(m.title)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+  else{$("playerStage").innerHTML='<video id="nativePlayer" class="player-frame" controls playsinline preload="metadata"></video>';const p=$("nativePlayer");p.src=m.video_url;p.play().catch(()=>{})}
+  $("playerMessage").textContent="Some video hosts block playback on external websites. Use a direct MP4/HLS stream or an embeddable YouTube link.";
+  showModal("playerModal");
+}
+
+async function loadSupabase(){if(!window.supabase||SUPABASE_URL.includes("YOUR_")||SUPABASE_ANON_KEY.includes("YOUR_"))return false;try{supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);const{data,error}=await supabaseClient.from(TABLE_NAME).select("*");if(error)throw error;if(Array.isArray(data)&&data.length)allMovies=data.map(normalize);return true}catch(e){return false}}
+async function loadTMDB(){if(!TMDB_API_KEY||TMDB_API_KEY.includes("YOUR_"))return;try{const r=await fetch("https://api.themoviedb.org/3/movie/popular?api_key="+encodeURIComponent(TMDB_API_KEY)+"&language=en-US&page=1");if(!r.ok)throw Error();const d=await r.json(),existing=new Set(allMovies.map(m=>m.title.toLowerCase()));const extra=(d.results||[]).filter(x=>!existing.has((x.title||"").toLowerCase())).map(x=>normalize({id:"tmdb-"+x.id,title:x.title,year:(x.release_date||"").slice(0,4),poster:x.poster_path?"https://image.tmdb.org/t/p/w500"+x.poster_path:"",description:x.overview,category:"TMDB"}));allMovies=[...allMovies,...extra]}catch(e){}}
+function go(id){const el=$(id);if(el){el.scrollIntoView({behavior:"smooth",block:"start"});setNav(id);closeSidebar()}}
+function setNav(id){document.querySelectorAll("[data-nav]").forEach(a=>a.classList.toggle("active",a.dataset.nav===id))}
+function closeSidebar(){$("sidebar").classList.remove("open");$("sidebarOverlay").classList.remove("show")}
+
+// Drag-to-dismiss bottom sheet gestures
+document.addEventListener("pointerdown",e=>{
+  if(e.target.closest(".drag-handle")){
+    const m=e.target.closest(".modal");
+    if(m){
+      activeModal=m;
+      startY=e.clientY;
+      currentY=0;
+      const d=m.querySelector(".dialog");
+      if(d)d.style.transition="none";
     }
+  }
+});
+document.addEventListener("pointermove",e=>{
+  if(!activeModal)return;
+  currentY=Math.max(0,e.clientY-startY);
+  const d=activeModal.querySelector(".dialog");
+  if(d)d.style.transform=`translateY(${currentY}px)`;
+});
+document.addEventListener("pointerup",()=>{
+  if(!activeModal)return;
+  const d=activeModal.querySelector(".dialog");
+  if(d)d.style.transition="";
+  if(currentY>110){closeModal(activeModal.id)}
+  if(d)d.style.transform="";
+  activeModal=null;currentY=0;
+});
 
-    const demoMovies = [
-      {
-        id: "demo1",
-        title: "Kampala Night Strike",
-        year: 2025,
-        genre: "Action, Thriller",
-        vj: "VJ Junior",
-        type: "movie",
-        category: "Featured",
-        poster: makePosterArt("Kampala Night Strike", "VJ Junior", "#1e090c", "#0a0a0f"),
-        description: "An elite undercover operative races across East Africa to intercept a rogue syndicate before midnight. Translated with signature energy by VJ Junior."
-      },
-      {
-        id: "demo2",
-        title: "The Laughing Matatu",
-        year: 2024,
-        genre: "Comedy",
-        vj: "Emmy",
-        type: "movie",
-        category: "Featured",
-        poster: makePosterArt("The Laughing Matatu", "VJ Emmy", "#1c1208", "#0a0a0f"),
-        description: "A chaotic cross-town commute turns into the funniest heist mix-up of the year. Non-stop Luganda punchlines."
-      },
-      {
-        id: "demo3",
-        title: "Seoul Dynasty Chronicles",
-        year: 2025,
-        genre: "Drama, Romance",
-        vj: "Ice P",
-        type: "series",
-        category: "Asian Series",
-        language: "Korean",
-        poster: makePosterArt("Seoul Dynasty", "Ice P", "#190a18", "#0a0a0f"),
-        description: "Rival heirs battle for control of a tech empire while uncovering a decades-old family secret."
-      },
-      {
-        id: "demo4",
-        title: "Mumbai Express Vengeance",
-        year: 2024,
-        genre: "Action, Drama",
-        vj: "Jingo",
-        type: "movie",
-        category: "Indian Movies",
-        language: "Hindi",
-        poster: makePosterArt("Mumbai Express", "VJ Jingo", "#221007", "#0a0a0f"),
-        description: "High-octane Bollywood action aboard a runaway express train, narrated in full dramatic style by VJ Jingo."
-      },
-      {
-        id: "demo5",
-        title: "Savannah Sky Riders",
-        year: 2025,
-        genre: "Animation, Family",
-        vj: "Mark",
-        type: "movie",
-        category: "Kids Zone",
-        poster: makePosterArt("Savannah Sky Riders", "VJ Mark", "#081a24", "#0a0a0f"),
-        description: "Young inventors build a solar glider to rescue endangered wildlife across the Great Rift Valley."
-      },
-      {
-        id: "demo6",
-        title: "Shadow Protocol: Zero",
-        year: 2025,
-        genre: "Sci-Fi, Action",
-        vj: "Isma Pro",
-        type: "series",
-        category: "Series",
-        poster: makePosterArt("Shadow Protocol", "Isma Pro", "#0a1324", "#070709"),
-        description: "In 2049, a rogue AI detective uncovers a conspiracy hidden inside orbital memory banks."
-      }
-    ];
+// Double-tap poster to toggle favorite
+let lastTapTime=0,lastTapCard=null;
+document.addEventListener("click",e=>{
+  const themeBtn=e.target.closest("[data-theme-choice]");
+  if(themeBtn){applyTheme(themeBtn.dataset.themeChoice);return}
 
-    /* ==========================================================================
-       STATE & UTILITIES
-       ========================================================================== */
-    let allMovies = [];
-    let visibleLimit = 24;
-    let activeGenre = "all";
-    let supabaseClient = null;
-    let heroIndex = 0;
-    let heroTimer = null;
+  const planBtn=e.target.closest("[data-select-plan]");
+  if(planBtn){selectPlan(planBtn.dataset.selectPlan,Number(planBtn.dataset.amount));return}
 
-    const $ = id => document.getElementById(id);
-    const clean = v => String(v ?? "").trim();
+  const s=e.target.closest("[data-save]");
+  if(s){
+    const id=String(s.dataset.save);
+    let ids=savedIds();
+    const adding=!ids.includes(id);
+    ids=adding?[...ids,id]:ids.filter(x=>x!==id);
+    saveIds(ids);render();
+    if(adding)triggerHeartBurst(document.querySelector(`[data-card-id="${CSS.escape(id)}"]`));
+    if($("detailModal").classList.contains("show"))details(id);
+    return;
+  }
 
-    function esc(v) {
-      return String(v ?? "").replace(/[&<>"']/g, c => ({
-        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-      }[c]));
+  const posterImg=e.target.closest(".poster-wrap");
+  const movieCard=e.target.closest("[data-card-id]");
+  if(posterImg && movieCard && !e.target.closest("button")){
+    const now=Date.now();
+    if(lastTapCard===movieCard && now-lastTapTime<320){
+      const id=String(movieCard.dataset.cardId);
+      let ids=savedIds();
+      if(!ids.includes(id)){saveIds([...ids,id]);render();}
+      triggerHeartBurst(document.querySelector(`[data-card-id="${CSS.escape(id)}"]`));
+      lastTapTime=0;lastTapCard=null;
+      return;
     }
-
-    function vibrate(ms = 18) {
-      if (navigator.vibrate) {
-        try { navigator.vibrate(ms); } catch (e) {}
-      }
-    }
-
-    function showToast(msg, accent = false) {
-      const container = $("toastContainer");
-      const el = document.createElement("div");
-      el.className = `toast-item px-4 py-2.5 rounded-full text-xs font-semibold shadow-xl border backdrop-blur-md flex items-center gap-2 ${
-        accent
-          ? "bg-crimson/95 border-red-400/30 text-white"
-          : "bg-zinc-900/95 border-white/15 text-zinc-100"
-      }`;
-      el.innerHTML = accent ? `<span>♥</span><span>${esc(msg)}</span>` : `<span>${esc(msg)}</span>`;
-      container.appendChild(el);
-      setTimeout(() => {
-        el.style.opacity = "0";
-        el.style.transform = "translate(-50%, 10px)";
-        el.style.transition = "all 0.25s ease";
-        setTimeout(() => el.remove(), 260);
-      }, 2200);
-    }
-
-    function normalize(m, idx = 0) {
-      const t = String(m.type || m.content_type || "movie").toLowerCase();
-      return {
-        id: String(m.id ?? m.movie_id ?? (m.title || m.name || "title") + "-" + (m.year || idx)),
-        orderIndex: idx,
-        createdAt: m.created_at ? new Date(m.created_at).getTime() : (1000000 - idx),
-        title: clean(m.title || m.name || "Untitled"),
-        year: Number(m.year || m.release_year || (m.release_date || "").slice(0, 4)) || "",
-        genre: clean(Array.isArray(m.genres) ? m.genres.join(", ") : (m.genre || m.genres || "")),
-        vj: clean(m.vj || m.video_jockey || m.translator || ""),
-        type: t.includes("series") || t === "tv" ? "series" : "movie",
-        category: clean(m.category || m.collection || ""),
-        poster: clean(m.poster || m.poster_url || m.image_url || m.thumbnail || ""),
-        description: clean(m.description || m.overview || ""),
-        video_url: clean(m.video_url || m.stream_url || m.youtube_url || m.url || ""),
-        language: clean(m.language || "")
-      };
-    }
-
-    /* Watchlist Persistence */
-    function savedIds() {
-      try {
-        return JSON.parse(localStorage.getItem("xtreme_watchlist") || "[]").map(String);
-      } catch {
-        return [];
-      }
-    }
-
-    function saveIds(ids) {
-      try {
-        localStorage.setItem("xtreme_watchlist", JSON.stringify(ids));
-      } catch (e) {}
-      $("watchCount").textContent = ids.length;
-      $("sideWatchCount").textContent = ids.length;
-    }
-
-    function isSaved(id) {
-      return savedIds().includes(String(id));
-    }
-
-    function toggleWatchlist(id, silent = false) {
-      const strId = String(id);
-      let ids = savedIds();
-      const exists = ids.includes(strId);
-      ids = exists ? ids.filter(x => x !== strId) : [...ids, strId];
-      saveIds(ids);
-      vibrate(20);
-      if (!silent) {
-        const movie = findMovie(strId);
-        showToast(
-          exists ? `Removed "${movie?.title || "Title"}" from My List` : `Saved "${movie?.title || "Title"}" to My List`,
-          !exists
-        );
-      }
-      render();
-      updateHero();
-      if ($("detailModal").classList.contains("open")) details(strId);
-    }
-
-    /* ==========================================================================
-       CARD & CAROUSEL RENDERING
-       ========================================================================== */
-    function posterMarkup(m) {
-      if (m.poster) {
-        return `<img class="poster-img w-full h-full object-cover bg-zinc-900" src="${esc(m.poster)}" alt="${esc(m.title)} poster" loading="lazy" draggable="false" onerror="this.style.display='none';this.nextElementSibling.classList.remove('hidden')">
-        <div class="hidden w-full h-full flex flex-col items-center justify-center p-3 text-center bg-gradient-to-br from-crimson/30 via-zinc-900 to-black text-zinc-200 font-black text-xs tracking-widest">
-          <span>XTREME</span><span class="text-[9px] text-crimson mt-1">MOVIE WATCH</span>
-        </div>`;
-      }
-      return `<div class="w-full h-full flex flex-col items-center justify-center p-3 text-center bg-gradient-to-br from-crimson/30 via-zinc-900 to-black text-zinc-200 font-black text-xs tracking-widest">
-        <span>XTREME</span><span class="text-[9px] text-crimson mt-1">MOVIE WATCH</span>
-      </div>`;
-    }
-
-    function card(m) {
-      const saved = isSaved(m.id);
-      return `
-        <article class="movie-card group relative rounded-2xl bg-card border border-white/[0.07] hover:border-crimson/60 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-crimson/15 flex flex-col">
-          <div class="poster-zone relative aspect-[2/3] overflow-hidden bg-zinc-900 cursor-pointer" data-poster-id="${esc(m.id)}">
-            ${posterMarkup(m)}
-            <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-black/25 opacity-80 group-hover:opacity-95 transition-opacity"></div>
-
-            <!-- Type Badge -->
-            <span class="absolute top-2 left-2 px-2 py-0.5 rounded-md text-[9px] font-extrabold tracking-wider uppercase ${
-              m.type === "series" ? "bg-amber-500/90 text-black" : "bg-crimson/95 text-white"
-            } shadow">
-              ${m.type === "series" ? "SERIES" : "MOVIE"}
-            </span>
-
-            <!-- Quick Heart Button -->
-            <button data-save="${esc(m.id)}" aria-label="Save to My List" class="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/65 backdrop-blur-md border ${
-              saved ? "border-crimson text-crimson" : "border-white/20 text-white/90 hover:text-white"
-            } flex items-center justify-center text-sm transition active:scale-90 z-10">
-              ${saved ? "♥" : "♡"}
-            </button>
-
-            <!-- Bottom VJ Pill Overlay -->
-            <div class="absolute bottom-2 left-2 right-2 flex items-center justify-between gap-1 text-[10px] font-semibold text-zinc-200 pointer-events-none">
-              <span class="px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-xs border border-white/10 truncate max-w-[72%]">
-                ${esc(m.vj || "VJ N/A")}
-              </span>
-              <span class="text-zinc-300">${esc(m.year || "")}</span>
-            </div>
-          </div>
-
-          <div class="p-2.5 flex-1 flex flex-col justify-between">
-            <h3 class="text-xs font-bold text-zinc-100 truncate mb-2" title="${esc(m.title)}">${esc(m.title)}</h3>
-            <div class="flex items-center gap-1.5">
-              <button data-play="${esc(m.id)}" class="flex-1 py-1.5 px-2 rounded-lg bg-crimson hover:bg-red-600 text-white text-[10px] font-bold flex items-center justify-center gap-1 transition active:scale-95">
-                <span>▶</span><span>Play</span>
-              </button>
-              <button data-details="${esc(m.id)}" class="py-1.5 px-2.5 rounded-lg bg-white/[0.06] hover:bg-white/[0.12] border border-white/[0.08] text-zinc-300 text-[10px] font-semibold transition active:scale-95">
-                Info
-              </button>
-            </div>
-          </div>
-        </article>`;
-    }
-
-    function renderGrid(id, items, limit = items.length, emptyText = "No titles found in this collection yet.") {
-      const el = $(id);
-      if (!el) return;
-      el.innerHTML = items.length
-        ? items.slice(0, limit).map(card).join("")
-        : `<div class="col-span-full w-full py-10 px-4 text-center text-xs text-zinc-500 border border-dashed border-white/10 rounded-2xl">${esc(emptyText)}</div>`;
-    }
-
-    /* ==========================================================================
-       HERO SPOTLIGHT (Swipeable + Auto-cycling)
-       ========================================================================== */
-    function getSpotlightItems() {
-      const featured = allMovies.filter(m => /featured/i.test(m.category) || m.poster);
-      return (featured.length ? featured : allMovies).slice(0, 5);
-    }
-
-    function updateHero() {
-      const items = getSpotlightItems();
-      if (!items.length) return;
-      heroIndex = ((heroIndex % items.length) + items.length) % items.length;
-      const item = items[heroIndex];
-
-      $("heroTitle").textContent = item.title;
-      $("heroDesc").textContent = item.description || "Stream Ugandan VJ-translated movies and series in high definition.";
-      $("heroVjBadge").textContent = item.vj || "Xtreme VJ";
-      $("heroMetaBadge").textContent = `${item.year || "2025"} • ${item.genre || (item.type === "series" ? "Series" : "Movie")}`;
-
-      const bg = $("heroBackdrop");
-      if (item.poster) {
-        bg.style.backgroundImage = `url("${item.poster.replace(/"/g, '\\"')}")`;
-      } else {
-        bg.style.backgroundImage = "radial-gradient(circle at 80% 30%, rgba(229,9,20,0.4), transparent 60%)";
-      }
-
-      const saved = isSaved(item.id);
-      $("heroSaveIcon").textContent = saved ? "♥" : "＋";
-      $("heroSaveIcon").className = saved ? "text-crimson" : "";
-      $("heroSaveLabel").textContent = saved ? "Saved" : "My List";
-
-      $("heroPlayBtn").onclick = () => play(item.id);
-      $("heroSaveBtn").onclick = () => toggleWatchlist(item.id);
-      $("heroDetailsBtn").onclick = () => details(item.id);
-
-      $("heroDots").innerHTML = items.map((_, i) => `
-        <button data-hero-dot="${i}" aria-label="Spotlight ${i + 1}" class="h-1.5 rounded-full transition-all ${
-          i === heroIndex ? "w-6 bg-crimson" : "w-1.5 bg-white/30 hover:bg-white/60"
-        }"></button>
-      `).join("");
-    }
-
-    function startHeroAutoplay() {
-      clearInterval(heroTimer);
-      heroTimer = setInterval(() => {
-        heroIndex++;
-        updateHero();
-      }, 6500);
-    }
-
-    /* ==========================================================================
-       FILTERING & MAIN RENDER PIPELINE
-       ========================================================================== */
-    function matches(m) {
-      const q = clean($("searchInput").value).toLowerCase();
-      const type = $("typeFilter").value;
-      const g = $("genreFilter").value;
-      const v = $("vjFilter").value;
-      const hay = [m.title, m.year, m.genre, m.vj, m.description, m.category, m.language].join(" ").toLowerCase();
-
-      return (
-        (!q || hay.includes(q)) &&
-        (type === "all" || m.type === type) &&
-        (g === "all" || m.genre.toLowerCase().includes(g.toLowerCase())) &&
-        (v === "all" || m.vj === v) &&
-        (activeGenre === "all" || m.genre.toLowerCase().includes(activeGenre.toLowerCase()))
-      );
-    }
-
-    function render() {
-      const sortMode = $("sortFilter").value;
-      const list = allMovies.filter(matches).sort((a, b) => {
-        if (sortMode === "az") return a.title.localeCompare(b.title);
-        if (sortMode === "year") return (Number(b.year) || 0) - (Number(a.year) || 0);
-        return (b.createdAt || 0) - (a.createdAt || 0);
-      });
-
-      $("catalogTitle").textContent = $("typeFilter").value === "series" ? "Series Results" : "Latest Movies & Releases";
-      $("resultCount").textContent = `${list.length} ${list.length === 1 ? "title" : "titles"}`;
-
-      renderGrid("movieGrid", list, visibleLimit, "No matching movies or series found. Try clearing your filters.");
-      $("loadMore").hidden = list.length <= visibleLimit;
-
-      renderGrid("seriesGrid", allMovies.filter(m => m.type === "series"), 14);
-      renderGrid("kidsGrid", allMovies.filter(m => /kids|children|animation|family/i.test(m.category + " " + m.genre)), 14);
-      renderGrid("indianGrid", allMovies.filter(m => /india|indian|hindi|bollywood/i.test(m.category + " " + m.language)), 14);
-      renderGrid("asianGrid", allMovies.filter(m => /korean|asian|japanese|chinese|thai/i.test(m.category + " " + m.language)), 14);
-      renderGrid("watchlistGrid", allMovies.filter(m => isSaved(m.id)), 50, "Your list is empty. Double-tap any poster or tap ♡ to save titles.");
-
-      $("loadNotice").textContent = allMovies.length
-        ? "Showing titles from your Xtreme Watch library."
-        : "No database titles loaded. Showing sample cinema titles.";
-    }
-
-    function populateVjs() {
-      const names = [...new Set([...VJS, ...allMovies.map(m => m.vj).filter(Boolean)])];
-      const currentVj = $("vjFilter").value;
-      $("vjFilter").innerHTML = '<option value="all" class="bg-zinc-900">All VJs</option>' +
-        names.map(v => `<option value="${esc(v)}" class="bg-zinc-900">${esc(v)}</option>`).join("");
-      if (names.includes(currentVj)) $("vjFilter").value = currentVj;
-
-      $("vjChips").innerHTML = names.map(v => {
-        const active = $("vjFilter").value === v;
-        return `<button data-vjchip="${esc(v)}" class="px-3.5 py-2 rounded-xl text-xs font-semibold border transition active:scale-95 ${
-          active
-            ? "bg-crimson border-crimson text-white shadow-md shadow-crimson/30"
-            : "bg-surface border-white/[0.08] text-zinc-300 hover:border-crimson/50 hover:text-white"
-        }">${esc(v)}</button>`;
-      }).join("");
-    }
-
-    /* ==========================================================================
-       MODALS & GESTURE VIDEO PLAYER
-       ========================================================================== */
-    function showModal(id) {
-      const modal = $(id);
-      const sheet = modal.querySelector(".modal-sheet");
-      if (sheet) {
-        sheet.style.transform = "";
-        sheet.style.opacity = "";
-      }
-      modal.classList.add("open");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeModal(id) {
-      const modal = $(id);
-      modal.classList.remove("open");
-      if (id === "playerModal") {
-        const video = $("nativePlayer");
-        if (video) {
-          try { video.pause(); video.removeAttribute("src"); video.load(); } catch (e) {}
-        }
-        $("playerStage").innerHTML = "";
-      }
-      if (!document.querySelector(".modal-backdrop.open")) {
-        document.body.style.overflow = "";
-      }
-    }
-
-    function findMovie(id) {
-      return allMovies.find(m => String(m.id) === String(id));
-    }
-
-    function details(id) {
-      const m = findMovie(id);
-      if (!m) return;
-      const saved = isSaved(m.id);
-      $("detailContent").innerHTML = `
-        <div class="flex flex-col sm:flex-row gap-5">
-          <div class="w-32 sm:w-44 shrink-0 mx-auto sm:mx-0 rounded-2xl overflow-hidden border border-white/10 aspect-[2/3] bg-zinc-900 shadow-xl">
-            ${posterMarkup(m)}
-          </div>
-          <div class="flex-1 min-w-0">
-            <div class="flex flex-wrap items-center gap-2 mb-2">
-              <span class="px-2 py-0.5 rounded-md bg-crimson text-white text-[10px] font-extrabold uppercase">${esc(m.type)}</span>
-              <span class="px-2.5 py-0.5 rounded-md bg-white/10 text-zinc-200 text-xs font-semibold">${esc(m.vj || "VJ N/A")}</span>
-              <span class="text-xs text-zinc-400">${esc(m.year || "Year N/A")}</span>
-            </div>
-            <h2 class="text-xl sm:text-2xl font-black text-white leading-snug mb-2">${esc(m.title)}</h2>
-            <div class="text-xs text-zinc-400 space-y-1 mb-3">
-              <div><strong class="text-zinc-200">Genre:</strong> ${esc(m.genre || "Not specified")}</div>
-              <div><strong class="text-zinc-200">Collection:</strong> ${esc(m.category || "General")}</div>
-            </div>
-            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed mb-5">
-              ${esc(m.description || "No synopsis has been added for this title yet.")}
-            </p>
-            <div class="flex flex-wrap items-center gap-2.5">
-              <button data-play="${esc(m.id)}" class="px-5 py-2.5 rounded-xl bg-crimson hover:bg-red-600 text-white text-xs font-bold flex items-center gap-2 shadow-lg shadow-crimson/30 active:scale-95 transition">
-                <span>▶</span><span>Play Stream</span>
-              </button>
-              <button data-save="${esc(m.id)}" class="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white text-xs font-semibold flex items-center gap-1.5 active:scale-95 transition">
-                <span class="${saved ? "text-crimson" : ""}">${saved ? "♥" : "＋"}</span>
-                <span>${saved ? "Saved in My List" : "Add to My List"}</span>
-              </button>
-            </div>
-          </div>
-        </div>`;
-      showModal("detailModal");
-    }
-
-    function youtubeEmbed(url) {
-      try {
-        const u = new URL(url);
-        let id = "";
-        if (u.hostname.includes("youtu.be")) {
-          id = u.pathname.slice(1);
-        } else if (u.hostname.includes("youtube.com")) {
-          id = u.searchParams.get("v") || ((u.pathname.match(/\/(embed|shorts)\/([^/?]+)/) || [])[2] || "");
-        }
-        return id ? "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(id) + "?autoplay=1&rel=0" : "";
-      } catch {
-        return "";
-      }
-    }
-
-    function play(id) {
-      const m = findMovie(id);
-      if (!m) return;
-      closeModal("detailModal");
-      $("playerTitle").textContent = `${m.title}${m.vj ? " (" + m.vj + ")" : ""}`;
-      $("playerStage").innerHTML = "";
-      $("playerMessage").textContent = "";
-
-      if (!m.video_url) {
-        $("playerStage").innerHTML = `
-          <div class="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-gradient-to-b from-zinc-900 to-black">
-            <div class="w-12 h-12 rounded-full bg-crimson/20 border border-crimson/40 flex items-center justify-center text-crimson text-xl mb-3">▶</div>
-            <div class="text-sm font-bold text-white mb-1">Stream Link Not Connected Yet</div>
-            <p class="text-xs text-zinc-400 max-w-md">Add an authorized MP4/HLS video URL or an embeddable YouTube link in your Supabase <code class="text-zinc-300">movies</code> table to stream this title.</p>
-          </div>`;
-        $("playerMessage").textContent = "Ready for Supabase video_url connection.";
-        showModal("playerModal");
-        return;
-      }
-
-      if (!/^https?:\/\//i.test(m.video_url)) {
-        $("playerMessage").textContent = "Invalid video URL. Use a full https:// or http:// address.";
-        showModal("playerModal");
-        return;
-      }
-
-      const embed = youtubeEmbed(m.video_url);
-      if (embed) {
-        $("playerStage").innerHTML = `<iframe class="w-full h-full border-0" src="${embed}" title="${esc(m.title)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
-      } else {
-        $("playerStage").innerHTML = `
-          <video id="nativePlayer" class="w-full h-full object-contain bg-black" controls playsinline preload="metadata"></video>
-          <div id="playerGestureLayer" class="absolute inset-x-0 top-0 bottom-12 z-10 flex">
-            <div data-seek-side="left" class="w-1/2 h-full relative"></div>
-            <div data-seek-side="right" class="w-1/2 h-full relative"></div>
-          </div>`;
-        const video = $("nativePlayer");
-        video.src = m.video_url;
-        video.play().catch(() => {});
-        bindPlayerGestures(video);
-      }
-
-      $("playerMessage").textContent = "Some external hosts restrict embedding. Direct MP4/HLS streams or YouTube links work best.";
-      showModal("playerModal");
-    }
-
-    /* Custom Double-Tap Seek Gesture inside Native HTML5 Player */
-    function bindPlayerGestures(video) {
-      const layer = $("playerGestureLayer");
-      if (!layer) return;
-      let lastTapTime = 0;
-      let lastSide = "";
-
-      layer.addEventListener("pointerup", e => {
-        const sideEl = e.target.closest("[data-seek-side]");
-        if (!sideEl) return;
-        const side = sideEl.dataset.seekSide;
-        const now = Date.now();
-
-        if (now - lastTapTime < 300 && lastSide === side) {
-          const delta = side === "left" ? -10 : 10;
-          video.currentTime = Math.max(0, Math.min(video.duration || 99999, video.currentTime + delta));
-          vibrate(15);
-
-          const badge = document.createElement("div");
-          badge.className = "seek-indicator absolute inset-0 flex items-center justify-center bg-white/10 backdrop-blur-[2px] text-white font-extrabold text-sm pointer-events-none";
-          badge.innerHTML = side === "left" ? "⏪ -10s" : "+10s ⏩";
-          sideEl.appendChild(badge);
-          setTimeout(() => badge.remove(), 660);
-          lastTapTime = 0;
-        } else {
-          lastTapTime = now;
-          lastSide = side;
-        }
-      });
-    }
-
-    /* ==========================================================================
-       SUPABASE & TMDB DATA LOADERS (Preserved Logic)
-       ========================================================================== */
-    async function loadSupabase() {
-      if (!window.supabase || SUPABASE_URL.includes("YOUR_") || SUPABASE_ANON_KEY.includes("YOUR_")) return false;
-      try {
-        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        const { data, error } = await supabaseClient.from(TABLE_NAME).select("*");
-        if (error) throw error;
-        if (Array.isArray(data) && data.length) {
-          allMovies = data.map((row, i) => normalize(row, i));
-        } else {
-          $("loadNotice").textContent = "Supabase connected, but the movies table is empty. Add movie records to populate your library.";
-        }
-        return true;
-      } catch (e) {
-        console.error(e);
-        $("loadNotice").textContent = "Database connection issue: " + (e.message || "check Supabase URL, key, table name and permissions.");
-        return false;
-      }
-    }
-
-    async function loadTMDB() {
-      if (!TMDB_API_KEY || TMDB_API_KEY.includes("YOUR_")) return;
-      try {
-        const r = await fetch("https://api.themoviedb.org/3/movie/popular?api_key=" + encodeURIComponent(TMDB_API_KEY) + "&language=en-US&page=1");
-        if (!r.ok) throw Error("TMDB request failed");
-        const d = await r.json();
-        const existing = new Set(allMovies.map(m => m.title.toLowerCase()));
-        const extra = (d.results || [])
-          .filter(x => !existing.has((x.title || "").toLowerCase()))
-          .map((x, idx) => normalize({
-            id: "tmdb-" + x.id,
-            title: x.title,
-            year: (x.release_date || "").slice(0, 4),
-            poster: x.poster_path ? "https://image.tmdb.org/t/p/w500" + x.poster_path : "",
-            description: x.overview,
-            category: "TMDB"
-          }, allMovies.length + idx));
-        allMovies = [...allMovies, ...extra];
-      } catch (e) {
-        console.warn("TMDB:", e);
-      }
-    }
-
-    /* ==========================================================================
-       RICH TOUCH & MOUSE GESTURE ENGINE
-       ========================================================================== */
-    function initGestures() {
-      /* 1. Hero Spotlight Swipe Left / Right */
-      const hero = $("heroSpotlight");
-      let heroStartX = 0;
-      let heroStartY = 0;
-      let heroDragging = false;
-
-      hero.addEventListener("pointerdown", e => {
-        if (e.target.closest("button")) return;
-        heroStartX = e.clientX;
-        heroStartY = e.clientY;
-        heroDragging = true;
-      });
-
-      hero.addEventListener("pointerup", e => {
-        if (!heroDragging) return;
-        heroDragging = false;
-        const dx = e.clientX - heroStartX;
-        const dy = e.clientY - heroStartY;
-        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
-          heroIndex += dx < 0 ? 1 : -1;
-          updateHero();
-          startHeroAutoplay();
-          vibrate(12);
-        }
-      });
-
-      $("heroPrev").addEventListener("click", () => {
-        heroIndex--;
-        updateHero();
-        startHeroAutoplay();
-      });
-
-      $("heroNext").addEventListener("click", () => {
-        heroIndex++;
-        updateHero();
-        startHeroAutoplay();
-      });
-
-      /* 2. Desktop Mouse Drag-to-Scroll on Horizontal Carousels */
-      document.querySelectorAll(".carousel-track").forEach(track => {
-        let isDown = false;
-        let startX = 0;
-        let scrollLeft = 0;
-        let moved = false;
-
-        track.addEventListener("pointerdown", e => {
-          if (e.pointerType !== "mouse") return;
-          isDown = true;
-          moved = false;
-          track.classList.add("dragging");
-          startX = e.pageX - track.offsetLeft;
-          scrollLeft = track.scrollLeft;
-        });
-
-        track.addEventListener("pointermove", e => {
-          if (!isDown) return;
-          const x = e.pageX - track.offsetLeft;
-          const walk = (x - startX) * 1.4;
-          if (Math.abs(walk) > 6) moved = true;
-          track.scrollLeft = scrollLeft - walk;
-        });
-
-        const endDrag = () => {
-          isDown = false;
-          track.classList.remove("dragging");
-          if (moved) {
-            track.dataset.justDragged = "1";
-            setTimeout(() => delete track.dataset.justDragged, 80);
-          }
-        };
-
-        track.addEventListener("pointerup", endDrag);
-        track.addEventListener("pointerleave", endDrag);
-      });
-
-      /* Carousel Arrow Buttons */
-      document.querySelectorAll("[data-scroll-left]").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const track = $(btn.dataset.scrollLeft);
-          if (track) track.scrollBy({ left: -380, behavior: "smooth" });
-        });
-      });
-      document.querySelectorAll("[data-scroll-right]").forEach(btn => {
-        btn.addEventListener("click", () => {
-          const track = $(btn.dataset.scrollRight);
-          if (track) track.scrollBy({ left: 380, behavior: "smooth" });
-        });
-      });
-
-      /* 3. Swipe-Down to Dismiss Modals / Bottom Sheets */
-      document.querySelectorAll("[data-sheet-handle]").forEach(handle => {
-        const modalId = handle.dataset.sheetHandle;
-        const modal = $(modalId);
-        const sheet = modal.querySelector(".modal-sheet");
-        let startY = 0;
-        let currentY = 0;
-        let dragging = false;
-
-        handle.addEventListener("pointerdown", e => {
-          startY = e.clientY;
-          currentY = 0;
-          dragging = true;
-          sheet.classList.add("dragging-sheet");
-          handle.setPointerCapture(e.pointerId);
-        });
-
-        handle.addEventListener("pointermove", e => {
-          if (!dragging) return;
-          const dy = Math.max(0, e.clientY - startY);
-          currentY = dy;
-          sheet.style.transform = `translateY(${dy}px)`;
-          modal.style.opacity = String(Math.max(0.25, 1 - dy / 360));
-        });
-
-        const releaseSheet = () => {
-          if (!dragging) return;
-          dragging = false;
-          sheet.classList.remove("dragging-sheet");
-          modal.style.opacity = "";
-          if (currentY > 110) {
-            closeModal(modalId);
-            vibrate(14);
-          } else {
-            sheet.style.transform = "";
-          }
-        };
-
-        handle.addEventListener("pointerup", releaseSheet);
-        handle.addEventListener("pointercancel", releaseSheet);
-      });
-
-      /* 4. Edge Swipe to Open / Swipe Left to Close Mobile Sidebar */
-      const edgeZone = $("edgeSwipeZone");
-      const sidebar = $("sidebar");
-      let edgeStartX = 0;
-      let sideStartX = 0;
-
-      edgeZone.addEventListener("touchstart", e => {
-        edgeStartX = e.touches[0].clientX;
-      }, { passive: true });
-
-      edgeZone.addEventListener("touchend", e => {
-        const dx = e.changedTouches[0].clientX - edgeStartX;
-        if (dx > 50) {
-          openSidebar();
-          vibrate(14);
-        }
-      }, { passive: true });
-
-      sidebar.addEventListener("touchstart", e => {
-        sideStartX = e.touches[0].clientX;
-      }, { passive: true });
-
-      sidebar.addEventListener("touchend", e => {
-        const dx = e.changedTouches[0].clientX - sideStartX;
-        if (dx < -55) {
-          closeSidebar();
-        }
-      }, { passive: true });
-
-      /* 5. Double-Tap Poster to Favorite with Heart Burst + Single Tap for Details */
-      let lastPosterTap = 0;
-      let lastPosterId = "";
-      let singleTapTimer = null;
-
-      document.addEventListener("click", e => {
-        const track = e.target.closest(".carousel-track");
-        if (track && track.dataset.justDragged) return;
-
-        const posterZone = e.target.closest(".poster-zone");
-        if (!posterZone || e.target.closest("button")) return;
-
-        const id = posterZone.dataset.posterId;
-        const now = Date.now();
-
-        if (now - lastPosterTap < 310 && lastPosterId === id) {
-          clearTimeout(singleTapTimer);
-          lastPosterTap = 0;
-
-          // Trigger animated heart burst
-          const burst = document.createElement("div");
-          burst.className = "heart-burst-icon text-crimson text-5xl";
-          burst.textContent = "♥";
-          posterZone.appendChild(burst);
-          setTimeout(() => burst.remove(), 760);
-
-          toggleWatchlist(id);
-        } else {
-          lastPosterTap = now;
-          lastPosterId = id;
-          singleTapTimer = setTimeout(() => {
-            details(id);
-          }, 290);
-        }
-      });
-    }
-
-    /* ==========================================================================
-       NAVIGATION & EVENT DELEGATION
-       ========================================================================== */
-    function openSidebar() {
-      $("sidebar").classList.remove("-translate-x-full");
-      const ov = $("sidebarOverlay");
-      ov.classList.remove("hidden");
-      requestAnimationFrame(() => ov.classList.remove("opacity-0"));
-    }
-
-    function closeSidebar() {
-      $("sidebar").classList.add("-translate-x-full");
-      const ov = $("sidebarOverlay");
-      ov.classList.add("opacity-0");
-      setTimeout(() => ov.classList.add("hidden"), 280);
-    }
-
-    function setNav(id) {
-      document.querySelectorAll(".side-link").forEach(a => {
-        const active = a.dataset.nav === id;
-        a.classList.toggle("active", active);
-        a.classList.toggle("bg-white/[0.07]", active);
-        a.classList.toggle("text-white", active);
-        a.classList.toggle("text-zinc-400", !active);
-      });
-      document.querySelectorAll(".mobile-link").forEach(a => {
-        const active = a.dataset.nav === id;
-        a.classList.toggle("text-crimson", active);
-        a.classList.toggle("font-semibold", active);
-        a.classList.toggle("text-zinc-400", !active);
-      });
-    }
-
-    function go(id) {
-      const el = $(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-        setNav(id);
-        closeSidebar();
-      }
-    }
-
-    document.addEventListener("click", e => {
-      const saveBtn = e.target.closest("[data-save]");
-      if (saveBtn) {
-        toggleWatchlist(saveBtn.dataset.save);
-        return;
-      }
-
-      const detBtn = e.target.closest("[data-details]");
-      if (detBtn) {
-        details(detBtn.dataset.details);
-        return;
-      }
-
-      const playBtn = e.target.closest("[data-play]");
-      if (playBtn) {
-        play(playBtn.dataset.play);
-        return;
-      }
-
-      const closeBtn = e.target.closest("[data-close]");
-      if (closeBtn) {
-        closeModal(closeBtn.dataset.close);
-        return;
-      }
-
-      const navLink = e.target.closest("[data-nav]");
-      if (navLink) {
-        setNav(navLink.dataset.nav);
-        closeSidebar();
-        return;
-      }
-
-      const heroDot = e.target.closest("[data-hero-dot]");
-      if (heroDot) {
-        heroIndex = Number(heroDot.dataset.heroDot);
-        updateHero();
-        startHeroAutoplay();
-        return;
-      }
-
-      const genreChip = e.target.closest("[data-filter]");
-      if (genreChip) {
-        activeGenre = genreChip.dataset.filter;
-        document.querySelectorAll("[data-filter]").forEach(btn => {
-          const isAct = btn === genreChip;
-          btn.classList.toggle("bg-crimson", isAct);
-          btn.classList.toggle("text-white", isAct);
-          btn.classList.toggle("shadow-md", isAct);
-          btn.classList.toggle("shadow-crimson/30", isAct);
-          btn.classList.toggle("bg-surface", !isAct);
-          btn.classList.toggle("text-zinc-300", !isAct);
-        });
-        $("genreFilter").value = "all";
-        visibleLimit = 24;
-        render();
-        go("catalog");
-        return;
-      }
-
-      const vjChip = e.target.closest("[data-vjchip]");
-      if (vjChip) {
-        const vjName = vjChip.dataset.vjchip;
-        $("vjFilter").value = $("vjFilter").value === vjName ? "all" : vjName;
-        populateVjs();
-        render();
-        showToast($("vjFilter").value === "all" ? "Showing all VJs" : `Filtered by ${vjName}`);
-        go("catalog");
-      }
-    });
-
-    /* Close modals when clicking dark backdrop */
-    document.querySelectorAll(".modal-backdrop").forEach(m => {
-      m.addEventListener("click", e => {
-        if (e.target === m) closeModal(m.id);
-      });
-    });
-
-    $("menuBtn").addEventListener("click", openSidebar);
-    $("sidebarOverlay").addEventListener("click", closeSidebar);
-    $("myListTop").addEventListener("click", () => go("mylist"));
-
-    /* Search Input & Clear Button */
-    $("searchInput").addEventListener("input", () => {
-      $("clearSearchBtn").classList.toggle("hidden", !$("searchInput").value);
-      $("clearSearchBtn").classList.toggle("flex", !!$("searchInput").value);
-      visibleLimit = 24;
-      render();
-    });
-
-    $("clearSearchBtn").addEventListener("click", () => {
-      $("searchInput").value = "";
-      $("clearSearchBtn").classList.add("hidden");
-      $("clearSearchBtn").classList.remove("flex");
-      render();
-    });
-
-    ["typeFilter", "genreFilter", "vjFilter", "sortFilter"].forEach(id => {
-      $(id).addEventListener("change", () => {
-        if (id === "genreFilter") {
-          activeGenre = "all";
-          document.querySelectorAll("[data-filter]").forEach(btn => {
-            const isAll = btn.dataset.filter === "all";
-            btn.classList.toggle("bg-crimson", isAll);
-            btn.classList.toggle("text-white", isAll);
-            btn.classList.toggle("bg-surface", !isAll);
-            btn.classList.toggle("text-zinc-300", !isAll);
-          });
-        }
-        if (id === "vjFilter") populateVjs();
-        visibleLimit = 24;
-        render();
-      });
-    });
-
-    $("clearFilters").addEventListener("click", () => {
-      $("searchInput").value = "";
-      $("clearSearchBtn").classList.add("hidden");
-      $("typeFilter").value = "all";
-      $("genreFilter").value = "all";
-      $("vjFilter").value = "all";
-      $("sortFilter").value = "newest";
-      activeGenre = "all";
-      visibleLimit = 24;
-      document.querySelectorAll("[data-filter]").forEach(btn => {
-        const isAll = btn.dataset.filter === "all";
-        btn.classList.toggle("bg-crimson", isAll);
-        btn.classList.toggle("text-white", isAll);
-        btn.classList.toggle("bg-surface", !isAll);
-        btn.classList.toggle("text-zinc-300", !isAll);
-      });
-      populateVjs();
-      render();
-      showToast("All filters reset");
-    });
-
-    $("loadMore").addEventListener("click", () => {
-      visibleLimit += 24;
-      render();
-    });
-
-    document.addEventListener("keydown", e => {
-      if (e.key === "Escape") {
-        closeSidebar();
-        closeModal("detailModal");
-        closeModal("playerModal");
-      }
-    });
-
-    /* ==========================================================================
-       INITIALIZATION
-       ========================================================================== */
-    const yr = new Date().getFullYear();
-    $("yearNow").textContent = yr;
-    $("sideYear").textContent = yr;
-    saveIds(savedIds());
-
-    (async () => {
-      allMovies = demoMovies.map((m, i) => normalize(m, i));
-      populateVjs();
-      updateHero();
-      startHeroAutoplay();
-      render();
-      initGestures();
-
-      await loadSupabase();
-      await loadTMDB();
-      populateVjs();
-      updateHero();
-      render();
-    })();
-  </script>
+    lastTapTime=now;lastTapCard=movieCard;
+  }
+
+  const d=e.target.closest("[data-details]");if(d){details(d.dataset.details);return}
+  const p=e.target.closest("[data-play]");if(p){play(p.dataset.play);return}
+  const c=e.target.closest("[data-close]");if(c){closeModal(c.dataset.close);return}
+  const n=e.target.closest("[data-nav]");if(n){setNav(n.dataset.nav);closeSidebar()}
+  const f=e.target.closest("[data-filter]");if(f){activeGenre=f.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x===f));$("genreFilter").value="all";visibleLimit=24;render();go("catalog");return}
+  const v=e.target.closest("[data-vjchip]");if(v){$("vjFilter").value=v.dataset.vjchip;render();go("catalog");return}
+});
+
+document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)closeModal(m.id)}));
+$("menuBtn").addEventListener("click",()=>{$("sidebar").classList.add("open");$("sidebarOverlay").classList.add("show")});
+$("sidebarOverlay").addEventListener("click",closeSidebar);
+$("exploreBtn").addEventListener("click",()=>go("catalog"));
+$("browseSeriesBtn").addEventListener("click",()=>go("series"));
+$("myListTop").addEventListener("click",()=>go("mylist"));
+$("loadMore").addEventListener("click",()=>{visibleLimit+=24;render()});
+$("searchInput").addEventListener("input",()=>{visibleLimit=24;render()});
+["typeFilter","genreFilter","vjFilter","sortFilter"].forEach(id=>$(id).addEventListener("change",()=>{
+  if(id==="genreFilter"){activeGenre="all";document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"))}
+  visibleLimit=24;render();
+}));
+$("clearFilters").addEventListener("click",()=>{
+  $("searchInput").value="";$("typeFilter").value="all";$("genreFilter").value="all";$("vjFilter").value="all";$("sortFilter").value="newest";
+  activeGenre="all";visibleLimit=24;
+  document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));
+  render();
+});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeSidebar();closeModal("detailModal");closeModal("playerModal")}});
+
+const yr=new Date().getFullYear();
+$("yearNow").textContent=yr;$("sideYear").textContent=yr;
+initHeroSlider();
+saveIds(savedIds());
+try{const savedTheme=localStorage.getItem("xtreme_theme");if(savedTheme)applyTheme(savedTheme);}catch(e){}
+try{const savedPlan=JSON.parse(localStorage.getItem("xtreme_active_plan")||"null");if(savedPlan?.planName && savedPlan?.amount)selectPlan(savedPlan.planName,savedPlan.amount);}catch(e){}
+
+(async()=>{
+  allMovies=demoMovies.map(normalize);
+  populateVjs();render();
+  await loadSupabase();await loadTMDB();
+  populateVjs();render();
+})();
+</script>
 </body>
 </html>
-```
