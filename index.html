@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#050a08">
-<title>Xtreme Movie Watch - Emerald Pulse</title>
+<meta name="theme-color" content="#000000">
+<title>Xtreme Movie Watch - Unlimited VJ Movies & Series</title>
 <style>
 :root{
   --bg:#050a08;--panel:#0b1511;--card:#102019;--red:#00e676;--text:#f2fff8;--muted:#88b09b;--line:#1d382c;
@@ -62,12 +62,84 @@
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:84px}
-body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background-color .35s ease,color .35s ease}
+body{margin:0;background:#000;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background-color .35s ease,color .35s ease}
 button,input,select{font:inherit}
 button{cursor:pointer}
 a{color:inherit;text-decoration:none}
 
-/* Sidebar */
+/* =========================================================
+   NETFLIX-STYLE LANDING & SIGN-IN GATEWAY (BEFORE APP)
+   ========================================================= */
+.auth-landing{min-height:100vh;background:#000000;color:#ffffff;position:relative;overflow-x:hidden;padding-bottom:96px}
+.auth-hero{position:relative;min-height:600px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;background:#000}
+.auth-collage{position:absolute;inset:-45px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;transform:rotate(-8deg) scale(1.14);opacity:0.44;pointer-events:none;z-index:0}
+@media(min-width:769px){.auth-collage{grid-template-columns:repeat(6,1fr);gap:16px}}
+.auth-collage img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px;background:#141418;box-shadow:0 8px 24px rgba(0,0,0,0.85)}
+.auth-hero-vignette{position:absolute;inset:0;background:radial-gradient(circle at 50% 42%,rgba(0,0,0,0.35) 0%,rgba(0,0,0,0.88) 76%,#000000 100%),linear-gradient(180deg,rgba(0,0,0,0.85) 0%,rgba(0,0,0,0.35) 45%,#000000 100%);z-index:1}
+
+.auth-topbar{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:20px 24px;max-width:1280px;width:100%;margin:0 auto}
+.nf-wordmark{color:#e50914;font-weight:950;font-size:clamp(22px,4vw,32px);letter-spacing:1.2px;text-transform:uppercase;text-shadow:0 2px 16px rgba(229,9,20,0.45)}
+.nf-signin-btn{background:#e50914;color:#ffffff;border:none;border-radius:6px;padding:8px 16px;font-size:14px;font-weight:700;transition:background .2s}
+.nf-signin-btn:hover{background:#f40612}
+
+.auth-hero-center{position:relative;z-index:3;max-width:680px;margin:auto;padding:34px 22px 54px;text-align:center}
+.auth-hero-center h1{font-size:clamp(30px,5.6vw,54px);font-weight:900;line-height:1.12;margin:0 0 16px;letter-spacing:-0.5px;text-shadow:0 4px 24px rgba(0,0,0,0.9)}
+.auth-price-line{font-size:clamp(16px,2.4vw,20px);font-weight:600;color:#ffffff;margin:0 0 18px}
+.auth-sub-line{font-size:15px;color:#e5e5e5;line-height:1.5;margin:0 0 22px}
+
+.nf-start-form{display:flex;flex-direction:column;gap:14px;max-width:520px;margin:0 auto}
+@media(min-width:640px){.nf-start-form{flex-direction:row;align-items:stretch}}
+.nf-email-input{flex:1;height:54px;background:rgba(18,18,22,0.82);border:1px solid rgba(255,255,255,0.38);border-radius:6px;padding:0 16px;color:#ffffff;font-size:16px;outline:none;backdrop-filter:blur(8px)}
+.nf-email-input::placeholder{color:#b3b3b3}
+.nf-email-input:focus{border-color:#ffffff;box-shadow:0 0 0 2px rgba(255,255,255,0.25)}
+.nf-cta-btn{height:54px;background:#e50914;color:#ffffff;border:none;border-radius:6px;padding:0 26px;font-size:18px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:10px;white-space:nowrap;box-shadow:0 8px 26px rgba(229,9,20,0.45);transition:background .2s,transform .15s}
+.nf-cta-btn:hover{background:#f40612;transform:translateY(-1px)}
+
+/* Signature Netflix Curved Red Arch Divider */
+.nf-arch-divider{position:relative;height:44px;margin-top:-22px;z-index:4;overflow:hidden}
+.nf-arch-curve{position:absolute;left:-12%;right:-12%;top:4px;height:140px;border-top:4px solid #e50914;border-radius:50% 50% 0 0 / 38px 38px 0 0;background:radial-gradient(55% 42px at 50% 0%,rgba(229,9,20,0.36),rgba(14,22,52,0.45) 55%,#000000 100%)}
+
+.auth-body{max-width:1200px;margin:0 auto;padding:6px 20px 24px}
+.auth-sec-title{font-size:22px;font-weight:800;margin:18px 0 16px;color:#ffffff}
+
+/* Trending Now Top 10 Row with Big Rank Numbers */
+.nf-trending-row{display:flex;gap:18px;overflow-x:auto;padding:10px 8px 20px 22px;scrollbar-width:none;scroll-snap-type:x mandatory}
+.nf-trending-row::-webkit-scrollbar{display:none}
+.nf-trend-card{position:relative;min-width:148px;width:148px;flex-shrink:0;scroll-snap-align:start;cursor:pointer;transition:transform .25s ease}
+@media(min-width:769px){.nf-trend-card{min-width:185px;width:185px}}
+.nf-trend-card:hover{transform:scale(1.04)}
+.nf-trend-poster{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:10px;display:block;background:#16161c;box-shadow:0 10px 26px rgba(0,0,0,0.85)}
+.nf-rank-num{position:absolute;left:-18px;bottom:-6px;font-size:74px;font-weight:950;line-height:0.85;color:#000000;-webkit-text-stroke:2.2px #ffffff;text-shadow:0 4px 18px rgba(0,0,0,0.95);pointer-events:none;user-select:none;font-family:Impact,"Arial Black",sans-serif}
+@media(min-width:769px){.nf-rank-num{font-size:94px;left:-22px}}
+
+/* More Reasons to Join Cards */
+.nf-reasons-grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:769px){.nf-reasons-grid{grid-template-columns:repeat(4,1fr);gap:16px}}
+.nf-reason-card{background:linear-gradient(155deg,#192145 0%,#1b132b 55%,#210e19 100%);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:22px 20px 64px;position:relative;overflow:hidden}
+.nf-reason-card h3{margin:0 0 10px;font-size:19px;font-weight:800;color:#ffffff}
+.nf-reason-card p{margin:0;font-size:14px;line-height:1.5;color:#c7c9d9}
+.nf-reason-icon{position:absolute;right:18px;bottom:16px;font-size:34px;filter:drop-shadow(0 4px 12px rgba(229,9,20,0.45))}
+
+/* Sticky Bottom Get Started Bar on Mobile */
+.nf-sticky-footer{position:fixed;bottom:0;left:0;right:0;z-index:35;padding:12px 16px calc(12px + env(safe-area-inset-bottom));background:linear-gradient(0deg,#000000 72%,transparent);display:flex;justify-content:center}
+.nf-sticky-footer button{width:100%;max-width:520px;height:48px;background:#e50914;color:#ffffff;border:none;border-radius:6px;font-size:16px;font-weight:800;box-shadow:0 6px 24px rgba(229,9,20,0.55)}
+@media(min-width:769px){.nf-sticky-footer{display:none}}
+
+/* Sign-In Modal Box */
+.nf-auth-dialog{width:100%;max-width:430px;background:rgba(12,12,16,0.96);border:1px solid rgba(255,255,255,0.14);border-radius:18px;padding:32px 28px;color:#ffffff;position:relative;box-shadow:0 24px 60px rgba(0,0,0,0.9)}
+.nf-auth-dialog h2{margin:0 0 8px;font-size:28px;font-weight:900}
+.nf-auth-field{width:100%;height:50px;background:#181820;border:1px solid #333342;border-radius:8px;padding:0 14px;color:#ffffff;font-size:15px;margin-top:12px;outline:none}
+.nf-auth-field:focus{border-color:#e50914}
+.nf-auth-submit{width:100%;height:50px;background:#e50914;color:#ffffff;border:none;border-radius:8px;font-size:16px;font-weight:800;margin-top:18px}
+.nf-auth-submit:hover{background:#f40612}
+
+#appShell{display:none;background:var(--bg)}
+#appShell.unlocked{display:block}
+#authLanding.hidden{display:none}
+
+/* =========================================================
+   MAIN STREAMING APP STYLES
+   ========================================================= */
 .sidebar{position:fixed;inset:0 auto 0 0;width:280px;background:var(--panel);border-right:1px solid var(--line);z-index:45;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(0.16,1,0.3,1),background-color .35s ease}
 .sidebar-header{padding:22px 20px;border-bottom:1px solid var(--line)}
 .brand{display:flex;align-items:center;gap:12px;margin-bottom:16px}
@@ -108,6 +180,8 @@ a{color:inherit;text-decoration:none}
 .search-wrap input{width:100%;height:42px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 16px 0 44px;color:var(--text);outline:none;font-size:13px;transition:all .25s}
 .search-wrap input:focus{border-color:var(--red);box-shadow:var(--glow)}
 .top-right{margin-left:auto;display:flex;gap:10px;align-items:center}
+.user-email-pill{font-size:12px;color:var(--muted);font-weight:700;max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:none}
+@media(min-width:640px){.user-email-pill{display:block}}
 .user-badge{width:38px;height:38px;border-radius:50%;background:var(--accent-grad);color:#ffffff;display:grid;place-items:center;font-weight:900;font-size:12px;box-shadow:var(--glow);flex-shrink:0}
 .user-badge.vip{border:2px solid #ffd000;box-shadow:0 0 18px rgba(255,208,0,0.85)}
 
@@ -116,8 +190,8 @@ a{color:inherit;text-decoration:none}
 .hero-wrapper{position:relative;margin:20px 0 32px;border-radius:24px;overflow:hidden;background:var(--hero-grad);border:1px solid var(--line);box-shadow:0 18px 40px rgba(0,0,0,0.25)}
 .hero-slider{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth}
 .hero-slider::-webkit-scrollbar{display:none}
-.hero-slide{min-width:100%;scroll-snap-align:center;position:relative;min-height:390px;display:flex;align-items:flex-end;padding:44px;background-size:cover;background-position:center}
-.hero-slide::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,color-mix(in srgb,var(--bg) 90%,transparent) 8%,color-mix(in srgb,var(--bg) 60%,transparent) 52%,transparent 100%),linear-gradient(0deg,color-mix(in srgb,var(--bg) 95%,transparent) 0%,transparent 65%)}
+.hero-slide{min-width:100%;scroll-snap-align:center;position:relative;min-height:410px;display:flex;align-items:flex-end;padding:44px;background-size:cover;background-position:center}
+.hero-slide::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,color-mix(in srgb,var(--bg) 92%,transparent) 8%,color-mix(in srgb,var(--bg) 55%,transparent) 52%,transparent 100%),linear-gradient(0deg,color-mix(in srgb,var(--bg) 96%,transparent) 0%,transparent 65%)}
 .hero-content{position:relative;z-index:2;max-width:650px}
 .eyebrow{color:#ffffff;background:var(--accent-grad);font-size:10px;font-weight:900;letter-spacing:2.6px;text-transform:uppercase;padding:6px 14px;border-radius:999px;display:inline-block;margin-bottom:14px;box-shadow:var(--glow)}
 .hero-slide h1,.hero-slide h2{font-size:clamp(30px,4.6vw,52px);margin:0 0 12px;font-weight:900;line-height:1.1}
@@ -211,7 +285,7 @@ a{color:inherit;text-decoration:none}
 #subViewContainer.active{display:block}
 
 /* Modals & Payment Flow */
-.modal{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);align-items:flex-end;justify-content:center;opacity:0;transition:opacity .3s ease}
+.modal{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.82);backdrop-filter:blur(10px);align-items:flex-end;justify-content:center;opacity:0;transition:opacity .3s ease}
 .modal.show{display:flex;opacity:1}
 .dialog{width:100%;max-width:900px;max-height:92vh;background:var(--panel);color:var(--text);border-top-left-radius:30px;border-top-right-radius:30px;border:1px solid var(--line);border-bottom:none;overflow-y:auto;position:relative;padding:28px 30px 34px;box-shadow:0 -12px 45px rgba(0,0,0,0.5);transform:translateY(100%);transition:transform .35s cubic-bezier(0.16,1,0.3,1)}
 .modal.show .dialog{transform:translateY(0)}
@@ -253,8 +327,8 @@ a{color:inherit;text-decoration:none}
 
 @media(min-width:769px){
   .modal{align-items:center;padding:24px}
-  .dialog{border-radius:24px;border-bottom:1px solid var(--line);transform:scale(0.96)}
-  .modal.show .dialog{transform:scale(1)}
+  .dialog,.nf-auth-dialog{border-radius:24px;border-bottom:1px solid var(--line);transform:scale(0.96)}
+  .modal.show .dialog,.modal.show .nf-auth-dialog{transform:scale(1)}
 }
 
 @media(max-width:768px){
@@ -273,239 +347,337 @@ a{color:inherit;text-decoration:none}
 </head>
 <body data-theme="emerald">
 
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-header">
-    <a class="brand" href="#" onclick="showHomeView();closeSidebar();return false;">
-      <span class="brand-mark">XT</span>
-      <span class="brand-name">XTREME WATCH<small>UGANDAN VJ TRANSLATIONS</small></span>
-    </a>
-    <div class="sidebar-poster-spotlight">
-      <img id="sidebarSpotlightImg" src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=600" alt="Spotlight Poster">
-      <div class="sidebar-poster-label" id="sidebarSpotlightLabel">⚡ Loading Featured Spotlight...</div>
+<!-- =========================================================
+     1. NETFLIX-STYLE WELCOME & SIGN-IN SCREEN (SHOWN FIRST)
+     ========================================================= -->
+<div class="auth-landing" id="authLanding">
+  <section class="auth-hero">
+    <div class="auth-collage" id="authCollage"></div>
+    <div class="auth-hero-vignette"></div>
+
+    <div class="auth-topbar">
+      <div class="nf-wordmark">XTREME WATCH</div>
+      <button type="button" class="nf-signin-btn" onclick="openSignInModal()">Sign In</button>
     </div>
-  </div>
 
-  <nav class="sidebar-nav">
-    <div class="side-label">Menu</div>
-    <a href="#" class="side-link active" id="homeSidebarLink" onclick="showHomeView();closeSidebar();return false;"><span class="ico">🏠</span>Home</a>
-    <a href="#catalog" class="side-link" onclick="showHomeView();go('catalog');closeSidebar();return false;"><span class="ico">🎞️</span>Latest Movies</a>
-    <a href="#series" class="side-link" onclick="showHomeView();go('series');closeSidebar();return false;"><span class="ico">📺</span>Series</a>
-    <a href="#mylist" class="side-link" onclick="showHomeView();go('mylist');closeSidebar();return false;"><span class="ico">❤️</span>My List <span id="sideWatchCount" style="margin-left:auto;padding:2px 8px;border-radius:10px;font-size:11px">0</span></a>
-
-    <div class="side-label">Membership</div>
-    <a href="#" class="side-link" id="subSidebarLink" onclick="showSubscriptionView();closeSidebar();return false;"><span class="ico">💎</span><span id="subSidebarText">Subscription Plans</span></a>
-
-    <div class="side-label">Collections</div>
-    <a href="#catalog" class="side-link" onclick="showHomeView();go('catalog');closeSidebar();return false;"><span class="ico">🍿</span>All Movies</a>
-    <a href="#kids" class="side-link" onclick="showHomeView();go('kids');closeSidebar();return false;"><span class="ico">🧸</span>Kids Zone</a>
-    <a href="#indian" class="side-link" onclick="showHomeView();go('indian');closeSidebar();return false;"><span class="ico">✨</span>Indian Movies</a>
-    <a href="#asian" class="side-link" onclick="showHomeView();go('asian');closeSidebar();return false;"><span class="ico">⛩️</span>Asian Series</a>
-
-    <div class="side-label">Preferences</div>
-    <a href="#" class="side-link" id="settingsSidebarLink" onclick="showSettingsView();closeSidebar();return false;"><span class="ico">⚙️</span>Settings</a>
-  </nav>
-
-  <div class="sidebar-bottom">
-    <div style="display:flex;justify-content:space-between;align-items:center;">
-      <span style="font-size:12px;font-weight:800;" id="sidebarUserStatus">✓ Free Sample (1h/movie)</span>
-      <button class="btn secondary" style="padding:6px 12px;font-size:11px;" onclick="showSubscriptionView();closeSidebar();return false;">Plans</button>
+    <div class="auth-hero-center">
+      <h1>Unlimited movies, TV shows, and more</h1>
+      <p class="auth-price-line">Starts at 1,000 UGX. Cancel anytime.</p>
+      <p class="auth-sub-line">Ready to watch? Enter your email or phone number to sign in or start your 1-hour free sample.</p>
+      <form class="nf-start-form" id="landingStartForm">
+        <input class="nf-email-input" id="landingEmailInput" type="text" placeholder="Email address or phone number" required>
+        <button type="submit" class="nf-cta-btn">Get Started &rsaquo;</button>
+      </form>
     </div>
-    <div class="side-note">Your entertainment • Your VJ • Your choice<br>© <span id="sideYear"></span> Xtreme</div>
-  </div>
-</aside>
+  </section>
 
-<div class="overlay" id="sidebarOverlay"></div>
+  <!-- Curved Red Arch Separator -->
+  <div class="nf-arch-divider"><div class="nf-arch-curve"></div></div>
 
-<div class="main">
-  <header class="topbar">
-    <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
-    <div class="search-wrap"><input id="searchInput" type="search" placeholder="Search movies, year, genre or VJ..."></div>
-    <div class="top-right">
-      <div class="user-badge" title="Free Member" id="userBadge">XT</div>
-    </div>
-  </header>
+  <div class="auth-body">
+    <h2 class="auth-sec-title">Trending Now</h2>
+    <div class="nf-trending-row" id="landingTrendingRow"></div>
 
-  <div id="mainAppView">
-    <div class="content">
-      <section class="hero-wrapper" id="home">
-        <div class="hero-slider" id="heroSlider">
-          <div class="hero-slide" id="heroSlide1" style="background-image:url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200')">
-            <div class="hero-content">
-              <span class="eyebrow">Featured Spotlight • Trending Now</span>
-              <h1 id="heroTitle1">Loading Featured Movie...</h1>
-              <p id="heroDesc1">Fetching the latest blockbusters, series, and official posters.</p>
-              <div class="hero-actions">
-                <button class="btn" id="exploreBtn">Explore Movies</button>
-                <button class="btn secondary" id="browseSeriesBtn">Browse Series</button>
-              </div>
-            </div>
-          </div>
-          <div class="hero-slide" id="heroSlide2" style="background-image:url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1200')">
-            <div class="hero-content">
-              <span class="eyebrow">Popular Series • Binge Watch</span>
-              <h2 id="heroTitle2">Series & Drama Marathon</h2>
-              <p id="heroDesc2">Binge full seasons, Asian dramas, and translated favorites with smooth playback across devices.</p>
-              <div class="hero-actions">
-                <button class="btn" onclick="go('series')">Watch Series</button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="slider-indicators" id="sliderIndicators"></div>
-      </section>
-
-      <div class="quick" id="quickGenres">
-        <button class="chip active" data-filter="all">All</button>
-        <button class="chip" data-filter="Action">Action</button>
-        <button class="chip" data-filter="Adventure">Adventure</button>
-        <button class="chip" data-filter="Comedy">Comedy</button>
-        <button class="chip" data-filter="Drama">Drama</button>
-        <button class="chip" data-filter="Romance">Romance</button>
-        <button class="chip" data-filter="Horror">Horror</button>
-        <button class="chip" data-filter="Thriller">Thriller</button>
-        <button class="chip" data-filter="Sci-Fi">Sci-Fi</button>
+    <h2 class="auth-sec-title" style="margin-top:28px;">More Reasons to Join</h2>
+    <div class="nf-reasons-grid">
+      <div class="nf-reason-card">
+        <h3>Enjoy on your TV & Phone</h3>
+        <p>Watch on Smart TVs, Android, iPhone, laptops, and tablets in crisp HD clarity.</p>
+        <div class="nf-reason-icon">📺</div>
       </div>
-
-      <div class="toolbar" id="categories">
-        <select id="typeFilter"><option value="all">All content</option><option value="movie">Movies</option><option value="series">Series</option></select>
-        <select id="genreFilter"><option value="all">All genres</option><option>Action</option><option>Adventure</option><option>Comedy</option><option>Drama</option><option>Romance</option><option>Horror</option><option>Thriller</option><option>Sci-Fi</option><option>Animation</option></select>
-        <select id="vjFilter"><option value="all">All VJs</option></select>
-        <select id="sortFilter"><option value="newest">Newest first</option><option value="az">Title A–Z</option><option value="year">Year: newest</option></select>
-        <button class="btn secondary" id="clearFilters">Clear filters</button>
+      <div class="nf-reason-card">
+        <h3>Authentic Ugandan VJs</h3>
+        <p>Stream blockbusters translated by VJ Junior, Ice P, Emmy, Jingo, and more.</p>
+        <div class="nf-reason-icon">🎙️</div>
       </div>
-
-      <section class="section" id="catalog">
-        <div class="section-head"><h2 id="catalogTitle">Latest Movies</h2><span id="resultCount">Loading library...</span></div>
-        <div class="grid-car" id="movieGrid"><div class="empty">Loading your movie library...</div></div>
-        <p class="notice" id="loadNotice">Connecting to movie catalog...</p>
-        <div style="text-align:center;margin-top:16px"><button class="btn secondary" id="loadMore" hidden>Load more</button></div>
-      </section>
-
-      <section class="section" id="series"><div class="section-head"><h2>Series Collection</h2><span>Series and seasons</span></div><div class="grid-car" id="seriesGrid"></div></section>
-      <section class="section" id="kids"><div class="section-head"><h2>Kids Zone</h2><span>Family-friendly collection</span></div><div class="grid-car" id="kidsGrid"></div></section>
-      <section class="section" id="indian"><div class="section-head"><h2>Indian Movies</h2><span>Browse Indian cinema</span></div><div class="grid-car" id="indianGrid"></div></section>
-      <section class="section" id="asian"><div class="section-head"><h2>Asian Series</h2><span>Korean and other Asian series</span></div><div class="grid-car" id="asianGrid"></div></section>
-      <section class="section" id="mylist"><div class="section-head"><h2>My List</h2><span>Your saved titles</span></div><div class="grid-car" id="watchlistGrid"></div></section>
-      <section class="section" id="vjcollections"><div class="section-head"><h2>VJ Collections</h2><span>Choose your favourite translator</span></div><div class="vj-chips" id="vjChips"></div></section>
-      
-      <section class="section" id="support">
-        <div class="section-head"><h2>Contact & Support</h2><span>Need help?</span></div>
-        <div class="toolbar">
-          <div style="flex:1;min-width:190px">
-            <b>XTREME MOVIE WATCH</b>
-            <p class="notice">For support, questions or feedback, contact the app team directly via email or WhatsApp.</p>
-          </div>
-          <div style="display:flex;gap:10px;flex-wrap:wrap">
-            <a class="btn" href="mailto:xmmedialibrary@gmail.com">Email Support</a>
-            <a class="btn secondary" href="https://wa.me/256740981386" target="_blank">Chat on WhatsApp</a>
-          </div>
-        </div>
-      </section>
+      <div class="nf-reason-card">
+        <h3>Easy Mobile Money</h3>
+        <p>Instant activation using MTN MoMo or Airtel Money starting from just 1,000 UGX.</p>
+        <div class="nf-reason-icon">📱</div>
+      </div>
+      <div class="nf-reason-card">
+        <h3>1-Hour Free Sample</h3>
+        <p>Sign in and test any movie free for 1 full hour before choosing a pass.</p>
+        <div class="nf-reason-icon">⏳</div>
+      </div>
     </div>
   </div>
 
-  <div id="subViewContainer">
-    <div class="content">
-      <section class="subscription-section" id="subscriptionViewSection">
-        <div class="sub-header">
-          <h2>Subscription Plans</h2>
-          <p>Browse freely anytime. New viewers get 1 hour of sample playback per movie before a subscription pass is required.</p>
-        </div>
-        <div class="pricing-grid">
-          <div class="price-card" data-plan-card="1000">
-            <span class="plan-duration">Daily</span>
-            <div class="plan-price">1,000 UGX<small>1 Day Access</small></div>
-            <ul class="plan-features">
-              <li>1 day unlimited movie playback</li>
-              <li>All Ugandan VJ translations</li>
-              <li>Instant instant activation</li>
-            </ul>
-            <button class="plan-btn" data-select-plan="Daily" data-amount="1000">Select 1,000 UGX</button>
-          </div>
-
-          <div class="price-card" data-plan-card="1500">
-            <span class="plan-duration">2 Days</span>
-            <div class="plan-price">1,500 UGX<small>48 Hours Access</small></div>
-            <ul class="plan-features">
-              <li>2 days unlimited movie playback</li>
-              <li>Movies & series catalog</li>
-              <li>Great short-stay value</li>
-            </ul>
-            <button class="plan-btn" data-select-plan="2 Days" data-amount="1500">Select 1,500 UGX</button>
-          </div>
-
-          <div class="price-card featured" data-plan-card="4000">
-            <span class="badge-popular">Best Value</span>
-            <span class="plan-duration">Weekly</span>
-            <div class="plan-price">4,000 UGX<small>7 Days Access</small></div>
-            <ul class="plan-features">
-              <li>1 week unlimited movie playback</li>
-              <li>All VJs & collections</li>
-              <li>Weekly pass at 4,000 UGX</li>
-            </ul>
-            <button class="plan-btn" data-select-plan="Weekly" data-amount="4000">Select 4,000 UGX</button>
-          </div>
-
-          <div class="price-card" data-plan-card="20000">
-            <span class="plan-duration">Monthly</span>
-            <div class="plan-price">20,000 UGX<small>30 Days Access</small></div>
-            <ul class="plan-features">
-              <li>1 month unlimited movie playback</li>
-              <li>All titles & VJ releases</li>
-              <li>VIP badge highlight</li>
-            </ul>
-            <button class="plan-btn" data-select-plan="Monthly" data-amount="20000">Select 20,000 UGX</button>
-          </div>
-        </div>
-      </section>
-
-      <section class="settings-section" id="settingsViewSection">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:28px;border-bottom:1px solid var(--line);padding-bottom:18px;">
-          <div>
-            <h2 style="margin:0 0 6px;font-size:28px;font-weight:900;">Settings</h2>
-            <p style="color:var(--muted);margin:0;font-size:14px;">Switch theme colors (including Light Mode) and check your plan status.</p>
-          </div>
-          <button class="btn" onclick="showHomeView();">Back to Home</button>
-        </div>
-
-        <div class="settings-group">
-          <h3>🎨 Theme Colors</h3>
-          <p style="color:var(--muted);font-size:13px;margin-bottom:14px;">Pick one of 6 themes, including Light Mode.</p>
-          <div class="theme-swatches" id="themeSwatches">
-            <button class="theme-pill" data-theme-choice="crimson"><span class="swatch-dot" style="background:#e50914"></span>Crimson Dark</button>
-            <button class="theme-pill" data-theme-choice="neon"><span class="swatch-dot" style="background:#00e5ff"></span>Neon Cyber</button>
-            <button class="theme-pill" data-theme-choice="gold"><span class="swatch-dot" style="background:#f5b700"></span>Royal Gold</button>
-            <button class="theme-pill active" data-theme-choice="emerald"><span class="swatch-dot" style="background:#00e676"></span>Emerald Pulse</button>
-            <button class="theme-pill" data-theme-choice="sunset"><span class="swatch-dot" style="background:#ff2a85"></span>Sunset Velvet</button>
-            <button class="theme-pill" data-theme-choice="light"><span class="swatch-dot" style="background:#ffffff;border:1px solid #888"></span>Light Mode</button>
-          </div>
-        </div>
-
-        <div class="settings-group" style="margin-bottom:0">
-          <h3>💎 Membership Status</h3>
-          <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
-            <div>
-              <div style="font-weight:800;font-size:15px;" id="settingsPlanTitle">Free Sample (1 Hour per Movie)</div>
-              <div style="color:var(--muted);font-size:13px;margin-top:4px;">Browsing is free across the site; unsubscribed movie playback prompts after 1 hour.</div>
-            </div>
-            <button class="btn" onclick="showSubscriptionView();">Subscription Plans</button>
-          </div>
-        </div>
-      </section>
-    </div>
+  <div class="nf-sticky-footer">
+    <button type="button" onclick="openSignInModal()">Get Started</button>
   </div>
-
-  <footer class="footer">XTREME MOVIE WATCH<br>Ugandan VJ Translations • This product uses the TMDB API but is not endorsed or certified by TMDB.<br>© <span id="yearNow"></span> Xtreme.</footer>
 </div>
 
-<nav class="mobile-nav" id="mobileNav">
-  <a href="#" data-nav="home" class="active" onclick="showHomeView();return false;"><b>🏠</b>Home</a>
-  <a href="#catalog" onclick="showHomeView();go('catalog');return false;"><b>🎞️</b>Movies</a>
-  <a href="#series" onclick="showHomeView();go('series');return false;"><b>📺</b>Series</a>
-  <a href="#" id="mobileSubKey" onclick="showSubscriptionView();return false;"><b>💎</b><span id="mobileSubLabel">Plans</span></a>
-  <a href="#" id="mobileSettingsKey" onclick="showSettingsView();return false;"><b>⚙️</b>Settings</a>
-</nav>
+<!-- Sign-In Modal -->
+<div class="modal" id="signInModal">
+  <div class="nf-auth-dialog">
+    <button class="close" data-close="signInModal" style="background:#1c1c26;color:#fff;border-color:#333">✕</button>
+    <h2>Sign In</h2>
+    <p style="color:#a3a3b5;font-size:13px;margin:0 0 10px;">Sign in to unlock the full HD Xtreme Movie Watch library.</p>
+    <form id="signInForm">
+      <input class="nf-auth-field" id="authUserField" type="text" placeholder="Email or mobile number (e.g. 0740981386)" required>
+      <input class="nf-auth-field" id="authPassField" type="password" placeholder="Password (min 4 characters)" minlength="4" required>
+      <button type="submit" class="nf-auth-submit">Sign In & Watch</button>
+    </form>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:12px;color:#999;">
+      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;"><input type="checkbox" checked> Remember me</label>
+      <a href="#" onclick="quickGuestEnter();return false;" style="color:#fff;text-decoration:underline;">Quick Enter</a>
+    </div>
+  </div>
+</div>
 
+<!-- =========================================================
+     2. MAIN STREAMING APP SHELL (UNLOCKED AFTER SIGN IN)
+     ========================================================= -->
+<div id="appShell">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a class="brand" href="#" onclick="showHomeView();closeSidebar();return false;">
+        <span class="brand-mark">XT</span>
+        <span class="brand-name">XTREME WATCH<small>UGANDAN VJ TRANSLATIONS</small></span>
+      </a>
+      <div class="sidebar-poster-spotlight">
+        <img id="sidebarSpotlightImg" src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800" alt="Spotlight Poster">
+        <div class="sidebar-poster-label" id="sidebarSpotlightLabel">⚡ Loading Featured Spotlight...</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="side-label">Menu</div>
+      <a href="#" class="side-link active" id="homeSidebarLink" onclick="showHomeView();closeSidebar();return false;"><span class="ico">🏠</span>Home</a>
+      <a href="#catalog" class="side-link" onclick="showHomeView();go('catalog');closeSidebar();return false;"><span class="ico">🎞️</span>Latest Movies</a>
+      <a href="#series" class="side-link" onclick="showHomeView();go('series');closeSidebar();return false;"><span class="ico">📺</span>Series</a>
+      <a href="#mylist" class="side-link" onclick="showHomeView();go('mylist');closeSidebar();return false;"><span class="ico">❤️</span>My List <span id="sideWatchCount" style="margin-left:auto;padding:2px 8px;border-radius:10px;font-size:11px">0</span></a>
+
+      <div class="side-label">Membership</div>
+      <a href="#" class="side-link" id="subSidebarLink" onclick="showSubscriptionView();closeSidebar();return false;"><span class="ico">💎</span><span id="subSidebarText">Subscription Plans</span></a>
+
+      <div class="side-label">Collections</div>
+      <a href="#catalog" class="side-link" onclick="showHomeView();go('catalog');closeSidebar();return false;"><span class="ico">🍿</span>All Movies</a>
+      <a href="#kids" class="side-link" onclick="showHomeView();go('kids');closeSidebar();return false;"><span class="ico">🧸</span>Kids Zone</a>
+      <a href="#indian" class="side-link" onclick="showHomeView();go('indian');closeSidebar();return false;"><span class="ico">✨</span>Indian Movies</a>
+      <a href="#asian" class="side-link" onclick="showHomeView();go('asian');closeSidebar();return false;"><span class="ico">⛩️</span>Asian Series</a>
+
+      <div class="side-label">Preferences</div>
+      <a href="#" class="side-link" id="settingsSidebarLink" onclick="showSettingsView();closeSidebar();return false;"><span class="ico">⚙️</span>Settings</a>
+      <a href="#" class="side-link" onclick="signOutUser();closeSidebar();return false;"><span class="ico">🚪</span>Sign Out</a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:12px;font-weight:800;" id="sidebarUserStatus">✓ Free Sample (1h/movie)</span>
+        <button class="btn secondary" style="padding:6px 12px;font-size:11px;" onclick="showSubscriptionView();closeSidebar();return false;">Plans</button>
+      </div>
+      <div class="side-note">Your entertainment • Your VJ • Your choice<br>© <span id="sideYear"></span> Xtreme</div>
+    </div>
+  </aside>
+
+  <div class="overlay" id="sidebarOverlay"></div>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+      <div class="search-wrap"><input id="searchInput" type="search" placeholder="Search movies, year, genre or VJ..."></div>
+      <div class="top-right">
+        <span class="user-email-pill" id="topUserLabel">Member</span>
+        <div class="user-badge" title="Signed In Member" id="userBadge">XT</div>
+      </div>
+    </header>
+
+    <div id="mainAppView">
+      <div class="content">
+        <section class="hero-wrapper" id="home">
+          <div class="hero-slider" id="heroSlider">
+            <div class="hero-slide" id="heroSlide1" style="background-image:url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1400')">
+              <div class="hero-content">
+                <span class="eyebrow">HD Spotlight • Trending Now</span>
+                <h1 id="heroTitle1">Loading Featured Movie...</h1>
+                <p id="heroDesc1">Fetching the latest blockbusters, series, and official HD posters.</p>
+                <div class="hero-actions">
+                  <button class="btn" id="exploreBtn">Explore Movies</button>
+                  <button class="btn secondary" id="browseSeriesBtn">Browse Series</button>
+                </div>
+              </div>
+            </div>
+            <div class="hero-slide" id="heroSlide2" style="background-image:url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1400')">
+              <div class="hero-content">
+                <span class="eyebrow">Popular Series • HD Marathon</span>
+                <h2 id="heroTitle2">Series & Drama Marathon</h2>
+                <p id="heroDesc2">Binge full seasons, Asian dramas, and translated favorites with smooth HD playback across devices.</p>
+                <div class="hero-actions">
+                  <button class="btn" onclick="go('series')">Watch Series</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slider-indicators" id="sliderIndicators"></div>
+        </section>
+
+        <div class="quick" id="quickGenres">
+          <button class="chip active" data-filter="all">All</button>
+          <button class="chip" data-filter="Action">Action</button>
+          <button class="chip" data-filter="Adventure">Adventure</button>
+          <button class="chip" data-filter="Comedy">Comedy</button>
+          <button class="chip" data-filter="Drama">Drama</button>
+          <button class="chip" data-filter="Romance">Romance</button>
+          <button class="chip" data-filter="Horror">Horror</button>
+          <button class="chip" data-filter="Thriller">Thriller</button>
+          <button class="chip" data-filter="Sci-Fi">Sci-Fi</button>
+        </div>
+
+        <div class="toolbar" id="categories">
+          <select id="typeFilter"><option value="all">All content</option><option value="movie">Movies</option><option value="series">Series</option></select>
+          <select id="genreFilter"><option value="all">All genres</option><option>Action</option><option>Adventure</option><option>Comedy</option><option>Drama</option><option>Romance</option><option>Horror</option><option>Thriller</option><option>Sci-Fi</option><option>Animation</option></select>
+          <select id="vjFilter"><option value="all">All VJs</option></select>
+          <select id="sortFilter"><option value="newest">Newest first</option><option value="az">Title A–Z</option><option value="year">Year: newest</option></select>
+          <button class="btn secondary" id="clearFilters">Clear filters</button>
+        </div>
+
+        <section class="section" id="catalog">
+          <div class="section-head"><h2 id="catalogTitle">Latest Movies</h2><span id="resultCount">Loading library...</span></div>
+          <div class="grid-car" id="movieGrid"><div class="empty">Loading your movie library...</div></div>
+          <p class="notice" id="loadNotice">Connecting to movie catalog...</p>
+          <div style="text-align:center;margin-top:16px"><button class="btn secondary" id="loadMore" hidden>Load more</button></div>
+        </section>
+
+        <section class="section" id="series"><div class="section-head"><h2>Series Collection</h2><span>Series and seasons</span></div><div class="grid-car" id="seriesGrid"></div></section>
+        <section class="section" id="kids"><div class="section-head"><h2>Kids Zone</h2><span>Family-friendly collection</span></div><div class="grid-car" id="kidsGrid"></div></section>
+        <section class="section" id="indian"><div class="section-head"><h2>Indian Movies</h2><span>Browse Indian cinema</span></div><div class="grid-car" id="indianGrid"></div></section>
+        <section class="section" id="asian"><div class="section-head"><h2>Asian Series</h2><span>Korean and other Asian series</span></div><div class="grid-car" id="asianGrid"></div></section>
+        <section class="section" id="mylist"><div class="section-head"><h2>My List</h2><span>Your saved titles</span></div><div class="grid-car" id="watchlistGrid"></div></section>
+        <section class="section" id="vjcollections"><div class="section-head"><h2>VJ Collections</h2><span>Choose your favourite translator</span></div><div class="vj-chips" id="vjChips"></div></section>
+        
+        <section class="section" id="support">
+          <div class="section-head"><h2>Contact & Support</h2><span>Need help?</span></div>
+          <div class="toolbar">
+            <div style="flex:1;min-width:190px">
+              <b>XTREME MOVIE WATCH</b>
+              <p class="notice">For support, questions or feedback, contact the app team directly via email or WhatsApp.</p>
+            </div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <a class="btn" href="mailto:xmmedialibrary@gmail.com">Email Support</a>
+              <a class="btn secondary" href="https://wa.me/256740981386" target="_blank">Chat on WhatsApp</a>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div id="subViewContainer">
+      <div class="content">
+        <section class="subscription-section" id="subscriptionViewSection">
+          <div class="sub-header">
+            <h2>Subscription Plans</h2>
+            <p>Browse freely anytime. New viewers get 1 hour of sample playback per movie before a subscription pass is required.</p>
+          </div>
+          <div class="pricing-grid">
+            <div class="price-card" data-plan-card="1000">
+              <span class="plan-duration">Daily</span>
+              <div class="plan-price">1,000 UGX<small>1 Day Access</small></div>
+              <ul class="plan-features">
+                <li>1 day unlimited movie playback</li>
+                <li>All Ugandan VJ translations</li>
+                <li>Instant activation</li>
+              </ul>
+              <button class="plan-btn" data-select-plan="Daily" data-amount="1000">Select 1,000 UGX</button>
+            </div>
+
+            <div class="price-card" data-plan-card="1500">
+              <span class="plan-duration">2 Days</span>
+              <div class="plan-price">1,500 UGX<small>48 Hours Access</small></div>
+              <ul class="plan-features">
+                <li>2 days unlimited movie playback</li>
+                <li>Movies & series catalog</li>
+                <li>Great short-stay value</li>
+              </ul>
+              <button class="plan-btn" data-select-plan="2 Days" data-amount="1500">Select 1,500 UGX</button>
+            </div>
+
+            <div class="price-card featured" data-plan-card="4000">
+              <span class="badge-popular">Best Value</span>
+              <span class="plan-duration">Weekly</span>
+              <div class="plan-price">4,000 UGX<small>7 Days Access</small></div>
+              <ul class="plan-features">
+                <li>1 week unlimited movie playback</li>
+                <li>All VJs & collections</li>
+                <li>Weekly pass at 4,000 UGX</li>
+              </ul>
+              <button class="plan-btn" data-select-plan="Weekly" data-amount="4000">Select 4,000 UGX</button>
+            </div>
+
+            <div class="price-card" data-plan-card="20000">
+              <span class="plan-duration">Monthly</span>
+              <div class="plan-price">20,000 UGX<small>30 Days Access</small></div>
+              <ul class="plan-features">
+                <li>1 month unlimited movie playback</li>
+                <li>All titles & VJ releases</li>
+                <li>VIP badge highlight</li>
+              </ul>
+              <button class="plan-btn" data-select-plan="Monthly" data-amount="20000">Select 20,000 UGX</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="settings-section" id="settingsViewSection">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:28px;border-bottom:1px solid var(--line);padding-bottom:18px;">
+            <div>
+              <h2 style="margin:0 0 6px;font-size:28px;font-weight:900;">Settings</h2>
+              <p style="color:var(--muted);margin:0;font-size:14px;">Switch theme colors (including Light Mode), check your plan, or sign out.</p>
+            </div>
+            <button class="btn" onclick="showHomeView();">Back to Home</button>
+          </div>
+
+          <div class="settings-group">
+            <h3>🎨 Theme Colors</h3>
+            <p style="color:var(--muted);font-size:13px;margin-bottom:14px;">Pick one of 6 themes, including Light Mode.</p>
+            <div class="theme-swatches" id="themeSwatches">
+              <button class="theme-pill" data-theme-choice="crimson"><span class="swatch-dot" style="background:#e50914"></span>Crimson Dark</button>
+              <button class="theme-pill" data-theme-choice="neon"><span class="swatch-dot" style="background:#00e5ff"></span>Neon Cyber</button>
+              <button class="theme-pill" data-theme-choice="gold"><span class="swatch-dot" style="background:#f5b700"></span>Royal Gold</button>
+              <button class="theme-pill active" data-theme-choice="emerald"><span class="swatch-dot" style="background:#00e676"></span>Emerald Pulse</button>
+              <button class="theme-pill" data-theme-choice="sunset"><span class="swatch-dot" style="background:#ff2a85"></span>Sunset Velvet</button>
+              <button class="theme-pill" data-theme-choice="light"><span class="swatch-dot" style="background:#ffffff;border:1px solid #888"></span>Light Mode</button>
+            </div>
+          </div>
+
+          <div class="settings-group">
+            <h3>💎 Membership Status</h3>
+            <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+              <div>
+                <div style="font-weight:800;font-size:15px;" id="settingsPlanTitle">Free Sample (1 Hour per Movie)</div>
+                <div style="color:var(--muted);font-size:13px;margin-top:4px;">Browsing is free across the site; unsubscribed movie playback prompts after 1 hour.</div>
+              </div>
+              <button class="btn" onclick="showSubscriptionView();">Subscription Plans</button>
+            </div>
+          </div>
+
+          <div class="settings-group" style="margin-bottom:0">
+            <h3>👤 Account</h3>
+            <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+              <div>
+                <div style="font-weight:800;font-size:15px;" id="settingsAccountEmail">Signed In</div>
+                <div style="color:var(--muted);font-size:13px;margin-top:4px;">Return to the welcome sign-in screen anytime.</div>
+              </div>
+              <button class="btn secondary" onclick="signOutUser();">Sign Out</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <footer class="footer">XTREME MOVIE WATCH<br>Ugandan VJ Translations • This product uses the TMDB API but is not endorsed or certified by TMDB.<br>© <span id="yearNow"></span> Xtreme.</footer>
+  </div>
+
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="#" data-nav="home" class="active" onclick="showHomeView();return false;"><b>🏠</b>Home</a>
+    <a href="#catalog" onclick="showHomeView();go('catalog');return false;"><b>🎞️</b>Movies</a>
+    <a href="#series" onclick="showHomeView();go('series');return false;"><b>📺</b>Series</a>
+    <a href="#" id="mobileSubKey" onclick="showSubscriptionView();return false;"><b>💎</b><span id="mobileSubLabel">Plans</span></a>
+    <a href="#" id="mobileSettingsKey" onclick="showSettingsView();return false;"><b>⚙️</b>Settings</a>
+  </nav>
+</div>
+
+<!-- Detail & Player Modals -->
 <div class="modal" id="detailModal"><div class="dialog" id="detailDialog"><div class="drag-handle" id="detailDrag"></div><button class="close" data-close="detailModal">✕</button><div id="detailContent"></div></div></div>
 
 <div class="modal" id="playerModal">
@@ -559,15 +731,79 @@ const SUPABASE_URL="YOUR_SUPABASE_URL",SUPABASE_ANON_KEY="YOUR_SUPABASE_ANON_KEY
 const TMDB_API_KEY="925111c270baf9b011e32b3c70c84546";
 const VJS=["VJ Junior","Ice P","Emmy","Jingo","Mark","Aaron","Isma Pro","Eddy","VJ ashim","Ulio","Muba","Ivo","Soul"];
 const demoMovies=[
-  {id:"demo1",title:"Test Video",year:2026,genre:"Demo",vj:"VJ Junior",type:"movie",description:"Standard platform test video feed.",video_url:"https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ",poster:"https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=600"},
-  {id:"demo2",title:"YouTube Demo",year:2026,genre:"Demo",vj:"Ice P",type:"movie",description:"Secondary system test playback stream.",video_url:"https://www.youtube-nocookie.com/embed/M7lc1UVf-VE",poster:"https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600"}
+  {id:"demo1",title:"Test Video",year:2026,genre:"Demo",vj:"VJ Junior",type:"movie",description:"Standard platform test video feed.",video_url:"https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ",poster:"https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800"},
+  {id:"demo2",title:"YouTube Demo",year:2026,genre:"Demo",vj:"Ice P",type:"movie",description:"Secondary system test playback stream.",video_url:"https://www.youtube-nocookie.com/embed/M7lc1UVf-VE",poster:"https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=800"}
 ];
 
-const SAMPLE_LIMIT_MS = 60 * 60 * 1000; // 1 hour
+const SAMPLE_LIMIT_MS = 60 * 60 * 1000;
 let allMovies=[],visibleLimit=24,activeGenre="all",supabaseClient=null,sampleTimeout=null;
 const $=id=>document.getElementById(id),clean=v=>String(v??"").trim();
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 
+/* =========================================================
+   SIGN-IN GATEWAY & AUTH STATE
+   ========================================================= */
+function getSignedUser(){
+  try{return JSON.parse(localStorage.getItem("xtreme_signed_user")||"null")}catch{return null}
+}
+function openSignInModal(prefill=""){
+  if(prefill) $("authUserField").value=prefill;
+  showModal("signInModal");
+  setTimeout(()=>$("authUserField").focus(),120);
+}
+function unlockApp(userObj){
+  try{localStorage.setItem("xtreme_signed_user",JSON.stringify(userObj))}catch(e){}
+  $("authLanding").classList.add("hidden");
+  $("appShell").classList.add("unlocked");
+  closeModal("signInModal");
+  const label=userObj.contact||"Member";
+  $("topUserLabel").textContent=label;
+  $("settingsAccountEmail").textContent="Signed in as: "+label;
+  const initials=label.replace(/[^a-zA-Z0-9]/g,"").slice(0,2).toUpperCase()||"XT";
+  if(!getActivePlan()) $("userBadge").textContent=initials;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function signOutUser(){
+  try{localStorage.removeItem("xtreme_signed_user")}catch(e){}
+  $("appShell").classList.remove("unlocked");
+  $("authLanding").classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function quickGuestEnter(){
+  unlockApp({contact:"Xtreme Viewer",signedAt:Date.now()});
+}
+
+$("landingStartForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const val=clean($("landingEmailInput").value);
+  openSignInModal(val);
+});
+$("signInForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const contact=clean($("authUserField").value);
+  if(!contact)return;
+  unlockApp({contact,signedAt:Date.now()});
+});
+
+function renderLandingShowcase(){
+  const items=allMovies.filter(m=>m.poster);
+  if(!items.length)return;
+  // Populate tilted background collage with HD w780 posters
+  const collageItems=[...items,...items].slice(0,24);
+  $("authCollage").innerHTML=collageItems.map(m=>`<img src="${esc(m.poster)}" alt="" loading="lazy">`).join("");
+
+  // Populate Trending Now Top 10 with large outlined rank numbers
+  $("landingTrendingRow").innerHTML=items.slice(0,10).map((m,idx)=>`
+    <div class="nf-trend-card" onclick="openSignInModal()" title="${esc(m.title)}">
+      <img class="nf-trend-poster" src="${esc(m.poster)}" alt="${esc(m.title)}" loading="lazy">
+      <span class="nf-rank-num">${idx+1}</span>
+    </div>
+  `).join("");
+}
+
+/* =========================================================
+   NORMALIZATION & STORAGE
+   ========================================================= */
 function normalize(m){
   const t=String(m.type||m.content_type||"movie").toLowerCase();
   return{
@@ -666,10 +902,12 @@ function applyPlanUI(planName, amount, animate=true){
   }
 }
 
-// Payment Flow Integration
+/* =========================================================
+   MOBILE MONEY PAYMENT FLOW (MTN & AIRTEL)
+   ========================================================= */
 let pendingCheckout={planName:"",amount:0,provider:"mtn"};
 function formatUgMsisdn(raw){
-  const digits=String(raw|| "").replace(/\D/g,"");
+  const digits=String(raw||"").replace(/\D/g,"");
   if(digits.startsWith("256")&&digits.length===12)return digits;
   if(digits.startsWith("0")&&digits.length===10)return "256"+digits.slice(1);
   if(digits.length===9&&/^[7]/.test(digits))return "256"+digits;
@@ -737,22 +975,25 @@ if($("confirmPayBtn")){
     if(detected && detected!==pendingCheckout.provider) setProviderUI(detected);
 
     statusBox.style.color="var(--text)";
-    statusBox.textContent=`Processing ${pendingCheckout.provider.toUpperCase()} payment for +${msisdn}... Simulating payment confirmation.`;
+    statusBox.textContent=`Sending ${pendingCheckout.provider.toUpperCase()} Mobile Money prompt to +${msisdn}... Please enter your PIN on your phone.`;
     statusBox.classList.add("show");
     $("confirmPayBtn").disabled=true;
-    $("confirmPayBtn").textContent="Processing...";
+    $("confirmPayBtn").textContent="Awaiting PIN Approval...";
 
     setTimeout(()=>{
       statusBox.style.color="#00e676";
-      statusBox.textContent="✓ Payment successful! Activating subscription...";
+      statusBox.textContent="✓ Payment confirmed! Activating your subscription...";
       setTimeout(()=>{
         $("confirmPayBtn").disabled=false;
         activatePaidPlan(pendingCheckout.planName,pendingCheckout.amount);
       },1200);
-    },2000);
+    },2200);
   });
 }
 
+/* =========================================================
+   CATALOG, HD POSTERS & PLAYER
+   ========================================================= */
 function initHeroSlider(){
   const slider=$("heroSlider"),indicators=$("sliderIndicators");
   if(!slider||!indicators)return;
@@ -785,7 +1026,7 @@ function card(m){
     </div>
     <div class="movie-info">
       <div class="movie-title" title="${esc(m.title)}">${esc(m.title)}</div>
-      <div class="meta"><span>${esc(m.year||"Year N/A")}</span><span>${esc(m.vj||"TMDB")}</span></div>
+      <div class="meta"><span>${esc(m.year||"Year N/A")}</span><span>${esc(m.vj||"HD")}</span></div>
       <div class="movie-actions">
         <button class="btn" data-details="${esc(m.id)}">Details</button>
         <button class="btn secondary" data-play="${esc(m.id)}">Play</button>
@@ -830,7 +1071,7 @@ function render(){
   grid("indianGrid",allMovies.filter(m=>/india|indian|hindi|bollywood/i.test(m.category+" "+m.language)).slice(0,16));
   grid("asianGrid",allMovies.filter(m=>/korean|asian|japanese|chinese|thai/i.test(m.category+" "+m.language)).slice(0,16));
   grid("watchlistGrid",allMovies.filter(m=>isSaved(m.id)));
-  $("loadNotice").textContent=allMovies.length?`Loaded ${allMovies.length} titles with live posters.`:"No database titles loaded.";
+  $("loadNotice").textContent=allMovies.length?`Loaded ${allMovies.length} titles in HD clarity.`:"No database titles loaded.";
 }
 
 function populateVjs(){
@@ -858,7 +1099,7 @@ function closeModal(id){
 function findMovie(id){return allMovies.find(m=>String(m.id)===String(id))}
 function details(id){
   const m=findMovie(id);if(!m)return;
-  $("detailContent").innerHTML=`<div class="detail-layout">${poster(m)}<div><h2>${esc(m.title)}</h2><div class="meta"><span>${esc(m.year||"Year N/A")}</span><span>${esc(m.type)}</span></div><p><b>VJ:</b> ${esc(m.vj||"TMDB Catalog")}<br><b>Genre:</b> ${esc(m.genre||"Not specified")}<br><b>Collection:</b> ${esc(m.category||"General")}</p><p>${esc(m.description||"No description has been added yet.")}</p><div class="modal-actions"><button class="btn" data-play="${esc(m.id)}">Play now</button><button class="btn secondary" data-save="${esc(m.id)}">${isSaved(m.id)?"Remove from":"Add to"} My List</button></div></div></div>`;
+  $("detailContent").innerHTML=`<div class="detail-layout">${poster(m)}<div><h2>${esc(m.title)}</h2><div class="meta"><span>${esc(m.year||"Year N/A")}</span><span>${esc(m.type)}</span></div><p><b>VJ:</b> ${esc(m.vj||"HD Catalog")}<br><b>Genre:</b> ${esc(m.genre||"Not specified")}<br><b>Collection:</b> ${esc(m.category||"General")}</p><p>${esc(m.description||"No description has been added yet.")}</p><div class="modal-actions"><button class="btn" data-play="${esc(m.id)}">Play now</button><button class="btn secondary" data-save="${esc(m.id)}">${isSaved(m.id)?"Remove from":"Add to"} My List</button></div></div></div>`;
   showModal("detailModal");
 }
 
@@ -901,7 +1142,7 @@ async function resolveTmdbVideo(m){
 async function play(id){
   const m=findMovie(id);if(!m)return;
   $("playerTitle").textContent=m.title;
-  $("playerStage").innerHTML='<div style="color:#fff;font-size:14px;">Loading stream...</div>';
+  $("playerStage").innerHTML='<div style="color:#fff;font-size:14px;">Loading HD stream...</div>';
   $("playerMessage").textContent="";
   showModal("playerModal");
 
@@ -915,7 +1156,7 @@ async function play(id){
   if(embed)$("playerStage").innerHTML=`<iframe class="player-frame" src="${embed}" title="${esc(m.title)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
   else{$("playerStage").innerHTML='<video id="nativePlayer" class="player-frame" controls playsinline preload="metadata"></video>';const p=$("nativePlayer");p.src=videoUrl;p.play().catch(()=>{})}
   $("playerMessage").textContent=getActivePlan()
-    ?"Active subscription enabled."
+    ?"Active subscription enabled • HD Playback."
     :"1-hour free sample active for this movie. Subscription prompt appears after 1 hour.";
   startSampleLimitIfNeeded();
 }
@@ -926,8 +1167,9 @@ async function loadTMDB(){
   if(!TMDB_API_KEY||TMDB_API_KEY.includes("YOUR_"))return;
   const base="https://api.themoviedb.org/3";
   const key=encodeURIComponent(TMDB_API_KEY);
-  const imgBase="https://image.tmdb.org/t/p/w500";
-  const heroBase="https://image.tmdb.org/t/p/w1280";
+  // HD Poster (w780) & Original Backdrop for sharp HD clarity
+  const imgBase="https://image.tmdb.org/t/p/w780";
+  const heroBase="https://image.tmdb.org/t/p/original";
 
   try{
     const [mGenresRes,tvGenresRes]=await Promise.all([
@@ -945,8 +1187,8 @@ async function loadTMDB(){
     });
 
     const endpoints=[
+      {url:`${base}/trending/all/day?api_key=${key}&language=en-US`,type:"movie",category:"Trending"},
       {url:`${base}/movie/popular?api_key=${key}&language=en-US&page=1`,type:"movie",category:"Latest"},
-      {url:`${base}/movie/now_playing?api_key=${key}&language=en-US&page=1`,type:"movie",category:"Latest"},
       {url:`${base}/tv/popular?api_key=${key}&language=en-US&page=1`,type:"series",category:"Series"},
       {url:`${base}/discover/movie?api_key=${key}&with_genres=16,10751&sort_by=popularity.desc&page=1`,type:"movie",category:"Kids"},
       {url:`${base}/discover/movie?api_key=${key}&with_original_language=hi&sort_by=popularity.desc&page=1`,type:"movie",category:"Indian",language:"Indian"},
@@ -964,17 +1206,18 @@ async function loadTMDB(){
         if(!title||!item.poster_path||seen.has(title.toLowerCase()))return;
         seen.add(title.toLowerCase());
 
+        const itemType=item.media_type==="tv"||cfg.type==="series"?"series":"movie";
         const genres=(item.genre_ids||[]).map(id=>genreMap[id]).filter(Boolean).join(", ");
         const date=item.release_date||item.first_air_date||"";
 
-        if(!slide1Set && cfg.type==="movie" && item.backdrop_path){
+        if(!slide1Set && itemType==="movie" && item.backdrop_path){
           slide1Set=true;
           $("heroSlide1").style.backgroundImage=`url('${heroBase+item.backdrop_path}')`;
           $("heroTitle1").textContent=title;
           if(item.overview)$("heroDesc1").textContent=item.overview;
           $("sidebarSpotlightImg").src=heroBase+item.backdrop_path;
           $("sidebarSpotlightLabel").textContent="⚡ Featured: "+title;
-        }else if(!slide2Set && cfg.type==="series" && item.backdrop_path){
+        }else if(!slide2Set && itemType==="series" && item.backdrop_path){
           slide2Set=true;
           $("heroSlide2").style.backgroundImage=`url('${heroBase+item.backdrop_path}')`;
           $("heroTitle2").textContent=title;
@@ -982,12 +1225,12 @@ async function loadTMDB(){
         }
 
         allMovies.push(normalize({
-          id:`tmdb-${cfg.type}-${item.id}`,
+          id:`tmdb-${itemType}-${item.id}`,
           tmdb_id:item.id,
           title,
           year:date.slice(0,4),
           genre:genres,
-          type:cfg.type,
+          type:itemType,
           category:cfg.category,
           language:cfg.language||"",
           poster:imgBase+item.poster_path,
@@ -1072,7 +1315,7 @@ $("clearFilters").addEventListener("click",()=>{
   document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x.dataset.filter==="all"));
   render();
 });
-document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeSidebar();closeModal("detailModal");closeModal("playerModal")}});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeSidebar();closeModal("detailModal");closeModal("playerModal");closeModal("paymentModal");closeModal("signInModal")}});
 
 const yr=new Date().getFullYear();
 $("yearNow").textContent=yr;$("sideYear").textContent=yr;
@@ -1082,10 +1325,15 @@ try{const savedTheme=localStorage.getItem("xtreme_theme");if(savedTheme)applyThe
 const existingPlan=getActivePlan();
 if(existingPlan?.planName && existingPlan?.amount)applyPlanUI(existingPlan.planName,existingPlan.amount,false);
 
+// Check if user is already signed in
+const existingUser=getSignedUser();
+if(existingUser) unlockApp(existingUser);
+
 (async()=>{
   await loadSupabase();
   await loadTMDB();
   if(!allMovies.length)allMovies=demoMovies.map(normalize);
+  renderLandingShowcase();
   populateVjs();
   render();
 })();
