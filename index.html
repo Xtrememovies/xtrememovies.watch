@@ -1,8 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#070709">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#070709">
 <title>Xtreme Movie Watch - Netflix Edition</title>
 <style>
 :root{
@@ -68,197 +69,203 @@
   --sub-title-grad:linear-gradient(90deg,#d90429,#ff4d00,#6a00f4)
 }
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 84px; }
-body { margin: 0; background: var(--bg);color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; transition: background-color .35s ease, color .35s ease; }
-button, input, select { font: inherit; }
-button { cursor: pointer; }
-a { color: inherit; text-decoration: none; }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background-color .35s ease,color .35s ease}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
 
-/* Refined Netflix-Style Sidebar */
-.sidebar { position: fixed; inset: 0 auto 0 0; width: 280px; background: var(--panel); border-right: 1px solid var(--line); z-index: 45; display: flex; flex-direction: column; transition: transform .3s cubic-bezier(0.16,1,0.3,1), background-color .35s ease; }
-.sidebar-header { padding: 24px 20px; background: linear-gradient(180deg, rgba(0,0,0,0.3), transparent); border-bottom: 1px solid rgba(255,255,255,0.05); }
-.brand { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; text-decoration: none; color: var(--text); }
-.brand-mark { width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; font-weight: 900; font-size: 16px; color: #fff; background: var(--accent-grad); box-shadow: var(--glow); flex-shrink: 0; }
-.brand-name { font-size: 15px; font-weight: 900; letter-spacing: 0.5px; line-height: 1.2; }
-.brand-name small { display: block; color: var(--red); font-size: 9px; letter-spacing: 2.2px; margin-top: 2px; text-transform: uppercase; }
+/* Sidebar */
+.sidebar{position:fixed;inset:0 auto 0 0;width:280px;background:var(--panel);border-right:1px solid var(--line);z-index:45;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(0.16,1,0.3,1),background-color .35s ease}
+.sidebar-header{padding:22px 20px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.brand-mark{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;font-weight:900;font-size:16px;color:#fff;background:var(--accent-grad);box-shadow:var(--glow);flex-shrink:0}
+.brand-name{font-size:15px;font-weight:900;letter-spacing:0.5px;line-height:1.2}
+.brand-name small{display:block;color:var(--red);font-size:9px;letter-spacing:2.2px;margin-top:2px;text-transform:uppercase}
+.sidebar-poster-spotlight{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:16/9;background:var(--card);border:1px solid var(--line)}
+.sidebar-poster-spotlight img{width:100%;height:100%;object-fit:cover;display:block}
+.sidebar-poster-label{position:absolute;bottom:8px;left:8px;right:8px;background:rgba(7,7,9,0.82);backdrop-filter:blur(6px);color:#fff;padding:6px 10px;border-radius:6px;font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-.sidebar-poster-spotlight { position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 16/9; background: #222; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-.sidebar-poster-spotlight img { width: 100%; height: 100%; object-fit: cover; }
-.sidebar-poster-label { position: absolute; bottom: 8px; left: 8px; right: 8px; background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); padding: 6px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border: 1px solid rgba(255,255,255,0.1); }
+.sidebar-nav{overflow-y:auto;flex-grow:1;padding:16px;scrollbar-width:none}
+.sidebar-nav::-webkit-scrollbar{display:none}
+.side-label{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:2px;padding:14px 12px 6px;text-transform:uppercase}
+.side-link{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;color:var(--muted);font-size:13px;font-weight:600;margin:3px 0;transition:all .2s ease}
+.side-link .ico{width:22px;text-align:center;font-size:17px;transition:transform .2s}
+.side-link:hover{background:rgba(128,128,150,0.08);color:var(--text)}
+.side-link.active{background:var(--accent-grad);color:#ffffff;box-shadow:var(--glow);font-weight:700}
+.side-link.active .ico{transform:scale(1.08)}
+.side-link.nav-glow{background:var(--accent-grad);color:#ffffff;box-shadow:0 0 24px rgba(255,0,85,0.7),var(--glow);animation:keyGlow .75s cubic-bezier(0.22,1,0.36,1)}
+@keyframes keyGlow{
+  0%{transform:scale(0.95);filter:brightness(1.4)}
+  55%{transform:scale(1.05)}
+  100%{transform:scale(1);filter:brightness(1)}
+}
 
-.sidebar-nav { overflow-y: auto; flex-grow: 1; padding: 20px 16px; scrollbar-width: none; }
-.sidebar-nav::-webkit-scrollbar { display: none; }
-.side-label { font-size: 10px; color: var(--muted); font-weight: 800; letter-spacing: 2px; padding: 16px 12px 8px; text-transform: uppercase; opacity: 0.8; }
-.side-link { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 10px; color: var(--muted); font-size: 13px; font-weight: 600; margin: 4px 0; transition: all .2s ease; text-decoration: none; }
-.side-link .ico { width: 22px; text-align: center; font-size: 18px; transition: transform .2s; }
-.side-link:hover { background: rgba(128,128,150,0.08); color: var(--text); }
-.side-link.active { background: var(--accent-grad); color: #ffffff; box-shadow: var(--glow); font-weight: 700; }
-.side-link.active .ico { transform: scale(1.1); }
+.sidebar-bottom{padding:16px;border-top:1px solid var(--line)}
+.side-note{font-size:11px;color:var(--muted);line-height:1.5;text-align:center;margin-top:10px}
 
-.sidebar-bottom { padding: 16px; border-top: 1px solid var(--line); background: color-mix(in srgb, var(--panel) 50%, transparent); }
-.side-note { font-size: 11px; color: var(--muted); line-height: 1.5; text-align: center; margin-top: 8px; font-weight: 500; }
-
-.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 40; }
-.overlay.show { display: block; }
-
-.main { margin-left: 280px; min-height: 100vh; transition: margin-left .3s cubic-bezier(0.16,1,0.3,1); }
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:40}
+.overlay.show{display:block}
+.main{margin-left:280px;min-height:100vh;transition:margin-left .3s cubic-bezier(0.16,1,0.3,1)}
 
 /* Topbar */
-.topbar { height: 70px; position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--panel) 88%,transparent); backdrop-filter:blur(20px); border-bottom:1px solid var(--line); display:flex; align-items:center; gap:14px; padding:0 32px; transition: background-color .35s ease }
-.menu-btn { display:none; background:var(--card); border:1px solid var(--line); color:var(--text); border-radius:10px; width:40px; height:40px; font-size:20px; place-items:center; flex-shrink:0 }
-.search-wrap { position:relative; flex:1; max-width:600px }
-.search-wrap::before { content:"🔍"; position:absolute; left:16px; top:12px; font-size:15px; opacity:0.6 }
-.search-wrap input { width:100%; height:42px; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:0 16px 0 46px; color:var(--text); outline:none; font-size:13px; transition:all .25s }
-.search-wrap input:focus { border-color:var(--red); box-shadow:var(--glow) }
-.top-right { margin-left:auto; display:flex; gap:12px; align-items:center }
-.user-badge { width:38px; height:38px; border-radius:50%; background:var(--accent-grad); color:#ffffff; display:grid; place-items:center; font-weight:900; font-size:12px; box-shadow:var(--glow); flex-shrink:0 }
-.user-badge.vip { box-shadow:0 0 16px rgba(245,183,0,0.9); border:2px solid #f5b700 }
+.topbar{height:70px;position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--panel) 88%,transparent);backdrop-filter:blur(20px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 28px}
+.menu-btn{display:none;background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:10px;width:42px;height:42px;font-size:20px;place-items:center;flex-shrink:0}
+.search-wrap{position:relative;flex:1;max-width:600px}
+.search-wrap::before{content:"🔍";position:absolute;left:15px;top:11px;font-size:15px;opacity:0.65}
+.search-wrap input{width:100%;height:42px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 16px 0 44px;color:var(--text);outline:none;font-size:13px;transition:all .25s}
+.search-wrap input:focus{border-color:var(--red);box-shadow:var(--glow)}
+.top-right{margin-left:auto;display:flex;gap:10px;align-items:center}
+.user-badge{width:38px;height:38px;border-radius:50%;background:var(--accent-grad);color:#ffffff;display:grid;place-items:center;font-weight:900;font-size:12px;box-shadow:var(--glow);flex-shrink:0}
+.user-badge.vip{border:2px solid #ffd000;box-shadow:0 0 18px rgba(255,208,0,0.85)}
 
-/* Hero Slider */
-.content { max-width:1600px; margin:auto; padding:0 32px 80px }
-.hero-wrapper { position:relative; margin:24px 0 36px; border-radius:24px; overflow:hidden; background:var(--hero-grad); border:1px solid var(--line); box-shadow:0 20px 40px rgba(0,0,0,0.3) }
-.hero-slider { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; scroll-behavior:smooth }
-.hero-slider::-webkit-scrollbar { display:none }
-.hero-slide { min-width:100%; scroll-snap-align:center; position:relative; min-height:420px; display:flex; align-items:flex-end; padding:48px; background-size:cover; background-position:center }
-.hero-slide::before { content:""; position:absolute; inset:0; background: linear-gradient(90deg,color-mix(in srgb,var(--bg) 90%,transparent) 5%,color-mix(in srgb,var(--bg) 55%,transparent) 50%,transparent 100%),linear-gradient(0deg,color-mix(in srgb,var(--bg) 95%,transparent) 0%,transparent 60%) }
-.hero-content { position:relative; z-index:2; max-width:680px }
-.eyebrow { color:#ffffff; background:var(--accent-grad); font-size:10px; font-weight:900; letter-spacing:2.8px; text-transform:uppercase; padding:6px 14px; border-radius:999px; display:inline-block; margin-bottom:14px; box-shadow:var(--glow) }
-.hero-slide h1,.hero-slide h2 { font-size:clamp(32px,5vw,56px); margin:0 0 14px; font-weight:900; line-height:1.1 }
-.hero-slide p { color:var(--muted); line-height:1.6; font-size:16px; margin:0 0 26px }
-[data-theme]:not([data-theme="light"]) .hero-slide p { color:#e8e8f0 }
-.hero-actions { display:flex; gap:12px; flex-wrap:wrap }
-.btn { background:var(--accent-grad); color:#ffffff; border:none; border-radius:12px; padding:13px 26px; font-size:13px; font-weight:800; display:inline-flex; align-items:center; justify-content:center; gap:8px; transition:all .22s ease; box-shadow:var(--glow); text-decoration:none }
-.btn:hover { transform:translateY(-2px); filter:brightness(1.08) }
-.btn.secondary { background:var(--card); color:var(--text); border:1px solid var(--line); box-shadow:none }
-.btn.secondary:hover { border-color:var(--red) }
-.slider-indicators { position:absolute; bottom:24px; right:24px; z-index:3; display:flex; gap:8px; background:color-mix(in srgb,var(--panel) 80%,transparent); padding:8px 12px; border-radius:20px; border:1px solid var(--line); backdrop-filter:blur(10px) }
-.indicator { width:11px; height:11px; border-radius:50%; background:var(--muted); opacity:0.45; border:none; padding:0; transition:all .25s }
-.indicator.active { background:var(--red); opacity:1; transform:scale(1.25) }
+/* Content & Hero */
+.content{max-width:1560px;margin:auto;padding:0 28px 80px}
+.hero-wrapper{position:relative;margin:20px 0 32px;border-radius:24px;overflow:hidden;background:var(--hero-grad);border:1px solid var(--line);box-shadow:0 18px 40px rgba(0,0,0,0.25)}
+.hero-slider{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth}
+.hero-slider::-webkit-scrollbar{display:none}
+.hero-slide{min-width:100%;scroll-snap-align:center;position:relative;min-height:390px;display:flex;align-items:flex-end;padding:44px;background-size:cover;background-position:center}
+.hero-slide::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,color-mix(in srgb,var(--bg) 90%,transparent) 8%,color-mix(in srgb,var(--bg) 60%,transparent) 52%,transparent 100%),linear-gradient(0deg,color-mix(in srgb,var(--bg) 95%,transparent) 0%,transparent 65%)}
+.hero-content{position:relative;z-index:2;max-width:650px}
+.eyebrow{color:#ffffff;background:var(--accent-grad);font-size:10px;font-weight:900;letter-spacing:2.6px;text-transform:uppercase;padding:6px 14px;border-radius:999px;display:inline-block;margin-bottom:14px;box-shadow:var(--glow)}
+.hero-slide h1,.hero-slide h2{font-size:clamp(30px,4.6vw,52px);margin:0 0 12px;font-weight:900;line-height:1.1}
+.hero-slide p{color:var(--muted);line-height:1.6;font-size:15px;margin:0 0 24px}
+[data-theme]:not([data-theme="light"]) .hero-slide p{color:#e6e6f2}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{background:var(--accent-grad);color:#ffffff;border:none;border-radius:12px;padding:12px 22px;font-size:13px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all .22s ease;box-shadow:var(--glow)}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn.secondary{background:var(--card);color:var(--text);border:1px solid var(--line);box-shadow:none}
+.btn.secondary:hover{border-color:var(--red)}
+.slider-indicators{position:absolute;bottom:22px;right:24px;z-index:3;display:flex;gap:8px;background:color-mix(in srgb,var(--panel) 80%,transparent);padding:8px 12px;border-radius:20px;border:1px solid var(--line);backdrop-filter:blur(10px)}
+.indicator{width:11px;height:11px;border-radius:50%;background:var(--muted);opacity:0.45;border:none;padding:0;transition:all .25s}
+.indicator.active{background:var(--red);opacity:1;transform:scale(1.25)}
 
-/* Quick Chips & Toolbar */
-.quick { display:flex; gap:10px; overflow-x:auto; padding-bottom:10px; margin:28px 0; scrollbar-width:none }
-.quick::-webkit-scrollbar { display:none }
-.chip { background:var(--card); border:1px solid var(--line); color:var(--muted); border-radius:24px; padding:10px 20px; font-size:13px; font-weight:700; white-space:nowrap; transition:all .2s }
-.chip:hover, .chip.active { border-color:transparent; background:var(--accent-grad); color:#ffffff; box-shadow:var(--glow) }
-.toolbar { display:flex; gap:12px; align-items:center; flex-wrap:wrap; padding:16px 20px; background:var(--panel); border:1px solid var(--line); border-radius:20px; margin:28px 0 }
-.toolbar select { background:var(--card); color:var(--text); border:1px solid var(--line); border-radius:12px; padding:12px 16px; font-size:13px; font-weight:600; min-width:150px; outline:none; cursor:pointer }
+/* Quick Chips & Filters */
+.quick{display:flex;gap:10px;overflow-x:auto;padding-bottom:10px;margin:24px 0;scrollbar-width:none}
+.quick::-webkit-scrollbar{display:none}
+.chip{background:var(--card);border:1px solid var(--line);color:var(--muted);border-radius:24px;padding:9px 18px;font-size:13px;font-weight:700;white-space:nowrap;transition:all .2s}
+.chip:hover,.chip.active{border-color:transparent;background:var(--accent-grad);color:#ffffff;box-shadow:var(--glow)}
+.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:16px 20px;background:var(--panel);border:1px solid var(--line);border-radius:20px;margin:24px 0}
+.toolbar select{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:11px 15px;font-size:13px;font-weight:600;min-width:140px;outline:none}
+.vj-chips{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}
 
-/* Sections & Momentum Carousels */
-.section { margin:42px 0 }
-.section-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:20px }
-.section-head h2 { font-size:24px; margin:0; font-weight:900; display:flex; align-items:center; gap:14px }
-.section-head h2::before { content:""; display:inline-block; width:6px; height:26px; background:var(--accent-grad); border-radius:3px; box-shadow:var(--glow) }
-.section-head span { font-size:13px; color:var(--muted); font-weight:600 }
-.grid-car { display:flex; gap:18px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; padding:10px 2px 16px; cursor:grab }
-.grid-car:active { cursor:grabbing }
-.grid-car::-webkit-scrollbar{ display:none }
-.movie { min-width:195px; width:195px; background:var(--card); border:1px solid var(--line); border-radius:18px; overflow:hidden; position:relative; transition:all .28s cubic-bezier(0.16,1,0.3,1); scroll-snap-align:start; display:flex; flex-direction:column; box-shadow:0 8px 24px rgba(0,0,0,0.15) }
-.movie:hover { transform:translateY(-8px) scale(1.02); border-color:var(--red); box-shadow:var(--glow) }
-.poster-wrap { position:relative; background:var(--panel); aspect-ratio:2/3; overflow:hidden }
-.poster { display:block; width:100%; height:100%; object-fit:cover; transition:transform .45s ease; user-select:none; -webkit-user-drag:none }
-.movie:hover .poster { transform:scale(1.08) }
-.poster-placeholder { width:100%; height:100%; aspect-ratio:2/3; display:grid; place-items:center; text-align:center; padding:16px; background:var(--hero-grad); color:var(--text); font-size:12px; font-weight:900; letter-spacing:1.5px }
-.poster-tag { position:absolute; left:10px; top:10px; background:var(--accent-grad); color:#ffffff; padding:4px 9px; border-radius:6px; font-size:10px; font-weight:900; letter-spacing:0.6px; text-transform:uppercase }
-.heart { position:absolute; right:10px; top:10px; border:none; border-radius:50%; width:38px; height:38px; background:rgba(10,10,14,0.78); backdrop-filter:blur(8px); color:#ffffff; font-size:18px; display:grid; place-items:center; transition:transform .2s ease; cursor:pointer }
-.heart:hover { transform:scale(1.15) }
-.heart.saved { color:#ff4b55; text-shadow:0 0 14px rgba(255,75,85,0.9) }
-.heart-burst { position:absolute; inset:0; display:grid; place-items:center; font-size:56px; color:#ff2a55; text-shadow:0 0 28px rgba(255,42,85,0.9); pointer-events:none; animation:heartPop .7s ease forwards }
-@keyframes heartPop {
-  0% { opacity:0; transform:scale(0.3) }
-  35% { opacity:1; transform:scale(1.3) }
-  100% { opacity:0; transform:scale(1.7) translateY(-14px) }
+/* Sections & Carousels */
+.section{margin:38px 0}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.section-head h2{font-size:22px;margin:0;font-weight:900;display:flex;align-items:center;gap:12px}
+.section-head h2::before{content:"";display:inline-block;width:6px;height:24px;background:var(--accent-grad);border-radius:3px;box-shadow:var(--glow)}
+.section-head span{font-size:12px;color:var(--muted);font-weight:600}
+.grid-car{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:8px 2px 14px;cursor:grab}
+.grid-car:active{cursor:grabbing}
+.grid-car::-webkit-scrollbar{display:none}
+.movie{min-width:185px;width:185px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;position:relative;transition:all .28s cubic-bezier(0.16,1,0.3,1);scroll-snap-align:start;display:flex;flex-direction:column;box-shadow:0 6px 18px rgba(0,0,0,0.12)}
+.movie:hover{transform:translateY(-6px);border-color:var(--red);box-shadow:var(--glow)}
+.poster-wrap{position:relative;background:var(--panel);aspect-ratio:2/3;overflow:hidden}
+.poster{display:block;width:100%;height:100%;object-fit:cover;transition:transform .45s ease;user-select:none;-webkit-user-drag:none}
+.movie:hover .poster{transform:scale(1.06)}
+.poster-placeholder{width:100%;height:100%;aspect-ratio:2/3;display:grid;place-items:center;text-align:center;padding:14px;background:var(--hero-grad);color:var(--text);font-size:12px;font-weight:900;letter-spacing:1.5px}
+.poster-tag{position:absolute;left:10px;top:10px;background:var(--accent-grad);color:#ffffff;padding:4px 8px;border-radius:6px;font-size:10px;font-weight:900;letter-spacing:0.6px}
+.heart{position:absolute;right:10px;top:10px;border:none;border-radius:50%;width:36px;height:36px;background:rgba(10,10,14,0.72);backdrop-filter:blur(6px);color:#ffffff;font-size:18px;display:grid;place-items:center;transition:transform .2s ease}
+.heart:hover{transform:scale(1.12)}
+.heart.saved{color:#ff4b55;text-shadow:0 0 12px rgba(255,75,85,0.9)}
+.heart-burst{position:absolute;inset:0;display:grid;place-items:center;font-size:52px;color:#ff2a55;text-shadow:0 0 24px rgba(255,42,85,0.9);pointer-events:none;animation:heartPop .65s ease forwards}
+@keyframes heartPop{
+  0%{opacity:0;transform:scale(0.3)}
+  35%{opacity:1;transform:scale(1.25)}
+  100%{opacity:0;transform:scale(1.6) translateY(-10px)}
 }
-.movie-info { padding:16px; display:flex; flex-direction:column; flex-grow:1 }
-.movie-title { font-size:15px; font-weight:900; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:6px }
-.meta { font-size:12px; color:var(--muted); display:flex; justify-content:space-between; gap:6px; margin-bottom:14px; font-weight:600 }
-.movie-actions { display:flex; gap:8px; margin-top:auto }
-.movie-actions button { flex:1; padding:10px 6px; font-size:12px; border-radius:10px; font-weight:800; border:none; transition:filter .2s }
+.movie-info{padding:13px;display:flex;flex-direction:column;flex-grow:1}
+.movie-title{font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:6px}
+.meta{font-size:11px;color:var(--muted);display:flex;justify-content:space-between;gap:6px;margin-bottom:12px;font-weight:600}
+.movie-actions{display:flex;gap:8px;margin-top:auto}
+.movie-actions button{flex:1;padding:9px 6px;font-size:11px;border-radius:9px;font-weight:800}
 
-/* Settings Section */
-.settings-section { display: none; padding: 40px; background: var(--panel); border-radius:24px; border:1px solid var(--line); margin: 20px 0 }
-.settings-section.active { display: block }
-.settings-group { margin-bottom: 36px }
-.settings-group h3 { font-size: 20px; font-weight:900; margin-bottom:18px; display:flex; align-items:center; gap:10px; border-bottom:1px solid var(--line); padding-bottom:10px }
+/* Settings View */
+.settings-section{display:none;padding:36px;background:var(--panel);border-radius:24px;border:1px solid var(--line);margin:24px 0}
+.settings-section.active{display:block}
+.settings-group{margin-bottom:32px}
+.settings-group h3{font-size:19px;font-weight:900;margin-bottom:14px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.theme-swatches{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.theme-pill{display:inline-flex;align-items:center;gap:9px;padding:11px 18px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:13px;font-weight:800;transition:all .22s ease}
+.theme-pill:hover{transform:translateY(-2px);border-color:var(--red)}
+.theme-pill.active{background:var(--accent-grad);color:#ffffff;border-color:transparent;box-shadow:var(--glow)}
+.swatch-dot{width:14px;height:14px;border-radius:50%;border:1px solid rgba(255,255,255,0.45);flex-shrink:0}
 
-.theme-swatches { display:flex; gap:12px; flex-wrap:wrap; align-items:center }
-.theme-pill { display:inline-flex; align-items:center; gap:10px; padding:12px 22px; border-radius:999px; border:1px solid var(--line); background:var(--card); color:var(--text); font-size:13px; font-weight:800; transition:all .25s ease }
-.theme-pill:hover { transform:translateY(-3px); border-color:var(--red) }
-.theme-pill.active { background:var(--accent-grad); color:#ffffff; border-color:transparent; box-shadow:var(--glow) }
-.swatch-dot { width:15px; height:15px; border-radius:50%; border:1px solid rgba(255,255,255,0.4); flex-shrink:0 }
+/* Subscription View */
+.subscription-section{display:none;padding:42px 32px;background:var(--sub-grad);border-radius:28px;border:1px solid color-mix(in srgb,var(--red) 45%,var(--line));position:relative;overflow:hidden;box-shadow:0 18px 45px rgba(0,0,0,0.25);margin:24px 0}
+.subscription-section.active{display:block}
+.subscription-section::after{content:"";position:absolute;inset:-60px -60px auto auto;width:240px;height:240px;border-radius:50%;background:var(--accent-grad);filter:blur(75px);opacity:0.28;pointer-events:none}
+.sub-header{text-align:center;max-width:740px;margin:0 auto 32px;position:relative;z-index:1}
+.sub-header h2{font-size:clamp(28px,3.8vw,42px);margin:0 0 10px;font-weight:900;background:var(--sub-title-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub-header p{color:var(--muted);font-size:15px;line-height:1.55;margin:0}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:20px;position:relative;z-index:1}
+.price-card{background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:22px;padding:26px 22px;text-align:center;transition:all .3s cubic-bezier(0.16,1,0.3,1);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.price-card:hover{transform:translateY(-8px);border-color:var(--red);box-shadow:var(--glow)}
+.price-card.selected-plan{border-color:var(--red);box-shadow:0 0 0 2px var(--red),var(--glow)}
+.price-card.featured{border-color:color-mix(in srgb,var(--red) 70%,transparent)}
+.badge-popular{position:absolute;top:15px;right:-32px;background:var(--accent-grad);color:#ffffff;font-size:10px;font-weight:900;padding:4px 36px;transform:rotate(42deg);text-transform:uppercase;letter-spacing:0.8px}
+.plan-duration{font-size:12px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:10px;background:var(--sub-title-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.plan-price{font-size:34px;font-weight:900;margin-bottom:6px;color:var(--text)}
+.plan-price small{font-size:13px;color:var(--muted);display:block;font-weight:600;margin-top:2px}
+.plan-features{list-style:none;padding:0;margin:18px 0 24px;text-align:left;flex-grow:1}
+.plan-features li{font-size:13px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.plan-features li::before{content:"✦";color:var(--red);font-weight:900}
+.plan-btn{width:100%;padding:13px 16px;border-radius:12px;border:none;background:var(--accent-grad);color:#ffffff;font-weight:800;font-size:13px;letter-spacing:0.4px;box-shadow:var(--glow);transition:transform .2s ease,filter .2s ease}
+.plan-btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
 
-/* Brilliant Subscription Section */
-.subscription-section { display: none; padding:48px 36px; background:var(--sub-grad); border-radius:28px; border:1px solid color-mix(in srgb,var(--red) 40%,var(--line)); position:relative; overflow:hidden; box-shadow:0 25px 60px rgba(0,0,0,0.4); margin:20px 0 }
-.subscription-section.active { display: block }
-.subscription-section::after { content:""; position:absolute; inset:-80px -80px auto auto; width:300px; height:300px; border-radius:50%; background:var(--accent-grad); filter:blur(90px); opacity:0.32; pointer-events:none }
-.sub-header { text-align:center; max-width:800px; margin:0 auto 40px; position:relative; z-index:1 }
-.sub-header h2 { font-size:clamp(32px,4vw,48px); margin:0 0 14px; font-weight:900; background:var(--sub-title-grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent }
-.sub-header p { color:var(--muted); font-size:16px; line-height:1.6; margin:0 }
-.pricing-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:24px; position:relative; z-index:1 }
-.price-card { background:color-mix(in srgb,var(--card) 90%,transparent); backdrop-filter:blur(16px); border:1px solid var(--line); border-radius:24px; padding:32px 24px; text-align:center; transition:all .35s cubic-bezier(0.16,1,0.3,1); position:relative; overflow:hidden; display:flex; flex-direction:column }
-.price-card:hover { transform:translateY(-10px); border-color:var(--red); box-shadow:var(--glow) }
-.price-card.selected-plan { border-color:var(--red); box-shadow:0 0 0 2px var(--red),var(--glow) }
-.badge-popular { position:absolute; top:18px; right:-36px; background:var(--accent-grad); color:#ffffff; font-size:11px; font-weight:900; padding:5px 42px; transform:rotate(45deg); text-transform:uppercase; letter-spacing:0.8px; box-shadow:0 2px 8px rgba(0,0,0,0.3) }
-.plan-duration { font-size:13px; font-weight:900; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; background:var(--sub-title-grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent }
-.plan-price { font-size:38px; font-weight:900; margin-bottom:8px; color:var(--text) }
-.plan-price small { font-size:14px; color:var(--muted); display:block; font-weight:600; margin-top:2px }
-.plan-features { list-style:none; padding:0; margin:22px 0 28px; text-align:left; flex-grow:1 }
-.plan-features li { font-size:14px; color:var(--muted); margin-bottom:12px; display:flex; align-items:center; gap:10px }
-.plan-features li::before { content:"✦"; color:var(--red); font-weight:900; font-size:16px }
-.plan-btn { width:100%; padding:15px 20px; border-radius:14px; border:none; background:var(--accent-grad); color:#ffffff; font-weight:800; font-size:14px; letter-spacing:0.5px; box-shadow:var(--glow); transition:transform .2s ease,filter .2s ease }
-.plan-btn:hover { transform:translateY(-2px); filter:brightness(1.1) }
+#mainAppView{display:block}
+#mainAppView.hidden{display:none}
+#subViewContainer{display:none}
+#subViewContainer.active{display:block}
 
-/* Global Views Container */
-#mainAppView { display: block }
-#mainAppView.hidden { display: none }
-#subViewContainer { display: none }
-#subViewContainer.active { display: block }
+/* Modals & 1-Hour Paywall */
+.modal{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);align-items:flex-end;justify-content:center;opacity:0;transition:opacity .3s ease}
+.modal.show{display:flex;opacity:1}
+.dialog{width:100%;max-width:900px;max-height:92vh;background:var(--panel);color:var(--text);border-top-left-radius:30px;border-top-right-radius:30px;border:1px solid var(--line);border-bottom:none;overflow-y:auto;position:relative;padding:28px 30px 34px;box-shadow:0 -12px 45px rgba(0,0,0,0.5);transform:translateY(100%);transition:transform .35s cubic-bezier(0.16,1,0.3,1)}
+.modal.show .dialog{transform:translateY(0)}
+.drag-handle{width:50px;height:6px;background:var(--line);border-radius:999px;margin:0 auto 20px;cursor:grab;touch-action:none}
+.close{position:absolute;right:22px;top:22px;background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:50%;width:38px;height:38px;font-size:18px;display:grid;place-items:center}
+.detail-layout{display:grid;grid-template-columns:210px 1fr;gap:24px}
+.detail-layout img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:16px}
+.detail-layout h2{margin:0 36px 10px 0;font-size:26px}
+.detail-layout p{color:var(--muted);line-height:1.6;font-size:14px}
+.modal-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
 
-/* Modals & Paywall Overlay */
-.modal { display:none; position:fixed; inset:0; z-index:150; background:rgba(0,0,0,0.82); backdrop-filter:blur(12px); align-items:flex-end; justify-content:center; opacity:0; transition:opacity .3s ease }
-.modal.show { display:flex; opacity:1 }
-.dialog { width:100%; max-width:900px; max-height:92vh; background:var(--panel); color:var(--text); border-top-left-radius:32px; border-top-right-radius:32px; border:1px solid var(--line); border-bottom:none; overflow-y:auto; position:relative; padding:32px 36px 40px; box-shadow:0 -15px 50px rgba(0,0,0,0.6); transform:translateY(100%); transition:transform .35s cubic-bezier(0.16,1,0.3,1) }
-.modal.show .dialog { transform:translateY(0) }
-.drag-handle { width:55px; height:6px; background:var(--line); border-radius:999px; margin:0 auto 24px; cursor:grab; touch-action:none }
-.close { position:absolute; right:26px; top:26px; background:var(--card); border:1px solid var(--line); color:var(--text); border-radius:50%; width:42px; height:42px; font-size:20px; display:grid; place-items:center; transition:all .2s }
-.close:hover { background:var(--red); border-color:var(--red); color:#fff }
-.detail-layout { display:grid; grid-template-columns:230px 1fr; gap:28px }
-.detail-layout img { width:100%; aspect-ratio:2/3; object-fit:cover; border-radius:18px; box-shadow:0 15px 35px rgba(0,0,0,0.5) }
-.detail-layout h2 { margin:0 42px 12px 0; font-size:30px; font-weight:900 }
-.detail-layout p { color:var(--muted); line-height:1.6; font-size:15px }
-.modal-actions { display:flex; gap:14px; flex-wrap:wrap; margin-top:24px }
+.player-container{width:100%;aspect-ratio:16/9;background:#000;border-radius:16px;overflow:hidden;position:relative;display:grid;place-items:center}
+.player-frame{width:100%;height:100%;border:none}
+.paywall-overlay{position:absolute;inset:0;background:rgba(7,7,9,0.92);backdrop-filter:blur(8px);display:none;flex-direction:column;align-items:center;justify-content:center;padding:28px;text-align:center;z-index:10}
+.paywall-overlay.show{display:flex}
+.paywall-title{font-size:24px;font-weight:900;margin-bottom:10px;color:#fff}
+.paywall-desc{font-size:14px;color:#d0d0de;max-width:480px;margin:0 0 20px;line-height:1.5}
+.player-message{font-size:12px;color:var(--muted);text-align:center;margin-top:14px}
+.notice{font-size:12px;color:var(--muted);margin:10px 0 0}
+.empty{padding:40px 20px;color:var(--muted);width:100%;text-align:center;font-size:14px}
 
-.player-container { width:100%; aspect-ratio:16/9; background:#000; border-radius:18px; overflow:hidden; position:relative; display:grid; place-items:center }
-.player-frame { width:100%; height:100%; border:none }
-.paywall-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.92); backdrop-filter:blur(8px); display:none; flex-direction:column; align-items:center; justify-content:center; padding:30px; text-align:center; z-index:10 }
-.paywall-overlay.show { display:flex; animation:fadeIn .3s ease }
-@keyframes fadeIn { from{opacity:0} to{opacity:1} }
-.paywall-title { font-size:28px; font-weight:900; margin-bottom:12px; color:#fff }
-.paywall-desc { font-size:15px; color:#ccc; max-width:500px; margin-bottom:24px; line-height:1.5 }
+.footer{text-align:center;border-top:1px solid var(--line);padding:34px 20px;color:var(--muted);font-size:12px;line-height:1.8;background:var(--panel)}
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;background:color-mix(in srgb,var(--panel) 94%,transparent);border-top:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-bottom));backdrop-filter:blur(16px);justify-content:space-around}
+.mobile-nav a{color:var(--muted);text-align:center;font-size:10px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px}
+.mobile-nav b{font-size:19px}
+.mobile-nav a.active{color:var(--red)}
+.mobile-nav a.nav-glow{color:#ffffff;background:var(--accent-grad);border-radius:12px;padding:6px 10px;box-shadow:var(--glow)}
 
-.notice { font-size:13px; color:var(--muted); margin:14px 0 0; font-weight:600 }
-.empty { padding:56px 20px; color:var(--muted); width:100%; text-align:center; font-size:15px; font-weight:600; background:var(--card); border-radius:18px; border:1px dashed var(--line) }
-
-/* Mobile Nav */
-.mobile-nav { display:none; position:fixed; bottom:0; left:0; right:0; z-index:100; background:color-mix(in srgb,var(--panel) 95%,transparent); border-top:1px solid var(--line); padding:12px 16px calc(12px + env(safe-area-inset-bottom)); backdrop-filter:blur(20px);justify-content:space-around }
-.mobile-nav a { color:var(--muted); text-align:center; font-size:10px; font-weight:800; display:flex; flex-direction:column; align-items:center; gap:4px; text-decoration:none }
-.mobile-nav b { font-size:22px }
-.mobile-nav a.active { color:var(--red) }
-
-.footer { text-align:center; border-top:1px solid var(--line); padding:40px 20px; color:var(--muted); font-size:12px; line-height:1.8; background:var(--panel); font-weight:600 }
+@media(min-width:769px){
+  .modal{align-items:center;padding:24px}
+  .dialog{border-radius:24px;border-bottom:1px solid var(--line);transform:scale(0.96)}
+  .modal.show .dialog{transform:scale(1)}
+}
 
 @media(max-width:768px){
-  .sidebar { transform:translateX(-105%); width:300px; box-shadow:20px 0 50px rgba(0,0,0,0.8) }
-  .sidebar.open { transform:translateX(0) }
-  .main { margin-left:0 }
-  .menu-btn { display:grid }
-  .content { padding:0 18px 110px }
-  .mobile-nav { display:flex }
-  .detail-layout { grid-template-columns:140px 1fr; gap:18px }
-  .detail-layout h2 { font-size:24px }
-  .dialog { padding:24px 20px 32px; border-radius:28px 28px 0 0 }
-  .hero-slide { padding:28px; min-height:360px }
-  .subscription-section { padding:36px 24px }
+  .sidebar{transform:translateX(-105%);width:290px}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0}
+  .menu-btn{display:grid}
+  .content{padding:0 16px 96px}
+  .mobile-nav{display:flex}
+  .detail-layout{grid-template-columns:130px 1fr;gap:16px}
+  .dialog{padding:20px 18px 28px;border-radius:24px 24px 0 0}
+  .hero-slide{padding:26px;min-height:340px}
+  .subscription-section,.settings-section{padding:26px 18px}
 }
 </style>
 </head>
@@ -270,36 +277,36 @@ a { color: inherit; text-decoration: none; }
       <span class="brand-mark">XT</span>
       <span class="brand-name">XTREME WATCH<small>UGANDAN VJ TRANSLATIONS</small></span>
     </a>
-    <div class="sidebar-poster-spotlight" id="sidebarSpotlight">
-      <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=600" alt="Spotlight Poster">
-      <div class="sidebar-poster-label" id="sidebarSpotlightLabel">⚡ Featured: Action Blockbuster Returns</div>
+    <div class="sidebar-poster-spotlight">
+      <img id="sidebarSpotlightImg" src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=600" alt="Spotlight Poster">
+      <div class="sidebar-poster-label" id="sidebarSpotlightLabel">⚡ Loading Featured Spotlight...</div>
     </div>
   </div>
 
   <nav class="sidebar-nav">
     <div class="side-label">Menu</div>
-    <a href="#" class="side-link active" onclick="showHomeView();closeSidebar();return false;"><span class="ico">🏠</span>Home</a>
+    <a href="#" class="side-link active" id="homeSidebarLink" onclick="showHomeView();closeSidebar();return false;"><span class="ico">🏠</span>Home</a>
     <a href="#catalog" class="side-link" onclick="showHomeView();go('catalog');closeSidebar();return false;"><span class="ico">🎞️</span>Latest Movies</a>
     <a href="#series" class="side-link" onclick="showHomeView();go('series');closeSidebar();return false;"><span class="ico">📺</span>Series</a>
-    <a href="#mylist" class="side-link" onclick="showHomeView();go('mylist');closeSidebar();return false;"><span class="ico">❤️</span>My List <span id="sideWatchCount" style="margin-left:auto;background:rgba(229,9,20,0.2);color:var(--red);padding:2px 8px;border-radius:10px;font-size:11px">0</span></a>
-    
+    <a href="#mylist" class="side-link" onclick="showHomeView();go('mylist');closeSidebar();return false;"><span class="ico">❤️</span>My List <span id="sideWatchCount" style="margin-left:auto;padding:2px 8px;border-radius:10px;font-size:11px">0</span></a>
+
     <div class="side-label">Membership</div>
-    <a href="#" class="side-link" id="subSidebarLink" onclick="showSubscriptionView();closeSidebar();return false;"><span class="ico">💎</span>Subscription Plans</a>
-    
+    <a href="#" class="side-link" id="subSidebarLink" onclick="showSubscriptionView();closeSidebar();return false;"><span class="ico">💎</span><span id="subSidebarText">Subscription Plans</span></a>
+
     <div class="side-label">Collections</div>
-    <a href="#movies" class="side-link" onclick="showHomeView();go('catalog');closeSidebar();return false;"><span class="ico">🍿</span>All Movies</a>
+    <a href="#catalog" class="side-link" onclick="showHomeView();go('catalog');closeSidebar();return false;"><span class="ico">🍿</span>All Movies</a>
     <a href="#kids" class="side-link" onclick="showHomeView();go('kids');closeSidebar();return false;"><span class="ico">🧸</span>Kids Zone</a>
     <a href="#indian" class="side-link" onclick="showHomeView();go('indian');closeSidebar();return false;"><span class="ico">✨</span>Indian Movies</a>
     <a href="#asian" class="side-link" onclick="showHomeView();go('asian');closeSidebar();return false;"><span class="ico">⛩️</span>Asian Series</a>
-    
+
     <div class="side-label">Preferences</div>
     <a href="#" class="side-link" id="settingsSidebarLink" onclick="showSettingsView();closeSidebar();return false;"><span class="ico">⚙️</span>Settings</a>
   </nav>
 
   <div class="sidebar-bottom">
-    <div style="display:flex; justify-content:space-between; align-items:center;">
-      <span style="font-size:12px; font-weight:800;" id="sidebarUserStatus">✓ Free Tier</span>
-      <button class="btn secondary" style="padding:6px 12px; font-size:11px;" onclick="showSubscriptionView();closeSidebar();return false;">Upgrade</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <span style="font-size:12px;font-weight:800;" id="sidebarUserStatus">✓ Free Sample (1h/movie)</span>
+      <button class="btn secondary" style="padding:6px 12px;font-size:11px;" onclick="showSubscriptionView();closeSidebar();return false;">Plans</button>
     </div>
     <div class="side-note">Your entertainment • Your VJ • Your choice<br>© <span id="sideYear"></span> Xtreme</div>
   </div>
@@ -316,27 +323,26 @@ a { color: inherit; text-decoration: none; }
     </div>
   </header>
 
-  <!-- View 1: Main Homepage & Content Grids -->
   <div id="mainAppView">
     <div class="content">
       <section class="hero-wrapper" id="home">
         <div class="hero-slider" id="heroSlider">
-          <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200')">
+          <div class="hero-slide" id="heroSlide1" style="background-image:url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200')">
             <div class="hero-content">
-              <span class="eyebrow">Featured Spotlight • VJ Junior</span>
-              <h1>Action Blockbuster Returns</h1>
-              <p>Experience top action hits with energetic Ugandan VJ translations, crisp audio, and instant access.</p>
+              <span class="eyebrow">Featured Spotlight • Trending Now</span>
+              <h1 id="heroTitle1">Loading Featured Movie...</h1>
+              <p id="heroDesc1">Fetching the latest blockbusters, series, and official posters.</p>
               <div class="hero-actions">
                 <button class="btn" id="exploreBtn">Explore Movies</button>
                 <button class="btn secondary" id="browseSeriesBtn">Browse Series</button>
               </div>
             </div>
           </div>
-          <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1200')">
+          <div class="hero-slide" id="heroSlide2" style="background-image:url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1200')">
             <div class="hero-content">
-              <span class="eyebrow">Trending Series • Ice P</span>
-              <h2>Series & Drama Marathon</h2>
-              <p>Binge full seasons, Asian dramas, and translated favorites with smooth playback across devices.</p>
+              <span class="eyebrow">Popular Series • Binge Watch</span>
+              <h2 id="heroTitle2">Series & Drama Marathon</h2>
+              <p id="heroDesc2">Binge full seasons, Asian dramas, and translated favorites with smooth playback across devices.</p>
               <div class="hero-actions">
                 <button class="btn" onclick="go('series')">Watch Series</button>
               </div>
@@ -368,7 +374,7 @@ a { color: inherit; text-decoration: none; }
       <section class="section" id="catalog">
         <div class="section-head"><h2 id="catalogTitle">Latest Movies</h2><span id="resultCount">Loading library...</span></div>
         <div class="grid-car" id="movieGrid"><div class="empty">Loading your movie library...</div></div>
-        <p class="notice" id="loadNotice">Connect your database or add movie records to populate this library.</p>
+        <p class="notice" id="loadNotice">Connecting to movie catalog...</p>
         <div style="text-align:center;margin-top:16px"><button class="btn secondary" id="loadMore" hidden>Load more</button></div>
       </section>
 
@@ -382,114 +388,108 @@ a { color: inherit; text-decoration: none; }
     </div>
   </div>
 
-  <!-- View 2: Sub-Views Container (Swapped in via Sidebar) -->
   <div id="subViewContainer">
     <div class="content">
-      
-      <!-- Subscription Section (Moved out of Home into Sidebar routing) -->
       <section class="subscription-section" id="subscriptionViewSection">
         <div class="sub-header">
-          <h2>Unlimited Ugandan VJ Entertainment</h2>
-          <p>Choose a pass to remove viewing limits and enjoy uninterrupted 4K streaming with priority support.</p>
+          <h2>Subscription Plans</h2>
+          <p>Browse freely anytime. New viewers get 1 hour of sample playback per movie before a subscription pass is required.</p>
         </div>
         <div class="pricing-grid">
           <div class="price-card" data-plan-card="1000">
-            <span class="plan-duration">1 Day Pass</span>
-            <div class="plan-price">1,000 UGX<small>24 Hours Access</small></div>
+            <span class="plan-duration">Daily</span>
+            <div class="plan-price">1,000 UGX<small>1 Day Access</small></div>
             <ul class="plan-features">
-              <li>1-day full catalog streaming</li>
-              <li>All translated VJ movies</li>
-              <li>Instant pass activation</li>
+              <li>1 day unlimited movie playback</li>
+              <li>All Ugandan VJ translations</li>
+              <li>Instant activation</li>
             </ul>
-            <button class="plan-btn" data-select-plan="1 Day Pass" data-amount="1000">Activate Plan</button>
+            <button class="plan-btn" data-select-plan="Daily" data-amount="1000">Select 1,000 UGX</button>
           </div>
 
           <div class="price-card" data-plan-card="1500">
-            <span class="plan-duration">2 Days Pass</span>
+            <span class="plan-duration">2 Days</span>
             <div class="plan-price">1,500 UGX<small>48 Hours Access</small></div>
             <ul class="plan-features">
-              <li>2-day full catalog streaming</li>
-              <li>Movies & series access</li>
-              <li>Great weekend value</li>
+              <li>2 days unlimited movie playback</li>
+              <li>Movies & series catalog</li>
+              <li>Great short-stay value</li>
             </ul>
-            <button class="plan-btn" data-select-plan="2 Days Pass" data-amount="1500">Activate Plan</button>
+            <button class="plan-btn" data-select-plan="2 Days" data-amount="1500">Select 1,500 UGX</button>
           </div>
 
           <div class="price-card featured" data-plan-card="4000">
-            <span class="badge-popular">Popular</span>
-            <span class="plan-duration">1 Week Pass</span>
+            <span class="badge-popular">Best Value</span>
+            <span class="plan-duration">Weekly</span>
             <div class="plan-price">4,000 UGX<small>7 Days Access</small></div>
             <ul class="plan-features">
-              <li>7 days unlimited browsing</li>
+              <li>1 week unlimited movie playback</li>
               <li>All VJs & collections</li>
-              <li>Best weekly rate at 4,000 UGX</li>
+              <li>Weekly pass at 4,000 UGX</li>
             </ul>
-            <button class="plan-btn" data-select-plan="1 Week Pass" data-amount="4000">Activate Plan</button>
+            <button class="plan-btn" data-select-plan="Weekly" data-amount="4000">Select 4,000 UGX</button>
           </div>
 
           <div class="price-card" data-plan-card="20000">
-            <span class="plan-duration">1 Month Pass</span>
+            <span class="plan-duration">Monthly</span>
             <div class="plan-price">20,000 UGX<small>30 Days Access</small></div>
             <ul class="plan-features">
-              <li>Full 30-day monthly pass</li>
-              <li>Priority access to new drops</li>
-              <li>VIP member badge highlight</li>
+              <li>1 month unlimited movie playback</li>
+              <li>All titles & VJ releases</li>
+              <li>VIP badge highlight</li>
             </ul>
-            <button class="plan-btn" data-select-plan="1 Month Pass" data-amount="20000">Activate Plan</button>
+            <button class="plan-btn" data-select-plan="Monthly" data-amount="20000">Select 20,000 UGX</button>
           </div>
         </div>
       </section>
 
-      <!-- Settings Section (Theme Switcher moved here) -->
       <section class="settings-section" id="settingsViewSection">
-        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:40px; border-bottom:1px solid var(--line); padding-bottom:20px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:28px;border-bottom:1px solid var(--line);padding-bottom:18px;">
           <div>
-            <h2 style="margin:0 0 8px; font-size:32px; font-weight:900;">Application Settings</h2>
-            <p style="color:var(--muted); margin:0; font-size:15px;">Customize your viewing environment and manage preferences.</p>
+            <h2 style="margin:0 0 6px;font-size:28px;font-weight:900;">Settings</h2>
+            <p style="color:var(--muted);margin:0;font-size:14px;">Switch theme colors (including Light Mode) and check your plan status.</p>
           </div>
-          <button class="btn" onclick="showHomeView();">Done</button>
+          <button class="btn" onclick="showHomeView();">Back to Home</button>
         </div>
 
         <div class="settings-group">
-          <h3>🎨 Interface Theme</h3>
-          <p style="color:var(--muted); font-size:13px; margin-bottom:16px;">Choose your preferred visual aesthetic. Includes a high-contrast Light Mode.</p>
+          <h3>🎨 Theme Colors</h3>
+          <p style="color:var(--muted);font-size:13px;margin-bottom:14px;">Pick one of 6 themes, including Light Mode.</p>
           <div class="theme-swatches" id="themeSwatches">
             <button class="theme-pill active" data-theme-choice="crimson"><span class="swatch-dot" style="background:#e50914"></span>Crimson Dark</button>
             <button class="theme-pill" data-theme-choice="neon"><span class="swatch-dot" style="background:#00e5ff"></span>Neon Cyber</button>
             <button class="theme-pill" data-theme-choice="gold"><span class="swatch-dot" style="background:#f5b700"></span>Royal Gold</button>
             <button class="theme-pill" data-theme-choice="emerald"><span class="swatch-dot" style="background:#00e676"></span>Emerald Pulse</button>
             <button class="theme-pill" data-theme-choice="sunset"><span class="swatch-dot" style="background:#ff2a85"></span>Sunset Velvet</button>
-            <button class="theme-pill" data-theme-choice="light"><span class="swatch-dot" style="background:#ffffff; border:1px solid #888"></span>Light Mode</button>
+            <button class="theme-pill" data-theme-choice="light"><span class="swatch-dot" style="background:#ffffff;border:1px solid #888"></span>Light Mode</button>
           </div>
         </div>
 
-        <div class="settings-group">
-          <h3>🔒 Membership Status</h3>
-          <div style="background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; display:flex; align-items:center; justify-content:space-between;">
+        <div class="settings-group" style="margin-bottom:0">
+          <h3>💎 Membership Status</h3>
+          <div style="background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
             <div>
-              <div style="font-weight:800; font-size:16px;" id="settingsPlanTitle">Free Tier (1-Hour Sample Limit Active)</div>
-              <div style="color:var(--muted); font-size:13px; margin-top:4px;">Watch up to 60 minutes continuously before requiring a subscription pass.</div>
+              <div style="font-weight:800;font-size:15px;" id="settingsPlanTitle">Free Sample (1 Hour per Movie)</div>
+              <div style="color:var(--muted);font-size:13px;margin-top:4px;">Browsing is free across the site; unsubscribed movie playback prompts after 1 hour.</div>
             </div>
-            <button class="btn" onclick="showSubscriptionView();">View Plans</button>
+            <button class="btn" onclick="showSubscriptionView();">Subscription Plans</button>
           </div>
         </div>
       </section>
-
     </div>
   </div>
 
-  <footer class="footer">XTREME MOVIE WATCH<br>Ugandan VJ Translations • Movie information provided by TMDB where configured.<br>© <span id="yearNow"></span> Xtreme.</footer>
+  <footer class="footer">XTREME MOVIE WATCH<br>Ugandan VJ Translations • This product uses the TMDB API but is not endorsed or certified by TMDB.<br>© <span id="yearNow"></span> Xtreme.</footer>
 </div>
 
 <nav class="mobile-nav" id="mobileNav">
   <a href="#" data-nav="home" class="active" onclick="showHomeView();return false;"><b>🏠</b>Home</a>
   <a href="#catalog" onclick="showHomeView();go('catalog');return false;"><b>🎞️</b>Movies</a>
   <a href="#series" onclick="showHomeView();go('series');return false;"><b>📺</b>Series</a>
-  <a href="#" onclick="showSubscriptionView();return false;"><b>💎</b>Plans</a>
-  <a href="#" onclick="showSettingsView();return false;"><b>⚙️</b>Settings</a>
+  <a href="#" id="mobileSubKey" onclick="showSubscriptionView();return false;"><b>💎</b><span id="mobileSubLabel">Plans</span></a>
+  <a href="#" id="mobileSettingsKey" onclick="showSettingsView();return false;"><b>⚙️</b>Settings</a>
 </nav>
 
-<!-- Modals -->
 <div class="modal" id="detailModal"><div class="dialog" id="detailDialog"><div class="drag-handle" id="detailDrag"></div><button class="close" data-close="detailModal">✕</button><div id="detailContent"></div></div></div>
 
 <div class="modal" id="playerModal">
@@ -497,15 +497,13 @@ a { color: inherit; text-decoration: none; }
     <div class="drag-handle" id="playerDrag"></div>
     <button class="close" data-close="playerModal">✕</button>
     <h3 id="playerTitle" style="margin-top:0">Now Playing</h3>
-    
     <div class="player-container">
-      <div id="playerStage"></div>
-      <!-- 1-Hour Paywall Overlay -->
+      <div id="playerStage" style="width:100%;height:100%;"></div>
       <div class="paywall-overlay" id="paywallOverlay">
-        <div style="font-size:48px; margin-bottom:12px;">⏳</div>
-        <div class="paywall-title">Sample Time Limit Reached!</div>
-        <div class="paywall-desc">You have enjoyed your 1-hour free sample. To continue watching uninterrupted, please activate an access pass from the Membership section in the menu.</div>
-        <button class="btn" style="padding:14px 32px; font-size:15px;" onclick="closeModal('playerModal');showSubscriptionView();">Select Subscription Plan</button>
+        <div style="font-size:44px;margin-bottom:10px;">⏳</div>
+        <div class="paywall-title">1-Hour Free Sample Complete</div>
+        <div class="paywall-desc">You have watched 1 hour of this movie. Choose a subscription plan (1,000 / 1,500 / 4,000 / 20,000 UGX) to continue watching.</div>
+        <button class="btn" onclick="closeModal('playerModal');showSubscriptionView();">Open Subscription Plans</button>
       </div>
     </div>
     <p class="player-message" id="playerMessage"></p>
@@ -515,21 +513,23 @@ a { color: inherit; text-decoration: none; }
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL="YOUR_SUPABASE_URL",SUPABASE_ANON_KEY="YOUR_SUPABASE_ANON_KEY",TABLE_NAME="movies";
-const TMDB_API_KEY="YOUR_TMDB_API_KEY";
+const TMDB_API_KEY="925111c270baf9b011e32b3c70c84546";
 const VJS=["VJ Junior","Ice P","Emmy","Jingo","Mark","Aaron","Isma Pro","Eddy","VJ ashim","Ulio","Muba","Ivo","Soul"];
 const demoMovies=[
-  {id:"demo1",title:"Action Blockbuster Returns",year:2025,genre:"Action",vj:"VJ Junior",type:"movie",description:"Experience top action hits with energetic Ugandan VJ translations, crisp audio, and instant access.",poster:"https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=600"},
-  {id:"demo2",title:"Series & Drama Marathon",year:2024,genre:"Drama",vj:"Ice P",type:"series",description:"Binge full seasons, Asian dramas, and translated favorites with smooth playback across devices.",poster:"https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600"},
-  {id:"demo3",title:"Comedy Kings",year:2025,genre:"Comedy",vj:"Jingo",type:"movie",description:"Non-stop laughter with classic translated comedy hits.",poster:"https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&w=600"}
+  {id:"demo1",title:"Test Video",year:2026,genre:"Demo",vj:"VJ Junior",type:"movie",description:"Standard platform test video feed.",video_url:"https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ",poster:"https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=600"},
+  {id:"demo2",title:"YouTube Demo",year:2026,genre:"Demo",vj:"Ice P",type:"movie",description:"Secondary system test playback stream.",video_url:"https://www.youtube-nocookie.com/embed/M7lc1UVf-VE",poster:"https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600"}
 ];
 
-let allMovies=[],visibleLimit=24,activeGenre="all",supabaseClient=null;
+const SAMPLE_LIMIT_MS = 60 * 60 * 1000; // 1 hour
+let allMovies=[],visibleLimit=24,activeGenre="all",supabaseClient=null,sampleTimeout=null;
 const $=id=>document.getElementById(id),clean=v=>String(v??"").trim();
 function esc(v){return String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
 function normalize(m){
   const t=String(m.type||m.content_type||"movie").toLowerCase();
   return{
     id:String(m.id??m.movie_id??(m.title||m.name||"title")+"-"+(m.year||"")),
+    tmdb_id:m.tmdb_id||"",
     title:clean(m.title||m.name||"Untitled"),
     year:Number(m.year||m.release_year||(m.release_date||"").slice(0,4))||"",
     genre:clean(Array.isArray(m.genres)?m.genres.join(", "):(m.genre||m.genres||"")),
@@ -550,40 +550,41 @@ function saveIds(ids){
 }
 function isSaved(id){return savedIds().includes(String(id))}
 
-// Navigation Views Routing
+function getActivePlan(){
+  try{return JSON.parse(localStorage.getItem("xtreme_active_plan")||"null")}catch{return null}
+}
+
 function showHomeView(){
   $("mainAppView").classList.remove("hidden");
   $("subViewContainer").classList.remove("active");
-  window.scrollTo({top:0,behavior:"smooth"});
-  updateActiveSidebarItem();
+  $("subscriptionViewSection").classList.remove("active");
+  $("settingsViewSection").classList.remove("active");
+  updateActiveNav("homeSidebarLink");
 }
+
 function showSubscriptionView(){
   $("mainAppView").classList.add("hidden");
   $("subViewContainer").classList.add("active");
   $("subscriptionViewSection").classList.add("active");
   $("settingsViewSection").classList.remove("active");
   window.scrollTo({top:0,behavior:"smooth"});
-  updateActiveSidebarItem('subSidebarLink');
+  updateActiveNav("subSidebarLink");
 }
+
 function showSettingsView(){
   $("mainAppView").classList.add("hidden");
   $("subViewContainer").classList.add("active");
   $("settingsViewSection").classList.add("active");
   $("subscriptionViewSection").classList.remove("active");
   window.scrollTo({top:0,behavior:"smooth"});
-  updateActiveSidebarItem('settingsSidebarLink');
+  updateActiveNav("settingsSidebarLink");
 }
 
-function updateActiveSidebarItem(activeId){
-  document.querySelectorAll(".sidebar-nav .side-link").forEach(link=>link.classList.remove("active"));
-  if(!activeId){
-    document.querySelector('.sidebar-nav .side-link[onclick*="showHomeView"]').classList.add("active");
-  }else{
-    $(activeId)?.classList.add("active");
-  }
+function updateActiveNav(activeId){
+  document.querySelectorAll(".sidebar-nav .side-link").forEach(a=>a.classList.remove("active"));
+  if(activeId && $(activeId)) $(activeId).classList.add("active");
 }
 
-// Theme Switcher (Stored inside Settings)
 function applyTheme(themeName){
   const valid=["crimson","neon","gold","emerald","sunset","light"];
   const chosen=valid.includes(themeName)?themeName:"crimson";
@@ -594,40 +595,42 @@ function applyTheme(themeName){
   });
 }
 
-// Subscription Plan Activation & UI Updates
-function selectPlan(planName,amount){
+function applyPlanUI(planName, amount, animate=true){
   const formatted=Number(amount).toLocaleString()+" UGX";
-  try{localStorage.setItem("xtreme_active_plan",JSON.stringify({planName,amount}))}catch(e){}
-
   document.querySelectorAll("[data-plan-card]").forEach(card=>{
     card.classList.toggle("selected-plan",String(card.dataset.planCard)===String(amount));
   });
-
   const badge=$("userBadge");
-  if(badge){
-    badge.classList.add("vip");
-    badge.textContent="VIP";
-    badge.title="Active VIP Member";
-  }
-  const sidebarStatus=$("sidebarUserStatus");
-  if(sidebarStatus){
-    sidebarStatus.textContent="⭐ VIP Active";
-    sidebarStatus.style.color="var(--red)";
-  }
+  if(badge){badge.classList.add("vip");badge.textContent="VIP";badge.title=`Active Plan: ${planName} (${formatted})`;}
+  const status=$("sidebarUserStatus");
+  if(status){status.textContent=`★ ${planName} (${formatted})`;status.style.color="var(--red)";}
+  const subText=$("subSidebarText");
+  if(subText)subText.textContent=`Plan: ${formatted}`;
   const settingsTitle=$("settingsPlanTitle");
-  if(settingsTitle){
-    settingsTitle.textContent=`VIP Active: ${esc(planName)} (${formatted})`;
-  }
-  
-  // Clear paywall timer
-  if(window.playTimer)clearInterval(window.playTimer);
-  $("paywallOverlay").classList.remove("show");
+  if(settingsTitle)settingsTitle.textContent=`Active: ${planName} — ${formatted}`;
+  const mobileLabel=$("mobileSubLabel");
+  if(mobileLabel)mobileLabel.textContent=Number(amount).toLocaleString();
 
-  alert(`⚡ VIP Membership Activated!\nYou are now subscribed to the ${esc(planName)}.`);
+  if(animate){
+    ["subSidebarLink","mobileSubKey"].forEach(id=>{
+      const el=$(id);
+      if(!el)return;
+      el.classList.remove("nav-glow");
+      void el.offsetWidth;
+      el.classList.add("nav-glow");
+      setTimeout(()=>el.classList.remove("nav-glow"),1800);
+    });
+  }
+}
+
+function selectPlan(planName, amount){
+  try{localStorage.setItem("xtreme_active_plan",JSON.stringify({planName,amount}))}catch(e){}
+  applyPlanUI(planName, amount, true);
+  if(sampleTimeout){clearTimeout(sampleTimeout);sampleTimeout=null;}
+  $("paywallOverlay").classList.remove("show");
   showHomeView();
 }
 
-// Hero Slider Setup
 function initHeroSlider(){
   const slider=$("heroSlider"),indicators=$("sliderIndicators");
   if(!slider||!indicators)return;
@@ -636,8 +639,7 @@ function initHeroSlider(){
   indicators.addEventListener("click",e=>{
     const b=e.target.closest("[data-slide]");
     if(!b)return;
-    const idx=Number(b.dataset.slide);
-    slider.scrollTo({left:idx*slider.clientWidth,behavior:"smooth"});
+    slider.scrollTo({left:Number(b.dataset.slide)*slider.clientWidth,behavior:"smooth"});
   });
   slider.addEventListener("scroll",()=>{
     const idx=Math.round(slider.scrollLeft/Math.max(1,slider.clientWidth));
@@ -661,7 +663,7 @@ function card(m){
     </div>
     <div class="movie-info">
       <div class="movie-title" title="${esc(m.title)}">${esc(m.title)}</div>
-      <div class="meta"><span>${esc(m.year||"Year N/A")}</span><span>${esc(m.vj||"VJ N/A")}</span></div>
+      <div class="meta"><span>${esc(m.year||"Year N/A")}</span><span>${esc(m.vj||"TMDB")}</span></div>
       <div class="movie-actions">
         <button class="btn" data-details="${esc(m.id)}">Details</button>
         <button class="btn secondary" data-play="${esc(m.id)}">Play</button>
@@ -699,12 +701,12 @@ function render(){
   $("resultCount").textContent=list.length+" titles";
   grid("movieGrid",list,visibleLimit);
   $("loadMore").hidden=list.length<=visibleLimit;
-  grid("seriesGrid",allMovies.filter(m=>m.type==="series").slice(0,12));
-  grid("kidsGrid",allMovies.filter(m=>/kids|children|animation|family/i.test(m.category+" "+m.genre)).slice(0,12));
-  grid("indianGrid",allMovies.filter(m=>/india|indian|hindi|bollywood/i.test(m.category+" "+m.language)).slice(0,12));
-  grid("asianGrid",allMovies.filter(m=>/korean|asian|japanese|chinese|thai/i.test(m.category+" "+m.language)).slice(0,12));
+  grid("seriesGrid",allMovies.filter(m=>m.type==="series").slice(0,16));
+  grid("kidsGrid",allMovies.filter(m=>/kids|children|animation|family/i.test(m.category+" "+m.genre)).slice(0,16));
+  grid("indianGrid",allMovies.filter(m=>/india|indian|hindi|bollywood/i.test(m.category+" "+m.language)).slice(0,16));
+  grid("asianGrid",allMovies.filter(m=>/korean|asian|japanese|chinese|thai/i.test(m.category+" "+m.language)).slice(0,16));
   grid("watchlistGrid",allMovies.filter(m=>isSaved(m.id)));
-  $("loadNotice").textContent=allMovies.length?"Showing titles from your movie library.":"No database titles loaded. Demo titles are shown until your database is connected.";
+  $("loadNotice").textContent=allMovies.length?`Loaded ${allMovies.length} titles with live posters.`:"No database titles loaded.";
 }
 
 function populateVjs(){
@@ -713,13 +715,10 @@ function populateVjs(){
   $("vjChips").innerHTML=names.map(v=>`<button class="chip" data-vjchip="${esc(v)}">${esc(v)}</button>`).join("");
 }
 
-// Modal management
-let activeModal=null;
 function showModal(id){
   const m=$(id);if(!m)return;
   m.classList.add("show");
   document.body.style.overflow="hidden";
-  activeModal=m;
 }
 function closeModal(id){
   const m=$(id);if(!m)return;
@@ -727,17 +726,15 @@ function closeModal(id){
   if(!document.querySelector(".modal.show"))document.body.style.overflow="";
   if(id==="playerModal"){
     $("playerStage").innerHTML="";
-    if(window.playTimer)clearInterval(window.playTimer);
+    if(sampleTimeout){clearTimeout(sampleTimeout);sampleTimeout=null;}
     $("paywallOverlay").classList.remove("show");
   }
-  activeModal=null;
 }
 
 function findMovie(id){return allMovies.find(m=>String(m.id)===String(id))}
-
 function details(id){
   const m=findMovie(id);if(!m)return;
-  $("detailContent").innerHTML=`<div class="detail-layout">${poster(m)}<div><h2>${esc(m.title)}</h2><div class="meta"><span>${esc(m.year||"Year N/A")}</span><span>${esc(m.type)}</span></div><p><b>VJ:</b> ${esc(m.vj||"Not specified")}<br><b>Genre:</b> ${esc(m.genre||"Not specified")}<br><b>Collection:</b> ${esc(m.category||"General")}</p><p>${esc(m.description||"No description has been added yet.")}</p><div class="modal-actions"><button class="btn" data-play="${esc(m.id)}">Play now</button><button class="btn secondary" data-save="${esc(m.id)}">${isSaved(m.id)?"Remove from":"Add to"} My List</button></div></div></div>`;
+  $("detailContent").innerHTML=`<div class="detail-layout">${poster(m)}<div><h2>${esc(m.title)}</h2><div class="meta"><span>${esc(m.year||"Year N/A")}</span><span>${esc(m.type)}</span></div><p><b>VJ:</b> ${esc(m.vj||"TMDB Catalog")}<br><b>Genre:</b> ${esc(m.genre||"Not specified")}<br><b>Collection:</b> ${esc(m.category||"General")}</p><p>${esc(m.description||"No description has been added yet.")}</p><div class="modal-actions"><button class="btn" data-play="${esc(m.id)}">Play now</button><button class="btn secondary" data-save="${esc(m.id)}">${isSaved(m.id)?"Remove from":"Add to"} My List</button></div></div></div>`;
   showModal("detailModal");
 }
 
@@ -750,55 +747,130 @@ function youtubeEmbed(url){
   }catch{return""}
 }
 
-// Player with 1-hour paywall enforcement
-function play(id){
-  const m=findMovie(id);if(!m)return;
-  $("playerTitle").textContent=m.title;$("playerStage").innerHTML="";$("playerMessage").textContent="";
+function startSampleLimitIfNeeded(){
+  if(sampleTimeout){clearTimeout(sampleTimeout);sampleTimeout=null;}
   $("paywallOverlay").classList.remove("show");
-  if(window.playTimer)clearInterval(window.playTimer);
-
-  if(!m.video_url){
-    $("playerMessage").textContent="No video URL is connected. Add an authorized MP4/HLS stream or an embeddable YouTube link to this title in Supabase.";
-  } else {
-    const embed=youtubeEmbed(m.video_url);
-    if(embed){
-      $("playerStage").innerHTML=`<iframe class="player-frame" src="${embed}" title="${esc(m.title)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
-      $pcMessage();
-    } else {
-      $("playerStage").innerHTML=`<video id="nativePlayer" class="player-frame" controls playsinline></video>`;
-      const p=$("nativePlayer");
-      p.src=m.video_url;
-      p.play().catch(()=>{ $pcMessage(); });
-      
-      // Track playback time safely
-      window.playSeconds=0;
-      window.playTimer=setInterval(()=>{
-        if(!p.paused && !p.ended){
-          window.playSeconds++;
-          // Trigger paywall at 3600 seconds (1 hour)
-          if(window.playSeconds >= 3600){
-            p.pause();
-            clearInterval(window.playTimer);
-            $("paywallOverlay").classList.add("show");
-          }
-        }
-      },1000);
-    }
-  }
-  showModal("playerModal");
+  if(getActivePlan())return;
+  sampleTimeout=setTimeout(()=>{
+    $("playerStage").innerHTML="";
+    $("paywallOverlay").classList.add("show");
+  },SAMPLE_LIMIT_MS);
 }
 
-function $pcMessage(){
-  $("playerMessage").textContent="Streaming free sample. Browser/Embed restrictions apply.";
+async function resolveTmdbVideo(m){
+  if(m.video_url)return m.video_url;
+  if(!m.tmdb_id || !TMDB_API_KEY)return"";
+  const endpoint=m.type==="series"?"tv":"movie";
+  try{
+    const r=await fetch(`https://api.themoviedb.org/3/${endpoint}/${encodeURIComponent(m.tmdb_id)}/videos?api_key=${encodeURIComponent(TMDB_API_KEY)}&language=en-US`);
+    if(!r.ok)return"";
+    const d=await r.json();
+    const yt=(d.results||[]).find(v=>v.site==="YouTube" && v.type==="Trailer") || (d.results||[]).find(v=>v.site==="YouTube");
+    if(yt?.key){
+      m.video_url=`https://www.youtube.com/watch?v=${yt.key}`;
+      return m.video_url;
+    }
+  }catch(e){}
+  return"";
+}
+
+async function play(id){
+  const m=findMovie(id);if(!m)return;
+  $("playerTitle").textContent=m.title;
+  $("playerStage").innerHTML='<div style="color:#fff;font-size:14px;">Loading stream...</div>';
+  $("playerMessage").textContent="";
+  showModal("playerModal");
+
+  const videoUrl=await resolveTmdbVideo(m);
+  if(!videoUrl){
+    $("playerStage").innerHTML="";
+    $("playerMessage").textContent="No video stream or trailer available for this title yet. Connect a Supabase video_url for full VJ movie playback.";
+    return;
+  }
+  const embed=youtubeEmbed(videoUrl);
+  if(embed)$("playerStage").innerHTML=`<iframe class="player-frame" src="${embed}" title="${esc(m.title)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+  else{$("playerStage").innerHTML='<video id="nativePlayer" class="player-frame" controls playsinline preload="metadata"></video>';const p=$("nativePlayer");p.src=videoUrl;p.play().catch(()=>{})}
+  $("playerMessage").textContent=getActivePlan()
+    ?"Active subscription enabled."
+    :"1-hour free sample active for this movie. Subscription prompt appears after 1 hour.";
+  startSampleLimitIfNeeded();
 }
 
 async function loadSupabase(){if(!window.supabase||SUPABASE_URL.includes("YOUR_")||SUPABASE_ANON_KEY.includes("YOUR_"))return false;try{supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);const{data,error}=await supabaseClient.from(TABLE_NAME).select("*");if(error)throw error;if(Array.isArray(data)&&data.length)allMovies=data.map(normalize);return true}catch(e){return false}}
-async function loadTMDB(){if(!TMDB_API_KEY||TMDB_API_KEY.includes("YOUR_"))return;try{const r=await fetch("https://api.themoviedb.org/3/movie/popular?api_key="+encodeURIComponent(TMDB_API_KEY)+"&language=en-US&page=1");if(!r.ok)throw Error();const d=await r.json(),existing=new Set(allMovies.map(m=>m.title.toLowerCase()));const extra=(d.results||[]).filter(x=>!existing.has((x.title||"").toLowerCase())).map(x=>normalize({id:"tmdb-"+x.id,title:x.title,year:(x.release_date||"").slice(0,4),poster:x.poster_path?"https://image.tmdb.org/t/p/w500"+x.poster_path:"",description:x.overview,category:"TMDB"}));allMovies=[...allMovies,...extra]}catch(e){}}
+
+async function loadTMDB(){
+  if(!TMDB_API_KEY||TMDB_API_KEY.includes("YOUR_"))return;
+  const base="https://api.themoviedb.org/3";
+  const key=encodeURIComponent(TMDB_API_KEY);
+  const imgBase="https://image.tmdb.org/t/p/w500";
+  const heroBase="https://image.tmdb.org/t/p/w1280";
+
+  try{
+    const [mGenresRes,tvGenresRes]=await Promise.all([
+      fetch(`${base}/genre/movie/list?api_key=${key}&language=en-US`),
+      fetch(`${base}/genre/tv/list?api_key=${key}&language=en-US`)
+    ]);
+    const genreMap={};
+    if(mGenresRes.ok)(await mGenresRes.json()).genres?.forEach(g=>genreMap[g.id]=g.name==="Science Fiction"?"Sci-Fi":g.name);
+    if(tvGenresRes.ok)(await tvGenresRes.json()).genres?.forEach(g=>genreMap[g.id]=g.name==="Sci-Fi & Fantasy"?"Sci-Fi":g.name);
+
+    const endpoints=[
+      {url:`${base}/movie/popular?api_key=${key}&language=en-US&page=1`,type:"movie",category:"Latest"},
+      {url:`${base}/movie/now_playing?api_key=${key}&language=en-US&page=1`,type:"movie",category:"Latest"},
+      {url:`${base}/tv/popular?api_key=${key}&language=en-US&page=1`,type:"series",category:"Series"},
+      {url:`${base}/discover/movie?api_key=${key}&with_genres=16,10751&sort_by=popularity.desc&page=1`,type:"movie",category:"Kids"},
+      {url:`${base}/discover/movie?api_key=${key}&with_original_language=hi&sort_by=popularity.desc&page=1`,type:"movie",category:"Indian",language:"Indian"},
+      {url:`${base}/discover/tv?api_key=${key}&with_original_language=ko|ja|zh&sort_by=popularity.desc&page=1`,type:"series",category:"Asian",language:"Korean Asian"}
+    ];
+
+    const responses=await Promise.all(endpoints.map(ep=>fetch(ep.url).then(r=>r.ok?r.json():{results:[]})));
+    const seen=new Set(allMovies.map(m=>m.title.toLowerCase()));
+    let slide1Set=false,slide2Set=false;
+
+    responses.forEach((data,idx)=>{
+      const cfg=endpoints[idx];
+      (data.results||[]).forEach(item=>{
+        const title=clean(item.title||item.name);
+        if(!title||!item.poster_path||seen.has(title.toLowerCase()))return;
+        seen.add(title.toLowerCase());
+
+        const genres=(item.genre_ids||[]).map(id=>genreMap[id]).filter(Boolean).join(", ");
+        const date=item.release_date||item.first_air_date||"";
+
+        if(!slide1Set && cfg.type==="movie" && item.backdrop_path){
+          slide1Set=true;
+          $("heroSlide1").style.backgroundImage=`url('${heroBase+item.backdrop_path}')`;
+          $("heroTitle1").textContent=title;
+          if(item.overview)$("heroDesc1").textContent=item.overview;
+          $("sidebarSpotlightImg").src=heroBase+item.backdrop_path;
+          $("sidebarSpotlightLabel").textContent="⚡ Featured: "+title;
+        }else if(!slide2Set && cfg.type==="series" && item.backdrop_path){
+          slide2Set=true;
+          $("heroSlide2").style.backgroundImage=`url('${heroBase+item.backdrop_path}')`;
+          $("heroTitle2").textContent=title;
+          if(item.overview)$("heroDesc2").textContent=item.overview;
+        }
+
+        allMovies.push(normalize({
+          id:`tmdb-${cfg.type}-${item.id}`,
+          tmdb_id:item.id,
+          title,
+          year:date.slice(0,4),
+          genre:genres,
+          type:cfg.type,
+          category:cfg.category,
+          language:cfg.language||"",
+          poster:imgBase+item.poster_path,
+          description:item.overview
+        }));
+      });
+    });
+  }catch(e){}
+}
 
 function go(id){const el=$(id);if(el){el.scrollIntoView({behavior:"smooth",block:"start"});closeSidebar()}}
 function closeSidebar(){$("sidebar").classList.remove("open");$("sidebarOverlay").classList.remove("show")}
 
-// UI Event Handlers
 let lastTapTime=0,lastTapCard=null;
 document.addEventListener("click",e=>{
   const themeBtn=e.target.closest("[data-theme-choice]");
@@ -862,19 +934,19 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeSidebar();clos
 
 const yr=new Date().getFullYear();
 $("yearNow").textContent=yr;$("sideYear").textContent=yr;
-
 initHeroSlider();
 saveIds(savedIds());
-
 try{const savedTheme=localStorage.getItem("xtreme_theme");if(savedTheme)applyTheme(savedTheme);}catch(e){}
+const existingPlan=getActivePlan();
+if(existingPlan?.planName && existingPlan?.amount)applyPlanUI(existingPlan.planName,existingPlan.amount,false);
 
 (async()=>{
-  allMovies=demoMovies.map(normalize);
-  populateVjs();render();
-  await loadSupabase();await loadTMDB();
-  populateVjs();render();
+  await loadSupabase();
+  await loadTMDB();
+  if(!allMovies.length)allMovies=demoMovies.map(normalize);
+  populateVjs();
+  render();
 })();
 </script>
 </body>
 </html>
-
