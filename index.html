@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#070709">
-<title>Xtreme Movie Watch - Premium</title>
+<title>Xtreme Movie Watch - Netflix Edition</title>
 <style>
 :root{
   --bg:#070709;--panel:#111116;--card:#181820;--red:#e50914;--text:#ffffff;--muted:#8c8c9a;--line:#272733;
@@ -13,7 +14,6 @@
   --sub-title-grad:linear-gradient(90deg,#ff5f6d,#ffc371,#c471ed)
 }
 
-/* Theme 1: Crimson Cinema (Default) */
 [data-theme="crimson"]{
   --bg:#070709;--panel:#111116;--card:#181820;--red:#e50914;--text:#ffffff;--muted:#9090a2;--line:#272733;
   --glow:0 0 22px rgba(229,9,20,0.45);
@@ -23,7 +23,6 @@
   --sub-title-grad:linear-gradient(90deg,#ff4b55,#ff9966,#d53369)
 }
 
-/* Theme 2: Electric Neon */
 [data-theme="neon"]{
   --bg:#050811;--panel:#0c1222;--card:#121b33;--red:#00e5ff;--text:#f4f8ff;--muted:#8fa4c8;--line:#213154;
   --glow:0 0 24px rgba(0,229,255,0.45);
@@ -33,7 +32,6 @@
   --sub-title-grad:linear-gradient(90deg,#00f5a0,#00d9f5,#b5179e)
 }
 
-/* Theme 3: Royal Gold */
 [data-theme="gold"]{
   --bg:#090806;--panel:#14110b;--card:#1d1911;--red:#f5b700;--text:#fffdf7;--muted:#b5aa8e;--line:#332b1c;
   --glow:0 0 24px rgba(245,183,0,0.42);
@@ -43,7 +41,6 @@
   --sub-title-grad:linear-gradient(90deg,#ffe169,#ff9f1c,#ff5400)
 }
 
-/* Theme 4: Emerald Pulse */
 [data-theme="emerald"]{
   --bg:#050a08;--panel:#0b1511;--card:#102019;--red:#00e676;--text:#f2fff8;--muted:#88b09b;--line:#1d382c;
   --glow:0 0 24px rgba(0,230,118,0.42);
@@ -53,7 +50,6 @@
   --sub-title-grad:linear-gradient(90deg,#69f0ae,#18ffff,#64ffda)
 }
 
-/* Theme 5: Sunset Velvet */
 [data-theme="sunset"]{
   --bg:#0b060d;--panel:#160c1a;--card:#211226;--red:#ff2a85;--text:#fff5fb;--muted:#b996ad;--line:#381e40;
   --glow:0 0 24px rgba(255,42,133,0.45);
@@ -63,7 +59,6 @@
   --sub-title-grad:linear-gradient(90deg,#ff5e9e,#ffb36b,#c77dff)
 }
 
-/* Theme 6: Crisp Light Mode */
 [data-theme="light"]{
   --bg:#f4f5f9;--panel:#ffffff;--card:#ffffff;--red:#d90429;--text:#12131a;--muted:#5c6070;--line:#dfe2ec;
   --glow:0 8px 24px rgba(217,4,41,0.18);
@@ -73,201 +68,239 @@
   --sub-title-grad:linear-gradient(90deg,#d90429,#ff4d00,#6a00f4)
 }
 
-*{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:84px}
-body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;transition:background-color .35s ease,color .35s ease}
-button,input,select{font:inherit}
-button{cursor:pointer}
-a{color:inherit;text-decoration:none}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+body { margin: 0; background: var(--bg);color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; transition: background-color .35s ease, color .35s ease; }
+button, input, select { font: inherit; }
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
 
-/* Sidebar */
-.sidebar{position:fixed;inset:0 auto 0 0;width:260px;background:var(--panel);border-right:1px solid var(--line);padding:24px 16px;z-index:45;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(0.16,1,0.3,1),background-color .35s ease,border-color .35s ease}
-.brand{display:flex;align-items:center;gap:12px;padding:0 8px 26px}
-.brand-mark{width:46px;height:46px;border:2px solid var(--red);border-radius:12px;display:grid;place-items:center;font-weight:900;font-size:18px;color:#fff;box-shadow:var(--glow);background:var(--accent-grad)}
-.brand-name{font-size:16px;font-weight:900;letter-spacing:0.5px}
-.brand-name small{display:block;color:var(--red);font-size:10px;letter-spacing:2.4px;margin-top:4px}
-.side-label{font-size:11px;color:var(--muted);font-weight:800;letter-spacing:2px;padding:16px 12px 8px;text-transform:uppercase;opacity:0.8}
-.side-link{display:flex;align-items:center;gap:14px;padding:13px 14px;border:1px solid transparent;border-radius:12px;color:var(--muted);font-size:14px;font-weight:600;margin:3px 0;transition:all .2s ease}
-.side-link .ico{width:24px;text-align:center;font-size:18px;transition:transform .2s}
-.side-link:hover{background:rgba(128,128,150,0.08);color:var(--text)}
-.side-link.active{background:var(--accent-grad);color:#ffffff;box-shadow:var(--glow);font-weight:700}
-.side-link.active .ico{transform:scale(1.1)}
-.side-bottom{margin-top:auto;border-top:1px solid var(--line);padding-top:16px}
-.side-note{font-size:11px;color:var(--muted);line-height:1.6;padding:12px;background:rgba(128,128,150,0.06);border-radius:10px;text-align:center}
+/* Refined Netflix-Style Sidebar */
+.sidebar { position: fixed; inset: 0 auto 0 0; width: 280px; background: var(--panel); border-right: 1px solid var(--line); z-index: 45; display: flex; flex-direction: column; transition: transform .3s cubic-bezier(0.16,1,0.3,1), background-color .35s ease; }
+.sidebar-header { padding: 24px 20px; background: linear-gradient(180deg, rgba(0,0,0,0.3), transparent); border-bottom: 1px solid rgba(255,255,255,0.05); }
+.brand { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; text-decoration: none; color: var(--text); }
+.brand-mark { width: 42px; height: 42px; border-radius: 10px; display: grid; place-items: center; font-weight: 900; font-size: 16px; color: #fff; background: var(--accent-grad); box-shadow: var(--glow); flex-shrink: 0; }
+.brand-name { font-size: 15px; font-weight: 900; letter-spacing: 0.5px; line-height: 1.2; }
+.brand-name small { display: block; color: var(--red); font-size: 9px; letter-spacing: 2.2px; margin-top: 2px; text-transform: uppercase; }
 
-/* Overlay & Main Layout */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px);z-index:40}
-.overlay.show{display:block}
-.main{margin-left:260px;min-height:100vh;transition:margin-left .3s cubic-bezier(0.16,1,0.3,1)}
+.sidebar-poster-spotlight { position: relative; border-radius: 12px; overflow: hidden; aspect-ratio: 16/9; background: #222; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+.sidebar-poster-spotlight img { width: 100%; height: 100%; object-fit: cover; }
+.sidebar-poster-label { position: absolute; bottom: 8px; left: 8px; right: 8px; background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); padding: 6px 10px; border-radius: 6px; font-size: 11px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border: 1px solid rgba(255,255,255,0.1); }
+
+.sidebar-nav { overflow-y: auto; flex-grow: 1; padding: 20px 16px; scrollbar-width: none; }
+.sidebar-nav::-webkit-scrollbar { display: none; }
+.side-label { font-size: 10px; color: var(--muted); font-weight: 800; letter-spacing: 2px; padding: 16px 12px 8px; text-transform: uppercase; opacity: 0.8; }
+.side-link { display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 10px; color: var(--muted); font-size: 13px; font-weight: 600; margin: 4px 0; transition: all .2s ease; text-decoration: none; }
+.side-link .ico { width: 22px; text-align: center; font-size: 18px; transition: transform .2s; }
+.side-link:hover { background: rgba(128,128,150,0.08); color: var(--text); }
+.side-link.active { background: var(--accent-grad); color: #ffffff; box-shadow: var(--glow); font-weight: 700; }
+.side-link.active .ico { transform: scale(1.1); }
+
+.sidebar-bottom { padding: 16px; border-top: 1px solid var(--line); background: color-mix(in srgb, var(--panel) 50%, transparent); }
+.side-note { font-size: 11px; color: var(--muted); line-height: 1.5; text-align: center; margin-top: 8px; font-weight: 500; }
+
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); z-index: 40; }
+.overlay.show { display: block; }
+
+.main { margin-left: 280px; min-height: 100vh; transition: margin-left .3s cubic-bezier(0.16,1,0.3,1); }
 
 /* Topbar */
-.topbar{height:72px;position:sticky;top:0;z-index:25;background:color-mix(in srgb,var(--panel) 86%,transparent);backdrop-filter:blur(18px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 28px;transition:background-color .35s ease,border-color .35s ease}
-.menu-btn{display:none;background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:10px;width:44px;height:44px;font-size:22px;place-items:center}
-.search-wrap{position:relative;flex:1;max-width:620px}
-.search-wrap::before{content:"🔍";position:absolute;left:15px;top:12px;font-size:16px;opacity:0.65}
-.search-wrap input{width:100%;height:44px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:0 16px 0 46px;color:var(--text);outline:none;font-size:14px;transition:all .25s}
-.search-wrap input:focus{border-color:var(--red);box-shadow:var(--glow)}
-.top-right{margin-left:auto;display:flex;gap:10px;align-items:center}
-.top-btn{background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:12px;padding:10px 15px;font-size:13px;font-weight:700;display:flex;align-items:center;gap:8px;transition:all .3s ease;position:relative;overflow:hidden;white-space:nowrap}
-.top-btn:hover{border-color:var(--red);transform:translateY(-1px)}
-.top-btn.sub-activated{background:var(--accent-grad);color:#ffffff;border-color:transparent;box-shadow:0 0 28px rgba(255,0,85,0.65),0 0 12px var(--red);transform:scale(1.04);animation:navCelebration .7s cubic-bezier(0.22,1,0.36,1)}
-@keyframes navCelebration{
-  0%{transform:scale(0.92);filter:brightness(1.5)}
-  50%{transform:scale(1.09)}
-  100%{transform:scale(1.04);filter:brightness(1)}
+.topbar { height: 70px; position: sticky; top: 0; z-index: 30; background: color-mix(in srgb, var(--panel) 88%,transparent); backdrop-filter:blur(20px); border-bottom:1px solid var(--line); display:flex; align-items:center; gap:14px; padding:0 32px; transition: background-color .35s ease }
+.menu-btn { display:none; background:var(--card); border:1px solid var(--line); color:var(--text); border-radius:10px; width:40px; height:40px; font-size:20px; place-items:center; flex-shrink:0 }
+.search-wrap { position:relative; flex:1; max-width:600px }
+.search-wrap::before { content:"🔍"; position:absolute; left:16px; top:12px; font-size:15px; opacity:0.6 }
+.search-wrap input { width:100%; height:42px; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:0 16px 0 46px; color:var(--text); outline:none; font-size:13px; transition:all .25s }
+.search-wrap input:focus { border-color:var(--red); box-shadow:var(--glow) }
+.top-right { margin-left:auto; display:flex; gap:12px; align-items:center }
+.user-badge { width:38px; height:38px; border-radius:50%; background:var(--accent-grad); color:#ffffff; display:grid; place-items:center; font-weight:900; font-size:12px; box-shadow:var(--glow); flex-shrink:0 }
+.user-badge.vip { box-shadow:0 0 16px rgba(245,183,0,0.9); border:2px solid #f5b700 }
+
+/* Hero Slider */
+.content { max-width:1600px; margin:auto; padding:0 32px 80px }
+.hero-wrapper { position:relative; margin:24px 0 36px; border-radius:24px; overflow:hidden; background:var(--hero-grad); border:1px solid var(--line); box-shadow:0 20px 40px rgba(0,0,0,0.3) }
+.hero-slider { display:flex; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; scroll-behavior:smooth }
+.hero-slider::-webkit-scrollbar { display:none }
+.hero-slide { min-width:100%; scroll-snap-align:center; position:relative; min-height:420px; display:flex; align-items:flex-end; padding:48px; background-size:cover; background-position:center }
+.hero-slide::before { content:""; position:absolute; inset:0; background: linear-gradient(90deg,color-mix(in srgb,var(--bg) 90%,transparent) 5%,color-mix(in srgb,var(--bg) 55%,transparent) 50%,transparent 100%),linear-gradient(0deg,color-mix(in srgb,var(--bg) 95%,transparent) 0%,transparent 60%) }
+.hero-content { position:relative; z-index:2; max-width:680px }
+.eyebrow { color:#ffffff; background:var(--accent-grad); font-size:10px; font-weight:900; letter-spacing:2.8px; text-transform:uppercase; padding:6px 14px; border-radius:999px; display:inline-block; margin-bottom:14px; box-shadow:var(--glow) }
+.hero-slide h1,.hero-slide h2 { font-size:clamp(32px,5vw,56px); margin:0 0 14px; font-weight:900; line-height:1.1 }
+.hero-slide p { color:var(--muted); line-height:1.6; font-size:16px; margin:0 0 26px }
+[data-theme]:not([data-theme="light"]) .hero-slide p { color:#e8e8f0 }
+.hero-actions { display:flex; gap:12px; flex-wrap:wrap }
+.btn { background:var(--accent-grad); color:#ffffff; border:none; border-radius:12px; padding:13px 26px; font-size:13px; font-weight:800; display:inline-flex; align-items:center; justify-content:center; gap:8px; transition:all .22s ease; box-shadow:var(--glow); text-decoration:none }
+.btn:hover { transform:translateY(-2px); filter:brightness(1.08) }
+.btn.secondary { background:var(--card); color:var(--text); border:1px solid var(--line); box-shadow:none }
+.btn.secondary:hover { border-color:var(--red) }
+.slider-indicators { position:absolute; bottom:24px; right:24px; z-index:3; display:flex; gap:8px; background:color-mix(in srgb,var(--panel) 80%,transparent); padding:8px 12px; border-radius:20px; border:1px solid var(--line); backdrop-filter:blur(10px) }
+.indicator { width:11px; height:11px; border-radius:50%; background:var(--muted); opacity:0.45; border:none; padding:0; transition:all .25s }
+.indicator.active { background:var(--red); opacity:1; transform:scale(1.25) }
+
+/* Quick Chips & Toolbar */
+.quick { display:flex; gap:10px; overflow-x:auto; padding-bottom:10px; margin:28px 0; scrollbar-width:none }
+.quick::-webkit-scrollbar { display:none }
+.chip { background:var(--card); border:1px solid var(--line); color:var(--muted); border-radius:24px; padding:10px 20px; font-size:13px; font-weight:700; white-space:nowrap; transition:all .2s }
+.chip:hover, .chip.active { border-color:transparent; background:var(--accent-grad); color:#ffffff; box-shadow:var(--glow) }
+.toolbar { display:flex; gap:12px; align-items:center; flex-wrap:wrap; padding:16px 20px; background:var(--panel); border:1px solid var(--line); border-radius:20px; margin:28px 0 }
+.toolbar select { background:var(--card); color:var(--text); border:1px solid var(--line); border-radius:12px; padding:12px 16px; font-size:13px; font-weight:600; min-width:150px; outline:none; cursor:pointer }
+
+/* Sections & Momentum Carousels */
+.section { margin:42px 0 }
+.section-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:20px }
+.section-head h2 { font-size:24px; margin:0; font-weight:900; display:flex; align-items:center; gap:14px }
+.section-head h2::before { content:""; display:inline-block; width:6px; height:26px; background:var(--accent-grad); border-radius:3px; box-shadow:var(--glow) }
+.section-head span { font-size:13px; color:var(--muted); font-weight:600 }
+.grid-car { display:flex; gap:18px; overflow-x:auto; scroll-snap-type:x mandatory; scrollbar-width:none; padding:10px 2px 16px; cursor:grab }
+.grid-car:active { cursor:grabbing }
+.grid-car::-webkit-scrollbar{ display:none }
+.movie { min-width:195px; width:195px; background:var(--card); border:1px solid var(--line); border-radius:18px; overflow:hidden; position:relative; transition:all .28s cubic-bezier(0.16,1,0.3,1); scroll-snap-align:start; display:flex; flex-direction:column; box-shadow:0 8px 24px rgba(0,0,0,0.15) }
+.movie:hover { transform:translateY(-8px) scale(1.02); border-color:var(--red); box-shadow:var(--glow) }
+.poster-wrap { position:relative; background:var(--panel); aspect-ratio:2/3; overflow:hidden }
+.poster { display:block; width:100%; height:100%; object-fit:cover; transition:transform .45s ease; user-select:none; -webkit-user-drag:none }
+.movie:hover .poster { transform:scale(1.08) }
+.poster-placeholder { width:100%; height:100%; aspect-ratio:2/3; display:grid; place-items:center; text-align:center; padding:16px; background:var(--hero-grad); color:var(--text); font-size:12px; font-weight:900; letter-spacing:1.5px }
+.poster-tag { position:absolute; left:10px; top:10px; background:var(--accent-grad); color:#ffffff; padding:4px 9px; border-radius:6px; font-size:10px; font-weight:900; letter-spacing:0.6px; text-transform:uppercase }
+.heart { position:absolute; right:10px; top:10px; border:none; border-radius:50%; width:38px; height:38px; background:rgba(10,10,14,0.78); backdrop-filter:blur(8px); color:#ffffff; font-size:18px; display:grid; place-items:center; transition:transform .2s ease; cursor:pointer }
+.heart:hover { transform:scale(1.15) }
+.heart.saved { color:#ff4b55; text-shadow:0 0 14px rgba(255,75,85,0.9) }
+.heart-burst { position:absolute; inset:0; display:grid; place-items:center; font-size:56px; color:#ff2a55; text-shadow:0 0 28px rgba(255,42,85,0.9); pointer-events:none; animation:heartPop .7s ease forwards }
+@keyframes heartPop {
+  0% { opacity:0; transform:scale(0.3) }
+  35% { opacity:1; transform:scale(1.3) }
+  100% { opacity:0; transform:scale(1.7) translateY(-14px) }
 }
-.user-badge{width:40px;height:40px;border-radius:50%;background:var(--accent-grad);color:#ffffff;border:2px solid rgba(255,255,255,0.35);display:grid;place-items:center;font-weight:900;font-size:13px;box-shadow:var(--glow);transition:all .3s ease}
-.user-badge.vip{transform:scale(1.1);box-shadow:0 0 24px rgba(255,195,113,0.85)}
+.movie-info { padding:16px; display:flex; flex-direction:column; flex-grow:1 }
+.movie-title { font-size:15px; font-weight:900; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-bottom:6px }
+.meta { font-size:12px; color:var(--muted); display:flex; justify-content:space-between; gap:6px; margin-bottom:14px; font-weight:600 }
+.movie-actions { display:flex; gap:8px; margin-top:auto }
+.movie-actions button { flex:1; padding:10px 6px; font-size:12px; border-radius:10px; font-weight:800; border:none; transition:filter .2s }
 
-/* Theme Switcher Bar */
-.theme-bar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:14px 20px;margin:20px 0 12px;transition:background-color .35s ease,border-color .35s ease}
-.theme-bar-title{font-size:13px;font-weight:800;letter-spacing:0.5px;display:flex;align-items:center;gap:8px}
-.theme-bar-title small{color:var(--muted);font-weight:500}
-.theme-swatches{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.theme-pill{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:12px;font-weight:700;transition:all .22s ease}
-.theme-pill:hover{transform:translateY(-2px);border-color:var(--red)}
-.theme-pill.active{background:var(--accent-grad);color:#ffffff;border-color:transparent;box-shadow:var(--glow)}
-.swatch-dot{width:13px;height:13px;border-radius:50%;border:1px solid rgba(255,255,255,0.5);flex-shrink:0}
+/* Settings Section */
+.settings-section { display: none; padding: 40px; background: var(--panel); border-radius:24px; border:1px solid var(--line); margin: 20px 0 }
+.settings-section.active { display: block }
+.settings-group { margin-bottom: 36px }
+.settings-group h3 { font-size: 20px; font-weight:900; margin-bottom:18px; display:flex; align-items:center; gap:10px; border-bottom:1px solid var(--line); padding-bottom:10px }
 
-/* Content & Hero */
-.content{max-width:1560px;margin:auto;padding:0 28px 80px}
-.hero-wrapper{position:relative;margin:16px 0 32px;border-radius:24px;overflow:hidden;background:var(--hero-grad);border:1px solid var(--line);box-shadow:0 16px 40px rgba(0,0,0,0.22)}
-.hero-slider{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth}
-.hero-slider::-webkit-scrollbar{display:none}
-.hero-slide{min-width:100%;scroll-snap-align:center;position:relative;min-height:390px;display:flex;align-items:flex-end;padding:44px;background-size:cover;background-position:center}
-.hero-slide::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,color-mix(in srgb,var(--bg) 92%,transparent) 8%,color-mix(in srgb,var(--bg) 62%,transparent) 52%,transparent 100%),linear-gradient(0deg,color-mix(in srgb,var(--bg) 95%,transparent) 0%,transparent 65%)}
-.hero-content{position:relative;z-index:2;max-width:650px}
-.eyebrow{color:#ffffff;background:var(--accent-grad);font-size:10px;font-weight:900;letter-spacing:2.6px;text-transform:uppercase;padding:6px 14px;border-radius:999px;display:inline-block;margin-bottom:14px;box-shadow:var(--glow)}
-.hero-slide h1,.hero-slide h2{font-size:clamp(30px,4.6vw,52px);margin:0 0 14px;font-weight:900;line-height:1.1}
-.hero-slide p{color:var(--muted);line-height:1.6;font-size:15px;margin:0 0 24px}
-[data-theme]:not([data-theme="light"]) .hero-slide p{color:#e2e2ee}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
-.btn{background:var(--accent-grad);color:#ffffff;border:none;border-radius:12px;padding:12px 22px;font-size:13px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all .22s ease;box-shadow:var(--glow)}
-.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
-.btn.secondary{background:var(--panel);color:var(--text);border:1px solid var(--line);box-shadow:none}
-.btn.secondary:hover{border-color:var(--red)}
-.slider-indicators{position:absolute;bottom:22px;right:24px;z-index:3;display:flex;gap:8px;background:color-mix(in srgb,var(--panel) 80%,transparent);padding:8px 12px;border-radius:20px;border:1px solid var(--line);backdrop-filter:blur(10px)}
-.indicator{width:11px;height:11px;border-radius:50%;background:var(--muted);opacity:0.45;border:none;padding:0;transition:all .25s}
-.indicator.active{background:var(--red);opacity:1;transform:scale(1.25)}
+.theme-swatches { display:flex; gap:12px; flex-wrap:wrap; align-items:center }
+.theme-pill { display:inline-flex; align-items:center; gap:10px; padding:12px 22px; border-radius:999px; border:1px solid var(--line); background:var(--card); color:var(--text); font-size:13px; font-weight:800; transition:all .25s ease }
+.theme-pill:hover { transform:translateY(-3px); border-color:var(--red) }
+.theme-pill.active { background:var(--accent-grad); color:#ffffff; border-color:transparent; box-shadow:var(--glow) }
+.swatch-dot { width:15px; height:15px; border-radius:50%; border:1px solid rgba(255,255,255,0.4); flex-shrink:0 }
 
-/* Brilliant Gradient Subscription Section */
-.subscription-section{margin:36px 0;padding:38px 32px;background:var(--sub-grad);border-radius:28px;border:1px solid color-mix(in srgb,var(--red) 45%,var(--line));position:relative;overflow:hidden;box-shadow:0 18px 45px rgba(0,0,0,0.25)}
-.subscription-section::after{content:"";position:absolute;inset:-60px -60px auto auto;width:240px;height:240px;border-radius:50%;background:var(--accent-grad);filter:blur(75px);opacity:0.28;pointer-events:none}
-.sub-header{text-align:center;max-width:740px;margin:0 auto 32px;position:relative;z-index:1}
-.sub-header h2{font-size:clamp(28px,3.8vw,42px);margin:0 0 10px;font-weight:900;background:var(--sub-title-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.sub-header p{color:var(--muted);font-size:15px;line-height:1.55;margin:0}
-.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:20px;position:relative;z-index:1}
-.price-card{background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:22px;padding:26px 22px;text-align:center;transition:all .3s cubic-bezier(0.16,1,0.3,1);position:relative;overflow:hidden;display:flex;flex-direction:column}
-.price-card:hover{transform:translateY(-8px);border-color:var(--red);box-shadow:var(--glow)}
-.price-card.selected-plan{border-color:var(--red);box-shadow:0 0 0 2px var(--red),var(--glow)}
-.price-card.featured{border-color:color-mix(in srgb,var(--red) 70%,transparent)}
-.badge-popular{position:absolute;top:15px;right:-32px;background:var(--accent-grad);color:#ffffff;font-size:10px;font-weight:900;padding:4px 36px;transform:rotate(42deg);text-transform:uppercase;letter-spacing:0.8px}
-.plan-duration{font-size:12px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:10px;background:var(--sub-title-grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.plan-price{font-size:34px;font-weight:900;margin-bottom:6px;color:var(--text)}
-.plan-price small{font-size:13px;color:var(--muted);display:block;font-weight:600;margin-top:2px}
-.plan-features{list-style:none;padding:0;margin:18px 0 24px;text-align:left;flex-grow:1}
-.plan-features li{font-size:13px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.plan-features li::before{content:"✦";color:var(--red);font-weight:900}
-.plan-btn{width:100%;padding:13px 16px;border-radius:12px;border:none;background:var(--accent-grad);color:#ffffff;font-weight:800;font-size:13px;letter-spacing:0.4px;box-shadow:var(--glow);transition:transform .2s ease,filter .2s ease}
-.plan-btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
+/* Brilliant Subscription Section */
+.subscription-section { display: none; padding:48px 36px; background:var(--sub-grad); border-radius:28px; border:1px solid color-mix(in srgb,var(--red) 40%,var(--line)); position:relative; overflow:hidden; box-shadow:0 25px 60px rgba(0,0,0,0.4); margin:20px 0 }
+.subscription-section.active { display: block }
+.subscription-section::after { content:""; position:absolute; inset:-80px -80px auto auto; width:300px; height:300px; border-radius:50%; background:var(--accent-grad); filter:blur(90px); opacity:0.32; pointer-events:none }
+.sub-header { text-align:center; max-width:800px; margin:0 auto 40px; position:relative; z-index:1 }
+.sub-header h2 { font-size:clamp(32px,4vw,48px); margin:0 0 14px; font-weight:900; background:var(--sub-title-grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent }
+.sub-header p { color:var(--muted); font-size:16px; line-height:1.6; margin:0 }
+.pricing-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:24px; position:relative; z-index:1 }
+.price-card { background:color-mix(in srgb,var(--card) 90%,transparent); backdrop-filter:blur(16px); border:1px solid var(--line); border-radius:24px; padding:32px 24px; text-align:center; transition:all .35s cubic-bezier(0.16,1,0.3,1); position:relative; overflow:hidden; display:flex; flex-direction:column }
+.price-card:hover { transform:translateY(-10px); border-color:var(--red); box-shadow:var(--glow) }
+.price-card.selected-plan { border-color:var(--red); box-shadow:0 0 0 2px var(--red),var(--glow) }
+.badge-popular { position:absolute; top:18px; right:-36px; background:var(--accent-grad); color:#ffffff; font-size:11px; font-weight:900; padding:5px 42px; transform:rotate(45deg); text-transform:uppercase; letter-spacing:0.8px; box-shadow:0 2px 8px rgba(0,0,0,0.3) }
+.plan-duration { font-size:13px; font-weight:900; letter-spacing:2px; text-transform:uppercase; margin-bottom:12px; background:var(--sub-title-grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent }
+.plan-price { font-size:38px; font-weight:900; margin-bottom:8px; color:var(--text) }
+.plan-price small { font-size:14px; color:var(--muted); display:block; font-weight:600; margin-top:2px }
+.plan-features { list-style:none; padding:0; margin:22px 0 28px; text-align:left; flex-grow:1 }
+.plan-features li { font-size:14px; color:var(--muted); margin-bottom:12px; display:flex; align-items:center; gap:10px }
+.plan-features li::before { content:"✦"; color:var(--red); font-weight:900; font-size:16px }
+.plan-btn { width:100%; padding:15px 20px; border-radius:14px; border:none; background:var(--accent-grad); color:#ffffff; font-weight:800; font-size:14px; letter-spacing:0.5px; box-shadow:var(--glow); transition:transform .2s ease,filter .2s ease }
+.plan-btn:hover { transform:translateY(-2px); filter:brightness(1.1) }
 
-/* Quick Chips & Filters */
-.quick{display:flex;gap:10px;overflow-x:auto;padding-bottom:10px;margin:24px 0;scrollbar-width:none}
-.quick::-webkit-scrollbar{display:none}
-.chip{background:var(--card);border:1px solid var(--line);color:var(--muted);border-radius:24px;padding:9px 18px;font-size:13px;font-weight:700;white-space:nowrap;transition:all .2s}
-.chip:hover,.chip.active{border-color:transparent;background:var(--accent-grad);color:#ffffff;box-shadow:var(--glow)}
-.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:16px 20px;background:var(--panel);border:1px solid var(--line);border-radius:20px;margin:24px 0}
-.toolbar select{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:11px 15px;font-size:13px;font-weight:600;min-width:140px;outline:none}
-.vj-chips{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}
+/* Global Views Container */
+#mainAppView { display: block }
+#mainAppView.hidden { display: none }
+#subViewContainer { display: none }
+#subViewContainer.active { display: block }
 
-/* Sections & Carousels */
-.section{margin:38px 0}
-.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
-.section-head h2{font-size:21px;margin:0;font-weight:900;display:flex;align-items:center;gap:12px}
-.section-head h2::before{content:"";display:inline-block;width:6px;height:24px;background:var(--accent-grad);border-radius:3px;box-shadow:var(--glow)}
-.section-head span{font-size:12px;color:var(--muted);font-weight:600}
-.grid-car{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:8px 2px 14px;cursor:grab}
-.grid-car:active{cursor:grabbing}
-.grid-car::-webkit-scrollbar{display:none}
-.movie{min-width:185px;width:185px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;position:relative;transition:all .28s cubic-bezier(0.16,1,0.3,1);scroll-snap-align:start;display:flex;flex-direction:column;box-shadow:0 6px 18px rgba(0,0,0,0.12)}
-.movie:hover{transform:translateY(-6px);border-color:var(--red);box-shadow:var(--glow)}
-.poster-wrap{position:relative;background:var(--panel);aspect-ratio:2/3;overflow:hidden}
-.poster{display:block;width:100%;height:100%;object-fit:cover;transition:transform .45s ease;user-select:none;-webkit-user-drag:none}
-.movie:hover .poster{transform:scale(1.06)}
-.poster-placeholder{width:100%;height:100%;aspect-ratio:2/3;display:grid;place-items:center;text-align:center;padding:14px;background:var(--hero-grad);color:var(--text);font-size:12px;font-weight:900;letter-spacing:1.5px}
-.poster-tag{position:absolute;left:10px;top:10px;background:var(--accent-grad);color:#ffffff;padding:4px 8px;border-radius:6px;font-size:10px;font-weight:900;letter-spacing:0.6px}
-.heart{position:absolute;right:10px;top:10px;border:none;border-radius:50%;width:36px;height:36px;background:rgba(10,10,14,0.72);backdrop-filter:blur(6px);color:#ffffff;font-size:18px;display:grid;place-items:center;transition:transform .2s ease}
-.heart:hover{transform:scale(1.12)}
-.heart.saved{color:#ff4b55;text-shadow:0 0 12px rgba(255,75,85,0.9)}
-.heart-burst{position:absolute;inset:0;display:grid;place-items:center;font-size:52px;color:#ff2a55;text-shadow:0 0 24px rgba(255,42,85,0.9);pointer-events:none;animation:heartPop .65s ease forwards}
-@keyframes heartPop{
-  0%{opacity:0;transform:scale(0.3)}
-  35%{opacity:1;transform:scale(1.25)}
-  100%{opacity:0;transform:scale(1.6) translateY(-10px)}
-}
-.movie-info{padding:13px;display:flex;flex-direction:column;flex-grow:1}
-.movie-title{font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:6px}
-.meta{font-size:11px;color:var(--muted);display:flex;justify-content:space-between;gap:6px;margin-bottom:12px;font-weight:600}
-.movie-actions{display:flex;gap:8px;margin-top:auto}
-.movie-actions button{flex:1;padding:9px 6px;font-size:11px;border-radius:9px;font-weight:800}
-.notice{font-size:12px;color:var(--muted);margin:10px 0 0}
+/* Modals & Paywall Overlay */
+.modal { display:none; position:fixed; inset:0; z-index:150; background:rgba(0,0,0,0.82); backdrop-filter:blur(12px); align-items:flex-end; justify-content:center; opacity:0; transition:opacity .3s ease }
+.modal.show { display:flex; opacity:1 }
+.dialog { width:100%; max-width:900px; max-height:92vh; background:var(--panel); color:var(--text); border-top-left-radius:32px; border-top-right-radius:32px; border:1px solid var(--line); border-bottom:none; overflow-y:auto; position:relative; padding:32px 36px 40px; box-shadow:0 -15px 50px rgba(0,0,0,0.6); transform:translateY(100%); transition:transform .35s cubic-bezier(0.16,1,0.3,1) }
+.modal.show .dialog { transform:translateY(0) }
+.drag-handle { width:55px; height:6px; background:var(--line); border-radius:999px; margin:0 auto 24px; cursor:grab; touch-action:none }
+.close { position:absolute; right:26px; top:26px; background:var(--card); border:1px solid var(--line); color:var(--text); border-radius:50%; width:42px; height:42px; font-size:20px; display:grid; place-items:center; transition:all .2s }
+.close:hover { background:var(--red); border-color:var(--red); color:#fff }
+.detail-layout { display:grid; grid-template-columns:230px 1fr; gap:28px }
+.detail-layout img { width:100%; aspect-ratio:2/3; object-fit:cover; border-radius:18px; box-shadow:0 15px 35px rgba(0,0,0,0.5) }
+.detail-layout h2 { margin:0 42px 12px 0; font-size:30px; font-weight:900 }
+.detail-layout p { color:var(--muted); line-height:1.6; font-size:15px }
+.modal-actions { display:flex; gap:14px; flex-wrap:wrap; margin-top:24px }
 
-/* Modals / Bottom Sheets */
-.modal{display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,0.78);backdrop-filter:blur(10px);align-items:flex-end;justify-content:center;opacity:0;transition:opacity .3s ease}
-.modal.show{display:flex;opacity:1}
-.dialog{width:100%;max-width:860px;max-height:90vh;background:var(--panel);color:var(--text);border-top-left-radius:30px;border-top-right-radius:30px;border:1px solid var(--line);border-bottom:none;overflow-y:auto;position:relative;padding:28px 30px 34px;box-shadow:0 -12px 45px rgba(0,0,0,0.5);transform:translateY(100%);transition:transform .35s cubic-bezier(0.16,1,0.3,1)}
-.modal.show .dialog{transform:translateY(0)}
-.drag-handle{width:50px;height:6px;background:var(--line);border-radius:999px;margin:0 auto 20px;cursor:grab;touch-action:none}
-.close{position:absolute;right:22px;top:22px;background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:50%;width:38px;height:38px;font-size:18px;display:grid;place-items:center}
-.detail-layout{display:grid;grid-template-columns:210px 1fr;gap:24px}
-.detail-layout img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:16px}
-.detail-layout h2{margin:0 36px 10px 0;font-size:26px}
-.detail-layout p{color:var(--muted);line-height:1.6;font-size:14px}
-.modal-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
-.player-frame{width:100%;aspect-ratio:16/9;border:none;border-radius:16px;background:#000}
-.player-message{font-size:12px;color:var(--muted);text-align:center;margin-top:14px}
+.player-container { width:100%; aspect-ratio:16/9; background:#000; border-radius:18px; overflow:hidden; position:relative; display:grid; place-items:center }
+.player-frame { width:100%; height:100%; border:none }
+.paywall-overlay { position:absolute; inset:0; background:rgba(0,0,0,0.92); backdrop-filter:blur(8px); display:none; flex-direction:column; align-items:center; justify-content:center; padding:30px; text-align:center; z-index:10 }
+.paywall-overlay.show { display:flex; animation:fadeIn .3s ease }
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }
+.paywall-title { font-size:28px; font-weight:900; margin-bottom:12px; color:#fff }
+.paywall-desc { font-size:15px; color:#ccc; max-width:500px; margin-bottom:24px; line-height:1.5 }
 
-/* Mobile Nav & Footer */
-.footer{text-align:center;border-top:1px solid var(--line);padding:34px 20px;color:var(--muted);font-size:12px;line-height:1.8;background:var(--panel)}
-.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:35;background:color-mix(in srgb,var(--panel) 94%,transparent);border-top:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-bottom));backdrop-filter:blur(16px);justify-content:space-around}
-.mobile-nav a{color:var(--muted);text-align:center;font-size:10px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px}
-.mobile-nav b{font-size:19px}
-.mobile-nav a.active{color:var(--red)}
+.notice { font-size:13px; color:var(--muted); margin:14px 0 0; font-weight:600 }
+.empty { padding:56px 20px; color:var(--muted); width:100%; text-align:center; font-size:15px; font-weight:600; background:var(--card); border-radius:18px; border:1px dashed var(--line) }
+
+/* Mobile Nav */
+.mobile-nav { display:none; position:fixed; bottom:0; left:0; right:0; z-index:100; background:color-mix(in srgb,var(--panel) 95%,transparent); border-top:1px solid var(--line); padding:12px 16px calc(12px + env(safe-area-inset-bottom)); backdrop-filter:blur(20px);justify-content:space-around }
+.mobile-nav a { color:var(--muted); text-align:center; font-size:10px; font-weight:800; display:flex; flex-direction:column; align-items:center; gap:4px; text-decoration:none }
+.mobile-nav b { font-size:22px }
+.mobile-nav a.active { color:var(--red) }
+
+.footer { text-align:center; border-top:1px solid var(--line); padding:40px 20px; color:var(--muted); font-size:12px; line-height:1.8; background:var(--panel); font-weight:600 }
 
 @media(max-width:768px){
-  .sidebar{transform:translateX(-105%)}
-  .sidebar.open{transform:translateX(0)}
-  .main{margin-left:0}
-  .menu-btn{display:grid}
-  .top-right .top-btn{display:none}
-  .content{padding:0 16px 96px}
-  .mobile-nav{display:flex}
-  .detail-layout{grid-template-columns:130px 1fr;gap:16px}
-  .dialog{padding:20px 18px 28px;border-radius:24px 24px 0 0}
-  .hero-slide{padding:26px;min-height:340px}
-  .subscription-section{padding:26px 18px}
+  .sidebar { transform:translateX(-105%); width:300px; box-shadow:20px 0 50px rgba(0,0,0,0.8) }
+  .sidebar.open { transform:translateX(0) }
+  .main { margin-left:0 }
+  .menu-btn { display:grid }
+  .content { padding:0 18px 110px }
+  .mobile-nav { display:flex }
+  .detail-layout { grid-template-columns:140px 1fr; gap:18px }
+  .detail-layout h2 { font-size:24px }
+  .dialog { padding:24px 20px 32px; border-radius:28px 28px 0 0 }
+  .hero-slide { padding:28px; min-height:360px }
+  .subscription-section { padding:36px 24px }
 }
 </style>
 </head>
 <body data-theme="crimson">
 
 <aside class="sidebar" id="sidebar">
-  <a class="brand" href="#home" data-nav="home"><span class="brand-mark">XT</span><span class="brand-name">XTREME WATCH<small>UGANDAN VJ TRANSLATIONS</small></span></a>
-  <div class="side-label">Discover</div>
-  <a class="side-link active" href="#home" data-nav="home"><span class="ico">🏠</span>Home</a>
-  <a class="side-link" href="#subscription" data-nav="subscription"><span class="ico">💎</span>Subscription Plans</a>
-  <a class="side-link" href="#catalog" data-nav="catalog"><span class="ico">🎞️</span>Latest Movies</a>
-  <a class="side-link" href="#series" data-nav="series"><span class="ico">📺</span>Series</a>
-  <a class="side-link" href="#categories" data-nav="categories"><span class="ico">🔍</span>Browse & Filter</a>
-  <div class="side-label">Library</div>
-  <a class="side-link" href="#mylist" data-nav="mylist"><span class="ico">❤️</span>My List <span id="sideWatchCount" style="margin-left:auto;padding:2px 8px;border-radius:10px;font-size:12px">0</span></a>
-  <a class="side-link" href="#vjcollections" data-nav="vjcollections"><span class="ico">🎙️</span>VJ Collections</a>
-  <div class="side-label">Collections</div>
-  <a class="side-link" href="#kids" data-nav="kids"><span class="ico">🧸</span>Kids Zone</a>
-  <a class="side-link" href="#indian" data-nav="indian"><span class="ico">✨</span>Indian Movies</a>
-  <a class="side-link" href="#asian" data-nav="asian"><span class="ico">⛩️</span>Asian Series</a>
-  <div class="side-bottom">
-    <a class="side-link" href="#support" data-nav="support"><span class="ico">🎧</span>Support</a>
+  <div class="sidebar-header">
+    <a class="brand" href="#" onclick="showHomeView();closeSidebar();return false;">
+      <span class="brand-mark">XT</span>
+      <span class="brand-name">XTREME WATCH<small>UGANDAN VJ TRANSLATIONS</small></span>
+    </a>
+    <div class="sidebar-poster-spotlight" id="sidebarSpotlight">
+      <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=600" alt="Spotlight Poster">
+      <div class="sidebar-poster-label" id="sidebarSpotlightLabel">⚡ Featured: Action Blockbuster Returns</div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="side-label">Menu</div>
+    <a href="#" class="side-link active" onclick="showHomeView();closeSidebar();return false;"><span class="ico">🏠</span>Home</a>
+    <a href="#catalog" class="side-link" onclick="showHomeView();go('catalog');closeSidebar();return false;"><span class="ico">🎞️</span>Latest Movies</a>
+    <a href="#series" class="side-link" onclick="showHomeView();go('series');closeSidebar();return false;"><span class="ico">📺</span>Series</a>
+    <a href="#mylist" class="side-link" onclick="showHomeView();go('mylist');closeSidebar();return false;"><span class="ico">❤️</span>My List <span id="sideWatchCount" style="margin-left:auto;background:rgba(229,9,20,0.2);color:var(--red);padding:2px 8px;border-radius:10px;font-size:11px">0</span></a>
+    
+    <div class="side-label">Membership</div>
+    <a href="#" class="side-link" id="subSidebarLink" onclick="showSubscriptionView();closeSidebar();return false;"><span class="ico">💎</span>Subscription Plans</a>
+    
+    <div class="side-label">Collections</div>
+    <a href="#movies" class="side-link" onclick="showHomeView();go('catalog');closeSidebar();return false;"><span class="ico">🍿</span>All Movies</a>
+    <a href="#kids" class="side-link" onclick="showHomeView();go('kids');closeSidebar();return false;"><span class="ico">🧸</span>Kids Zone</a>
+    <a href="#indian" class="side-link" onclick="showHomeView();go('indian');closeSidebar();return false;"><span class="ico">✨</span>Indian Movies</a>
+    <a href="#asian" class="side-link" onclick="showHomeView();go('asian');closeSidebar();return false;"><span class="ico">⛩️</span>Asian Series</a>
+    
+    <div class="side-label">Preferences</div>
+    <a href="#" class="side-link" id="settingsSidebarLink" onclick="showSettingsView();closeSidebar();return false;"><span class="ico">⚙️</span>Settings</a>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <span style="font-size:12px; font-weight:800;" id="sidebarUserStatus">✓ Free Tier</span>
+      <button class="btn secondary" style="padding:6px 12px; font-size:11px;" onclick="showSubscriptionView();closeSidebar();return false;">Upgrade</button>
+    </div>
     <div class="side-note">Your entertainment • Your VJ • Your choice<br>© <span id="sideYear"></span> Xtreme</div>
   </div>
 </aside>
@@ -279,156 +312,205 @@ a{color:inherit;text-decoration:none}
     <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
     <div class="search-wrap"><input id="searchInput" type="search" placeholder="Search movies, year, genre or VJ..."></div>
     <div class="top-right">
-      <button class="top-btn" id="myListTop">❤️ My List <span id="watchCount">0</span></button>
-      <div class="user-badge" title="Xtreme Member" id="userBadge">XT</div>
+      <div class="user-badge" title="Free Member" id="userBadge">XT</div>
     </div>
   </header>
 
-  <div class="content">
-    <!-- 6-Theme Switcher (Including Light Mode) -->
-    <div class="theme-bar" id="themeBar">
-      <div class="theme-bar-title">🎨 Theme Colors <small>• 6 looks including Light Mode</small></div>
-      <div class="theme-swatches" id="themeSwatches">
-        <button class="theme-pill active" data-theme-choice="crimson"><span class="swatch-dot" style="background:#e50914"></span>Crimson Dark</button>
-        <button class="theme-pill" data-theme-choice="neon"><span class="swatch-dot" style="background:#00e5ff"></span>Neon Cyber</button>
-        <button class="theme-pill" data-theme-choice="gold"><span class="swatch-dot" style="background:#f5b700"></span>Royal Gold</button>
-        <button class="theme-pill" data-theme-choice="emerald"><span class="swatch-dot" style="background:#00e676"></span>Emerald Pulse</button>
-        <button class="theme-pill" data-theme-choice="sunset"><span class="swatch-dot" style="background:#ff2a85"></span>Sunset Velvet</button>
-        <button class="theme-pill" data-theme-choice="light"><span class="swatch-dot" style="background:#ffffff;border-color:#888"></span>Light Mode</button>
-      </div>
-    </div>
-
-    <!-- Hero Spotlight Slider -->
-    <section class="hero-wrapper" id="home">
-      <div class="hero-slider" id="heroSlider">
-        <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200')">
-          <div class="hero-content">
-            <span class="eyebrow">Featured Spotlight • VJ Junior</span>
-            <h1>Action Blockbuster Returns</h1>
-            <p>Experience top action hits with energetic Ugandan VJ translations, crisp audio, and instant access.</p>
-            <div class="hero-actions">
-              <button class="btn" id="exploreBtn">Explore Movies</button>
-              <button class="btn secondary" id="browseSeriesBtn">Browse Series</button>
-              <button class="btn secondary" onclick="go('subscription')">View Plans</button>
+  <!-- View 1: Main Homepage & Content Grids -->
+  <div id="mainAppView">
+    <div class="content">
+      <section class="hero-wrapper" id="home">
+        <div class="hero-slider" id="heroSlider">
+          <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200')">
+            <div class="hero-content">
+              <span class="eyebrow">Featured Spotlight • VJ Junior</span>
+              <h1>Action Blockbuster Returns</h1>
+              <p>Experience top action hits with energetic Ugandan VJ translations, crisp audio, and instant access.</p>
+              <div class="hero-actions">
+                <button class="btn" id="exploreBtn">Explore Movies</button>
+                <button class="btn secondary" id="browseSeriesBtn">Browse Series</button>
+              </div>
+            </div>
+          </div>
+          <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1200')">
+            <div class="hero-content">
+              <span class="eyebrow">Trending Series • Ice P</span>
+              <h2>Series & Drama Marathon</h2>
+              <p>Binge full seasons, Asian dramas, and translated favorites with smooth playback across devices.</p>
+              <div class="hero-actions">
+                <button class="btn" onclick="go('series')">Watch Series</button>
+              </div>
             </div>
           </div>
         </div>
-        <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1200')">
-          <div class="hero-content">
-            <span class="eyebrow">Trending Series • Ice P</span>
-            <h2>Series & Drama Marathon</h2>
-            <p>Binge full seasons, Asian dramas, and translated favorites with smooth playback across devices.</p>
-            <div class="hero-actions">
-              <button class="btn" onclick="go('series')">Watch Series</button>
-            </div>
+        <div class="slider-indicators" id="sliderIndicators"></div>
+      </section>
+
+      <div class="quick" id="quickGenres">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="Action">Action</button>
+        <button class="chip" data-filter="Comedy">Comedy</button>
+        <button class="chip" data-filter="Drama">Drama</button>
+        <button class="chip" data-filter="Romance">Romance</button>
+        <button class="chip" data-filter="Horror">Horror</button>
+        <button class="chip" data-filter="Thriller">Thriller</button>
+        <button class="chip" data-filter="Sci-Fi">Sci-Fi</button>
+      </div>
+
+      <div class="toolbar" id="categories">
+        <select id="typeFilter"><option value="all">All content</option><option value="movie">Movies</option><option value="series">Series</option></select>
+        <select id="genreFilter"><option value="all">All genres</option><option>Action</option><option>Comedy</option><option>Drama</option><option>Romance</option><option>Horror</option><option>Thriller</option><option>Sci-Fi</option><option>Animation</option></select>
+        <select id="vjFilter"><option value="all">All VJs</option></select>
+        <select id="sortFilter"><option value="newest">Newest first</option><option value="az">Title A–Z</option><option value="year">Year: newest</option></select>
+        <button class="btn secondary" id="clearFilters">Clear filters</button>
+      </div>
+
+      <section class="section" id="catalog">
+        <div class="section-head"><h2 id="catalogTitle">Latest Movies</h2><span id="resultCount">Loading library...</span></div>
+        <div class="grid-car" id="movieGrid"><div class="empty">Loading your movie library...</div></div>
+        <p class="notice" id="loadNotice">Connect your database or add movie records to populate this library.</p>
+        <div style="text-align:center;margin-top:16px"><button class="btn secondary" id="loadMore" hidden>Load more</button></div>
+      </section>
+
+      <section class="section" id="series"><div class="section-head"><h2>Series Collection</h2><span>Series and seasons</span></div><div class="grid-car" id="seriesGrid"></div></section>
+      <section class="section" id="kids"><div class="section-head"><h2>Kids Zone</h2><span>Family-friendly collection</span></div><div class="grid-car" id="kidsGrid"></div></section>
+      <section class="section" id="indian"><div class="section-head"><h2>Indian Movies</h2><span>Browse Indian cinema</span></div><div class="grid-car" id="indianGrid"></div></section>
+      <section class="section" id="asian"><div class="section-head"><h2>Asian Series</h2><span>Korean and other Asian series</span></div><div class="grid-car" id="asianGrid"></div></section>
+      <section class="section" id="mylist"><div class="section-head"><h2>My List</h2><span>Your saved titles</span></div><div class="grid-car" id="watchlistGrid"></div></section>
+      <section class="section" id="vjcollections"><div class="section-head"><h2>VJ Collections</h2><span>Choose your favourite translator</span></div><div class="vj-chips" id="vjChips"></div></section>
+      <section class="section" id="support"><div class="section-head"><h2>Contact & Support</h2><span>Need help?</span></div><div class="toolbar"><div style="flex:1;min-width:190px"><b>XTREME MOVIE WATCH</b><p class="notice">For support, questions or feedback, contact the app team.</p></div><a class="btn" href="mailto:support@xtrememovies.watch">Email Support</a></div></section>
+    </div>
+  </div>
+
+  <!-- View 2: Sub-Views Container (Swapped in via Sidebar) -->
+  <div id="subViewContainer">
+    <div class="content">
+      
+      <!-- Subscription Section (Moved out of Home into Sidebar routing) -->
+      <section class="subscription-section" id="subscriptionViewSection">
+        <div class="sub-header">
+          <h2>Unlimited Ugandan VJ Entertainment</h2>
+          <p>Choose a pass to remove viewing limits and enjoy uninterrupted 4K streaming with priority support.</p>
+        </div>
+        <div class="pricing-grid">
+          <div class="price-card" data-plan-card="1000">
+            <span class="plan-duration">1 Day Pass</span>
+            <div class="plan-price">1,000 UGX<small>24 Hours Access</small></div>
+            <ul class="plan-features">
+              <li>1-day full catalog streaming</li>
+              <li>All translated VJ movies</li>
+              <li>Instant pass activation</li>
+            </ul>
+            <button class="plan-btn" data-select-plan="1 Day Pass" data-amount="1000">Activate Plan</button>
+          </div>
+
+          <div class="price-card" data-plan-card="1500">
+            <span class="plan-duration">2 Days Pass</span>
+            <div class="plan-price">1,500 UGX<small>48 Hours Access</small></div>
+            <ul class="plan-features">
+              <li>2-day full catalog streaming</li>
+              <li>Movies & series access</li>
+              <li>Great weekend value</li>
+            </ul>
+            <button class="plan-btn" data-select-plan="2 Days Pass" data-amount="1500">Activate Plan</button>
+          </div>
+
+          <div class="price-card featured" data-plan-card="4000">
+            <span class="badge-popular">Popular</span>
+            <span class="plan-duration">1 Week Pass</span>
+            <div class="plan-price">4,000 UGX<small>7 Days Access</small></div>
+            <ul class="plan-features">
+              <li>7 days unlimited browsing</li>
+              <li>All VJs & collections</li>
+              <li>Best weekly rate at 4,000 UGX</li>
+            </ul>
+            <button class="plan-btn" data-select-plan="1 Week Pass" data-amount="4000">Activate Plan</button>
+          </div>
+
+          <div class="price-card" data-plan-card="20000">
+            <span class="plan-duration">1 Month Pass</span>
+            <div class="plan-price">20,000 UGX<small>30 Days Access</small></div>
+            <ul class="plan-features">
+              <li>Full 30-day monthly pass</li>
+              <li>Priority access to new drops</li>
+              <li>VIP member badge highlight</li>
+            </ul>
+            <button class="plan-btn" data-select-plan="1 Month Pass" data-amount="20000">Activate Plan</button>
           </div>
         </div>
-      </div>
-      <div class="slider-indicators" id="sliderIndicators"></div>
-    </section>
+      </section>
 
-    <!-- Brilliant Gradient Subscription Section -->
-    <section class="subscription-section" id="subscription">
-      <div class="sub-header">
-        <h2>Subscription Plans</h2>
-        <p>Tap any plan amount below to activate and light up your navigation key with a smooth gradient glow.</p>
-      </div>
-      <div class="pricing-grid">
-        <div class="price-card" data-plan-card="1000">
-          <span class="plan-duration">1 Day Pass</span>
-          <div class="plan-price">1,000 UGX<small>24 Hours Access</small></div>
-          <ul class="plan-features">
-            <li>1-day full catalog streaming</li>
-            <li>All translated VJ movies</li>
-            <li>Instant pass activation</li>
-          </ul>
-          <button class="plan-btn" data-select-plan="1 Day Pass" data-amount="1000">Pay 1,000 UGX</button>
+      <!-- Settings Section (Theme Switcher moved here) -->
+      <section class="settings-section" id="settingsViewSection">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:40px; border-bottom:1px solid var(--line); padding-bottom:20px;">
+          <div>
+            <h2 style="margin:0 0 8px; font-size:32px; font-weight:900;">Application Settings</h2>
+            <p style="color:var(--muted); margin:0; font-size:15px;">Customize your viewing environment and manage preferences.</p>
+          </div>
+          <button class="btn" onclick="showHomeView();">Done</button>
         </div>
 
-        <div class="price-card" data-plan-card="1500">
-          <span class="plan-duration">2 Days Pass</span>
-          <div class="plan-price">1,500 UGX<small>48 Hours Access</small></div>
-          <ul class="plan-features">
-            <li>2-day full catalog streaming</li>
-            <li>Movies & series access</li>
-            <li>Great weekend value</li>
-          </ul>
-          <button class="plan-btn" data-select-plan="2 Days Pass" data-amount="1500">Pay 1,500 UGX</button>
+        <div class="settings-group">
+          <h3>🎨 Interface Theme</h3>
+          <p style="color:var(--muted); font-size:13px; margin-bottom:16px;">Choose your preferred visual aesthetic. Includes a high-contrast Light Mode.</p>
+          <div class="theme-swatches" id="themeSwatches">
+            <button class="theme-pill active" data-theme-choice="crimson"><span class="swatch-dot" style="background:#e50914"></span>Crimson Dark</button>
+            <button class="theme-pill" data-theme-choice="neon"><span class="swatch-dot" style="background:#00e5ff"></span>Neon Cyber</button>
+            <button class="theme-pill" data-theme-choice="gold"><span class="swatch-dot" style="background:#f5b700"></span>Royal Gold</button>
+            <button class="theme-pill" data-theme-choice="emerald"><span class="swatch-dot" style="background:#00e676"></span>Emerald Pulse</button>
+            <button class="theme-pill" data-theme-choice="sunset"><span class="swatch-dot" style="background:#ff2a85"></span>Sunset Velvet</button>
+            <button class="theme-pill" data-theme-choice="light"><span class="swatch-dot" style="background:#ffffff; border:1px solid #888"></span>Light Mode</button>
+          </div>
         </div>
 
-        <div class="price-card featured" data-plan-card="4000">
-          <span class="badge-popular">Popular</span>
-          <span class="plan-duration">1 Week Pass</span>
-          <div class="plan-price">4,000 UGX<small>7 Days Access</small></div>
-          <ul class="plan-features">
-            <li>7 days unlimited browsing</li>
-            <li>All VJs & collections</li>
-            <li>Best weekly rate at 4,000 UGX</li>
-          </ul>
-          <button class="plan-btn" data-select-plan="1 Week Pass" data-amount="4000">Pay 4,000 UGX</button>
+        <div class="settings-group">
+          <h3>🔒 Membership Status</h3>
+          <div style="background:var(--card); border:1px solid var(--line); border-radius:16px; padding:20px; display:flex; align-items:center; justify-content:space-between;">
+            <div>
+              <div style="font-weight:800; font-size:16px;" id="settingsPlanTitle">Free Tier (1-Hour Sample Limit Active)</div>
+              <div style="color:var(--muted); font-size:13px; margin-top:4px;">Watch up to 60 minutes continuously before requiring a subscription pass.</div>
+            </div>
+            <button class="btn" onclick="showSubscriptionView();">View Plans</button>
+          </div>
         </div>
+      </section>
 
-        <div class="price-card" data-plan-card="20000">
-          <span class="plan-duration">1 Month Pass</span>
-          <div class="plan-price">20,000 UGX<small>30 Days Access</small></div>
-          <ul class="plan-features">
-            <li>Full 30-day monthly pass</li>
-            <li>Priority access to new drops</li>
-            <li>VIP member badge highlight</li>
-          </ul>
-          <button class="plan-btn" data-select-plan="1 Month Pass" data-amount="20000">Pay 20,000 UGX</button>
-        </div>
-      </div>
-    </section>
-
-    <div class="quick" id="quickGenres">
-      <button class="chip active" data-filter="all">All</button>
-      <button class="chip" data-filter="Action">Action</button>
-      <button class="chip" data-filter="Comedy">Comedy</button>
-      <button class="chip" data-filter="Drama">Drama</button>
-      <button class="chip" data-filter="Romance">Romance</button>
-      <button class="chip" data-filter="Horror">Horror</button>
-      <button class="chip" data-filter="Thriller">Thriller</button>
-      <button class="chip" data-filter="Sci-Fi">Sci-Fi</button>
     </div>
-
-    <div class="toolbar" id="categories">
-      <select id="typeFilter"><option value="all">All content</option><option value="movie">Movies</option><option value="series">Series</option></select>
-      <select id="genreFilter"><option value="all">All genres</option><option>Action</option><option>Comedy</option><option>Drama</option><option>Romance</option><option>Horror</option><option>Thriller</option><option>Sci-Fi</option><option>Animation</option></select>
-      <select id="vjFilter"><option value="all">All VJs</option></select>
-      <select id="sortFilter"><option value="newest">Newest first</option><option value="az">Title A–Z</option><option value="year">Year: newest</option></select>
-      <button class="btn secondary" id="clearFilters">Clear filters</button>
-    </div>
-
-    <section class="section" id="catalog">
-      <div class="section-head"><h2 id="catalogTitle">Latest Movies</h2><span id="resultCount">Loading library...</span></div>
-      <div class="grid-car" id="movieGrid"><div class="empty" style="padding:36px;color:var(--muted);width:100%;text-align:center">Loading your movie library...</div></div>
-      <p class="notice" id="loadNotice">Connect your database or add movie records to populate this library.</p>
-      <div style="text-align:center;margin-top:16px"><button class="btn secondary" id="loadMore" hidden>Load more</button></div>
-    </section>
-
-    <section class="section" id="series"><div class="section-head"><h2>Series Collection</h2><span>Series and seasons</span></div><div class="grid-car" id="seriesGrid"></div></section>
-    <section class="section" id="kids"><div class="section-head"><h2>Kids Zone</h2><span>Family-friendly collection</span></div><div class="grid-car" id="kidsGrid"></div></section>
-    <section class="section" id="indian"><div class="section-head"><h2>Indian Movies</h2><span>Browse Indian cinema</span></div><div class="grid-car" id="indianGrid"></div></section>
-    <section class="section" id="asian"><div class="section-head"><h2>Asian Series</h2><span>Korean and other Asian series</span></div><div class="grid-car" id="asianGrid"></div></section>
-    <section class="section" id="mylist"><div class="section-head"><h2>My List</h2><span>Your saved titles</span></div><div class="grid-car" id="watchlistGrid"></div></section>
-    <section class="section" id="vjcollections"><div class="section-head"><h2>VJ Collections</h2><span>Choose your favourite translator</span></div><div class="vj-chips" id="vjChips"></div></section>
-    <section class="section" id="support"><div class="section-head"><h2>Contact & Support</h2><span>Need help?</span></div><div class="toolbar"><div style="flex:1;min-width:190px"><b>XTREME MOVIE WATCH</b><p class="notice">For support, questions or feedback, contact the app team.</p></div><a class="btn" href="mailto:support@xtrememovies.watch">Email Support</a></div></section>
   </div>
 
   <footer class="footer">XTREME MOVIE WATCH<br>Ugandan VJ Translations • Movie information provided by TMDB where configured.<br>© <span id="yearNow"></span> Xtreme.</footer>
 </div>
 
 <nav class="mobile-nav" id="mobileNav">
-  <a href="#home" data-nav="home" class="active"><b>🏠</b>Home</a>
-  <a href="#catalog" data-nav="catalog"><b>🎞️</b>Movies</a>
-  <a href="#series" data-nav="series"><b>📺</b>Series</a>
-  <a href="#mylist" data-nav="mylist"><b>❤️</b>My List</a>
-  <a href="#subscription" data-nav="subscription" id="mobileSubKey"><b>💎</b><span id="mobileSubLabel">Plans</span></a>
+  <a href="#" data-nav="home" class="active" onclick="showHomeView();return false;"><b>🏠</b>Home</a>
+  <a href="#catalog" onclick="showHomeView();go('catalog');return false;"><b>🎞️</b>Movies</a>
+  <a href="#series" onclick="showHomeView();go('series');return false;"><b>📺</b>Series</a>
+  <a href="#" onclick="showSubscriptionView();return false;"><b>💎</b>Plans</a>
+  <a href="#" onclick="showSettingsView();return false;"><b>⚙️</b>Settings</a>
 </nav>
 
+<!-- Modals -->
 <div class="modal" id="detailModal"><div class="dialog" id="detailDialog"><div class="drag-handle" id="detailDrag"></div><button class="close" data-close="detailModal">✕</button><div id="detailContent"></div></div></div>
-<div class="modal" id="playerModal"><div class="dialog" id="playerDialog" style="max-width:1000px"><div class="drag-handle" id="playerDrag"></div><button class="close" data-close="playerModal">✕</button><h3 id="playerTitle" style="margin-top:0">Now Playing</h3><div id="playerStage"></div><p class="player-message" id="playerMessage"></p></div></div>
+
+<div class="modal" id="playerModal">
+  <div class="dialog" id="playerDialog" style="max-width:1000px">
+    <div class="drag-handle" id="playerDrag"></div>
+    <button class="close" data-close="playerModal">✕</button>
+    <h3 id="playerTitle" style="margin-top:0">Now Playing</h3>
+    
+    <div class="player-container">
+      <div id="playerStage"></div>
+      <!-- 1-Hour Paywall Overlay -->
+      <div class="paywall-overlay" id="paywallOverlay">
+        <div style="font-size:48px; margin-bottom:12px;">⏳</div>
+        <div class="paywall-title">Sample Time Limit Reached!</div>
+        <div class="paywall-desc">You have enjoyed your 1-hour free sample. To continue watching uninterrupted, please activate an access pass from the Membership section in the menu.</div>
+        <button class="btn" style="padding:14px 32px; font-size:15px;" onclick="closeModal('playerModal');showSubscriptionView();">Select Subscription Plan</button>
+      </div>
+    </div>
+    <p class="player-message" id="playerMessage"></p>
+  </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -436,9 +518,9 @@ const SUPABASE_URL="YOUR_SUPABASE_URL",SUPABASE_ANON_KEY="YOUR_SUPABASE_ANON_KEY
 const TMDB_API_KEY="YOUR_TMDB_API_KEY";
 const VJS=["VJ Junior","Ice P","Emmy","Jingo","Mark","Aaron","Isma Pro","Eddy","VJ ashim","Ulio","Muba","Ivo","Soul"];
 const demoMovies=[
-  {id:"demo1",title:"Sample Action Movie",year:2025,genre:"Action",vj:"VJ Junior",type:"movie",description:"Sample title. Replace it with a real record from Supabase."},
-  {id:"demo2",title:"Sample Comedy Movie",year:2024,genre:"Comedy",vj:"VJ Emmy",type:"movie",description:"A sample entry showing your movie cards."},
-  {id:"demo3",title:"Sample Drama Series",year:2025,genre:"Drama",vj:"Ice P",type:"series",description:"A sample series entry."}
+  {id:"demo1",title:"Action Blockbuster Returns",year:2025,genre:"Action",vj:"VJ Junior",type:"movie",description:"Experience top action hits with energetic Ugandan VJ translations, crisp audio, and instant access.",poster:"https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=600"},
+  {id:"demo2",title:"Series & Drama Marathon",year:2024,genre:"Drama",vj:"Ice P",type:"series",description:"Binge full seasons, Asian dramas, and translated favorites with smooth playback across devices.",poster:"https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=600"},
+  {id:"demo3",title:"Comedy Kings",year:2025,genre:"Comedy",vj:"Jingo",type:"movie",description:"Non-stop laughter with classic translated comedy hits.",poster:"https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?auto=format&fit=crop&w=600"}
 ];
 
 let allMovies=[],visibleLimit=24,activeGenre="all",supabaseClient=null;
@@ -464,12 +546,44 @@ function normalize(m){
 function savedIds(){try{return JSON.parse(localStorage.getItem("xtreme_watchlist")||"[]").map(String)}catch{return[]}}
 function saveIds(ids){
   try{localStorage.setItem("xtreme_watchlist",JSON.stringify(ids))}catch(e){}
-  $("watchCount").textContent=ids.length;
   $("sideWatchCount").textContent=ids.length;
 }
 function isSaved(id){return savedIds().includes(String(id))}
 
-// Theme Switcher (6 Themes including Light Mode)
+// Navigation Views Routing
+function showHomeView(){
+  $("mainAppView").classList.remove("hidden");
+  $("subViewContainer").classList.remove("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+  updateActiveSidebarItem();
+}
+function showSubscriptionView(){
+  $("mainAppView").classList.add("hidden");
+  $("subViewContainer").classList.add("active");
+  $("subscriptionViewSection").classList.add("active");
+  $("settingsViewSection").classList.remove("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+  updateActiveSidebarItem('subSidebarLink');
+}
+function showSettingsView(){
+  $("mainAppView").classList.add("hidden");
+  $("subViewContainer").classList.add("active");
+  $("settingsViewSection").classList.add("active");
+  $("subscriptionViewSection").classList.remove("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+  updateActiveSidebarItem('settingsSidebarLink');
+}
+
+function updateActiveSidebarItem(activeId){
+  document.querySelectorAll(".sidebar-nav .side-link").forEach(link=>link.classList.remove("active"));
+  if(!activeId){
+    document.querySelector('.sidebar-nav .side-link[onclick*="showHomeView"]').classList.add("active");
+  }else{
+    $(activeId)?.classList.add("active");
+  }
+}
+
+// Theme Switcher (Stored inside Settings)
 function applyTheme(themeName){
   const valid=["crimson","neon","gold","emerald","sunset","light"];
   const chosen=valid.includes(themeName)?themeName:"crimson";
@@ -480,7 +594,7 @@ function applyTheme(themeName){
   });
 }
 
-// Subscription Plan Selection & Navigation Key Animation
+// Subscription Plan Activation & UI Updates
 function selectPlan(planName,amount){
   const formatted=Number(amount).toLocaleString()+" UGX";
   try{localStorage.setItem("xtreme_active_plan",JSON.stringify({planName,amount}))}catch(e){}
@@ -489,31 +603,31 @@ function selectPlan(planName,amount){
     card.classList.toggle("selected-plan",String(card.dataset.planCard)===String(amount));
   });
 
-  const topBtn=$("myListTop");
-  if(topBtn){
-    topBtn.classList.remove("sub-activated");
-    void topBtn.offsetWidth;
-    topBtn.classList.add("sub-activated");
-    topBtn.innerHTML=`⚡ ${esc(planName)} • ${formatted}`;
-  }
-
-  const mobileSubKey=$("mobileSubKey");
-  const mobileSubLabel=$("mobileSubLabel");
-  if(mobileSubKey && mobileSubLabel){
-    mobileSubKey.classList.remove("sub-activated");
-    void mobileSubKey.offsetWidth;
-    mobileSubKey.classList.add("sub-activated");
-    mobileSubLabel.textContent=Number(amount).toLocaleString();
-  }
-
   const badge=$("userBadge");
   if(badge){
     badge.classList.add("vip");
     badge.textContent="VIP";
+    badge.title="Active VIP Member";
   }
+  const sidebarStatus=$("sidebarUserStatus");
+  if(sidebarStatus){
+    sidebarStatus.textContent="⭐ VIP Active";
+    sidebarStatus.style.color="var(--red)";
+  }
+  const settingsTitle=$("settingsPlanTitle");
+  if(settingsTitle){
+    settingsTitle.textContent=`VIP Active: ${esc(planName)} (${formatted})`;
+  }
+  
+  // Clear paywall timer
+  if(window.playTimer)clearInterval(window.playTimer);
+  $("paywallOverlay").classList.remove("show");
+
+  alert(`⚡ VIP Membership Activated!\nYou are now subscribed to the ${esc(planName)}.`);
+  showHomeView();
 }
 
-// Hero Slider Indicators
+// Hero Slider Setup
 function initHeroSlider(){
   const slider=$("heroSlider"),indicators=$("sliderIndicators");
   if(!slider||!indicators)return;
@@ -570,7 +684,7 @@ function triggerHeartBurst(cardEl){
 function grid(id,items,limit=items.length){
   $(id).innerHTML=items.length
     ?items.slice(0,limit).map(card).join("")
-    :'<div class="empty" style="padding:36px;color:var(--muted);width:100%;text-align:center">No titles found in this collection yet.</div>';
+    :'<div class="empty">No titles found in this collection yet.</div>';
 }
 
 function matches(m){
@@ -599,73 +713,92 @@ function populateVjs(){
   $("vjChips").innerHTML=names.map(v=>`<button class="chip" data-vjchip="${esc(v)}">${esc(v)}</button>`).join("");
 }
 
-// Bottom Sheets
-let startY=0,currentY=0,activeModal=null;
+// Modal management
+let activeModal=null;
 function showModal(id){
   const m=$(id);if(!m)return;
   m.classList.add("show");
   document.body.style.overflow="hidden";
+  activeModal=m;
 }
 function closeModal(id){
   const m=$(id);if(!m)return;
   m.classList.remove("show");
   if(!document.querySelector(".modal.show"))document.body.style.overflow="";
-  if(id==="playerModal")$("playerStage").innerHTML="";
+  if(id==="playerModal"){
+    $("playerStage").innerHTML="";
+    if(window.playTimer)clearInterval(window.playTimer);
+    $("paywallOverlay").classList.remove("show");
+  }
+  activeModal=null;
 }
 
 function findMovie(id){return allMovies.find(m=>String(m.id)===String(id))}
+
 function details(id){
   const m=findMovie(id);if(!m)return;
   $("detailContent").innerHTML=`<div class="detail-layout">${poster(m)}<div><h2>${esc(m.title)}</h2><div class="meta"><span>${esc(m.year||"Year N/A")}</span><span>${esc(m.type)}</span></div><p><b>VJ:</b> ${esc(m.vj||"Not specified")}<br><b>Genre:</b> ${esc(m.genre||"Not specified")}<br><b>Collection:</b> ${esc(m.category||"General")}</p><p>${esc(m.description||"No description has been added yet.")}</p><div class="modal-actions"><button class="btn" data-play="${esc(m.id)}">Play now</button><button class="btn secondary" data-save="${esc(m.id)}">${isSaved(m.id)?"Remove from":"Add to"} My List</button></div></div></div>`;
   showModal("detailModal");
 }
-function youtubeEmbed(url){try{const u=new URL(url);let id="";if(u.hostname.includes("youtu.be"))id=u.pathname.slice(1);else if(u.hostname.includes("youtube.com"))id=u.searchParams.get("v")||((u.pathname.match(/\/(embed|shorts)\/([^/?]+)/)||[])[2]||"");return id?"https://www.youtube-nocookie.com/embed/"+encodeURIComponent(id)+"?autoplay=1&rel=0":""}catch{return""}}
+
+function youtubeEmbed(url){
+  try{
+    const u=new URL(url);let id="";
+    if(u.hostname.includes("youtu.be"))id=u.pathname.slice(1);
+    else if(u.hostname.includes("youtube.com"))id=u.searchParams.get("v")||((u.pathname.match(/\/(embed|shorts)\/([^/?]+)/)||[])[2]||"");
+    return id?"https://www.youtube-nocookie.com/embed/"+encodeURIComponent(id)+"?autoplay=1&rel=0":""
+  }catch{return""}
+}
+
+// Player with 1-hour paywall enforcement
 function play(id){
   const m=findMovie(id);if(!m)return;
   $("playerTitle").textContent=m.title;$("playerStage").innerHTML="";$("playerMessage").textContent="";
-  if(!m.video_url){$("playerMessage").textContent="No video URL is connected. Add an authorized MP4/HLS stream or an embeddable YouTube link to this title in Supabase.";showModal("playerModal");return}
-  const embed=youtubeEmbed(m.video_url);
-  if(embed)$("playerStage").innerHTML=`<iframe class="player-frame" src="${embed}" title="${esc(m.title)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
-  else{$("playerStage").innerHTML='<video id="nativePlayer" class="player-frame" controls playsinline preload="metadata"></video>';const p=$("nativePlayer");p.src=m.video_url;p.play().catch(()=>{})}
-  $("playerMessage").textContent="Some video hosts block playback on external websites. Use a direct MP4/HLS stream or an embeddable YouTube link.";
+  $("paywallOverlay").classList.remove("show");
+  if(window.playTimer)clearInterval(window.playTimer);
+
+  if(!m.video_url){
+    $("playerMessage").textContent="No video URL is connected. Add an authorized MP4/HLS stream or an embeddable YouTube link to this title in Supabase.";
+  } else {
+    const embed=youtubeEmbed(m.video_url);
+    if(embed){
+      $("playerStage").innerHTML=`<iframe class="player-frame" src="${embed}" title="${esc(m.title)}" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+      $pcMessage();
+    } else {
+      $("playerStage").innerHTML=`<video id="nativePlayer" class="player-frame" controls playsinline></video>`;
+      const p=$("nativePlayer");
+      p.src=m.video_url;
+      p.play().catch(()=>{ $pcMessage(); });
+      
+      // Track playback time safely
+      window.playSeconds=0;
+      window.playTimer=setInterval(()=>{
+        if(!p.paused && !p.ended){
+          window.playSeconds++;
+          // Trigger paywall at 3600 seconds (1 hour)
+          if(window.playSeconds >= 3600){
+            p.pause();
+            clearInterval(window.playTimer);
+            $("paywallOverlay").classList.add("show");
+          }
+        }
+      },1000);
+    }
+  }
   showModal("playerModal");
+}
+
+function $pcMessage(){
+  $("playerMessage").textContent="Streaming free sample. Browser/Embed restrictions apply.";
 }
 
 async function loadSupabase(){if(!window.supabase||SUPABASE_URL.includes("YOUR_")||SUPABASE_ANON_KEY.includes("YOUR_"))return false;try{supabaseClient=window.supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);const{data,error}=await supabaseClient.from(TABLE_NAME).select("*");if(error)throw error;if(Array.isArray(data)&&data.length)allMovies=data.map(normalize);return true}catch(e){return false}}
 async function loadTMDB(){if(!TMDB_API_KEY||TMDB_API_KEY.includes("YOUR_"))return;try{const r=await fetch("https://api.themoviedb.org/3/movie/popular?api_key="+encodeURIComponent(TMDB_API_KEY)+"&language=en-US&page=1");if(!r.ok)throw Error();const d=await r.json(),existing=new Set(allMovies.map(m=>m.title.toLowerCase()));const extra=(d.results||[]).filter(x=>!existing.has((x.title||"").toLowerCase())).map(x=>normalize({id:"tmdb-"+x.id,title:x.title,year:(x.release_date||"").slice(0,4),poster:x.poster_path?"https://image.tmdb.org/t/p/w500"+x.poster_path:"",description:x.overview,category:"TMDB"}));allMovies=[...allMovies,...extra]}catch(e){}}
-function go(id){const el=$(id);if(el){el.scrollIntoView({behavior:"smooth",block:"start"});setNav(id);closeSidebar()}}
-function setNav(id){document.querySelectorAll("[data-nav]").forEach(a=>a.classList.toggle("active",a.dataset.nav===id))}
+
+function go(id){const el=$(id);if(el){el.scrollIntoView({behavior:"smooth",block:"start"});closeSidebar()}}
 function closeSidebar(){$("sidebar").classList.remove("open");$("sidebarOverlay").classList.remove("show")}
 
-// Drag-to-dismiss bottom sheet gestures
-document.addEventListener("pointerdown",e=>{
-  if(e.target.closest(".drag-handle")){
-    const m=e.target.closest(".modal");
-    if(m){
-      activeModal=m;
-      startY=e.clientY;
-      currentY=0;
-      const d=m.querySelector(".dialog");
-      if(d)d.style.transition="none";
-    }
-  }
-});
-document.addEventListener("pointermove",e=>{
-  if(!activeModal)return;
-  currentY=Math.max(0,e.clientY-startY);
-  const d=activeModal.querySelector(".dialog");
-  if(d)d.style.transform=`translateY(${currentY}px)`;
-});
-document.addEventListener("pointerup",()=>{
-  if(!activeModal)return;
-  const d=activeModal.querySelector(".dialog");
-  if(d)d.style.transition="";
-  if(currentY>110){closeModal(activeModal.id)}
-  if(d)d.style.transform="";
-  activeModal=null;currentY=0;
-});
-
-// Double-tap poster to toggle favorite
+// UI Event Handlers
 let lastTapTime=0,lastTapCard=null;
 document.addEventListener("click",e=>{
   const themeBtn=e.target.closest("[data-theme-choice]");
@@ -704,17 +837,15 @@ document.addEventListener("click",e=>{
   const d=e.target.closest("[data-details]");if(d){details(d.dataset.details);return}
   const p=e.target.closest("[data-play]");if(p){play(p.dataset.play);return}
   const c=e.target.closest("[data-close]");if(c){closeModal(c.dataset.close);return}
-  const n=e.target.closest("[data-nav]");if(n){setNav(n.dataset.nav);closeSidebar()}
-  const f=e.target.closest("[data-filter]");if(f){activeGenre=f.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x===f));$("genreFilter").value="all";visibleLimit=24;render();go("catalog");return}
-  const v=e.target.closest("[data-vjchip]");if(v){$("vjFilter").value=v.dataset.vjchip;render();go("catalog");return}
+  const f=e.target.closest("[data-filter]");if(f){activeGenre=f.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x===f));$("genreFilter").value="all";visibleLimit=24;render();showHomeView();go("catalog");return}
+  const v=e.target.closest("[data-vjchip]");if(v){$("vjFilter").value=v.dataset.vjchip;render();showHomeView();go("catalog");return}
 });
 
 document.querySelectorAll(".modal").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)closeModal(m.id)}));
 $("menuBtn").addEventListener("click",()=>{$("sidebar").classList.add("open");$("sidebarOverlay").classList.add("show")});
 $("sidebarOverlay").addEventListener("click",closeSidebar);
-$("exploreBtn").addEventListener("click",()=>go("catalog"));
-$("browseSeriesBtn").addEventListener("click",()=>go("series"));
-$("myListTop").addEventListener("click",()=>go("mylist"));
+$("exploreBtn").addEventListener("click",()=>{showHomeView();go("catalog")});
+$("browseSeriesBtn").addEventListener("click",()=>{showHomeView();go("series")});
 $("loadMore").addEventListener("click",()=>{visibleLimit+=24;render()});
 $("searchInput").addEventListener("input",()=>{visibleLimit=24;render()});
 ["typeFilter","genreFilter","vjFilter","sortFilter"].forEach(id=>$(id).addEventListener("change",()=>{
@@ -731,10 +862,11 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeSidebar();clos
 
 const yr=new Date().getFullYear();
 $("yearNow").textContent=yr;$("sideYear").textContent=yr;
+
 initHeroSlider();
 saveIds(savedIds());
+
 try{const savedTheme=localStorage.getItem("xtreme_theme");if(savedTheme)applyTheme(savedTheme);}catch(e){}
-try{const savedPlan=JSON.parse(localStorage.getItem("xtreme_active_plan")||"null");if(savedPlan?.planName && savedPlan?.amount)selectPlan(savedPlan.planName,savedPlan.amount);}catch(e){}
 
 (async()=>{
   allMovies=demoMovies.map(normalize);
@@ -745,3 +877,4 @@ try{const savedPlan=JSON.parse(localStorage.getItem("xtreme_active_plan")||"null
 </script>
 </body>
 </html>
+
