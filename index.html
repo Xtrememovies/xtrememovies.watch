@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#070709">
-<title>Xtreme Movie Watch - Netflix Edition</title>
+<meta name="theme-color" content="#050a08">
+<title>Xtreme Movie Watch - Emerald Pulse</title>
 <style>
 :root{
-  --bg:#070709;--panel:#111116;--card:#181820;--red:#e50914;--text:#ffffff;--muted:#8c8c9a;--line:#272733;
-  --glow:0 0 22px rgba(229,9,20,0.45);
-  --accent-grad:linear-gradient(135deg,#ff0055,#ff4b2b,#7a00ff);
-  --hero-grad:radial-gradient(ellipse at 85% 35%,rgba(229,9,20,0.28),transparent 50%),linear-gradient(115deg,#180c10,#0e0e14 60%,#160914);
-  --sub-grad:linear-gradient(135deg,#160812,#1c102b,#0b1322);
-  --sub-title-grad:linear-gradient(90deg,#ff5f6d,#ffc371,#c471ed)
+  --bg:#050a08;--panel:#0b1511;--card:#102019;--red:#00e676;--text:#f2fff8;--muted:#88b09b;--line:#1d382c;
+  --glow:0 0 24px rgba(0,230,118,0.42);
+  --accent-grad:linear-gradient(135deg,#00e676,#1de9b6,#00b0ff);
+  --hero-grad:radial-gradient(ellipse at 85% 35%,rgba(0,230,118,0.24),transparent 50%),linear-gradient(115deg,#072116,#060d0a 60%,#071b26);
+  --sub-grad:linear-gradient(135deg,#062117,#071c29,#112614);
+  --sub-title-grad:linear-gradient(90deg,#69f0ae,#18ffff,#64ffda)
 }
 
 [data-theme="crimson"]{
@@ -40,15 +40,6 @@
   --hero-grad:radial-gradient(ellipse at 85% 35%,rgba(245,183,0,0.24),transparent 50%),linear-gradient(115deg,#1f1708,#0e0c08 60%,#211108);
   --sub-grad:linear-gradient(135deg,#1f1506,#241016,#121008);
   --sub-title-grad:linear-gradient(90deg,#ffe169,#ff9f1c,#ff5400)
-}
-
-[data-theme="emerald"]{
-  --bg:#050a08;--panel:#0b1511;--card:#102019;--red:#00e676;--text:#f2fff8;--muted:#88b09b;--line:#1d382c;
-  --glow:0 0 24px rgba(0,230,118,0.42);
-  --accent-grad:linear-gradient(135deg,#00e676,#1de9b6,#00b0ff);
-  --hero-grad:radial-gradient(ellipse at 85% 35%,rgba(0,230,118,0.24),transparent 50%),linear-gradient(115deg,#072116,#060d0a 60%,#071b26);
-  --sub-grad:linear-gradient(135deg,#062117,#071c29,#112614);
-  --sub-title-grad:linear-gradient(90deg,#69f0ae,#18ffff,#64ffda)
 }
 
 [data-theme="sunset"]{
@@ -219,7 +210,7 @@ a{color:inherit;text-decoration:none}
 #subViewContainer{display:none}
 #subViewContainer.active{display:block}
 
-/* Modals & 1-Hour Paywall */
+/* Modals & Payment Flow */
 .modal{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);align-items:flex-end;justify-content:center;opacity:0;transition:opacity .3s ease}
 .modal.show{display:flex;opacity:1}
 .dialog{width:100%;max-width:900px;max-height:92vh;background:var(--panel);color:var(--text);border-top-left-radius:30px;border-top-right-radius:30px;border:1px solid var(--line);border-bottom:none;overflow-y:auto;position:relative;padding:28px 30px 34px;box-shadow:0 -12px 45px rgba(0,0,0,0.5);transform:translateY(100%);transition:transform .35s cubic-bezier(0.16,1,0.3,1)}
@@ -241,6 +232,17 @@ a{color:inherit;text-decoration:none}
 .player-message{font-size:12px;color:var(--muted);text-align:center;margin-top:14px}
 .notice{font-size:12px;color:var(--muted);margin:10px 0 0}
 .empty{padding:40px 20px;color:var(--muted);width:100%;text-align:center;font-size:14px}
+
+/* Mobile Money Modal Styles */
+.pay-methods{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.pay-method-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px;border-radius:14px;border:2px solid var(--line);background:var(--card);color:var(--text);font-weight:800;font-size:14px;transition:all .2s}
+.pay-method-btn.active[data-provider="mtn"]{border-color:#ffcc00;background:rgba(255,204,0,0.14);box-shadow:0 0 18px rgba(255,204,0,0.28)}
+.pay-method-btn.active[data-provider="airtel"]{border-color:#e40000;background:rgba(228,0,0,0.14);box-shadow:0 0 18px rgba(228,0,0,0.28)}
+.pay-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
+.pay-input{width:100%;height:46px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 14px;color:var(--text);font-size:15px;font-weight:700;outline:none;margin-top:6px}
+.pay-input:focus{border-color:var(--red)}
+.pay-status{margin-top:14px;padding:12px 14px;border-radius:12px;background:var(--card);border:1px solid var(--line);font-size:13px;line-height:1.5;display:none}
+.pay-status.show{display:block}
 
 .footer{text-align:center;border-top:1px solid var(--line);padding:34px 20px;color:var(--muted);font-size:12px;line-height:1.8;background:var(--panel)}
 .mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;background:color-mix(in srgb,var(--panel) 94%,transparent);border-top:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-bottom));backdrop-filter:blur(16px);justify-content:space-around}
@@ -269,7 +271,7 @@ a{color:inherit;text-decoration:none}
 }
 </style>
 </head>
-<body data-theme="crimson">
+<body data-theme="emerald">
 
 <aside class="sidebar" id="sidebar">
   <div class="sidebar-header">
@@ -355,6 +357,7 @@ a{color:inherit;text-decoration:none}
       <div class="quick" id="quickGenres">
         <button class="chip active" data-filter="all">All</button>
         <button class="chip" data-filter="Action">Action</button>
+        <button class="chip" data-filter="Adventure">Adventure</button>
         <button class="chip" data-filter="Comedy">Comedy</button>
         <button class="chip" data-filter="Drama">Drama</button>
         <button class="chip" data-filter="Romance">Romance</button>
@@ -365,7 +368,7 @@ a{color:inherit;text-decoration:none}
 
       <div class="toolbar" id="categories">
         <select id="typeFilter"><option value="all">All content</option><option value="movie">Movies</option><option value="series">Series</option></select>
-        <select id="genreFilter"><option value="all">All genres</option><option>Action</option><option>Comedy</option><option>Drama</option><option>Romance</option><option>Horror</option><option>Thriller</option><option>Sci-Fi</option><option>Animation</option></select>
+        <select id="genreFilter"><option value="all">All genres</option><option>Action</option><option>Adventure</option><option>Comedy</option><option>Drama</option><option>Romance</option><option>Horror</option><option>Thriller</option><option>Sci-Fi</option><option>Animation</option></select>
         <select id="vjFilter"><option value="all">All VJs</option></select>
         <select id="sortFilter"><option value="newest">Newest first</option><option value="az">Title A–Z</option><option value="year">Year: newest</option></select>
         <button class="btn secondary" id="clearFilters">Clear filters</button>
@@ -384,7 +387,20 @@ a{color:inherit;text-decoration:none}
       <section class="section" id="asian"><div class="section-head"><h2>Asian Series</h2><span>Korean and other Asian series</span></div><div class="grid-car" id="asianGrid"></div></section>
       <section class="section" id="mylist"><div class="section-head"><h2>My List</h2><span>Your saved titles</span></div><div class="grid-car" id="watchlistGrid"></div></section>
       <section class="section" id="vjcollections"><div class="section-head"><h2>VJ Collections</h2><span>Choose your favourite translator</span></div><div class="vj-chips" id="vjChips"></div></section>
-      <section class="section" id="support"><div class="section-head"><h2>Contact & Support</h2><span>Need help?</span></div><div class="toolbar"><div style="flex:1;min-width:190px"><b>XTREME MOVIE WATCH</b><p class="notice">For support, questions or feedback, contact the app team.</p></div><a class="btn" href="mailto:support@xtrememovies.watch">Email Support</a></div></section>
+      
+      <section class="section" id="support">
+        <div class="section-head"><h2>Contact & Support</h2><span>Need help?</span></div>
+        <div class="toolbar">
+          <div style="flex:1;min-width:190px">
+            <b>XTREME MOVIE WATCH</b>
+            <p class="notice">For support, questions or feedback, contact the app team directly via email or WhatsApp.</p>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn" href="mailto:xmmedialibrary@gmail.com">Email Support</a>
+            <a class="btn secondary" href="https://wa.me/256740981386" target="_blank">Chat on WhatsApp</a>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 
@@ -402,7 +418,7 @@ a{color:inherit;text-decoration:none}
             <ul class="plan-features">
               <li>1 day unlimited movie playback</li>
               <li>All Ugandan VJ translations</li>
-              <li>Instant activation</li>
+              <li>Instant instant activation</li>
             </ul>
             <button class="plan-btn" data-select-plan="Daily" data-amount="1000">Select 1,000 UGX</button>
           </div>
@@ -456,10 +472,10 @@ a{color:inherit;text-decoration:none}
           <h3>🎨 Theme Colors</h3>
           <p style="color:var(--muted);font-size:13px;margin-bottom:14px;">Pick one of 6 themes, including Light Mode.</p>
           <div class="theme-swatches" id="themeSwatches">
-            <button class="theme-pill active" data-theme-choice="crimson"><span class="swatch-dot" style="background:#e50914"></span>Crimson Dark</button>
+            <button class="theme-pill" data-theme-choice="crimson"><span class="swatch-dot" style="background:#e50914"></span>Crimson Dark</button>
             <button class="theme-pill" data-theme-choice="neon"><span class="swatch-dot" style="background:#00e5ff"></span>Neon Cyber</button>
             <button class="theme-pill" data-theme-choice="gold"><span class="swatch-dot" style="background:#f5b700"></span>Royal Gold</button>
-            <button class="theme-pill" data-theme-choice="emerald"><span class="swatch-dot" style="background:#00e676"></span>Emerald Pulse</button>
+            <button class="theme-pill active" data-theme-choice="emerald"><span class="swatch-dot" style="background:#00e676"></span>Emerald Pulse</button>
             <button class="theme-pill" data-theme-choice="sunset"><span class="swatch-dot" style="background:#ff2a85"></span>Sunset Velvet</button>
             <button class="theme-pill" data-theme-choice="light"><span class="swatch-dot" style="background:#ffffff;border:1px solid #888"></span>Light Mode</button>
           </div>
@@ -510,6 +526,33 @@ a{color:inherit;text-decoration:none}
   </div>
 </div>
 
+<!-- Mobile Money Payment Selection Modal -->
+<div class="modal" id="paymentModal">
+  <div class="dialog" style="max-width:480px">
+    <div class="drag-handle"></div>
+    <button class="close" data-close="paymentModal">✕</button>
+    <h3 style="margin:0 0 6px;font-size:22px;font-weight:900;">Complete Subscription</h3>
+    <p id="payPlanSummary" style="color:var(--muted);font-size:13px;margin:0 0 16px;">Plan: Weekly — 4,000 UGX</p>
+
+    <label style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">1. Select Mobile Money Network</label>
+    <div class="pay-methods" id="payMethods">
+      <button type="button" class="pay-method-btn active" data-provider="mtn">
+        <span class="pay-dot" style="background:#ffcc00"></span>MTN MoMo
+      </button>
+      <button type="button" class="pay-method-btn" data-provider="airtel">
+        <span class="pay-dot" style="background:#e40000"></span>Airtel Money
+      </button>
+    </div>
+
+    <label for="momoPhoneInput" style="font-size:12px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1px;">2. Enter Phone Number (Uganda)</label>
+    <input id="momoPhoneInput" class="pay-input" type="tel" inputmode="numeric" placeholder="e.g. 0772123456 or 0752123456" maxlength="12">
+    <div id="networkHint" style="font-size:11px;color:var(--muted);margin-top:6px;">MTN prefixes: 077, 078, 076 • Airtel prefixes: 070, 075, 074</div>
+
+    <button type="button" class="btn" id="confirmPayBtn" style="width:100%;margin-top:18px;padding:14px;">Confirm & Pay</button>
+    <div class="pay-status" id="payStatusBox"></div>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 const SUPABASE_URL="YOUR_SUPABASE_URL",SUPABASE_ANON_KEY="YOUR_SUPABASE_ANON_KEY",TABLE_NAME="movies";
@@ -551,7 +594,7 @@ function saveIds(ids){
 function isSaved(id){return savedIds().includes(String(id))}
 
 function getActivePlan(){
-  try{return JSON.parse(localStorage.getItem("xtreme_active_plan")||"null")}catch{return null}
+  try{const p=JSON.parse(localStorage.getItem("xtreme_active_plan")||"null");if(p&&p.expiresAt&&Date.now()>p.expiresAt){localStorage.removeItem("xtreme_active_plan");return null;}return p;}catch{return null}
 }
 
 function showHomeView(){
@@ -587,7 +630,7 @@ function updateActiveNav(activeId){
 
 function applyTheme(themeName){
   const valid=["crimson","neon","gold","emerald","sunset","light"];
-  const chosen=valid.includes(themeName)?themeName:"crimson";
+  const chosen=valid.includes(themeName)?themeName:"emerald";
   document.body.setAttribute("data-theme",chosen);
   try{localStorage.setItem("xtreme_theme",chosen)}catch(e){}
   document.querySelectorAll("[data-theme-choice]").forEach(btn=>{
@@ -623,12 +666,91 @@ function applyPlanUI(planName, amount, animate=true){
   }
 }
 
+// Payment Flow Integration
+let pendingCheckout={planName:"",amount:0,provider:"mtn"};
+function formatUgMsisdn(raw){
+  const digits=String(raw|| "").replace(/\D/g,"");
+  if(digits.startsWith("256")&&digits.length===12)return digits;
+  if(digits.startsWith("0")&&digits.length===10)return "256"+digits.slice(1);
+  if(digits.length===9&&/^[7]/.test(digits))return "256"+digits;
+  return "";
+}
+function detectProviderFromPhone(msisdn){
+  const local=msisdn.slice(3,5);
+  if(["77","78","76"].includes(local))return "mtn";
+  if(["70","75","74"].includes(local))return "airtel";
+  return null;
+}
+function setProviderUI(provider){
+  pendingCheckout.provider=provider;
+  document.querySelectorAll("[data-provider]").forEach(btn=>{
+    btn.classList.toggle("active",btn.dataset.provider===provider);
+  });
+}
+
 function selectPlan(planName, amount){
-  try{localStorage.setItem("xtreme_active_plan",JSON.stringify({planName,amount}))}catch(e){}
-  applyPlanUI(planName, amount, true);
+  pendingCheckout={planName,amount:Number(amount),provider:pendingCheckout.provider||"mtn"};
+  $("payPlanSummary").textContent=`Plan: ${planName} — ${Number(amount).toLocaleString()} UGX`;
+  $("payStatusBox").classList.remove("show");
+  $("payStatusBox").textContent="";
+  $("confirmPayBtn").disabled=false;
+  $("confirmPayBtn").textContent=`Pay ${Number(amount).toLocaleString()} UGX`;
+  showModal("paymentModal");
+}
+
+function activatePaidPlan(planName, amount){
+  const days=amount===1000?1:amount===1500?2:amount===4000?7:30;
+  const expiresAt=Date.now()+(days*86400000);
+  try{localStorage.setItem("xtreme_active_plan",JSON.stringify({planName,amount,expiresAt}))}catch(e){}
+  applyPlanUI(planName,amount,true);
   if(sampleTimeout){clearTimeout(sampleTimeout);sampleTimeout=null;}
   $("paywallOverlay").classList.remove("show");
+  closeModal("paymentModal");
   showHomeView();
+}
+
+document.addEventListener("click",e=>{
+  const provBtn=e.target.closest("[data-provider]");
+  if(provBtn){setProviderUI(provBtn.dataset.provider);return;}
+});
+
+if($("momoPhoneInput")){
+  $("momoPhoneInput").addEventListener("input",e=>{
+    const msisdn=formatUgMsisdn(e.target.value);
+    if(msisdn){
+      const detected=detectProviderFromPhone(msisdn);
+      if(detected)setProviderUI(detected);
+    }
+  });
+}
+
+if($("confirmPayBtn")){
+  $("confirmPayBtn").addEventListener("click",()=>{
+    const msisdn=formatUgMsisdn($("momoPhoneInput").value);
+    const statusBox=$("payStatusBox");
+    if(!msisdn){
+      statusBox.textContent="Please enter a valid Ugandan mobile number (e.g. 0772123456 or 0752123456).";
+      statusBox.classList.add("show");
+      return;
+    }
+    const detected=detectProviderFromPhone(msisdn);
+    if(detected && detected!==pendingCheckout.provider) setProviderUI(detected);
+
+    statusBox.style.color="var(--text)";
+    statusBox.textContent=`Processing ${pendingCheckout.provider.toUpperCase()} payment for +${msisdn}... Simulating payment confirmation.`;
+    statusBox.classList.add("show");
+    $("confirmPayBtn").disabled=true;
+    $("confirmPayBtn").textContent="Processing...";
+
+    setTimeout(()=>{
+      statusBox.style.color="#00e676";
+      statusBox.textContent="✓ Payment successful! Activating subscription...";
+      setTimeout(()=>{
+        $("confirmPayBtn").disabled=false;
+        activatePaidPlan(pendingCheckout.planName,pendingCheckout.amount);
+      },1200);
+    },2000);
+  });
 }
 
 function initHeroSlider(){
@@ -692,7 +814,9 @@ function grid(id,items,limit=items.length){
 function matches(m){
   const q=clean($("searchInput").value).toLowerCase(),type=$("typeFilter").value,g=$("genreFilter").value,v=$("vjFilter").value;
   const hay=[m.title,m.year,m.genre,m.vj,m.description,m.category,m.language].join(" ").toLowerCase();
-  return(!q||hay.includes(q))&&(type==="all"||m.type===type)&&(g==="all"||m.genre.toLowerCase().includes(g.toLowerCase()))&&(v==="all"||m.vj===v)&&(activeGenre==="all"||m.genre.toLowerCase().includes(activeGenre.toLowerCase()));
+  const activeG=activeGenre.toLowerCase();
+  const matchActiveGenre=activeGenre==="all"||m.genre.toLowerCase().includes(activeG)||(activeG==="romance" && /romance|love|affair/i.test(m.description+" "+m.genre));
+  return(!q||hay.includes(q))&&(type==="all"||m.type===type)&&(g==="all"||m.genre.toLowerCase().includes(g.toLowerCase()))&&(v==="all"||m.vj===v)&&matchActiveGenre;
 }
 
 function render(){
@@ -811,8 +935,14 @@ async function loadTMDB(){
       fetch(`${base}/genre/tv/list?api_key=${key}&language=en-US`)
     ]);
     const genreMap={};
-    if(mGenresRes.ok)(await mGenresRes.json()).genres?.forEach(g=>genreMap[g.id]=g.name==="Science Fiction"?"Sci-Fi":g.name);
-    if(tvGenresRes.ok)(await tvGenresRes.json()).genres?.forEach(g=>genreMap[g.id]=g.name==="Sci-Fi & Fantasy"?"Sci-Fi":g.name);
+    if(mGenresRes.ok)(await mGenresRes.json()).genres?.forEach(g=>{
+      genreMap[g.id]=g.name==="Science Fiction"?"Sci-Fi":g.name;
+    });
+    if(tvGenresRes.ok)(await tvGenresRes.json()).genres?.forEach(g=>{
+      if(g.name==="Sci-Fi & Fantasy") genreMap[g.id]="Sci-Fi, Fantasy";
+      else if(g.name==="Action & Adventure") genreMap[g.id]="Action, Adventure";
+      else genreMap[g.id]=g.name;
+    });
 
     const endpoints=[
       {url:`${base}/movie/popular?api_key=${key}&language=en-US&page=1`,type:"movie",category:"Latest"},
@@ -909,7 +1039,19 @@ document.addEventListener("click",e=>{
   const d=e.target.closest("[data-details]");if(d){details(d.dataset.details);return}
   const p=e.target.closest("[data-play]");if(p){play(p.dataset.play);return}
   const c=e.target.closest("[data-close]");if(c){closeModal(c.dataset.close);return}
-  const f=e.target.closest("[data-filter]");if(f){activeGenre=f.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x===f));$("genreFilter").value="all";visibleLimit=24;render();showHomeView();go("catalog");return}
+  const f=e.target.closest("[data-filter]");
+  if(f){
+    activeGenre=f.dataset.filter;
+    document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x===f));
+    $("genreFilter").value="all";
+    $("typeFilter").value="all";
+    $("vjFilter").value="all";
+    visibleLimit=24;
+    render();
+    showHomeView();
+    go("catalog");
+    return;
+  }
   const v=e.target.closest("[data-vjchip]");if(v){$("vjFilter").value=v.dataset.vjchip;render();showHomeView();go("catalog");return}
 });
 
