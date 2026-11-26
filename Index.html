@@ -1,310 +1,411 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Extreme Movie Watch</title>
-  <style>
-    :root {
-      --bg-color: #101018;
-      --surface-color: #1a1a26;
-      --primary-red: #e50914;
-      --primary-hover: #f40612;
-      --text-main: #ffffff;
-      --text-muted: #a7a7b3;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#070709">
+<title>Xtreme Movie Watch - Native Player Edition</title>
+<style>
+:root{
+  --bg:#070709;--panel:#111116;--card:#181820;--red:#e50914;--text:#ffffff;--muted:#8c8c9a;--line:#272733;
+  --glow:0 0 22px rgba(229,9,20,0.45);
+  --accent-grad:linear-gradient(135deg,#ff0055,#ff4b2b,#7a00ff);
+  --hero-grad:radial-gradient(ellipse at 85% 35%,rgba(229,9,20,0.28),transparent 50%),linear-gradient(115deg,#180c10,#0e0e14 60%,#160914);
+  --sub-grad:linear-gradient(135deg,#160812,#1c102b,#0b1322);
+  --sub-title-grad:linear-gradient(90deg,#ff5f6d,#ffc371,#c471ed)
+}
 
-    * {
-      box-sizing: border-box;
-    }
+[data-theme="crimson"]{
+  --bg:#070709;--panel:#111116;--card:#181820;--red:#e50914;--text:#ffffff;--muted:#9090a2;--line:#272733;
+  --glow:0 0 22px rgba(229,9,20,0.45);
+  --accent-grad:linear-gradient(135deg,#ff0055,#ff4b2b,#7a00ff);
+  --hero-grad:radial-gradient(ellipse at 85% 35%,rgba(229,9,20,0.28),transparent 50%),linear-gradient(115deg,#180c10,#0e0e14 60%,#160914);
+  --sub-grad:linear-gradient(135deg,#180812,#1d102c,#0c1424);
+  --sub-title-grad:linear-gradient(90deg,#ff4b55,#ff9966,#d53369)
+}
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      width: 100%;
-      overflow-x: hidden;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: var(--bg-color);
-      color: var(--text-main);
-    }
+[data-theme="neon"]{
+  --bg:#050811;--panel:#0c1222;--card:#121b33;--red:#00e5ff;--text:#f4f8ff;--muted:#8fa4c8;--line:#213154;
+  --glow:0 0 24px rgba(0,229,255,0.45);
+  --accent-grad:linear-gradient(135deg,#00f5a0,#00d9f5,#7b2cbf);
+  --hero-grad:radial-gradient(ellipse at 85% 35%,rgba(0,229,255,0.25),transparent 50%),linear-gradient(115deg,#09192e,#070c1a 60%,#150b2e);
+  --sub-grad:linear-gradient(135deg,#071b2e,#120d2e,#062429);
+  --sub-title-grad:linear-gradient(90deg,#00f5a0,#00d9f5,#b5179e)
+}
 
-    header {
-      background: var(--surface-color);
-      border-bottom: 1px solid #2a2a3d;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 24px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+[data-theme="gold"]{
+  --bg:#090806;--panel:#14110b;--card:#1d1911;--red:#f5b700;--text:#fffdf7;--muted:#b5aa8e;--line:#332b1c;
+  --glow:0 0 24px rgba(245,183,0,0.42);
+  --accent-grad:linear-gradient(135deg,#ffd000,#ff7b00,#d90429);
+  --hero-grad:radial-gradient(ellipse at 85% 35%,rgba(245,183,0,0.24),transparent 50%),linear-gradient(115deg,#1f1708,#0e0c08 60%,#211108);
+  --sub-grad:linear-gradient(135deg,#1f1506,#241016,#121008);
+  --sub-title-grad:linear-gradient(90deg,#ffe169,#ff9f1c,#ff5400)
+}
 
-    header h1 {
-      margin: 0;
-      color: var(--primary-red);
-      font-size: 20px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
+[data-theme="emerald"]{
+  --bg:#050a08;--panel:#0b1511;--card:#102019;--red:#00e676;--text:#f2fff8;--muted:#88b09b;--line:#1d382c;
+  --glow:0 0 24px rgba(0,230,118,0.42);
+  --accent-grad:linear-gradient(135deg,#00e676,#1de9b6,#00b0ff);
+  --hero-grad:radial-gradient(ellipse at 85% 35%,rgba(0,230,118,0.24),transparent 50%),linear-gradient(115deg,#072116,#060d0a 60%,#071b26);
+  --sub-grad:linear-gradient(135deg,#062117,#071c29,#112614);
+  --sub-title-grad:linear-gradient(90deg,#69f0ae,#18ffff,#64ffda)
+}
 
-    header p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 13px;
-    }
+[data-theme="sunset"]{
+  --bg:#0b060d;--panel:#160c1a;--card:#211226;--red:#ff2a85;--text:#fff5fb;--muted:#b996ad;--line:#381e40;
+  --glow:0 0 24px rgba(255,42,133,0.45);
+  --accent-grad:linear-gradient(135deg,#ff2a85,#ff8e53,#8e2de2);
+  --hero-grad:radial-gradient(ellipse at 85% 35%,rgba(255,42,133,0.26),transparent 50%),linear-gradient(115deg,#240b1d,#0e0812 60%,#1c0b2e);
+  --sub-grad:linear-gradient(135deg,#240a1d,#1e0b30,#261214);
+  --sub-title-grad:linear-gradient(90deg,#ff5e9e,#ffb36b,#c77dff)
+}
 
-    main {
-      width: 100%;
-      max-width: 1400px;
-      margin: 16px auto;
-      padding: 0 20px;
-    }
+[data-theme="light"]{
+  --bg:#f4f5f9;--panel:#ffffff;--card:#ffffff;--red:#d90429;--text:#12131a;--muted:#5c6070;--line:#dfe2ec;
+  --glow:0 8px 24px rgba(217,4,41,0.18);
+  --accent-grad:linear-gradient(135deg,#ff0055,#ff6a00,#7a00ff);
+  --hero-grad:radial-gradient(ellipse at 85% 35%,rgba(255,0,85,0.14),transparent 55%),linear-gradient(115deg,#ffffff,#f2f4fa 62%,#ffeaf0);
+  --sub-grad:linear-gradient(135deg,#fff0f5,#f3efff,#eef6ff);
+  --sub-title-grad:linear-gradient(90deg,#d90429,#ff4d00,#6a00f4)
+}
 
-    /* Video Player Section fitted to viewport height */
-    .player-container {
-      background: var(--surface-color);
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid #2a2a3d;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-      margin-bottom: 16px;
-      display: flex;
-      flex-direction: column;
-    }
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background-color .35s ease,color .35s ease}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
 
-    .player {
-      width: 100%;
-      height: 52vh;
-      min-height: 250px;
-      max-height: 550px;
-      border: 0;
-      display: block;
-    }
+/* Sidebar */
+.sidebar{position:fixed;inset:0 auto 0 0;width:280px;background:var(--panel);border-right:1px solid var(--line);z-index:45;display:flex;flex-direction:column;transition:transform .3s cubic-bezier(0.16,1,0.3,1),background-color .35s ease}
+.sidebar-header{padding:22px 20px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.brand-mark{width:42px;height:42px;border-radius:10px;display:grid;place-items:center;font-weight:900;font-size:16px;color:#fff;background:var(--accent-grad);box-shadow:var(--glow);flex-shrink:0}
+.brand-name{font-size:15px;font-weight:900;letter-spacing:0.5px;line-height:1.2}
+.brand-name small{display:block;color:var(--red);font-size:9px;letter-spacing:2.2px;margin-top:2px;text-transform:uppercase}
+.sidebar-poster-spotlight{position:relative;border-radius:12px;overflow:hidden;aspect-ratio:16/9;background:var(--card);border:1px solid var(--line)}
+.sidebar-poster-spotlight img{width:100%;height:100%;object-fit:cover;display:block}
+.sidebar-poster-label{position:absolute;bottom:8px;left:8px;right:8px;background:rgba(7,7,9,0.82);backdrop-filter:blur(6px);color:#fff;padding:6px 10px;border-radius:6px;font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
-    .player-info {
-      padding: 12px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
+.sidebar-nav{overflow-y:auto;flex-grow:1;padding:16px;scrollbar-width:none}
+.sidebar-nav::-webkit-scrollbar{display:none}
+.side-label{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:2px;padding:14px 12px 6px;text-transform:uppercase}
+.side-link{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;color:var(--muted);font-size:13px;font-weight:600;margin:3px 0;transition:all .2s ease}
+.side-link .ico{width:22px;text-align:center;font-size:17px;transition:transform .2s}
+.side-link:hover{background:rgba(128,128,150,0.08);color:var(--text)}
+.side-link.active{background:var(--accent-grad);color:#ffffff;box-shadow:var(--glow);font-weight:700}
+.side-link.active .ico{transform:scale(1.08)}
+.side-link.nav-glow{background:var(--accent-grad);color:#ffffff;box-shadow:0 0 24px rgba(255,0,85,0.7),var(--glow);animation:keyGlow .75s cubic-bezier(0.22,1,0.36,1)}
+@keyframes keyGlow{
+  0%{transform:scale(0.95);filter:brightness(1.4)}
+  55%{transform:scale(1.05)}
+  100%{transform:scale(1);filter:brightness(1)}
+}
 
-    .player-info h3 {
-      margin: 0;
-      font-size: 18px;
-    }
+.sidebar-bottom{padding:16px;border-top:1px solid var(--line)}
+.side-note{font-size:11px;color:var(--muted);line-height:1.5;text-align:center;margin-top:10px}
 
-    .player-info p {
-      margin: 0;
-      color: var(--text-muted);
-      font-size: 13px;
-    }
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(4px);z-index:40}
+.overlay.show{display:block}
+.main{margin-left:280px;min-height:100vh;transition:margin-left .3s cubic-bezier(0.16,1,0.3,1)}
 
-    /* Controls Bar (Filters & Title) */
-    .controls-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 14px;
-    }
+/* Topbar */
+.topbar{height:70px;position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--panel) 88%,transparent);backdrop-filter:blur(20px);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:14px;padding:0 28px}
+.menu-btn{display:none;background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:10px;width:42px;height:42px;font-size:20px;place-items:center;flex-shrink:0}
+.search-wrap{position:relative;flex:1;max-width:600px}
+.search-wrap::before{content:"🔍";position:absolute;left:15px;top:11px;font-size:15px;opacity:0.65}
+.search-wrap input{width:100%;height:42px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:0 16px 0 44px;color:var(--text);outline:none;font-size:13px;transition:all .25s}
+.search-wrap input:focus{border-color:var(--red);box-shadow:var(--glow)}
+.top-right{margin-left:auto;display:flex;gap:10px;align-items:center}
+.user-badge{width:38px;height:38px;border-radius:50%;background:var(--accent-grad);color:#ffffff;display:grid;place-items:center;font-weight:900;font-size:12px;box-shadow:var(--glow);flex-shrink:0}
+.user-badge.vip{border:2px solid #ffd000;box-shadow:0 0 18px rgba(255,208,0,0.85)}
 
-    .section-title {
-      font-size: 17px;
-      margin: 0;
-      font-weight: 600;
-    }
+/* Content & Hero */
+.content{max-width:1560px;margin:auto;padding:0 28px 80px}
+.hero-wrapper{position:relative;margin:20px 0 32px;border-radius:24px;overflow:hidden;background:var(--hero-grad);border:1px solid var(--line);box-shadow:0 18px 40px rgba(0,0,0,0.25)}
+.hero-slider{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;scroll-behavior:smooth}
+.hero-slider::-webkit-scrollbar{display:none}
+.hero-slide{min-width:100%;scroll-snap-align:center;position:relative;min-height:390px;display:flex;align-items:flex-end;padding:44px;background-size:cover;background-position:center}
+.hero-slide::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,color-mix(in srgb,var(--bg) 90%,transparent) 8%,color-mix(in srgb,var(--bg) 60%,transparent) 52%,transparent 100%),linear-gradient(0deg,color-mix(in srgb,var(--bg) 95%,transparent) 0%,transparent 65%)}
+.hero-content{position:relative;z-index:2;max-width:650px}
+.eyebrow{color:#ffffff;background:var(--accent-grad);font-size:10px;font-weight:900;letter-spacing:2.6px;text-transform:uppercase;padding:6px 14px;border-radius:999px;display:inline-block;margin-bottom:14px;box-shadow:var(--glow)}
+.hero-slide h1,.hero-slide h2{font-size:clamp(30px,4.6vw,52px);margin:0 0 12px;font-weight:900;line-height:1.1}
+.hero-slide p{color:var(--muted);line-height:1.6;font-size:15px;margin:0 0 24px}
+[data-theme]:not([data-theme="light"]) .hero-slide p{color:#e6e6f2}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{background:var(--accent-grad);color:#ffffff;border:none;border-radius:12px;padding:12px 22px;font-size:13px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all .22s ease;box-shadow:var(--glow)}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.btn.secondary{background:var(--card);color:var(--text);border:1px solid var(--line);box-shadow:none}
+.btn.secondary:hover{border-color:var(--red)}
+.slider-indicators{position:absolute;bottom:22px;right:24px;z-index:3;display:flex;gap:8px;background:color-mix(in srgb,var(--panel) 80%,transparent);padding:8px 12px;border-radius:20px;border:1px solid var(--line);backdrop-filter:blur(10px)}
+.indicator{width:11px;height:11px;border-radius:50%;background:var(--muted);opacity:0.45;border:none;padding:0;transition:all .25s}
+.indicator.active{background:var(--red);opacity:1;transform:scale(1.25)}
 
-    .filters {
-      display: flex;
-      gap: 8px;
-      overflow-x: auto;
-    }
+/* Quick Chips & Filters */
+.quick{display:flex;gap:10px;overflow-x:auto;padding-bottom:10px;margin:24px 0;scrollbar-width:none}
+.quick::-webkit-scrollbar{display:none}
+.chip{background:var(--card);border:1px solid var(--line);color:var(--muted);border-radius:24px;padding:9px 18px;font-size:13px;font-weight:700;white-space:nowrap;transition:all .2s}
+.chip:hover,.chip.active{border-color:transparent;background:var(--accent-grad);color:#ffffff;box-shadow:var(--glow)}
+.toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;padding:16px 20px;background:var(--panel);border:1px solid var(--line);border-radius:20px;margin:24px 0}
+.toolbar select{background:var(--card);color:var(--text);border:1px solid var(--line);border-radius:12px;padding:11px 15px;font-size:13px;font-weight:600;min-width:140px;outline:none}
+.vj-chips{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}
 
-    .filter-btn {
-      background: var(--surface-color);
-      color: var(--text-muted);
-      border: 1px solid #2a2a3d;
-      padding: 6px 14px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 13px;
-      white-space: nowrap;
-      transition: all 0.2s;
-    }
+/* Sections & Carousels */
+.section{margin:38px 0}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.section-head h2{font-size:22px;margin:0;font-weight:900;display:flex;align-items:center;gap:12px}
+.section-head h2::before{content:"";display:inline-block;width:6px;height:24px;background:var(--accent-grad);border-radius:3px;box-shadow:var(--glow)}
+.section-head span{font-size:12px;color:var(--muted);font-weight:600}
+.grid-car{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:8px 2px 14px;cursor:grab}
+.grid-car:active{cursor:grabbing}
+.grid-car::-webkit-scrollbar{display:none}
+.movie{min-width:185px;width:185px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;position:relative;transition:all .28s cubic-bezier(0.16,1,0.3,1);scroll-snap-align:start;display:flex;flex-direction:column;box-shadow:0 6px 18px rgba(0,0,0,0.12)}
+.movie:hover{transform:translateY(-6px);border-color:var(--red);box-shadow:var(--glow)}
+.poster-wrap{position:relative;background:var(--panel);aspect-ratio:2/3;overflow:hidden}
+.poster{display:block;width:100%;height:100%;object-fit:cover;transition:transform .45s ease;user-select:none;-webkit-user-drag:none}
+.movie:hover .poster{transform:scale(1.06)}
+.poster-placeholder{width:100%;height:100%;aspect-ratio:2/3;display:grid;place-items:center;text-align:center;padding:14px;background:var(--hero-grad);color:var(--text);font-size:12px;font-weight:900;letter-spacing:1.5px}
+.poster-tag{position:absolute;left:10px;top:10px;background:var(--accent-grad);color:#ffffff;padding:4px 8px;border-radius:6px;font-size:10px;font-weight:900;letter-spacing:0.6px}
+.heart{position:absolute;right:10px;top:10px;border:none;border-radius:50%;width:36px;height:36px;background:rgba(10,10,14,0.72);backdrop-filter:blur(6px);color:#ffffff;font-size:18px;display:grid;place-items:center;transition:transform .2s ease}
+.heart:hover{transform:scale(1.12)}
+.heart.saved{color:#ff4b55;text-shadow:0 0 12px rgba(255,75,85,0.9)}
+.heart-burst{position:absolute;inset:0;display:grid;place-items:center;font-size:52px;color:#ff2a55;text-shadow:0 0 24px rgba(255,42,85,0.9);pointer-events:none;animation:heartPop .65s ease forwards}
+@keyframes heartPop{
+  0%{opacity:0;transform:scale(0.3)}
+  35%{opacity:1;transform:scale(1.25)}
+  100%{opacity:0;transform:scale(1.6) translateY(-10px)}
+}
+.movie-info{padding:13px;display:flex;flex-direction:column;flex-grow:1}
+.movie-title{font-size:14px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:6px}
+.meta{font-size:11px;color:var(--muted);display:flex;justify-content:space-between;gap:6px;margin-bottom:12px;font-weight:600}
+.movie-actions{display:flex;gap:8px;margin-top:auto}
+.movie-actions button{flex:1;padding:9px 6px;font-size:11px;border-radius:9px;font-weight:800}
 
-    .filter-btn:hover, .filter-btn.active {
-      background: var(--primary-red);
-      color: white;
-      border-color: var(--primary-red);
-    }
+/* Settings View */
+.settings-section{display:none;padding:36px;background:var(--panel);border-radius:24px;border:1px solid var(--line);margin:24px 0}
+.settings-section.active{display:block}
+.settings-group{margin-bottom:32px}
+.settings-group h3{font-size:19px;font-weight:900;margin-bottom:14px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.theme-swatches{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.theme-pill{display:inline-flex;align-items:center;gap:9px;padding:11px 18px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--text);font-size:13px;font-weight:800;transition:all .22s ease}
+.theme-pill:hover{transform:translateY(-2px);border-color:var(--red)}
+.theme-pill.active{background:var(--accent-grad);color:#ffffff;border-color:transparent;box-shadow:var(--glow)}
+.swatch-dot{width:14px;height:14px;border-radius:50%;border:1px solid rgba(255,255,255,0.45);flex-shrink:0}
 
-    /* Movie Grid */
-    .movie-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 14px;
-      margin-bottom: 20px;
-    }
+/* Subscription View */
+.subscription-section{display:none;padding:42px 32px;background:var(--sub-grad);border-radius:28px;border:1px solid color-mix(in srgb,var(--red) 45%,var(--line));position:relative;overflow:hidden;box-shadow:0 18px 45px rgba(0,0,0,0.25);margin:24px 0}
+.subscription-section.active{display:block}
+.subscription-section::after{content:"";position:absolute;inset:-60px -60px auto auto;width:240px;height:240px;border-radius:50%;background:var(--accent-grad);filter:blur(75px);opacity:0.28;pointer-events:none}
+.sub-header{text-align:center;max-width:740px;margin:0 auto 32px;position:relative;z-index:1}
+.sub-header h2{font-size:clamp(28px,3.8vw,42px);margin:0 0 10px;font-weight:900;background:var(--sub-title-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub-header p{color:var(--muted);font-size:15px;line-height:1.55;margin:0}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(235px,1fr));gap:20px;position:relative;z-index:1}
+.price-card{background:color-mix(in srgb,var(--card) 88%,transparent);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:22px;padding:26px 22px;text-align:center;transition:all .3s cubic-bezier(0.16,1,0.3,1);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.price-card:hover{transform:translateY(-8px);border-color:var(--red);box-shadow:var(--glow)}
+.price-card.selected-plan{border-color:var(--red);box-shadow:0 0 0 2px var(--red),var(--glow)}
+.price-card.featured{border-color:color-mix(in srgb,var(--red) 70%,transparent)}
+.badge-popular{position:absolute;top:15px;right:-32px;background:var(--accent-grad);color:#ffffff;font-size:10px;font-weight:900;padding:4px 36px;transform:rotate(42deg);text-transform:uppercase;letter-spacing:0.8px}
+.plan-duration{font-size:12px;font-weight:900;letter-spacing:1.8px;text-transform:uppercase;margin-bottom:10px;background:var(--sub-title-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.plan-price{font-size:34px;font-weight:900;margin-bottom:6px;color:var(--text)}
+.plan-price small{font-size:13px;color:var(--muted);display:block;font-weight:600;margin-top:2px}
+.plan-features{list-style:none;padding:0;margin:18px 0 24px;text-align:left;flex-grow:1}
+.plan-features li{font-size:13px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.plan-features li::before{content:"✦";color:var(--red);font-weight:900}
+.plan-btn{width:100%;padding:13px 16px;border-radius:12px;border:none;background:var(--accent-grad);color:#ffffff;font-weight:800;font-size:13px;letter-spacing:0.4px;box-shadow:var(--glow);transition:transform .2s ease,filter .2s ease}
+.plan-btn:hover{transform:translateY(-2px);filter:brightness(1.1)}
 
-    .movie-card {
-      background: var(--surface-color);
-      border: 1px solid #2a2a3d;
-      border-radius: 8px;
-      padding: 14px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      transition: transform 0.2s, border-color 0.2s;
-    }
+#mainAppView{display:block}
+#mainAppView.hidden{display:none}
+#subViewContainer{display:none}
+#subViewContainer.active{display:block}
 
-    .movie-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--primary-red);
-    }
+/* Modals & Custom In-App Native Video Player */
+.modal{display:none;position:fixed;inset:0;z-index:150;background:rgba(0,0,0,0.84);backdrop-filter:blur(10px);align-items:flex-end;justify-content:center;opacity:0;transition:opacity .3s ease}
+.modal.show{display:flex;opacity:1}
+.dialog{width:100%;max-width:980px;max-height:94vh;background:var(--panel);color:var(--text);border-top-left-radius:30px;border-top-right-radius:30px;border:1px solid var(--line);border-bottom:none;overflow-y:auto;position:relative;padding:24px 28px 30px;box-shadow:0 -12px 45px rgba(0,0,0,0.55);transform:translateY(100%);transition:transform .35s cubic-bezier(0.16,1,0.3,1)}
+.modal.show .dialog{transform:translateY(0)}
+.drag-handle{width:50px;height:6px;background:var(--line);border-radius:999px;margin:0 auto 18px;cursor:grab;touch-action:none}
+.close{position:absolute;right:22px;top:22px;background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:50%;width:38px;height:38px;font-size:18px;display:grid;place-items:center;z-index:20}
+.detail-layout{display:grid;grid-template-columns:210px 1fr;gap:24px}
+.detail-layout img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:16px}
+.detail-layout h2{margin:0 36px 10px 0;font-size:26px}
+.detail-layout p{color:var(--muted);line-height:1.6;font-size:14px}
+.modal-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
 
-    .movie-card.active-card {
-      border-color: var(--primary-red);
-      box-shadow: 0 0 0 2px rgba(229, 9, 20, 0.25);
-    }
+.xtreme-player-shell{width:100%;aspect-ratio:16/9;background:#040407;border-radius:18px;overflow:hidden;position:relative;border:1px solid var(--line);box-shadow:0 16px 40px rgba(0,0,0,0.65);user-select:none}
+.xtreme-video{width:100%;height:100%;display:block;object-fit:contain;background:#000;cursor:pointer}
+.player-top-hud{position:absolute;top:0;left:0;right:0;padding:16px 20px;background:linear-gradient(180deg,rgba(0,0,0,0.82),transparent);display:flex;align-items:center;justify-content:space-between;gap:12px;pointer-events:none;transition:opacity .25s ease}
+.player-brand-pill{display:inline-flex;align-items:center;gap:8px;background:rgba(15,15,22,0.78);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.14);padding:6px 12px;border-radius:999px;font-size:11px;font-weight:800;color:#fff;letter-spacing:0.6px}
+.player-brand-dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:var(--glow)}
+.player-sample-pill{background:rgba(15,15,22,0.78);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.14);padding:6px 12px;border-radius:999px;font-size:11px;font-weight:700;color:#e4e4ef}
 
-    .movie-card h4 {
-      margin: 0 0 4px;
-      font-size: 15px;
-    }
+.center-play-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:72px;height:72px;border-radius:50%;border:none;background:var(--accent-grad);color:#fff;font-size:28px;display:grid;place-items:center;box-shadow:0 0 34px rgba(229,9,20,0.65);transition:transform .2s ease,opacity .2s ease;z-index:5}
+.center-play-btn:hover{transform:translate(-50%,-50%) scale(1.08)}
+.center-play-btn.hidden{opacity:0;pointer-events:none}
 
-    .movie-card .meta {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-    }
+.player-controls{position:absolute;left:0;right:0;bottom:0;padding:28px 18px 14px;background:linear-gradient(0deg,rgba(0,0,0,0.92) 0%,rgba(0,0,0,0.65) 65%,transparent 100%);display:flex;flex-direction:column;gap:10px;z-index:6;transition:opacity .25s ease}
+.progress-bar-wrap{width:100%;height:7px;background:rgba(255,255,255,0.22);border-radius:999px;cursor:pointer;position:relative;transition:height .15s ease}
+.progress-bar-wrap:hover{height:10px}
+.progress-filled{height:100%;width:0%;background:var(--accent-grad);border-radius:999px;position:relative}
+.progress-filled::after{content:"";position:absolute;right:-6px;top:50%;transform:translateY(-50%);width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:var(--glow)}
 
-    .movie-card button {
-      background: var(--primary-red);
-      color: white;
-      border: none;
-      padding: 8px;
-      border-radius: 6px;
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      width: 100%;
-      transition: background 0.2s;
-    }
+.controls-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.controls-left,.controls-right{display:flex;align-items:center;gap:8px}
+.ctrl-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.12);color:#fff;border-radius:9px;height:36px;padding:0 11px;font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:5px;transition:background .2s}
+.ctrl-btn:hover{background:var(--accent-grad);border-color:transparent}
+.time-display{font-size:12px;font-weight:700;color:#e5e5f0;font-variant-numeric:tabular-nums;padding:0 4px}
+.vol-slider{width:76px;accent-color:var(--red);cursor:pointer}
+.speed-select{background:rgba(255,255,255,0.12);color:#fff;border:1px solid rgba(255,255,255,0.15);border-radius:8px;height:34px;padding:0 8px;font-size:11px;font-weight:800;outline:none}
+.speed-select option{background:#111116;color:#fff}
 
-    .movie-card button:hover {
-      background: var(--primary-hover);
-    }
+.player-empty-state{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;color:#d6d6e4;background:radial-gradient(circle at center,#181824,#07070b);z-index:4}
+.paywall-overlay{position:absolute;inset:0;background:rgba(7,7,9,0.94);backdrop-filter:blur(10px);display:none;flex-direction:column;align-items:center;justify-content:center;padding:28px;text-align:center;z-index:12}
+.paywall-overlay.show{display:flex}
+.paywall-title{font-size:24px;font-weight:900;margin-bottom:10px;color:#fff}
+.paywall-desc{font-size:14px;color:#d0d0de;max-width:480px;margin:0 0 20px;line-height:1.5}
+.player-message{font-size:12px;color:var(--muted);text-align:center;margin-top:12px}
+.notice{font-size:12px;color:var(--muted);margin:10px 0 0}
+.empty{padding:40px 20px;color:var(--muted);width:100%;text-align:center;font-size:14px}
 
-    .note {
-      color: var(--text-muted);
-      font-size: 12px;
-      text-align: center;
-      margin-top: 16px;
-    }
+.footer{text-align:center;border-top:1px solid var(--line);padding:34px 20px;color:var(--muted);font-size:12px;line-height:1.8;background:var(--panel)}
+.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;background:color-mix(in srgb,var(--panel) 94%,transparent);border-top:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-bottom));backdrop-filter:blur(16px);justify-content:space-around}
+.mobile-nav a{color:var(--muted);text-align:center;font-size:10px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:3px}
+.mobile-nav b{font-size:19px}
+.mobile-nav a.active{color:var(--red)}
+.mobile-nav a.nav-glow{color:#ffffff;background:var(--accent-grad);border-radius:12px;padding:6px 10px;box-shadow:var(--glow)}
 
-    @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        gap: 4px;
-        padding: 10px;
-      }
-      .player {
-        height: 35vh;
-      }
-    }
-  </style>
+@media(max-width:768px){
+  .sidebar{transform:translateX(-105%);width:290px}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0}
+  .menu-btn{display:grid}
+  .content{padding:0 16px 96px}
+  .mobile-nav{display:flex}
+  .detail-layout{grid-template-columns:130px 1fr;gap:16px}
+  .dialog{padding:20px 16px 26px;border-radius:24px 24px 0 0}
+  .hero-slide{padding:26px;min-height:340px}
+  .subscription-section,.settings-section{padding:26px 18px}
+  .vol-slider{display:none}
+}
+</style>
 </head>
-<body>
+<body data-theme="crimson">
 
-  <header>
-    <h1>Extreme Movie Watch</h1>
-    <p>Extreme Watch</p>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <a class="brand" href="#" onclick="showHomeView();closeSidebar();return false;">
+      <span class="brand-mark">XT</span>
+      <span class="brand-name">XTREME WATCH<small>UGANDAN VJ TRANSLATIONS</small></span>
+    </a>
+    <div class="sidebar-poster-spotlight">
+      <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=600" alt="Spotlight Poster">
+      <div class="sidebar-poster-label">⚡ Featured: Action Blockbuster Returns</div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="side-label">Menu</div>
+    <a href="#" class="side-link active" id="homeSidebarLink" onclick="showHomeView();closeSidebar();return false;"><span class="ico">🏠</span>Home</a>
+    <a href="#catalog" class="side-link" onclick="showHomeView();go('catalog');closeSidebar();return false;"><span class="ico">🎞️</span>Latest Movies</a>
+    <a href="#series" class="side-link" onclick="showHomeView();go('series');closeSidebar();return false;"><span class="ico">📺</span>Series</a>
+    <a href="#mylist" class="side-link" onclick="showHomeView();go('mylist');closeSidebar();return false;"><span class="ico">❤️</span>My List <span id="sideWatchCount" style="margin-left:auto;padding:2px 8px;border-radius:10px;font-size:11px">0</span></a>
+
+    <div class="side-label">Membership</div>
+    <a href="#" class="side-link" id="subSidebarLink" onclick="showSubscriptionView();closeSidebar();return false;"><span class="ico">💎</span><span id="subSidebarText">Subscription Plans</span></a>
+
+    <div class="side-label">Collections</div>
+    <a href="#catalog" class="side-link" onclick="showHomeView();go('catalog');closeSidebar();return false;"><span class="ico">🍿</span>All Movies</a>
+    <a href="#kids" class="side-link" onclick="showHomeView();go('kids');closeSidebar();return false;"><span class="ico">🧸</span>Kids Zone</a>
+    <a href="#indian" class="side-link" onclick="showHomeView();go('indian');closeSidebar();return false;"><span class="ico">✨</span>Indian Movies</a>
+    <a href="#asian" class="side-link" onclick="showHomeView();go('asian');closeSidebar();return false;"><span class="ico">⛩️</span>Asian Series</a>
+
+    <div class="side-label">Preferences</div>
+    <a href="#" class="side-link" id="settingsSidebarLink" onclick="showSettingsView();closeSidebar();return false;"><span class="ico">⚙️</span>Settings</a>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <span style="font-size:12px;font-weight:800;" id="sidebarUserStatus">✓ Free Sample (1h/movie)</span>
+      <button class="btn secondary" style="padding:6px 12px;font-size:11px;" onclick="showSubscriptionView();closeSidebar();return false;">Plans</button>
+    </div>
+    <div class="side-note">Your entertainment • Your VJ • Your choice<br>© <span id="sideYear"></span> Xtreme</div>
+  </div>
+</aside>
+
+<div class="overlay" id="sidebarOverlay"></div>
+
+<div class="main">
+  <header class="topbar">
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu">☰</button>
+    <div class="search-wrap"><input id="searchInput" type="search" placeholder="Search movies, year, genre or VJ..."></div>
+    <div class="top-right">
+      <div class="user-badge" title="Free Member" id="userBadge">XT</div>
+    </div>
   </header>
 
-  <main>
-    <!-- Video Player Box -->
-    <div class="player-container">
-      <iframe
-        id="player"
-        class="player"
-        src="https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ"
-        title="Video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen>
-      </iframe>
-      <div class="player-info">
-        <h3 id="videoTitle">Test Video</h3>
-        <p id="videoDesc">Select a video title below to play it inside your website.</p>
-      </div>
-    </div>
-
-    <!-- Controls Bar & Filters -->
-    <div class="controls-bar">
-      <h2 class="section-title">Available Watch List</h2>
-      <div class="filters">
-        <button class="filter-btn active" onclick="filterCategory('all', this)">All</button>
-        <button class="filter-btn" onclick="filterCategory('vj', this)">Luganda VJ</button>
-        <button class="filter-btn" onclick="filterCategory('action', this)">Action</button>
-        <button class="filter-btn" onclick="filterCategory('demo', this)">Demos</button>
-      </div>
-    </div>
-
-    <!-- Movie Selection Grid -->
-    <div class="movie-grid" id="movieGrid">
-      <div class="movie-card" data-category="demo">
-        <div>
-          <h4>Test Video</h4>
-          <div class="meta">Demo · 2026</div>
+  <div id="mainAppView">
+    <div class="content">
+      <section class="hero-wrapper" id="home">
+        <div class="hero-slider" id="heroSlider">
+          <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1200')">
+            <div class="hero-content">
+              <span class="eyebrow">Featured Spotlight • VJ Junior</span>
+              <h1>Action Blockbuster Returns</h1>
+              <p>Experience top action hits with energetic Ugandan VJ translations, crisp audio, and instant native playback inside the app.</p>
+              <div class="hero-actions">
+                <button class="btn" id="exploreBtn">Explore Movies</button>
+                <button class="btn secondary" id="browseSeriesBtn">Browse Series</button>
+              </div>
+            </div>
+          </div>
+          <div class="hero-slide" style="background-image:url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&w=1200')">
+            <div class="hero-content">
+              <span class="eyebrow">Trending Series • Ice P</span>
+              <h2>Series & Drama Marathon</h2>
+              <p>Binge full seasons, Asian dramas, and translated favorites with smooth in-app playback across devices.</p>
+              <div class="hero-actions">
+                <button class="btn" onclick="go('series')">Watch Series</button>
+              </div>
+            </div>
+          </div>
         </div>
-        <button onclick="playVideo('aqz-KE-bpKQ', 'Test Video', 'Standard platform test video feed.', this)">Play Video</button>
+        <div class="slider-indicators" id="sliderIndicators"></div>
+      </section>
+
+      <div class="quick" id="quickGenres">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="Action">Action</button>
+        <button class="chip" data-filter="Comedy">Comedy</button>
+        <button class="chip" data-filter="Drama">Drama</button>
+        <button class="chip" data-filter="Romance">Romance</button>
+        <button class="chip" data-filter="Horror">Horror</button>
+        <button class="chip" data-filter="Thriller">Thriller</button>
+        <button class="chip" data-filter="Sci-Fi">Sci-Fi</button>
       </div>
 
-      <div class="movie-card" data-category="demo">
-        <div>
-          <h4>YouTube Demo</h4>
-          <div class="meta">Demo · 2026</div>
-        </div>
-        <button onclick="playVideo('M7lc1UVf-VE', 'YouTube Demo', 'Secondary system test playback stream.', this)">Play Video</button>
+      <div class="toolbar" id="categories">
+        <select id="typeFilter"><option value="all">All content</option><option value="movie">Movies</option><option value="series">Series</option></select>
+        <select id="genreFilter"><option value="all">All genres</option><option>Action</option><option>Comedy</option><option>Drama</option><option>Romance</option><option>Horror</option><option>Thriller</option><option>Sci-Fi</option><option>Animation</option></select>
+        <select id="vjFilter"><option value="all">All VJs</option></select>
+        <select id="sortFilter"><option value="newest">Newest first</option><option value="az">Title A–Z</option><option value="year">Year: newest</option></select>
+        <button class="btn secondary" id="clearFilters">Clear filters</button>
       </div>
+
+      <section class="section" id="catalog">
+        <div class="section-head"><h2 id="catalogTitle">Latest Movies</h2><span id="resultCount">Loading library...</span></div>
+        <div class="grid-car" id="movieGrid"><div class="empty">Loading your movie library...</div></div>
+        <p class="notice" id="loadNotice">Connect your database or add direct MP4/HLS movie URLs to populate this library.</p>
+        <div style="text-align:center;margin-top:16px"><button class="btn secondary" id="loadMore" hidden>Load more</button></div>
+      </section>
+
+      <section class="section" id="series"><div class="section-head"><h2>Series Collection</h2><span>Series and seasons</span></div><div class="grid-car" id="seriesGrid"></div></section>
+      <section class="section" id="kids"><div class="section-head"><h2>Kids Zone</h2><span>Family-friendly collection</span></div><div class="grid-car" id="kidsGrid"></div></section>
+      <section class="section" id="indian"><div class="section-head"><h2>Indian Movies</h2><span>Browse Indian cinema</span></div><div class="grid-car" id="indianGrid"></div></section>
+      <section class="section" id="asian"><div class="section-head"><h2>Asian Series</h2><span>Korean and other Asian series</span></div><div class="grid-car" id="asianGrid"></div></section>
+      <section class="section" id="mylist"><div class="section-head"><h2>My List</h2><span>Your saved titles</span></div><div class="grid-car" id="watchlistGrid"></div></section>
+      <section class="section" id="vjcollections"><div class="section-head"><h2>VJ Collections</h2><span>Choose your favourite translator</span></div><div class="vj-chips" id="vjChips"></div></section>
+      <section class="section" id="support"><div class="section-head"><h2>Contact & Support</h2><span>Need help?</span></div><div class="toolbar"><div style="flex:1;min-width:190px"><b>XTREME MOVIE WATCH</b><p class="notice">For support, questions or feedback, contact the app team.</p></div><a class="btn" href="mailto:support@xtrememovies.watch">Email Support</a></div></section>
     </div>
+  </div>
 
-    <p class="note">
-      Easily add more movies to your grid by duplicating the card blocks above and updating the video IDs and categories.
-    </p>
-  </main>
-
-  <script>
-    function playVideo(id, title, desc, btnElement) {
-      document.getElementById("player").src =
-        "https://www.youtube-nocookie.com/embed/" +
-        encodeURIComponent(id) + "?autoplay=1";
-
-      document.getElementById("videoTitle").textContent = title;
-      document.getElementById("videoDesc").textContent = desc;
-
-      document.querySelectorAll('.movie-card').forEach(card => card.classList.remove('active-card'));
-      if (btnElement) {
-        btnElement.closest('.movie-card').classList.add('active-card');
-      }
-    }
-
-    function filterCategory(category, btnElement) {
-      document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
-      btnElement.classList.add('active');
-
-      const cards = document.querySelectorAll('.movie-card');
-      cards.forEach(card => {
-        if (category === 'all' || card.getAttribute('data-category') === category) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    }
-  </script>
-</body>
-</html>
+  <div id="
